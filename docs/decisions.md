@@ -2,6 +2,10 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-21: Repository moved to the wim-to-watchlist organization
+
+The repository now lives at `wim-to-watchlist/watchlist` (it was `wimvdon/watchlist`) and is becoming private. Links elsewhere in the docs and store texts still point to the old address; GitHub redirects them for now.
+
 ## 2026-11-13: Search and Discover say when SIMKL couldn't be reached
 
 From an antislop pass over the app's states. A failed SIMKL request was turned into an empty

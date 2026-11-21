@@ -2,6 +2,12 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-21: Subscription switched on in release builds
+
+`REQUIRE_SUBSCRIPTION` is `true` for release builds again, now that the products exist in the Play
+Console (product `watchlist`, base plans `yearly` and `monthly`, offer `free-trial`). No build was
+ever published on Google Play, so there are no existing users to give a free period.
+
 ## 2026-11-21: Yearly and monthly plans, trial through Google Play with a reminder
 
 The owner chose €4.99 a year (with the 14-day free trial) and €0.99 a month (no trial), one

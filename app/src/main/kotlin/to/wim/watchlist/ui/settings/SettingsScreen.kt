@@ -32,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -53,6 +54,7 @@ import to.wim.watchlist.data.ThemeMode
 import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.data.toggled
 import to.wim.watchlist.ui.LocalNavigator
+import to.wim.watchlist.ui.components.Format
 import to.wim.watchlist.ui.components.label
 import to.wim.watchlist.ui.components.openUrl
 import to.wim.watchlist.ui.components.rememberApp
@@ -68,6 +70,7 @@ import to.wim.watchlist.ui.theme.SettingsScaffold
 import to.wim.watchlist.ui.theme.SwitchSetting
 import to.wim.watchlist.work.NewEpisodesWorker
 import kotlinx.coroutines.launch
+import java.time.Instant
 
 @Composable
 fun SettingsScreen(settings: AppSettings) {
@@ -287,11 +290,27 @@ fun SettingsScreen(settings: AppSettings) {
         if (BuildConfig.REQUIRE_SUBSCRIPTION) {
             item(key = "subscription") {
                 SettingsSection(title = stringResource(R.string.sub_settings_section)) {
+                    val trialEnd by produceState<Long?>(null) { value = app.settings.trialEndsAt() }
                     SettingItem(
                         title = stringResource(R.string.sub_manage),
-                        summary = stringResource(R.string.sub_settings_summary),
+                        summary =
+                            trialEnd?.takeIf { it > System.currentTimeMillis() }?.let {
+                                stringResource(R.string.sub_settings_trial, Format.date(Instant.ofEpochMilli(it)))
+                            } ?: stringResource(R.string.sub_settings_summary),
                         onClick = { context.openUrl(SubscriptionRepository.manageUrl(context.packageName)) },
                         trailing = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, null) },
+                    )
+                }
+            }
+        }
+
+        if (BuildConfig.DEBUG) {
+            item(key = "subscription_preview") {
+                SettingsSection(title = stringResource(R.string.sub_settings_section)) {
+                    SettingItem(
+                        title = stringResource(R.string.sub_preview),
+                        summary = stringResource(R.string.sub_preview_summary),
+                        onClick = { app.paywallPreview.value = true },
                     )
                 }
             }

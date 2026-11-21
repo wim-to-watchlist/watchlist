@@ -13,13 +13,14 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import to.wim.watchlist.data.model.Access
-import to.wim.watchlist.data.model.PaywallOffer
+import to.wim.watchlist.data.model.PaywallPlan
 import to.wim.watchlist.data.model.PlayStatus
 import to.wim.watchlist.data.model.PricePhase
 import to.wim.watchlist.data.model.PurchaseInfo
 import to.wim.watchlist.data.model.StoredAccess
 import to.wim.watchlist.data.model.SubscriptionOffer
 import to.wim.watchlist.data.model.SubscriptionRules
+import to.wim.watchlist.work.TrialReminderWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,8 +35,8 @@ import kotlin.coroutines.resume
 
 data class SubscriptionState(
     val status: PlayStatus = PlayStatus.Unknown,
-    /** What the subscription screen sells; null until Google Play described the product. */
-    val offer: PaywallOffer? = null,
+    /** What the subscription screen sells, yearly first; empty until Google Play described the product. */
+    val plans: List<PaywallPlan> = emptyList(),
     val access: Access = Access.Checking,
     /** A purchase screen of Google Play is open. */
     val purchasing: Boolean = false,
@@ -44,13 +45,14 @@ data class SubscriptionState(
 )
 
 /**
- * The yearly subscription, sold through Google Play Billing (product
- * [SubscriptionRules.PRODUCT_ID]; the 14-day free trial is an offer on it in the Play Console).
+ * The subscription, sold through Google Play Billing (product [SubscriptionRules.PRODUCT_ID] with a
+ * yearly and a monthly base plan; the 14-day free trial is an offer on the yearly plan in the Play
+ * Console).
  * Google Play keeps the purchases on the phone, so asking works offline too; the last answer is
  * also stored, so the app opens while Google Play can't be reached ([SubscriptionRules.access]).
  */
 class SubscriptionRepository(
-    context: Context,
+    private val context: Context,
     private val settings: SettingsStore,
     private val scope: CoroutineScope,
     /** False in debug builds: they are never locked (see [SubscriptionRules.access]). */
@@ -60,6 +62,9 @@ class SubscriptionRepository(
     val state: StateFlow<SubscriptionState> = _state.asStateFlow()
 
     private var product: ProductDetails? = null
+
+    /** The plan whose purchase sheet is open, to know whether a purchase started a free trial. */
+    private var buying: PaywallPlan? = null
     private val refreshLock = Mutex()
 
     private val client: BillingClient =
@@ -108,11 +113,19 @@ class SubscriptionRepository(
         return SubscriptionRules.access(required, _state.value.status, settings.storedAccess(), System.currentTimeMillis())
     }
 
+    /** Whether the subscription still renews (not cancelled); null when Google Play can't be asked. */
+    suspend fun renewing(): Boolean? {
+        if (!connect()) return null
+        val purchases = queryPurchases() ?: return null
+        return purchases.any { SubscriptionRules.PRODUCT_ID in it.products && it.purchaseState == Purchase.PurchaseState.PURCHASED && it.isAutoRenewing }
+    }
+
     /** Opens Google Play's purchase sheet for [offer]. */
     fun purchase(
         activity: Activity,
-        offer: PaywallOffer,
+        offer: PaywallPlan,
     ) {
+        buying = offer
         val details = product ?: return
         val params =
             BillingFlowParams.newBuilder()
@@ -131,6 +144,7 @@ class SubscriptionRepository(
         when (result.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
                 purchases.orEmpty().filter { it.purchaseState == Purchase.PurchaseState.PURCHASED && !it.isAcknowledged }.forEach { acknowledge(it) }
+                rememberTrial(purchases.orEmpty())
                 _state.update { it.copy(purchasing = false) }
                 publish(SubscriptionRules.status(purchases.orEmpty().map { it.info() }).takeIf { it != PlayStatus.Inactive } ?: _state.value.status)
             }
@@ -144,6 +158,16 @@ class SubscriptionRepository(
         }
     }
 
+    /** A purchase of the free-trial offer: remember when the trial ends and schedule the reminder. */
+    private suspend fun rememberTrial(purchases: List<Purchase>) {
+        val days = buying?.trialDays ?: return
+        val purchase = purchases.firstOrNull { SubscriptionRules.PRODUCT_ID in it.products && it.purchaseState == Purchase.PurchaseState.PURCHASED } ?: return
+        buying = null
+        val end = SubscriptionRules.trialEnd(purchase.purchaseTime, days)
+        settings.setTrialEndsAt(end)
+        runCatching { TrialReminderWorker.schedule(context, end) }
+    }
+
     private suspend fun publish(status: PlayStatus) {
         val now = System.currentTimeMillis()
         when (status) {
@@ -151,8 +175,8 @@ class SubscriptionRepository(
             PlayStatus.Inactive, PlayStatus.Pending -> settings.setStoredAccess(StoredAccess(false, now))
             PlayStatus.Unknown, PlayStatus.Unavailable -> Unit
         }
-        val offer = product?.let { SubscriptionRules.paywallOffer(it.offers()) }
-        _state.update { it.copy(status = status, offer = offer ?: it.offer, access = SubscriptionRules.access(required, status, settings.storedAccess(), now)) }
+        val plans = product?.let { SubscriptionRules.paywallPlans(it.offers()) }.orEmpty()
+        _state.update { it.copy(status = status, plans = plans.ifEmpty { it.plans }, access = SubscriptionRules.access(required, status, settings.storedAccess(), now)) }
     }
 
     private suspend fun queryPurchases(): List<Purchase>? =
@@ -190,7 +214,11 @@ class SubscriptionRepository(
 
     private fun ProductDetails.offers(): List<SubscriptionOffer> =
         subscriptionOfferDetails.orEmpty().map { o ->
-            SubscriptionOffer(o.offerToken, o.pricingPhases.pricingPhaseList.map { PricePhase(it.priceAmountMicros, it.formattedPrice, it.billingPeriod) })
+            SubscriptionOffer(
+                o.offerToken,
+                o.basePlanId,
+                o.pricingPhases.pricingPhaseList.map { PricePhase(it.priceAmountMicros, it.formattedPrice, it.billingPeriod, it.priceCurrencyCode) },
+            )
         }
 
     companion object {

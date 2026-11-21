@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The subscription screen and the Subscription row in Settings. -->
-    <string name="sub_title_trial">Starte deinen kostenlosen Test</string>
+    <!-- The subscription screen, the Subscription row in Settings and the trial reminder. -->
     <string name="sub_title">Abonniere Watchlist, um es weiter zu nutzen</string>
-    <string name="sub_feature_up_next">Als Nächstes, deine Listen und Bewertungen, mit SIMKL synchronisiert</string>
-    <string name="sub_feature_calendar">Der Kalender, Entdecken sowie Besetzung und Team</string>
-    <string name="sub_feature_notifications">Benachrichtigungen für neue Folgen und Filmstarts</string>
-    <string name="sub_price">%1$s pro Jahr</string>
     <string name="sub_start_trial">Kostenlos testen</string>
     <string name="sub_subscribe">Abonnieren</string>
-    <string name="sub_terms_trial">Google Play belastet dich, wenn der kostenlose Test endet, es sei denn, du kündigst vorher. Das Abo verlängert sich jedes Jahr, bis du es in Google Play › Abos kündigst.</string>
+    <string name="sub_price">%1$s pro Jahr</string>
+    <plurals name="sub_title_trial">
+        <item quantity="one">Teste Watchlist %1$d Tag kostenlos</item>
+        <item quantity="other">Teste Watchlist %1$d Tage kostenlos</item>
+    </plurals>
+    <plurals name="sub_library_ready">
+        <item quantity="one">Deine Bibliothek ist synchronisiert: %1$d Titel ist bereit</item>
+        <item quantity="other">Deine Bibliothek ist synchronisiert: %1$d Titel sind bereit</item>
+    </plurals>
+    <string name="sub_feature_up_next">Als Nächstes: die nächste Folge jeder Serie, mit SIMKL synchronisiert</string>
+    <string name="sub_feature_notifications">Eine Benachrichtigung, sobald eine neue Folge oder ein Film erscheint</string>
+    <string name="sub_feature_calendar">Ein Kalender mit kommenden Folgen und Starts</string>
+    <string name="sub_feature_discover">Entdecke Trends und Neues, oder lass Überrasch mich wählen</string>
+    <string name="sub_feature_details">Deine Listen, Bewertungen und Statistiken</string>
+    <string name="sub_plan_yearly">Jährlich</string>
+    <string name="sub_plan_monthly">Monatlich</string>
+    <string name="sub_price_monthly">%1$s pro Monat</string>
+    <string name="sub_per_month">Das sind %1$s im Monat</string>
+    <string name="sub_save">%1$d %% sparen</string>
+    <plurals name="sub_days_free">
+        <item quantity="one">%1$d Tag gratis</item>
+        <item quantity="other">%1$d Tage gratis</item>
+    </plurals>
+    <string name="sub_step_today">Heute</string>
+    <string name="sub_step_today_text">Voller Zugriff, nichts zu zahlen</string>
+    <string name="sub_step_day">Tag %1$d · %2$s</string>
+    <string name="sub_step_reminder_text">Eine Benachrichtigung, dass dein Test bald endet</string>
+    <string name="sub_step_charge_text">Google Play berechnet %1$s, außer du kündigst vorher</string>
+    <string name="sub_terms_trial">Google Play berechnet dir den Betrag, wenn der kostenlose Test endet, außer du kündigst vorher. Das Abo verlängert sich jedes Jahr, bis du es in Google Play › Abos kündigst.</string>
     <string name="sub_terms">Das Abo verlängert sich jedes Jahr, bis du es in Google Play › Abos kündigst.</string>
+    <string name="sub_terms_monthly">Das Abo verlängert sich jeden Monat, bis du es in Google Play › Abos kündigst.</string>
+    <string name="sub_manage">Verwalten oder kündigen</string>
+    <string name="sub_settings_trial">Kostenloser Test bis %1$s. In Google Play ändern oder kündigen</string>
+    <string name="sub_notif_channel">Abo</string>
+    <string name="sub_notif_channel_description">Eine Erinnerung, bevor dein kostenloser Test endet</string>
+    <string name="sub_notif_title">Dein kostenloser Test endet am %1$s</string>
+    <string name="sub_notif_text">Danach berechnet Google Play dein Abo. Tippe, um es zu verwalten oder zu kündigen.</string>
     <string name="sub_failed">Der Kauf hat nicht geklappt. Versuche es erneut oder prüfe deine Zahlungsmethode in Google Play.</string>
     <string name="sub_pending">Dein Kauf wartet darauf, dass Google Play die Zahlung bestätigt. Watchlist öffnet sich, sobald das passiert ist.</string>
     <string name="sub_unavailable">Google Play ist nicht verfügbar, daher kann das Abo nicht geprüft werden. Stelle sicher, dass Google Play installiert ist und du angemeldet bist, und prüfe erneut.</string>
     <string name="sub_not_loaded">Das Abo konnte nicht aus Google Play geladen werden. Prüfe deine Verbindung und versuche es erneut.</string>
     <string name="sub_check_again">Erneut prüfen</string>
-    <string name="sub_manage">Abo verwalten</string>
     <string name="sub_settings_section">Abo</string>
     <string name="sub_settings_summary">In Google Play ändern oder kündigen</string>
-    <plurals name="sub_price_trial">
-        <item quantity="one">%1$d Tag kostenlos, danach %2$s pro Jahr</item>
-        <item quantity="other">%1$d Tage kostenlos, danach %2$s pro Jahr</item>
-    </plurals>
+    <string name="sub_preview">Abo-Bildschirm ansehen</string>
+    <string name="sub_preview_summary">Nur in der Testversion: zeigt den Bildschirm mit Beispielpreisen</string>
+    <string name="sub_preview_close">Vorschau schließen</string>
 </resources>

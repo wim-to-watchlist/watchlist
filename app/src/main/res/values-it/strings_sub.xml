@@ -1,27 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The subscription screen and the Subscription row in Settings. -->
-    <string name="sub_title_trial">Inizia la prova gratuita</string>
+    <!-- The subscription screen, the Subscription row in Settings and the trial reminder. -->
     <string name="sub_title">Abbonati per continuare a usare Watchlist</string>
-    <string name="sub_feature_up_next">Prossimi, le tue liste e i tuoi voti, sincronizzati con SIMKL</string>
-    <string name="sub_feature_calendar">Il calendario, Scopri, e cast e troupe</string>
-    <string name="sub_feature_notifications">Avvisi per nuovi episodi e uscite dei film</string>
-    <string name="sub_price">%1$s all\'anno</string>
     <string name="sub_start_trial">Inizia la prova gratuita</string>
     <string name="sub_subscribe">Abbonati</string>
-    <string name="sub_terms_trial">Google Play ti addebita l\'importo alla fine della prova gratuita, a meno che tu non disdica prima. L\'abbonamento si rinnova ogni anno finché non lo disdici in Google Play › Abbonamenti.</string>
+    <string name="sub_price">%1$s all\'anno</string>
+    <plurals name="sub_title_trial">
+        <item quantity="one">Prova Watchlist gratis per %1$d giorno</item>
+        <item quantity="many">Prova Watchlist gratis per %1$d giorni</item>
+        <item quantity="other">Prova Watchlist gratis per %1$d giorni</item>
+    </plurals>
+    <plurals name="sub_library_ready">
+        <item quantity="one">La tua libreria è sincronizzata: %1$d titolo è pronto</item>
+        <item quantity="many">La tua libreria è sincronizzata: %1$d titoli sono pronti</item>
+        <item quantity="other">La tua libreria è sincronizzata: %1$d titoli sono pronti</item>
+    </plurals>
+    <string name="sub_feature_up_next">Prossimi: il prossimo episodio di ogni serie, sincronizzato con SIMKL</string>
+    <string name="sub_feature_notifications">Una notifica appena esce un nuovo episodio o film</string>
+    <string name="sub_feature_calendar">Un calendario dei prossimi episodi e uscite</string>
+    <string name="sub_feature_discover">Scopri tendenze e novità, o lascia scegliere a Sorprendimi</string>
+    <string name="sub_feature_details">Le tue liste, valutazioni e statistiche</string>
+    <string name="sub_plan_yearly">Annuale</string>
+    <string name="sub_plan_monthly">Mensile</string>
+    <string name="sub_price_monthly">%1$s al mese</string>
+    <string name="sub_per_month">Cioè %1$s al mese</string>
+    <string name="sub_save">Risparmi il %1$d%%</string>
+    <plurals name="sub_days_free">
+        <item quantity="one">%1$d giorno gratis</item>
+        <item quantity="many">%1$d giorni gratis</item>
+        <item quantity="other">%1$d giorni gratis</item>
+    </plurals>
+    <string name="sub_step_today">Oggi</string>
+    <string name="sub_step_today_text">Accesso completo, niente da pagare</string>
+    <string name="sub_step_day">Giorno %1$d · %2$s</string>
+    <string name="sub_step_reminder_text">Una notifica che la prova sta per finire</string>
+    <string name="sub_step_charge_text">Google Play addebita %1$s, a meno che tu non disdica prima</string>
+    <string name="sub_terms_trial">Google Play addebita l\'importo quando finisce la prova gratuita, a meno che tu non disdica prima. L\'abbonamento si rinnova ogni anno finché non lo disdici in Google Play › Abbonamenti.</string>
     <string name="sub_terms">L\'abbonamento si rinnova ogni anno finché non lo disdici in Google Play › Abbonamenti.</string>
+    <string name="sub_terms_monthly">L\'abbonamento si rinnova ogni mese finché non lo disdici in Google Play › Abbonamenti.</string>
+    <string name="sub_manage">Gestisci o disdici</string>
+    <string name="sub_settings_trial">Prova gratuita fino al %1$s. Modificalo o disdicilo in Google Play</string>
+    <string name="sub_notif_channel">Abbonamento</string>
+    <string name="sub_notif_channel_description">Un promemoria prima che finisca la prova gratuita</string>
+    <string name="sub_notif_title">La tua prova gratuita finisce il %1$s</string>
+    <string name="sub_notif_text">Dopo, Google Play addebita l\'abbonamento. Tocca per gestirlo o disdirlo.</string>
     <string name="sub_failed">L\'acquisto non è andato a buon fine. Riprova o controlla il metodo di pagamento in Google Play.</string>
     <string name="sub_pending">Il tuo acquisto aspetta che Google Play confermi il pagamento. Watchlist si apre appena succede.</string>
     <string name="sub_unavailable">Google Play non è disponibile, quindi non è possibile verificare l\'abbonamento. Controlla che Google Play sia installato e di aver effettuato l\'accesso, poi verifica di nuovo.</string>
     <string name="sub_not_loaded">Non è stato possibile caricare l\'abbonamento da Google Play. Controlla la connessione e riprova.</string>
     <string name="sub_check_again">Verifica di nuovo</string>
-    <string name="sub_manage">Gestisci abbonamento</string>
     <string name="sub_settings_section">Abbonamento</string>
     <string name="sub_settings_summary">Modificalo o disdicilo in Google Play</string>
-    <plurals name="sub_price_trial">
-        <item quantity="one">%1$d giorno gratis, poi %2$s all\'anno</item>
-        <item quantity="many">%1$d giorni gratis, poi %2$s all\'anno</item>
-        <item quantity="other">%1$d giorni gratis, poi %2$s all\'anno</item>
-    </plurals>
+    <string name="sub_preview">Anteprima schermata di abbonamento</string>
+    <string name="sub_preview_summary">Solo nella versione di prova: mostra la schermata con prezzi di esempio</string>
+    <string name="sub_preview_close">Chiudi anteprima</string>
 </resources>

@@ -19,6 +19,6 @@ PRIVACY
 No ads, no analytics, no tracking. You sign in on simkl.com, so the app never sees your password. Your lists stay on SIMKL; the app keeps a copy on your phone so it opens fast. Privacy policy: https://github.com/wimvdon/watchlist/blob/main/PRIVACY.md
 
 PRICE
-Try everything free for 14 days. After that, Watchlist costs €3.99 a year (Google Play shows the price in your currency). You can cancel any time in Google Play.
+Try everything free for 14 days. After that, Watchlist costs €4.99 a year or €0.99 a month (Google Play shows the price in your currency). The app reminds you two days before the trial ends, and you can cancel any time in Google Play.
 
 You need a free SIMKL account (simkl.com). Watchlist is an unofficial app and is not affiliated with or endorsed by Simkl. This application uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.

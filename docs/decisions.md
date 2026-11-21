@@ -2,6 +2,24 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-21: Yearly and monthly plans, trial through Google Play with a reminder
+
+The owner chose €4.99 a year (with the 14-day free trial) and €0.99 a month (no trial), one
+subscription product `watchlist` with base plans `yearly` and `monthly` (the old ID
+`watchlist_yearly` was never created in the Play Console). The monthly plan is mostly a
+comparison that makes the yearly plan's saving visible. The trial stays a Google Play offer, which
+needs a payment method up front; the owner weighed that against a trial counted by the app
+without payment details and kept Play's (Google decides who gets it, it can't be reset, and it
+converts on its own). Because of that up-front step the subscription screen now spells out the
+trial: the features, a timeline (today, the reminder, the first charge with dates) and "Manage or
+cancel". The app reminds the user two days before the trial ends with a local notification
+(`TrialReminderWorker`, WorkManager, no network call; skipped if Google Play says it no longer
+renews), since surprise charges cause refunds and bad reviews. The subscription screen appears
+after the first sync instead of before it, so it can say the user's titles are ready. Rejected:
+RevenueCat (a new dependency and a third party receiving purchase data, with no iOS version to
+sync), a trial counted by the app (resettable without a server), Google Block Store and a
+small server of our own to make such a trial stick (a new library or a new network destination).
+
 ## 2026-11-21: Repository moved to the wim-to-watchlist organization
 
 The repository now lives at `wim-to-watchlist/watchlist` (it was `wimvdon/watchlist`) and is becoming private. Links elsewhere in the docs and store texts still point to the old address; GitHub redirects them for now.

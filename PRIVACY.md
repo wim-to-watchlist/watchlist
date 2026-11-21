@@ -28,7 +28,7 @@ Only when you turn on notifications for new episodes and releases: about every 4
 
 ## Subscription
 
-The subscription is sold by Google Play under [Google's terms and privacy policy](https://policies.google.com/privacy). The app never sees your payment details. It asks Google Play whether your subscription is active and keeps that answer, with the time it was checked, on your phone (not backed up), so it opens when you're offline.
+The subscription is sold by Google Play under [Google's terms and privacy policy](https://policies.google.com/privacy). The app never sees your payment details. It asks Google Play whether your subscription is active and keeps that answer, with the time it was checked, on your phone (not backed up), so it opens when you're offline. When you start the free trial, it also keeps the date the trial ends on your phone (not backed up), to remind you two days before.
 
 ## Permissions
 

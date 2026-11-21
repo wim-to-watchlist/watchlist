@@ -1,6 +1,6 @@
 # Installation
 
-For developers who build the app. To just install it, download the APK from [Releases](https://github.com/wimvdon/watchlist/releases).
+For developers who build the app. To just install it, download the APK from [Releases](https://github.com/wim-to-watchlist/watchlist/releases).
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ Gradle is downloaded by the wrapper. There is no database or server to set up.
 ## 1. Clone the repo
 
 ```bash
-git clone https://github.com/wimvdon/watchlist.git
+git clone https://github.com/wim-to-watchlist/watchlist.git
 cd watchlist
 ```
 

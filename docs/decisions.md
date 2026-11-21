@@ -28,7 +28,14 @@ small server of our own to make such a trial stick (a new library or a new netwo
 
 ## 2026-11-21: Repository moved to the wim-to-watchlist organization
 
-The repository now lives at `wim-to-watchlist/watchlist` (it was `wimvdon/watchlist`) and is becoming private. Links elsewhere in the docs and store texts still point to the old address; GitHub redirects them for now.
+The repository now lives at `wim-to-watchlist/watchlist` (it was `wimvdon/watchlist`) and is becoming private.
+
+A private repository can't host the privacy policy the Play Store needs, and people can't open
+issues in it. The policy and a contact page now live in the public repository
+`wim-to-watchlist/wim-to-watchlist.github.io`, served by GitHub Pages at
+https://wim-to-watchlist.github.io/privacy/. `PRIVACY.md` stays here as the source; copy it there
+when it changes. Rejected: keeping this repository public (the owner wants the code private) and
+a separate website host (one more account to look after).
 
 ## 2026-11-13: Search and Discover say when SIMKL couldn't be reached
 

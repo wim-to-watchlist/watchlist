@@ -38,4 +38,4 @@ The subscription is sold by Google Play under [Google's terms and privacy policy
 
 If this changes, this file will be updated **before** the change is released.
 
-Questions: open an issue at https://github.com/wimvdon/watchlist/issues.
+Questions: open an issue at https://github.com/wim-to-watchlist/wim-to-watchlist.github.io/issues.

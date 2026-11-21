@@ -62,7 +62,9 @@ Secrets, keystores (`*.jks`, `*.keystore`), `keystore.properties`, passwords or 
 - Versions are automatic (git tags / release workflow). Don't edit `versionName`/`versionCode`.
 
 ## Keep docs in sync
-- Behaviour change → update `docs/` and, if it touches data or permissions, `PRIVACY.md`.
+- Behaviour change → update `docs/` and, if it touches data or permissions, `PRIVACY.md`. Copy
+  `PRIVACY.md` to `privacy.md` in the public website repo `wim-to-watchlist/wim-to-watchlist.github.io`
+  (that copy is the policy the Play Store links to).
 - Notable decision (new library, architecture choice, minSdk change, …) → add a dated entry to
   `docs/decisions.md`.
 - Structure: `docs/structure.md`. Design and flow: `docs/architecture.md`. SIMKL calls and deep

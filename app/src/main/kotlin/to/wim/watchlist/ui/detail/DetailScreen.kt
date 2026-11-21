@@ -949,7 +949,7 @@ private fun Trailers(d: MediaDetails) {
         LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             items(d.trailers) { t ->
                 Column(
-                    Modifier.width(220.dp).clip(RoundedCornerShape(16.dp)).clickable { context.openUrl("https://www.youtube.com/watch?v=${t.youtubeId}") },
+                    Modifier.width(220.dp).clip(RoundedCornerShape(16.dp)).clickable(role = Role.Button) { context.openUrl("https://www.youtube.com/watch?v=${t.youtubeId}") },
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
                     Box(contentAlignment = Alignment.Center) {

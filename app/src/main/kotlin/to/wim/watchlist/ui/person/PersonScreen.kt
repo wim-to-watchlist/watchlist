@@ -52,6 +52,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -293,6 +294,6 @@ private fun CreditRow(
                 inLibrary -> { { Icon(Icons.Rounded.CheckCircle, stringResource(R.string.person_in_library), tint = MaterialTheme.colorScheme.primary) } }
                 else -> null
             },
-        modifier = Modifier.clickable(onClick = onClick),
+        modifier = Modifier.clickable(role = Role.Button, onClick = onClick),
     )
 }

@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -90,7 +91,7 @@ fun PersonTile(
     onClick: () -> Unit,
 ) {
     Column(
-        Modifier.width(96.dp).clip(RoundedCornerShape(16.dp)).clickable(onClick = onClick),
+        Modifier.width(96.dp).clip(RoundedCornerShape(16.dp)).clickable(role = Role.Button, onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {

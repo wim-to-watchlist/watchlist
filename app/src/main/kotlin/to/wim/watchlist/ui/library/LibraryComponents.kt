@@ -49,6 +49,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -422,7 +423,7 @@ fun SectionHeader(
     Row(
         modifier
             .fillMaxWidth()
-            .then(if (onOpen != null) Modifier.clip(RoundedCornerShape(12.dp)).clickable(onClick = onOpen) else Modifier)
+            .then(if (onOpen != null) Modifier.clip(RoundedCornerShape(12.dp)).clickable(role = Role.Button, onClick = onOpen) else Modifier)
             .padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),

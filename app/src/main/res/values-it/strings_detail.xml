@@ -6,7 +6,7 @@
     <string name="detail_try_again">Riprova</string>
     <string name="detail_failure_reason">%1$s: %2$s</string>
     <string name="detail_error_mark_watched">Impossibile segnare come visto</string>
-    <string name="detail_error_update_list">Impossibile aggiornare l\'elenco</string>
+    <string name="detail_error_update_list">Impossibile aggiornare l’elenco</string>
     <string name="detail_error_save_rating">Impossibile salvare il voto</string>
     <string name="detail_error_mark_episode_watched">Impossibile segnare %1$s come visto</string>
     <string name="detail_error_check_in">Check-in non riuscito</string>

@@ -8,10 +8,10 @@ WHAT YOU GET
 • A calendar of upcoming episodes and movie releases from your lists.
 • A notification when a new episode of a show you watch is out, or when a movie on your Plan to watch list is released. Each type has its own channel, so you decide what makes a sound.
 • Discover: Trending on Simkl today, this week and this month, airing today, new premieres and the best of the year. Or tap the dice for a surprise.
-• Details pages with ratings from SIMKL, IMDb and others, trailers, every episode by season and links to IMDb, TMDB, MyAnimeList and more.
+• Detail pages with ratings from SIMKL, IMDb and others, trailers, every episode by season and links to IMDb, TMDB, MyAnimeList and more.
 • Cast and crew, with pages for actors and directors, when you add your own free TMDB token (optional).
 • Search the whole SIMKL catalogue.
-• Opens instantly and works offline from the copy of your library on your phone. It syncs when you open the app or pull down to refresh.
+• Opens straight away and works offline from the copy of your library on your phone. It syncs when you open the app or pull down to refresh.
 • Material 3 design with a dark theme and, on Android 12 and later, colours from your wallpaper.
 • In English, Dutch, French, German, Spanish and Italian.
 

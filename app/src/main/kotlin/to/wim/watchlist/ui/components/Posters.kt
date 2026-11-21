@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -136,7 +137,7 @@ fun PosterTile(
     inLibrary: Boolean = false,
 ) {
     Column(
-        modifier.clip(RoundedCornerShape(14.dp)).clickable(onClick = onClick).padding(4.dp),
+        modifier.clip(RoundedCornerShape(14.dp)).clickable(role = Role.Button, onClick = onClick).padding(4.dp),
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Box {

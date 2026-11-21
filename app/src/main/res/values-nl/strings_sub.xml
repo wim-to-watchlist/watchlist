@@ -17,7 +17,7 @@
     <string name="sub_feature_notifications">Een melding zodra een nieuwe aflevering of film uit is</string>
     <string name="sub_feature_calendar">Een kalender met komende afleveringen en releases</string>
     <string name="sub_feature_discover">Ontdek wat populair en nieuw is, of laat Verras me kiezen</string>
-    <string name="sub_feature_details">Je lijsten, scores en kijkstatistieken</string>
+    <string name="sub_feature_details">Je lijsten, beoordelingen en kijkstatistieken</string>
     <string name="sub_plan_yearly">Jaarlijks</string>
     <string name="sub_plan_monthly">Maandelijks</string>
     <string name="sub_price_monthly">%1$s per maand</string>
@@ -38,7 +38,7 @@
     <string name="sub_manage">Beheren of opzeggen</string>
     <string name="sub_settings_trial">Gratis proefperiode tot %1$s. Wijzigen of opzeggen in Google Play</string>
     <string name="sub_notif_channel">Abonnement</string>
-    <string name="sub_notif_channel_description">Een herinnering voor je gratis proefperiode afloopt</string>
+    <string name="sub_notif_channel_description">Een herinnering voordat je gratis proefperiode afloopt</string>
     <string name="sub_notif_title">Je gratis proefperiode loopt af op %1$s</string>
     <string name="sub_notif_text">Daarna rekent Google Play je abonnement aan. Tik om het te beheren of op te zeggen.</string>
     <string name="sub_failed">De aankoop is niet gelukt. Probeer het opnieuw of controleer je betaalmethode in Google Play.</string>

@@ -6,8 +6,5 @@
     <string name="demo_try_note">Serie e film inventati. Non viene inviato nulla a SIMKL.</string>
     <string name="demo_bar">Demo con titoli inventati</string>
     <string name="demo_exit">Esci dalla demo</string>
-    <string name="demo_start_trial">Prova gratis</string>
     <string name="demo_sign_in">Accedi</string>
-    <string name="demo_welcome_note">Watchlist funziona con il tuo account SIMKL. Non è affiliata a Simkl.</string>
-    <string name="sub_next_sign_in">Poi accedi con il tuo account SIMKL.</string>
 </resources>

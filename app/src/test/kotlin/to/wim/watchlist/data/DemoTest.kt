@@ -4,7 +4,6 @@ import to.wim.watchlist.data.api.Parsers
 import to.wim.watchlist.data.api.asObject
 import to.wim.watchlist.data.demo.DemoCatalog
 import to.wim.watchlist.data.demo.DemoSimkl
-import to.wim.watchlist.data.model.Access
 import to.wim.watchlist.data.model.EpisodeRef
 import to.wim.watchlist.data.model.Images
 import to.wim.watchlist.data.model.ListStatus
@@ -195,16 +194,10 @@ class DemoTest {
 
     @Test
     fun onboardingOrder() {
-        // New: welcome, the demo, then the subscription, then SIMKL.
-        assertEquals(Screen.Welcome, Onboarding.screen(signedIn = false, Access.Locked, SignedOutStep.Welcome))
-        assertEquals(Screen.Welcome, Onboarding.screen(signedIn = false, Access.Checking, SignedOutStep.Welcome))
-        assertEquals(Screen.Demo, Onboarding.screen(signedIn = false, Access.Locked, SignedOutStep.Demo))
-        assertEquals(Screen.Subscribe, Onboarding.screen(signedIn = false, Access.Locked, SignedOutStep.Subscribe))
-        // Subscribed (or restored from Google Play): straight to signing in, unless in the demo.
-        assertEquals(Screen.SignIn, Onboarding.screen(signedIn = false, Access.Allowed, SignedOutStep.Welcome))
-        assertEquals(Screen.SignIn, Onboarding.screen(signedIn = false, Access.Allowed, SignedOutStep.Subscribe))
-        assertEquals(Screen.Demo, Onboarding.screen(signedIn = false, Access.Allowed, SignedOutStep.Demo))
-        // Signed in: the app (which shows the subscription screen itself when it lapsed).
-        SignedOutStep.entries.forEach { assertEquals(Screen.App, Onboarding.screen(signedIn = true, Access.Locked, it)) }
+        // New: sign in with SIMKL (the subscription screen follows the first sync), or the demo.
+        assertEquals(Screen.SignIn, Onboarding.screen(signedIn = false, SignedOutStep.SignIn))
+        assertEquals(Screen.Demo, Onboarding.screen(signedIn = false, SignedOutStep.Demo))
+        // Signed in: the app, which shows the subscription screen itself when there is none.
+        SignedOutStep.entries.forEach { assertEquals(Screen.App, Onboarding.screen(signedIn = true, it)) }
     }
 }

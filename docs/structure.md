@@ -62,7 +62,7 @@ watchlist/
         │   │   │       ├── Shelves.kt         Shelves, episode order, continue-from-latest
         │   │   │       ├── Errors.kt          What went wrong with a request (offline, signed out, busy, …)
         │   │   │       ├── TmdbBanner.kt      When the details page offers to add a TMDB token
-        │   │   │       ├── Onboarding.kt      Which signed-out screen shows (welcome, demo, subscription, sign in)
+        │   │   │       ├── Onboarding.kt      Which signed-out screen shows (sign in or the demo)
         │   │   │       ├── Subscription.kt    When the app opens or shows the subscription screen; which plans to show; trial reminder
         │   │   │       └── NewEpisodes.kt     Which aired episodes a notification announces
         │   │   ├── work/NewEpisodesWorker.kt  Periodic new-episode notifications
@@ -76,7 +76,7 @@ watchlist/
         │   │       ├── discover/    Trending, airing, premieres, best, "Surprise me"
         │   │       ├── calendar/    Upcoming episodes and releases
         │   │       ├── search/  profile/  settings/  subscription/
-        │   │       ├── login/       Welcome and sign-in screens
+        │   │       ├── login/       Sign-in screen (with Try the demo)
         │   │       ├── demo/        Demo bar, LocalDemo, drawn demo pictures (Coil fetcher)
         │   │       ├── components/  Posters, labels, skeletons, shared widgets
         │   │       └── theme/       Material 3 theme, shapes, motion, system bars, settings kit, empty states

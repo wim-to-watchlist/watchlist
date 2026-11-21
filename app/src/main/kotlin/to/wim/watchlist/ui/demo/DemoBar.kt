@@ -18,8 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,8 +25,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import to.wim.watchlist.R
-import to.wim.watchlist.data.model.Access
-import to.wim.watchlist.data.model.SignedOutStep
 import to.wim.watchlist.ui.components.rememberApp
 
 /**
@@ -38,20 +34,12 @@ import to.wim.watchlist.ui.components.rememberApp
 val LocalDemo = staticCompositionLocalOf { false }
 
 /**
- * Above every screen of the demo: says the titles are made up, leads to the free trial (or, when
- * the subscription is already active, to signing in) and closes the demo.
+ * Above every screen of the demo: says the titles are made up, leads to signing in (where the
+ * user's own library and then the subscription come next) and closes the demo.
  */
 @Composable
 fun DemoBar() {
     val app = rememberApp()
-    val subscription by app.subscription.state.collectAsState()
-    val plans = subscription.plans
-    val action =
-        when {
-            subscription.access == Access.Allowed -> R.string.demo_sign_in
-            plans.isNotEmpty() && plans.none { it.trialDays != null } -> R.string.sub_subscribe
-            else -> R.string.demo_start_trial
-        }
     Surface(color = MaterialTheme.colorScheme.secondaryContainer, modifier = Modifier.fillMaxWidth()) {
         Row(
             Modifier
@@ -67,7 +55,7 @@ fun DemoBar() {
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f).padding(end = 8.dp),
             )
-            Button(onClick = { app.endDemo(next = SignedOutStep.Subscribe) }) { Text(stringResource(action)) }
+            Button(onClick = { app.endDemo() }) { Text(stringResource(R.string.demo_sign_in)) }
             IconButton(onClick = { app.endDemo() }) {
                 Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.demo_exit))
             }

@@ -2,6 +2,19 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-21: Sign in first, subscription after the first sync; the demo stays made up
+
+Reverses the order of the entry below; the owner left the design of the trial and demo to Claude.
+Almost everyone who installs a SIMKL app already has a SIMKL account, and the strongest reason to
+pay is seeing one's own library in the app, so the order is sign in, first sync, then the
+subscription screen with the user's title count (as before 1.11.0). Paying first asked for money
+before showing anything personal. The demo stays for people who want to look first, with
+made-up titles: it works offline with no API calls, can show Up next, the Calendar and stats
+filled in (a guest mode with real titles would leave those empty), and invents no viewing
+history on real shows. Rejected: real popular titles with the paywall on the first change
+(empty personal screens, unauthenticated SIMKL calls at every look around, and less convincing
+than one's own lists one step later).
+
 ## 2026-11-21: A demo with made-up content, and the paywall before sign-in
 
 The first screen now offers **Try the demo**: the real screens with fictional titles, so people

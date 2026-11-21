@@ -1,42 +1,35 @@
 package to.wim.watchlist.data.model
 
-/** Where someone who isn't signed in is: the welcome screen, the demo, or the subscription screen. */
-enum class SignedOutStep { Welcome, Demo, Subscribe }
+/** Where someone who isn't signed in is: the sign-in screen or the demo. */
+enum class SignedOutStep { SignIn, Demo }
 
 /** What the app shows. */
 enum class Screen {
-    /** Try the demo or start the free trial. */
-    Welcome,
+    /** Sign in with SIMKL, with "Try the demo" next to it. */
+    SignIn,
 
     /** The app filled with made-up titles. */
     Demo,
 
-    /** The subscription screen, before signing in. */
-    Subscribe,
-
-    /** Sign in with SIMKL: the subscription is active (or not needed in this build). */
-    SignIn,
-
-    /** Signed in: the app itself, or the subscription screen when it lapsed. */
+    /** Signed in: the app, or the subscription screen (after the first sync) without one. */
     App,
 }
 
 /**
- * The order for new users: the demo first, then the subscription (Google Play, tied to the
- * Google account), then signing in with SIMKL. Someone whose subscription Google Play already
- * knows (a reinstall, a new phone) goes straight to signing in. Plain Kotlin so it is unit tested.
+ * The order for new users: sign in with SIMKL (free, and most people who install a SIMKL app have
+ * an account), let the first sync run, then the subscription screen counts the user's own titles.
+ * The demo is for people who want to look first; it leads back to signing in. Someone whose
+ * subscription Google Play already knows goes from sign-in straight into the app. Plain Kotlin so
+ * it is unit tested.
  */
 object Onboarding {
     fun screen(
         signedIn: Boolean,
-        access: Access,
         step: SignedOutStep,
     ): Screen =
         when {
             signedIn -> Screen.App
             step == SignedOutStep.Demo -> Screen.Demo
-            access == Access.Allowed -> Screen.SignIn
-            step == SignedOutStep.Subscribe -> Screen.Subscribe
-            else -> Screen.Welcome
+            else -> Screen.SignIn
         }
 }

@@ -60,7 +60,7 @@ fun AppRoot(
 
 /**
  * The app itself only with an active subscription (or its free trial); otherwise the subscription
- * screen. Google Play is asked again each time the app comes to the foreground, so a purchase,
+ * screen, with the library syncing behind it. Google Play is asked again each time the app comes to the foreground, so a purchase,
  * renewal or cancellation elsewhere shows without a restart.
  */
 @Composable
@@ -71,9 +71,19 @@ private fun Subscribed(content: @Composable () -> Unit) {
         lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { app.subscription.refresh() }
     }
     val state by app.subscription.state.collectAsState()
+    val preview by app.paywallPreview.collectAsState()
+    if (preview) {
+        BackHandler { app.paywallPreview.value = false }
+        return SubscriptionScreen(preview = true)
+    }
     when (state.access) {
         Access.Allowed -> content()
-        Access.Locked -> SubscriptionScreen()
+        Access.Locked -> {
+            // The first sync runs behind the subscription screen, so it can say the lists are ready
+            // and the app opens with them right after subscribing.
+            LaunchedEffect(Unit) { app.library.syncIfStale() }
+            SubscriptionScreen()
+        }
         Access.Checking -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
     }
 }

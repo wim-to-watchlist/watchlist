@@ -174,6 +174,7 @@ class SettingsStore(
         val tmdbBannerHidden = booleanPreferencesKey("tmdb_banner_hidden")
         val subscriptionActive = booleanPreferencesKey("subscription_active")
         val subscriptionCheckedAt = longPreferencesKey("subscription_checked_at")
+        val trialEndsAt = longPreferencesKey("trial_ends_at")
     }
 
     val settings: Flow<AppSettings> =
@@ -304,6 +305,11 @@ class SettingsStore(
             it[Keys.subscriptionActive] = value.active
             it[Keys.subscriptionCheckedAt] = value.checkedAt
         }
+
+    /** When the free trial bought on this phone ends (epoch ms); null when none was. Never backed up. */
+    suspend fun trialEndsAt(): Long? = device()[Keys.trialEndsAt]
+
+    suspend fun setTrialEndsAt(value: Long) = context.dataStore.edit { it[Keys.trialEndsAt] = value }
 
     suspend fun notifiedEpisodes(): Set<String> = device()[Keys.notified].orEmpty()
 

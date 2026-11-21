@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- The subscription screen and the Subscription row in Settings. -->
-    <string name="sub_title_trial">Start je gratis proefperiode</string>
+    <!-- The subscription screen, the Subscription row in Settings and the trial reminder. -->
     <string name="sub_title">Neem een abonnement om Watchlist te blijven gebruiken</string>
-    <string name="sub_feature_up_next">Volgende, je lijsten en scores, gesynchroniseerd met SIMKL</string>
-    <string name="sub_feature_calendar">De kalender, Ontdekken, en cast en crew</string>
-    <string name="sub_feature_notifications">Meldingen voor nieuwe afleveringen en films</string>
-    <string name="sub_price">%1$s per jaar</string>
     <string name="sub_start_trial">Gratis proefperiode starten</string>
     <string name="sub_subscribe">Abonneren</string>
+    <string name="sub_price">%1$s per jaar</string>
+    <plurals name="sub_title_trial">
+        <item quantity="one">Probeer Watchlist %1$d dag gratis</item>
+        <item quantity="other">Probeer Watchlist %1$d dagen gratis</item>
+    </plurals>
+    <plurals name="sub_library_ready">
+        <item quantity="one">Je bibliotheek is gesynchroniseerd: %1$d titel staat klaar</item>
+        <item quantity="other">Je bibliotheek is gesynchroniseerd: %1$d titels staan klaar</item>
+    </plurals>
+    <string name="sub_feature_up_next">Volgende: de volgende aflevering van elke serie, gesynchroniseerd met SIMKL</string>
+    <string name="sub_feature_notifications">Een melding zodra een nieuwe aflevering of film uit is</string>
+    <string name="sub_feature_calendar">Een kalender met komende afleveringen en releases</string>
+    <string name="sub_feature_discover">Ontdek wat populair en nieuw is, of laat Verras me kiezen</string>
+    <string name="sub_feature_details">Je lijsten, scores en kijkstatistieken</string>
+    <string name="sub_plan_yearly">Jaarlijks</string>
+    <string name="sub_plan_monthly">Maandelijks</string>
+    <string name="sub_price_monthly">%1$s per maand</string>
+    <string name="sub_per_month">Dat is %1$s per maand</string>
+    <string name="sub_save">%1$d%% voordeliger</string>
+    <plurals name="sub_days_free">
+        <item quantity="one">%1$d dag gratis</item>
+        <item quantity="other">%1$d dagen gratis</item>
+    </plurals>
+    <string name="sub_step_today">Vandaag</string>
+    <string name="sub_step_today_text">Alles gebruiken, niets betalen</string>
+    <string name="sub_step_day">Dag %1$d · %2$s</string>
+    <string name="sub_step_reminder_text">Een melding dat je proefperiode bijna afloopt</string>
+    <string name="sub_step_charge_text">Google Play rekent %1$s aan, tenzij je vóór dan opzegt</string>
     <string name="sub_terms_trial">Google Play rekent het bedrag aan als de gratis proefperiode afloopt, tenzij je vóór dan opzegt. Het abonnement verlengt elk jaar tot je het opzegt in Google Play › Abonnementen.</string>
     <string name="sub_terms">Het abonnement verlengt elk jaar tot je het opzegt in Google Play › Abonnementen.</string>
+    <string name="sub_terms_monthly">Het abonnement verlengt elke maand tot je het opzegt in Google Play › Abonnementen.</string>
+    <string name="sub_manage">Beheren of opzeggen</string>
+    <string name="sub_settings_trial">Gratis proefperiode tot %1$s. Wijzigen of opzeggen in Google Play</string>
+    <string name="sub_notif_channel">Abonnement</string>
+    <string name="sub_notif_channel_description">Een herinnering voor je gratis proefperiode afloopt</string>
+    <string name="sub_notif_title">Je gratis proefperiode loopt af op %1$s</string>
+    <string name="sub_notif_text">Daarna rekent Google Play je abonnement aan. Tik om het te beheren of op te zeggen.</string>
     <string name="sub_failed">De aankoop is niet gelukt. Probeer het opnieuw of controleer je betaalmethode in Google Play.</string>
     <string name="sub_pending">Je aankoop wacht tot Google Play de betaling bevestigt. Watchlist opent zodra dat gebeurd is.</string>
     <string name="sub_unavailable">Google Play is niet beschikbaar, dus het abonnement kan niet gecontroleerd worden. Zorg dat Google Play geïnstalleerd is en dat je erin aangemeld bent, en controleer opnieuw.</string>
     <string name="sub_not_loaded">Het abonnement kon niet geladen worden uit Google Play. Controleer je verbinding en probeer het opnieuw.</string>
     <string name="sub_check_again">Opnieuw controleren</string>
-    <string name="sub_manage">Abonnement beheren</string>
     <string name="sub_settings_section">Abonnement</string>
     <string name="sub_settings_summary">Wijzigen of opzeggen in Google Play</string>
-    <plurals name="sub_price_trial">
-        <item quantity="one">%1$d dag gratis, daarna %2$s per jaar</item>
-        <item quantity="other">%1$d dagen gratis, daarna %2$s per jaar</item>
-    </plurals>
+    <string name="sub_preview">Abonnementsscherm bekijken</string>
+    <string name="sub_preview_summary">Alleen in de testversie: toont het scherm met voorbeeldprijzen</string>
+    <string name="sub_preview_close">Voorbeeld sluiten</string>
 </resources>

@@ -18,7 +18,7 @@ copy them into the Play Console as they are.
   [API for business](https://www.themoviedb.org/api-for-business)). Without one, take the cast
   and crew features out of the paid version.
 - **The subscription comes with version 1.10.** The "Price" paragraph of the store texts
-  describes the 14-day trial and €3.99 a year; publish it together with that version, after
+  describes the 14-day trial, €4.99 a year and €0.99 a month; publish it together with that version, after
   setting up the subscription (step 7).
 
 ## 1. Developer account
@@ -107,18 +107,20 @@ to Play and keep GitHub Releases for testing.
 
 **Monetize with Play › Products › Subscriptions › Create subscription**:
 
-1. Product ID `watchlist_yearly`, name "Watchlist".
-2. **Add base plan**: ID `yearly`, auto-renewing, billing period 1 year, price **€3.99**. Play
-   suggests prices for the other countries; check them.
-3. **Add offer** on that base plan: ID `free-trial`, eligibility *New customer acquisition*
-   (never had this subscription), phase **Free trial, 14 days**. Activate the plan and the
-   offer.
-4. **Monetization setup › License testing**: add your own Google account, so test purchases
+1. Product ID `watchlist`, name "Watchlist".
+2. **Add base plan**: ID `yearly`, auto-renewing, billing period 1 year, price **€4.99**. Play
+   suggests prices for the other countries; round them to local price points (for example
+   $4.99, £4.49).
+3. **Add base plan**: ID `monthly`, auto-renewing, billing period 1 month, price **€0.99**.
+4. **Add offer** on the `yearly` base plan (not on `monthly`): ID `free-trial`, eligibility
+   *New customer acquisition* (never had this subscription), phase **Free trial, 14 days**.
+   Activate both plans and the offer.
+5. **Monetization setup › License testing**: add your own Google account, so test purchases
    cost nothing.
 
-The IDs have to match the app: the app asks Google Play for product `watchlist_yearly` and
-offers whichever offer Google Play returns for that user (the free-trial offer if they never had
-it, else the plain yearly plan). The products can only be activated after a version that uses
+The IDs have to match the app: the app asks Google Play for product `watchlist`, shows the
+`yearly` plan first and `monthly` below it, and on the yearly plan uses whichever offer Google
+Play returns for that user (the free-trial offer if they never had it, else the plain plan). The products can only be activated after a version that uses
 Google Play Billing has been uploaded to a test track.
 
 **Switch it on:** release builds don't ask for the subscription yet (`REQUIRE_SUBSCRIPTION` is

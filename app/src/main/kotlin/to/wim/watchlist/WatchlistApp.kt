@@ -18,6 +18,7 @@ import to.wim.watchlist.data.SubscriptionRepository
 import to.wim.watchlist.data.api.SimklApi
 import to.wim.watchlist.data.api.TmdbApi
 import to.wim.watchlist.work.NewEpisodesWorker
+import to.wim.watchlist.work.TrialReminderWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.Dispatchers
@@ -51,6 +52,9 @@ class WatchlistApp :
     val subscription by lazy { SubscriptionRepository(this, settings, scope, BuildConfig.REQUIRE_SUBSCRIPTION) }
     val catalog by lazy { CatalogRepository(api, tmdb, episodes) }
 
+    /** Debug builds: Settings › Subscription › Preview shows the subscription screen with sample plans. */
+    val paywallPreview = MutableStateFlow(false)
+
     /** "Not now" on the TMDB token card: hidden until the app restarts. */
     val tmdbBannerHiddenForNow = MutableStateFlow(false)
 
@@ -70,6 +74,7 @@ class WatchlistApp :
         super.onCreate()
         to.wim.watchlist.ui.components.Format.context = this
         runCatching { NewEpisodesWorker.createChannels(this) }
+        runCatching { TrialReminderWorker.createChannel(this) }
         scope.launch { runCatching { NewEpisodesWorker.restore(this@WatchlistApp) } }
     }
 

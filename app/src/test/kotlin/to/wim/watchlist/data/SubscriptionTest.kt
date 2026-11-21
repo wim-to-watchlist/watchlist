@@ -1,7 +1,8 @@
 package to.wim.watchlist.data
 
 import to.wim.watchlist.data.model.Access
-import to.wim.watchlist.data.model.PaywallOffer
+import to.wim.watchlist.data.model.PaywallPlan
+import to.wim.watchlist.data.model.PlanPeriod
 import to.wim.watchlist.data.model.PlayStatus
 import to.wim.watchlist.data.model.PricePhase
 import to.wim.watchlist.data.model.PurchaseInfo
@@ -11,6 +12,7 @@ import to.wim.watchlist.data.model.SubscriptionRules
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 class SubscriptionTest {
@@ -54,23 +56,70 @@ class SubscriptionTest {
         assertEquals(Access.Allowed, SubscriptionRules.access(false, PlayStatus.Inactive, null, now))
     }
 
-    private val yearly = PricePhase(3_990_000, "€3.99", "P1Y")
+    private val yearly = PricePhase(4_990_000, "€4.99", "P1Y", "EUR")
+    private val monthly = PricePhase(990_000, "€0.99", "P1M", "EUR")
+    private val free = PricePhase(0, "Free", "P2W", "EUR")
+    private val y = SubscriptionRules.YEARLY_PLAN
+    private val m = SubscriptionRules.MONTHLY_PLAN
 
     @Test
-    fun theFreeTrialIsOfferedWhenPlayHasIt() {
+    fun theYearlyPlanComesFirstWithItsFreeTrial() {
         val offers =
             listOf(
-                SubscriptionOffer("plain", listOf(yearly)),
-                SubscriptionOffer("trial", listOf(PricePhase(0, "Free", "P2W"), yearly)),
+                SubscriptionOffer("month", m, listOf(monthly)),
+                SubscriptionOffer("year", y, listOf(yearly)),
+                SubscriptionOffer("trial", y, listOf(free, yearly)),
             )
-        assertEquals(PaywallOffer("trial", 14, "€3.99"), SubscriptionRules.paywallOffer(offers))
+        assertEquals(
+            listOf(
+                PaywallPlan("trial", PlanPeriod.Yearly, 14, "€4.99", 4_990_000, "EUR"),
+                PaywallPlan("month", PlanPeriod.Monthly, null, "€0.99", 990_000, "EUR"),
+            ),
+            SubscriptionRules.paywallPlans(offers),
+        )
     }
 
     @Test
-    fun withoutTheTrialThePlainYearlyPlanIsOffered() {
-        // Someone who already had the trial only gets the base plan from Google Play.
-        assertEquals(PaywallOffer("plain", null, "€3.99"), SubscriptionRules.paywallOffer(listOf(SubscriptionOffer("plain", listOf(yearly)))))
-        assertNull(SubscriptionRules.paywallOffer(emptyList()))
+    fun withoutTheTrialThePlainPlansAreOffered() {
+        // Someone who already had the trial only gets the base plans from Google Play.
+        val plans = SubscriptionRules.paywallPlans(listOf(SubscriptionOffer("year", y, listOf(yearly)), SubscriptionOffer("month", m, listOf(monthly))))
+        assertEquals(listOf("year", "month"), plans.map { it.token })
+        assertEquals(listOf(null, null), plans.map { it.trialDays })
+        assertEquals(emptyList<PaywallPlan>(), SubscriptionRules.paywallPlans(emptyList()))
+        // Unknown base plans and offers without a paid phase are left out.
+        assertEquals(emptyList<PaywallPlan>(), SubscriptionRules.paywallPlans(listOf(SubscriptionOffer("x", "weekly", listOf(yearly)), SubscriptionOffer("f", y, listOf(free)))))
+    }
+
+    private fun plan(
+        period: PlanPeriod,
+        micros: Long,
+        currency: String = "EUR",
+    ) = PaywallPlan("t", period, null, "", micros, currency)
+
+    @Test
+    fun theYearlyPlanSavesComparedWithTwelveMonths() {
+        assertEquals(58, SubscriptionRules.savingsPercent(plan(PlanPeriod.Yearly, 4_990_000), plan(PlanPeriod.Monthly, 990_000)))
+        // Not cheaper, or in another currency: no saving shown.
+        assertNull(SubscriptionRules.savingsPercent(plan(PlanPeriod.Yearly, 12_000_000), plan(PlanPeriod.Monthly, 990_000)))
+        assertNull(SubscriptionRules.savingsPercent(plan(PlanPeriod.Yearly, 4_990_000), plan(PlanPeriod.Monthly, 990_000, "USD")))
+    }
+
+    @Test
+    fun theYearlyPriceIsShownPerMonth() {
+        assertEquals("€0.42", SubscriptionRules.perMonth(plan(PlanPeriod.Yearly, 4_990_000), Locale.UK))
+        assertEquals("$0.42", SubscriptionRules.perMonth(plan(PlanPeriod.Yearly, 4_990_000, "USD"), Locale.US))
+        assertNull(SubscriptionRules.perMonth(plan(PlanPeriod.Yearly, 4_990_000, ""), Locale.US))
+    }
+
+    @Test
+    fun theReminderComesTwoDaysBeforeTheTrialEnds() {
+        val end = SubscriptionRules.trialEnd(now, 14)
+        assertEquals(now + 14 * day, end)
+        assertEquals(now + 12 * day, SubscriptionRules.reminderAt(end, now))
+        // Bought late in the trial window (or the reminder is late): remind right away.
+        assertEquals(now, SubscriptionRules.reminderAt(now + day, now))
+        // The trial already ended: no reminder.
+        assertNull(SubscriptionRules.reminderAt(now - day, now))
     }
 
     @Test

@@ -59,9 +59,10 @@ watchlist/
         │   │   │       ├── Shelves.kt         Shelves, episode order, continue-from-latest
         │   │   │       ├── Errors.kt          What went wrong with a request (offline, signed out, busy, …)
         │   │   │       ├── TmdbBanner.kt      When the details page offers to add a TMDB token
-        │   │   │       ├── Subscription.kt    When the app opens or shows the subscription screen; which offer to show
+        │   │   │       ├── Subscription.kt    When the app opens or shows the subscription screen; which plans to show; trial reminder
         │   │   │       └── NewEpisodes.kt     Which aired episodes a notification announces
         │   │   ├── work/NewEpisodesWorker.kt  Periodic new-episode notifications
+        │   │   ├── work/TrialReminderWorker.kt  Notification two days before the free trial ends
         │   │   └── ui/
         │   │       ├── MainActivity.kt, AppRoot.kt, Navigation.kt   Entry, root, back stack
         │   │       ├── main/        Navigation bar and top bar

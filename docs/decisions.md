@@ -2,6 +2,20 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-21: A demo with made-up content, and the paywall before sign-in
+
+The first screen now offers **Try the demo**: the real screens with fictional titles, so people
+can see the app before paying or creating a SIMKL account. The demo swaps in a second object graph
+whose `SimklApi` is answered by `DemoSimkl`, a small pretend SIMKL in plain Kotlin that speaks
+SIMKL's JSON, so the screens, repositories and sync code are the ones the real app uses and stay
+in step with them. Its pictures are drawn on the phone (`DemoArtFetcher`), so the demo has no
+network destination and needs no image files in the APK. Rejected: a separate set of demo
+screens (they would drift from the real ones), canned JSON files (bigger, and changes like
+marking watched wouldn't stick), real titles or posters (rights, and they would go out of date).
+The order is now welcome or demo, then the subscription, then SIMKL sign-in, as the owner asked:
+paying comes before the work of creating or connecting a SIMKL account, and a reinstall with an
+existing subscription skips the paywall because Google Play is asked before sign-in.
+
 ## 2026-11-21: Subscription switched on in release builds
 
 `REQUIRE_SUBSCRIPTION` is `true` for release builds again, now that the products exist in the Play

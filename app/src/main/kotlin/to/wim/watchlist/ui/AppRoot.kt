@@ -24,6 +24,16 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.model.Access
+import to.wim.watchlist.data.model.Onboarding
+import to.wim.watchlist.data.model.Screen
+import to.wim.watchlist.data.model.SignedOutStep
+import to.wim.watchlist.ui.demo.DemoBar
+import to.wim.watchlist.ui.demo.LocalDemo
+import to.wim.watchlist.ui.login.WelcomeScreen
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.statusBars
 import to.wim.watchlist.ui.subscription.SubscriptionScreen
 import to.wim.watchlist.ui.components.rememberApp
 import to.wim.watchlist.ui.detail.DetailScreen
@@ -49,10 +59,43 @@ fun AppRoot(
 
     WatchlistTheme(mode = current.theme, dynamicColor = current.dynamicColor) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            if (current.accessToken == null) {
-                LoginScreen()
-            } else {
-                Subscribed { LoggedIn(current, requested, onRequestHandled) }
+            val step by app.signedOutStep.collectAsState()
+            val subscription by app.subscription.state.collectAsState()
+            val signedIn = current.accessToken != null
+            // Asks Google Play once before sign-in too, so a subscription bought earlier (a
+            // reinstall, a new phone) goes straight to signing in.
+            if (!signedIn) {
+                val lifecycle = LocalLifecycleOwner.current.lifecycle
+                LaunchedEffect(lifecycle) {
+                    lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { app.subscription.refresh() }
+                }
+            }
+            when (Onboarding.screen(signedIn, subscription.access, step)) {
+                Screen.App -> Subscribed { LoggedIn(current, requested, onRequestHandled) }
+                Screen.Demo -> Demo(current)
+                Screen.SignIn -> LoginScreen()
+                Screen.Subscribe -> {
+                    BackHandler { app.signedOutStep.value = SignedOutStep.Welcome }
+                    SubscriptionScreen(signedOut = true)
+                }
+                Screen.Welcome -> WelcomeScreen()
+            }
+        }
+    }
+}
+
+/**
+ * The app filled with made-up titles, under a bar that says so and leads to the free trial.
+ * Leaving it (the bar, back on the first screen or "Sign out") forgets what was done in it.
+ */
+@Composable
+private fun Demo(settings: AppSettings) {
+    val app = rememberApp()
+    Column(Modifier.fillMaxSize()) {
+        DemoBar()
+        Box(Modifier.weight(1f).consumeWindowInsets(WindowInsets.statusBars)) {
+            CompositionLocalProvider(LocalDemo provides true) {
+                LoggedIn(settings, requested = null, onRequestHandled = {}, onLeave = { app.endDemo() })
             }
         }
     }
@@ -93,6 +136,8 @@ private fun LoggedIn(
     settings: AppSettings,
     requested: Route.Detail?,
     onRequestHandled: () -> Unit,
+    /** Back on the first screen: the demo ends; otherwise Android handles it (the app closes). */
+    onLeave: (() -> Unit)? = null,
 ) {
     val app = rememberApp()
     val navigator = rememberSaveable(saver = Navigator.Saver) { Navigator() }
@@ -111,6 +156,7 @@ private fun LoggedIn(
         }
     }
     BackHandler(enabled = navigator.stack.size > 1) { navigator.pop() }
+    if (onLeave != null) BackHandler(enabled = navigator.stack.size <= 1, onBack = onLeave)
 
     // Material 3 shared-axis X (see Motion.sharedAxisX).
     val axisOffset = with(LocalDensity.current) { 30.dp.roundToPx() }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The demo with made-up titles, before subscribing and signing in. -->
+<resources>
+    <string name="demo_profile_name">Démo</string>
+    <string name="demo_try">Essayer la démo</string>
+    <string name="demo_try_note">Séries et films inventés. Rien n’est envoyé à SIMKL.</string>
+    <string name="demo_bar">Démo avec des titres inventés</string>
+    <string name="demo_exit">Quitter la démo</string>
+    <string name="demo_start_trial">Essai gratuit</string>
+    <string name="demo_sign_in">Se connecter</string>
+    <string name="demo_welcome_note">Watchlist fonctionne avec votre compte SIMKL. L’app n’est pas affiliée à Simkl.</string>
+    <string name="sub_next_sign_in">Ensuite, vous vous connectez avec votre compte SIMKL.</string>
+</resources>

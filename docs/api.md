@@ -15,6 +15,8 @@ Base URL `https://api.simkl.com`, implemented in `data/api/SimklApi.kt`. Every r
 
 Files on `data.simkl.in` get no extra query parameters, as SIMKL asks.
 
+The demo makes none of these calls: its `SimklApi` hands every request to `DemoSimkl`, which answers on the phone (see `docs/architecture.md`, "Onboarding and the demo").
+
 ### Endpoints used
 
 | Method | Path | Used for |

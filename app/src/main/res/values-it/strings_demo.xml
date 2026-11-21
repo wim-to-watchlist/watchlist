@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The demo with made-up titles, before subscribing and signing in. -->
+<resources>
+    <string name="demo_profile_name">Demo</string>
+    <string name="demo_try">Prova la demo</string>
+    <string name="demo_try_note">Serie e film inventati. Non viene inviato nulla a SIMKL.</string>
+    <string name="demo_bar">Demo con titoli inventati</string>
+    <string name="demo_exit">Esci dalla demo</string>
+    <string name="demo_start_trial">Prova gratis</string>
+    <string name="demo_sign_in">Accedi</string>
+    <string name="demo_welcome_note">Watchlist funziona con il tuo account SIMKL. Non è affiliata a Simkl.</string>
+    <string name="sub_next_sign_in">Poi accedi con il tuo account SIMKL.</string>
+</resources>

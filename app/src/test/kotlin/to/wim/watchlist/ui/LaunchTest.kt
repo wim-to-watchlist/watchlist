@@ -38,4 +38,14 @@ class LaunchTest {
         }
         launchAndSettle()
     }
+
+    @Test
+    fun demoShowsMainScreen() {
+        val app = ApplicationProvider.getApplicationContext<WatchlistApp>()
+        app.startDemo()
+        launchAndSettle()
+        // Leaving it forgets everything done in it.
+        app.endDemo()
+        org.junit.Assert.assertFalse(app.inDemo)
+    }
 }

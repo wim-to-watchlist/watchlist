@@ -57,6 +57,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
+import to.wim.watchlist.ui.demo.LocalDemo
 import to.wim.watchlist.data.model.Images
 import to.wim.watchlist.data.model.TypeStats
 import to.wim.watchlist.data.model.Ratings
@@ -83,6 +84,7 @@ fun ProfileScreen(types: Set<MediaType>) {
     val navigator = LocalNavigator.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val demo = LocalDemo.current
     val library by app.library.state.collectAsState()
     val profile by produceState<UserProfile?>(null) { value = runCatching { app.account.profile() }.getOrNull() }
     val stats by produceState<UserStats?>(null) { value = runCatching { app.account.stats() }.getOrNull() }
@@ -180,7 +182,7 @@ fun ProfileScreen(types: Set<MediaType>) {
                                 }
                             },
                         )
-                        profile?.let { p ->
+                        profile?.takeIf { !demo }?.let { p ->
                             ListItem(
                                 headlineContent = { Text(stringResource(R.string.screens_profile_open_page)) },
                                 leadingContent = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, null) },
@@ -197,10 +199,13 @@ fun ProfileScreen(types: Set<MediaType>) {
             item(key = "logout") {
                 Surface(shape = AppShapes.Group, color = MaterialTheme.colorScheme.surfaceContainerLow, modifier = Modifier.animateItem()) {
                     ListItem(
-                        headlineContent = { Text(stringResource(R.string.screens_profile_log_out), color = MaterialTheme.colorScheme.error) },
+                        headlineContent = {
+                            Text(stringResource(if (demo) R.string.demo_exit else R.string.screens_profile_log_out), color = MaterialTheme.colorScheme.error)
+                        },
                         leadingContent = { Icon(Icons.AutoMirrored.Rounded.Logout, null, tint = MaterialTheme.colorScheme.error) },
                         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-                        modifier = Modifier.clickableRow { confirmLogout = true },
+                        // Nothing to lose in the demo: no confirmation.
+                        modifier = Modifier.clickableRow { if (demo) scope.launch { app.logout() } else confirmLogout = true },
                     )
                 }
             }

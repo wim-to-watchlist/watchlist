@@ -64,7 +64,7 @@ other languages (nl-NL, fr-FR, de-DE, es-ES, it-IT):
 
 | Item | Answer |
 | --- | --- |
-| Privacy policy | `https://github.com/wimvdon/watchlist/blob/main/PRIVACY.md` |
+| Privacy policy | `https://wim-to-watchlist.github.io/privacy/` (the public website repo `wim-to-watchlist/wim-to-watchlist.github.io`, a copy of `PRIVACY.md`) |
 | Ads | No ads |
 | App access | All functions need a sign-in: give the reviewers a SIMKL test account (e-mail and password) and the steps: tap **Sign in with SIMKL**, sign in on simkl.com, approve. |
 | Content rating | Fill in the questionnaire (no violence, no user-to-user chat, no gambling). |

@@ -16,7 +16,7 @@ QUÉ INCLUYE
 • En español, inglés, neerlandés, francés, alemán e italiano.
 
 PRIVACIDAD
-Sin anuncios, sin analíticas, sin rastreo. Inicias sesión en simkl.com, así que la app nunca ve tu contraseña. Tus listas siguen en SIMKL; la app guarda una copia en el móvil para abrirse rápido. Política de privacidad: https://github.com/wimvdon/watchlist/blob/main/PRIVACY.md
+Sin anuncios, sin analíticas, sin rastreo. Inicias sesión en simkl.com, así que la app nunca ve tu contraseña. Tus listas siguen en SIMKL; la app guarda una copia en el móvil para abrirse rápido. Política de privacidad: https://wim-to-watchlist.github.io/privacy/
 
 PRECIO
 Prueba todo gratis durante 14 días. Después, Watchlist cuesta 3,99 € al año (Google Play muestra el precio en tu moneda). Puedes cancelar cuando quieras en Google Play.

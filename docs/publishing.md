@@ -123,11 +123,10 @@ The IDs have to match the app: the app asks Google Play for product `watchlist`,
 Play returns for that user (the free-trial offer if they never had it, else the plain plan). The products can only be activated after a version that uses
 Google Play Billing has been uploaded to a test track.
 
-**Switch it on:** release builds don't ask for the subscription yet (`REQUIRE_SUBSCRIPTION` is
-`false` for `release` in `app/build.gradle.kts`), because without an active product in Play
-nobody can get past the subscription screen. The Billing Library is still in the app, so the
-products can be activated. Once they are active, ask for it to be set to `true` in a pull request
-and test that build from the internal test track before releasing it.
+**Switched on:** release builds ask for the subscription (`REQUIRE_SUBSCRIPTION` is `true` for
+`release` in `app/build.gradle.kts`). Without active products in Play nobody gets past the
+subscription screen, so create and activate them before releasing a build, and test it from the
+internal test track first.
 
 To test: install the app from the internal test track (not a debug build or a GitHub APK: those
 can't buy from Google Play), signed in with a license-test account. Test purchases renew fast

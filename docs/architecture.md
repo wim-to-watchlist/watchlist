@@ -41,12 +41,11 @@ Watchlist is a single-module, single-activity Android app. Compose renders state
 
 ## Onboarding and the demo
 
-Signed out, `AppRoot` picks the screen with `Onboarding.screen(signedIn, access, step)` (pure
-Kotlin, tested in `DemoTest`). The order is: **Welcome** (try the demo, or start the trial), then
-the **subscription screen**, then **Sign in with SIMKL**, then the app. Someone whose Google Play
-account already has the subscription (a reinstall, a second phone) skips straight to sign-in,
-because `subscription.refresh()` runs on the signed-out screens too. Debug builds are never
-locked, so they open on the sign-in screen, which also has a **Try the demo** button.
+Signed out, `AppRoot` picks the screen with `Onboarding.screen(signedIn, step)` (pure Kotlin,
+tested in `DemoTest`). The order is: **Sign in with SIMKL** (with **Try the demo** under it), the
+first sync, then the **subscription screen**, which counts the user's own titles, then the app.
+Someone whose Google Play account already has the subscription (a reinstall, a second phone) goes
+from sign-in straight into the app. The demo's bar leads back to signing in.
 
 **The demo** runs the real screens against made-up content. `WatchlistApp.startDemo()` builds a
 second object graph (`SimklApi`, `EpisodeStore`, `LibraryRepository`, `CatalogRepository`,
@@ -58,8 +57,8 @@ sync code runs unchanged. Pictures are `demo:` paths drawn on the phone by `Demo
 Coil fetcher). Nothing goes over the network and nothing is written to the real settings or
 cache. `app.api`, `app.library` and the others return the demo graph while it exists. The
 `LocalDemo` composition local hides what makes no sense without a real account (Share, SIMKL
-links, the profile's SIMKL page, the subscription settings), and `DemoBar` on top offers **Start
-trial** (or **Sign in** when access is already allowed) and **Exit demo**. Leaving the demo, or
+links, the profile's SIMKL page, the subscription settings), and `DemoBar` on top offers **Sign in**
+and **Exit demo**. Leaving the demo, or
 starting the app again, deletes `cacheDir/demo`.
 
 ## Data flow

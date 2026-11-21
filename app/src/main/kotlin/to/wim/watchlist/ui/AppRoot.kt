@@ -26,10 +26,8 @@ import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.model.Access
 import to.wim.watchlist.data.model.Onboarding
 import to.wim.watchlist.data.model.Screen
-import to.wim.watchlist.data.model.SignedOutStep
 import to.wim.watchlist.ui.demo.DemoBar
 import to.wim.watchlist.ui.demo.LocalDemo
-import to.wim.watchlist.ui.login.WelcomeScreen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -60,32 +58,17 @@ fun AppRoot(
     WatchlistTheme(mode = current.theme, dynamicColor = current.dynamicColor) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             val step by app.signedOutStep.collectAsState()
-            val subscription by app.subscription.state.collectAsState()
-            val signedIn = current.accessToken != null
-            // Asks Google Play once before sign-in too, so a subscription bought earlier (a
-            // reinstall, a new phone) goes straight to signing in.
-            if (!signedIn) {
-                val lifecycle = LocalLifecycleOwner.current.lifecycle
-                LaunchedEffect(lifecycle) {
-                    lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) { app.subscription.refresh() }
-                }
-            }
-            when (Onboarding.screen(signedIn, subscription.access, step)) {
+            when (Onboarding.screen(signedIn = current.accessToken != null, step)) {
                 Screen.App -> Subscribed { LoggedIn(current, requested, onRequestHandled) }
                 Screen.Demo -> Demo(current)
                 Screen.SignIn -> LoginScreen()
-                Screen.Subscribe -> {
-                    BackHandler { app.signedOutStep.value = SignedOutStep.Welcome }
-                    SubscriptionScreen(signedOut = true)
-                }
-                Screen.Welcome -> WelcomeScreen()
             }
         }
     }
 }
 
 /**
- * The app filled with made-up titles, under a bar that says so and leads to the free trial.
+ * The app filled with made-up titles, under a bar that says so and leads to signing in.
  * Leaving it (the bar, back on the first screen or "Sign out") forgets what was done in it.
  */
 @Composable

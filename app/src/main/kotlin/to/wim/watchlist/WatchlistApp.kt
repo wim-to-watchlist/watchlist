@@ -79,7 +79,7 @@ class WatchlistApp :
     val catalog: CatalogRepository get() = (demoGraph ?: live).catalog
 
     /** Where someone who isn't signed in is (see [Onboarding]); kept in memory only. */
-    val signedOutStep = MutableStateFlow(SignedOutStep.Welcome)
+    val signedOutStep = MutableStateFlow(SignedOutStep.SignIn)
 
     /** Its files go to a folder of their own in the cache, removed when the demo ends. */
     private val demoDir get() = File(cacheDir, "demo")
@@ -102,9 +102,9 @@ class WatchlistApp :
     }
 
     /** Ends the demo and forgets everything done in it; [next] is where the user goes. */
-    fun endDemo(next: SignedOutStep = SignedOutStep.Welcome) {
+    fun endDemo() {
         endDemoGraph()
-        signedOutStep.value = next
+        signedOutStep.value = SignedOutStep.SignIn
     }
 
     private fun endDemoGraph() {

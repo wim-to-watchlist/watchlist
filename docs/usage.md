@@ -2,9 +2,17 @@
 
 For people using the app. It assumes the app is installed (see the [README](../README.md#quick-start)).
 
+## Trying the demo
+
+The first screen has **Try the demo**. It opens the whole app with made-up shows, anime and films,
+so you can look around before you subscribe or sign in: mark episodes watched, rate, move titles
+between lists, browse Discover and the Calendar. Nothing is sent to SIMKL and nothing is kept: a
+bar at the top says you are in the demo, with **Start trial** and **Exit demo** (back also leaves
+it from the main screen). Test builds open on the sign-in screen, which has the same button.
+
 ## Signing in
 
-1. Open the app and tap **Sign in with SIMKL**.
+1. Open the app, start the trial or subscribe (see "Subscription"), then tap **Sign in with SIMKL**.
 2. simkl.com opens in the browser. Sign in there if needed and approve the app.
 3. SIMKL sends you back to the app, which loads your lists.
 
@@ -16,7 +24,7 @@ Nobody needs a SIMKL developer account. If the browser shows the app chooser (wh
 
 ## Subscription
 
-After signing in, Watchlist syncs your lists and then needs a subscription, sold through Google Play. The subscription screen shows what the app does, how many of your titles are ready, and two plans: **Yearly** (€4.99 a year, with 14 days free) and **Monthly** (€0.99 a month, no trial). Google Play shows the prices in your currency. With the trial, a short timeline shows what happens: full access today, a reminder notification two days before the trial ends, and the first charge on the last day unless you cancel before then. **Start free trial** opens Google Play; someone who already had the trial sees **Subscribe** instead. Without an active subscription the app only shows this screen.
+Watchlist needs a subscription, sold through Google Play. You choose it before signing in (**Start free trial** on the first screen, or **Start trial** in the demo); if your Google account already has it, for example on a new phone, the app goes straight to sign-in. Someone who signed in with an older version and has no subscription sees the screen after the first sync. The subscription screen shows what the app does, how many of your titles are ready, and two plans: **Yearly** (€4.99 a year, with 14 days free) and **Monthly** (€0.99 a month, no trial). Google Play shows the prices in your currency. With the trial, a short timeline shows what happens: full access today, a reminder notification two days before the trial ends, and the first charge on the last day unless you cancel before then. **Start free trial** opens Google Play; someone who already had the trial sees **Subscribe** instead. Without an active subscription the app only shows this screen.
 
 - **Check again**: asks Google Play again, for example after subscribing on another phone with the same Google account.
 - **Manage or cancel** (also in *Settings › Subscription*, which shows the trial's end date while it runs): Google Play's page to change or cancel it.

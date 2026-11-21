@@ -39,6 +39,29 @@ Watchlist is a single-module, single-activity Android app. Compose renders state
 | Notification channels | One per type (`NotifyChannel`): TV keeps the id `new_episodes` of earlier versions so the user's settings for it stay, anime and movies get their own. Created at every start, which also renames them into the phone's language. *Settings › Notifications* reads Android's state (`AndroidNotifications`: the app switch and each channel) whenever it comes into view, shows it, and opens Android's channel or app page to change it, since apps can't turn a blocked channel back on. |
 | `CrashReporter` | Saves an uncaught exception's stack trace to `files/last_crash.txt` and shows it once on the next start, with a Copy button. Nothing is sent. |
 
+## Onboarding and the demo
+
+Signed out, `AppRoot` picks the screen with `Onboarding.screen(signedIn, access, step)` (pure
+Kotlin, tested in `DemoTest`). The order is: **Welcome** (try the demo, or start the trial), then
+the **subscription screen**, then **Sign in with SIMKL**, then the app. Someone whose Google Play
+account already has the subscription (a reinstall, a second phone) skips straight to sign-in,
+because `subscription.refresh()` runs on the signed-out screens too. Debug builds are never
+locked, so they open on the sign-in screen, which also has a **Try the demo** button.
+
+**The demo** runs the real screens against made-up content. `WatchlistApp.startDemo()` builds a
+second object graph (`SimklApi`, `EpisodeStore`, `LibraryRepository`, `CatalogRepository`,
+`AccountRepository`) whose files live in `cacheDir/demo` and whose `SimklApi` gets a `DemoSimkl`.
+`DemoSimkl` answers every SIMKL and data.simkl.in request in SIMKL's own JSON shape from
+`DemoCatalog` (fictional titles, IDs from 9 900 000 000 up so they can't match real ones) and keeps
+the user's changes in memory, bumping the `/sync/activities` stamps like SIMKL does, so the normal
+sync code runs unchanged. Pictures are `demo:` paths drawn on the phone by `DemoArtFetcher` (a
+Coil fetcher). Nothing goes over the network and nothing is written to the real settings or
+cache. `app.api`, `app.library` and the others return the demo graph while it exists. The
+`LocalDemo` composition local hides what makes no sense without a real account (Share, SIMKL
+links, the profile's SIMKL page, the subscription settings), and `DemoBar` on top offers **Start
+trial** (or **Sign in** when access is already allowed) and **Exit demo**. Leaving the demo, or
+starting the app again, deletes `cacheDir/demo`.
+
 ## Data flow
 
 **Sync.** On start and when the app returns to the foreground, `syncIfStale()` syncs if the last sync is older than 15 minutes; pull-to-refresh calls `sync()` directly. Only one sync runs at a time: a trigger while one is running waits for it and gets its result (a change queues one more after it). See `docs/api.md`, "Keeping the number of calls down".

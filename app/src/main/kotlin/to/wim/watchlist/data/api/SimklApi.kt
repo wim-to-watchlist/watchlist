@@ -22,6 +22,7 @@ import kotlinx.serialization.json.put
 import kotlinx.serialization.json.putJsonArray
 import kotlinx.serialization.json.putJsonObject
 import to.wim.watchlist.data.SettingsStore
+import to.wim.watchlist.data.demo.DemoSimkl
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import okhttp3.FormBody
@@ -65,6 +66,8 @@ sealed interface SignIn {
 class SimklApi(
     private val http: OkHttpClient,
     private val settings: SettingsStore,
+    /** The demo: every request is answered on the phone by this pretend SIMKL instead. */
+    private val demo: DemoSimkl? = null,
 ) {
     private val refreshLock = Mutex()
     private val inFlight = ConcurrentHashMap<String, CompletableDeferred<Pair<Int, String>>>()
@@ -126,6 +129,7 @@ class SimklApi(
         auth: Boolean = true,
         retried: Boolean = false,
     ): JsonElement {
+        demo?.let { return it.respond(method, path, params, body) }
         val id = clientId()?.takeIf { it.isNotBlank() } ?: throw ApiException(0, "This build has no SIMKL client ID")
         val bearer = if (auth) accessToken() else null
         val request =

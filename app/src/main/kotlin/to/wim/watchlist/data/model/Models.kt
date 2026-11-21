@@ -412,6 +412,8 @@ object Images {
             path.isBlank() -> null
             path.startsWith("//") -> "https:$path"
             path.startsWith("http") -> path
+            // The demo's pictures, drawn on the phone (see ui/demo/DemoArt.kt).
+            path.startsWith("demo:") -> path
             else -> null
         }
 

@@ -47,6 +47,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import to.wim.watchlist.BuildConfig
 import to.wim.watchlist.R
+import to.wim.watchlist.ui.demo.LocalDemo
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.NavConfig
 import to.wim.watchlist.data.SubscriptionRepository
@@ -75,6 +76,7 @@ import java.time.Instant
 @Composable
 fun SettingsScreen(settings: AppSettings) {
     val app = rememberApp()
+    val demo = LocalDemo.current
     val navigator = LocalNavigator.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -287,7 +289,8 @@ fun SettingsScreen(settings: AppSettings) {
             }
         }
 
-        if (BuildConfig.REQUIRE_SUBSCRIPTION) {
+        // The demo has no subscription to manage or preview.
+        if (BuildConfig.REQUIRE_SUBSCRIPTION && !demo) {
             item(key = "subscription") {
                 SettingsSection(title = stringResource(R.string.sub_settings_section)) {
                     val trialEnd by produceState<Long?>(null) { value = app.settings.trialEndsAt() }
@@ -304,7 +307,7 @@ fun SettingsScreen(settings: AppSettings) {
             }
         }
 
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG && !demo) {
             item(key = "subscription_preview") {
                 SettingsSection(title = stringResource(R.string.sub_settings_section)) {
                     SettingItem(

@@ -19,6 +19,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -156,7 +157,7 @@ fun LoginScreen() {
         error?.let {
             Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
         }
-        Spacer(Modifier.height(8.dp))
+        TextButton(onClick = { app.startDemo() }) { Text(stringResource(R.string.demo_try)) }
         Text(
             stringResource(R.string.screens_login_note),
             style = MaterialTheme.typography.bodySmall,

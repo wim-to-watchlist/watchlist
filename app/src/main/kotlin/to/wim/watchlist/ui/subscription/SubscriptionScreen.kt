@@ -3,6 +3,8 @@ package to.wim.watchlist.ui.subscription
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,10 +27,12 @@ import androidx.compose.material.icons.rounded.LockOpen
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.automirrored.rounded.PlaylistPlay
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
@@ -60,6 +64,7 @@ import to.wim.watchlist.data.SubscriptionRepository
 import to.wim.watchlist.data.model.PaywallPlan
 import to.wim.watchlist.data.model.PlanPeriod
 import to.wim.watchlist.data.model.PlayStatus
+import to.wim.watchlist.data.model.SignedOutStep
 import to.wim.watchlist.data.model.SubscriptionRules
 import to.wim.watchlist.ui.components.AppIcon
 import to.wim.watchlist.ui.components.Format
@@ -80,6 +85,8 @@ import java.time.temporal.ChronoUnit
 fun SubscriptionScreen(
     /** Debug builds: sample plans, the buttons do nothing, and "Close preview" goes back. */
     preview: Boolean = false,
+    /** Before signing in (new users): a back arrow, and signing in with SIMKL comes next. */
+    signedOut: Boolean = false,
 ) {
     val app = rememberApp()
     val activity = LocalActivity.current
@@ -97,7 +104,15 @@ fun SubscriptionScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Spacer(Modifier.height(8.dp))
+        if (signedOut) {
+            Box(Modifier.fillMaxWidth()) {
+                IconButton(onClick = { app.signedOutStep.value = SignedOutStep.Welcome }, modifier = Modifier.offset(x = (-12).dp)) {
+                    Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.screens_back))
+                }
+            }
+        } else {
+            Spacer(Modifier.height(8.dp))
+        }
         AppIcon(Modifier.size(80.dp))
         Text(
             trialDays?.let { pluralStringResource(R.plurals.sub_title_trial, it, it) } ?: stringResource(R.string.sub_title),
@@ -166,6 +181,7 @@ fun SubscriptionScreen(
                     textAlign = TextAlign.Center,
                     modifier = Modifier.readableWidth(480.dp),
                 )
+                if (signedOut) Note(stringResource(R.string.sub_next_sign_in))
             }
         }
         TextButton(onClick = { context.openUrl(SubscriptionRepository.manageUrl(context.packageName)) }) {
@@ -176,7 +192,11 @@ fun SubscriptionScreen(
         } else {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(onClick = { scope.launch { app.subscription.refresh() } }) { Text(stringResource(R.string.sub_check_again)) }
-                TextButton(onClick = { scope.launch { app.logout() } }) { Text(stringResource(R.string.screens_profile_log_out)) }
+                if (signedOut) {
+                    TextButton(onClick = { app.startDemo() }) { Text(stringResource(R.string.demo_try)) }
+                } else {
+                    TextButton(onClick = { scope.launch { app.logout() } }) { Text(stringResource(R.string.screens_profile_log_out)) }
+                }
             }
         }
     }

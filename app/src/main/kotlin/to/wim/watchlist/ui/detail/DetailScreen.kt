@@ -137,6 +137,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
+import to.wim.watchlist.ui.demo.LocalDemo
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.api.TmdbKey
 import androidx.lifecycle.Lifecycle
@@ -191,6 +192,7 @@ fun DetailScreen(
     val resources = LocalResources.current
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
+    val demo = LocalDemo.current
     val library by app.library.state.collectAsState()
     val item = library.item(route.type, route.simklId)
 
@@ -291,11 +293,14 @@ fun DetailScreen(
                             }
                         },
                     )
-                    Spacer(Modifier.width(8.dp))
-                    IconButton(
-                        onClick = { context.share(title, webUrl(route.type, route.simklId, ids.slug)) },
-                        colors = IconButtonDefaults.filledTonalIconButtonColors(),
-                    ) { Icon(Icons.Rounded.Share, contentDescription = stringResource(R.string.detail_share)) }
+                    // The demo's titles have no page to share.
+                    if (!demo) {
+                        Spacer(Modifier.width(8.dp))
+                        IconButton(
+                            onClick = { context.share(title, webUrl(route.type, route.simklId, ids.slug)) },
+                            colors = IconButtonDefaults.filledTonalIconButtonColors(),
+                        ) { Icon(Icons.Rounded.Share, contentDescription = stringResource(R.string.detail_share)) }
+                    }
                 },
                 colors =
                     TopAppBarDefaults.topAppBarColors(
@@ -445,7 +450,7 @@ fun DetailScreen(
                     }
                 }
                 // TMDB and Trakt file an anime movie under movies; SIMKL files it under anime.
-                item(key = "links") { Links(route.type, ids, movie = details?.let { CreditsSource.of(it)?.movie } ?: (route.type == MediaType.Movie)) }
+                if (!demo) item(key = "links") { Links(route.type, ids, movie = details?.let { CreditsSource.of(it)?.movie } ?: (route.type == MediaType.Movie)) }
             }
         }
     }

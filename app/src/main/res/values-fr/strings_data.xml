@@ -6,8 +6,8 @@
     <string name="data_error_busy">Trop de requêtes en ce moment. Réessayez dans un instant.</string>
     <string name="data_error_server">Le serveur ne répond pas (HTTP %1$d). Réessayez plus tard.</string>
     <string name="data_error_http">Le serveur a renvoyé une erreur (HTTP %1$d).</string>
-    <string name="data_error_unexpected">Une erreur s\'est produite.</string>
-    <string name="data_error_unexpected_detail">Une erreur s\'est produite (%1$s).</string>
+    <string name="data_error_unexpected">Une erreur s’est produite.</string>
+    <string name="data_error_unexpected_detail">Une erreur s’est produite (%1$s).</string>
     <string name="data_notif_new_episode">Nouvel épisode disponible</string>
     <string name="data_crash_title">Watchlist a planté la dernière fois</string>
     <string name="data_crash_copy">Copier le rapport de plantage</string>
@@ -19,9 +19,9 @@
         <item quantity="other">%1$d nouveaux épisodes, jusqu’à %2$s</item>
     </plurals>
     <string name="data_notif_channel_tv">Nouveaux épisodes de séries</string>
-    <string name="data_notif_channel_tv_description">Quand un nouvel épisode d\'une série que vous regardez est disponible</string>
-    <string name="data_notif_channel_anime">Nouveaux épisodes d\'anime</string>
-    <string name="data_notif_channel_anime_description">Quand un nouvel épisode d\'un anime que vous regardez est disponible</string>
+    <string name="data_notif_channel_tv_description">Quand un nouvel épisode d’une série que vous regardez est disponible</string>
+    <string name="data_notif_channel_anime">Nouveaux épisodes d’anime</string>
+    <string name="data_notif_channel_anime_description">Quand un nouvel épisode d’un anime que vous regardez est disponible</string>
     <string name="data_notif_channel_movies">Sorties de films</string>
     <string name="data_notif_channel_movies_description">Quand un film de votre liste À voir sort</string>
     <string name="data_notif_movie_out">Disponible</string>

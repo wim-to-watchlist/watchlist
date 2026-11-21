@@ -2,12 +2,12 @@
 <resources>
     <string name="lib_no_app_for_url">Aucune application ne peut ouvrir %1$s</string>
     <string name="lib_profile">Profil</string>
-    <string name="lib_day_today">Aujourd\'hui</string>
+    <string name="lib_day_today">Aujourd’hui</string>
     <string name="lib_day_tomorrow">Demain</string>
     <string name="lib_day_yesterday">Hier</string>
-    <string name="lib_relative_today">aujourd\'hui à %1$s</string>
+    <string name="lib_relative_today">aujourd’hui à %1$s</string>
     <string name="lib_relative_tomorrow">demain à %1$s</string>
-    <string name="lib_ago_just_now">à l\'instant</string>
+    <string name="lib_ago_just_now">à l’instant</string>
     <string name="lib_duration_days_hours">%1$dj %2$dh</string>
     <string name="lib_duration_hours_minutes">%1$dh %2$dmin</string>
     <string name="lib_duration_minutes">%1$dmin</string>
@@ -42,7 +42,7 @@
     <string name="lib_empty_up_next_text">Les nouveaux épisodes des séries que vous suivez apparaissent ici.</string>
     <string name="lib_empty_watched_text">Les séries à jour ou terminées apparaissent ici.</string>
     <string name="lib_empty_plan_text">Ajoutez les séries que vous voulez voir depuis Découvrir ou la recherche.</string>
-    <string name="lib_empty_other_text">Rien pour l\'instant.</string>
+    <string name="lib_empty_other_text">Rien pour l’instant.</string>
     <string name="lib_empty_up_next_shows">Aucune série à suivre</string>
     <string name="lib_empty_up_next_anime">Aucun anime à suivre</string>
     <string name="lib_empty_watched_shows">Aucune série vue</string>

@@ -53,7 +53,7 @@
     <string name="action_move_down">Sposta giù</string>
     <string name="screens_settings_library">Libreria</string>
     <string name="screens_settings_hide_specials">Nascondi speciali</string>
-    <string name="screens_settings_continue_latest">Continua dall\'ultimo episodio</string>
+    <string name="screens_settings_continue_latest">Continua dall’ultimo episodio</string>
     <string name="screens_settings_continue_latest_sub">Salta gli episodi non visti prima dell’ultimo visto</string>
     <string name="screens_settings_notifications">Nuovi episodi e uscite</string>
     <string name="screens_settings_notifications_sub">Serie e anime che stai guardando, film che vuoi vedere</string>
@@ -69,9 +69,9 @@
         <item quantity="many">%1$d episodi</item>
         <item quantity="other">%1$d episodi</item>
     </plurals>
-    <string name="screens_login_waiting_browser">Approva l\'accesso su simkl.com. Tornerai qui automaticamente.</string>
-    <string name="screens_login_denied">L\'accesso è stato annullato su SIMKL (%1$s).</string>
-    <string name="screens_login_redirect_invalid">Questo link di accesso non corrisponde a quello avviato dall\'app. Tocca di nuovo Accedi con SIMKL.</string>
+    <string name="screens_login_waiting_browser">Approva l’accesso su simkl.com. Tornerai qui automaticamente.</string>
+    <string name="screens_login_denied">L’accesso è stato annullato su SIMKL (%1$s).</string>
+    <string name="screens_login_redirect_invalid">Questo link di accesso non corrisponde a quello avviato dall’app. Tocca di nuovo Accedi con SIMKL.</string>
     <string name="screens_login_failed">Accesso non riuscito: %1$s</string>
     <string name="screens_login_note">Accedi su simkl.com; questa app non vede mai la tua password. Watchlist non è affiliato a Simkl.</string>
     <string name="screens_settings_tmdb">Cast e troupe</string>
@@ -87,12 +87,12 @@
     <string name="screens_tmdb_unreachable">Impossibile raggiungere TMDB. Controlla la connessione e riprova.</string>
     <string name="screens_tmdb_notice">Questa applicazione usa TMDB e le API di TMDB, ma non è approvata, certificata né altrimenti autorizzata da TMDB.</string>
     <string name="screens_tmdb_logo">TMDB</string>
-    <string name="screens_settings_tmdb_key_old">La chiave salvata è la API Key di TMDB, che qui non funziona più. Sostituiscila con l\'API Read Access Token.</string>
+    <string name="screens_settings_tmdb_key_old">La chiave salvata è la API Key di TMDB, che qui non funziona più. Sostituiscila con l’API Read Access Token.</string>
     <string name="screens_tmdb_api_key">Questa è la API Key breve di TMDB. Incolla invece il lungo API Read Access Token della stessa pagina.</string>
     <string name="screens_tmdb_not_token">Questo non è un API Read Access Token: è il codice lungo che inizia con eyJ.</string>
     <string name="screens_settings_credits">Fonti</string>
     <string name="screens_credit_simkl_title">SIMKL</string>
-    <string name="screens_credit_simkl_text">Le tue liste, i voti e la cronologia, e tutti i titoli, vengono da SIMKL. Watchlist è un\'app non ufficiale, non affiliata a SIMKL.</string>
+    <string name="screens_credit_simkl_text">Le tue liste, i voti e la cronologia, e tutti i titoli, vengono da SIMKL. Watchlist è un’app non ufficiale, non affiliata a SIMKL.</string>
     <string name="screens_credit_tmdb_title">TMDB</string>
     <string name="screens_credit_tmdb_text">Cast, troupe e persone vengono da TMDB, con il tuo token.</string>
     <string name="screens_settings_version">Watchlist %1$s</string>

@@ -7,7 +7,7 @@
     <string name="detail_failure_reason">%1$s : %2$s</string>
     <string name="detail_error_mark_watched">Impossible de marquer comme vu</string>
     <string name="detail_error_update_list">Impossible de mettre à jour la liste</string>
-    <string name="detail_error_save_rating">Impossible d\'enregistrer la note</string>
+    <string name="detail_error_save_rating">Impossible d’enregistrer la note</string>
     <string name="detail_error_mark_episode_watched">Impossible de marquer %1$s comme vu</string>
     <string name="detail_error_check_in">Échec du check-in</string>
     <string name="detail_checked_in">Check-in effectué. SIMKL le marquera comme vu à la fin.</string>
@@ -42,7 +42,7 @@
     <string name="detail_rating_7">Bon</string>
     <string name="detail_rating_8">Très bon</string>
     <string name="detail_rating_9">Excellent</string>
-    <string name="detail_rating_10">Chef-d\'œuvre</string>
+    <string name="detail_rating_10">Chef-d’œuvre</string>
     <string name="detail_fact_status">Statut</string>
     <string name="detail_fact_airs">Diffusion</string>
     <string name="detail_status_airing">En cours</string>
@@ -89,7 +89,7 @@
     </plurals>
     <string name="detail_cast">Distribution</string>
     <string name="detail_crew">Équipe</string>
-    <string name="detail_tmdb_banner_title">Voir la distribution et l\'équipe</string>
+    <string name="detail_tmdb_banner_title">Voir la distribution et l’équipe</string>
     <string name="detail_tmdb_banner_text">Ajoutez votre propre jeton TMDB gratuit pour voir qui joue dedans et rechercher des personnes.</string>
     <string name="detail_tmdb_banner_add">Ajouter un jeton</string>
     <string name="detail_tmdb_banner_not_now">Pas maintenant</string>
@@ -102,7 +102,7 @@
     <string name="detail_job_camera">Photographie</string>
     <string name="person_load_failed">Impossible de charger cette personne</string>
     <string name="person_lookup_failed">Impossible de rechercher ce titre sur SIMKL.</string>
-    <string name="person_not_on_simkl">SIMKL n\'a pas ce titre.</string>
+    <string name="person_not_on_simkl">SIMKL n’a pas ce titre.</string>
     <string name="person_open_tmdb">Ouvrir sur TMDB</string>
     <string name="person_no_key">Ajoutez votre jeton TMDB dans Paramètres › Distribution et équipe pour voir les personnes.</string>
     <string name="person_known_for">Connu pour</string>

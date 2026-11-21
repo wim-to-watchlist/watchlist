@@ -2,8 +2,8 @@
 <resources>
     <!-- The subscription screen, the Subscription row in Settings and the trial reminder. -->
     <string name="sub_title">Abonnez-vous pour continuer à utiliser Watchlist</string>
-    <string name="sub_start_trial">Commencer l\'essai gratuit</string>
-    <string name="sub_subscribe">S\'abonner</string>
+    <string name="sub_start_trial">Commencer l’essai gratuit</string>
+    <string name="sub_subscribe">S’abonner</string>
     <string name="sub_price">%1$s par an</string>
     <plurals name="sub_title_trial">
         <item quantity="one">Essayez Watchlist gratuitement pendant %1$d jour</item>
@@ -16,7 +16,7 @@
         <item quantity="other">Votre bibliothèque est synchronisée : %1$d titres sont prêts</item>
     </plurals>
     <string name="sub_feature_up_next">À suivre : le prochain épisode de chaque série, synchronisé avec SIMKL</string>
-    <string name="sub_feature_notifications">Une notification dès qu\'un nouvel épisode ou film sort</string>
+    <string name="sub_feature_notifications">Une notification dès qu’un nouvel épisode ou film sort</string>
     <string name="sub_feature_calendar">Un calendrier des épisodes et sorties à venir</string>
     <string name="sub_feature_discover">Découvrez les tendances et nouveautés, ou laissez Surprends-moi choisir</string>
     <string name="sub_feature_details">Vos listes, notes et statistiques</string>
@@ -24,34 +24,34 @@
     <string name="sub_plan_monthly">Mensuel</string>
     <string name="sub_price_monthly">%1$s par mois</string>
     <string name="sub_per_month">Soit %1$s par mois</string>
-    <string name="sub_save">%1$d %% d\'économie</string>
+    <string name="sub_save">%1$d %% d’économie</string>
     <plurals name="sub_days_free">
         <item quantity="one">%1$d jour gratuit</item>
         <item quantity="many">%1$d jours gratuits</item>
         <item quantity="other">%1$d jours gratuits</item>
     </plurals>
-    <string name="sub_step_today">Aujourd\'hui</string>
+    <string name="sub_step_today">Aujourd’hui</string>
     <string name="sub_step_today_text">Accès complet, rien à payer</string>
     <string name="sub_step_day">Jour %1$d · %2$s</string>
     <string name="sub_step_reminder_text">Une notification avant la fin de votre essai</string>
     <string name="sub_step_charge_text">Google Play prélève %1$s, sauf si vous résiliez avant</string>
-    <string name="sub_terms_trial">Google Play vous facture à la fin de l\'essai gratuit, sauf si vous résiliez avant. L\'abonnement se renouvelle chaque année jusqu\'à ce que vous le résiliiez dans Google Play › Abonnements.</string>
-    <string name="sub_terms">L\'abonnement se renouvelle chaque année jusqu\'à ce que vous le résiliiez dans Google Play › Abonnements.</string>
-    <string name="sub_terms_monthly">L\'abonnement se renouvelle chaque mois jusqu\'à ce que vous le résiliiez dans Google Play › Abonnements.</string>
+    <string name="sub_terms_trial">Google Play vous facture à la fin de l’essai gratuit, sauf si vous résiliez avant. L’abonnement se renouvelle chaque année jusqu’à ce que vous le résiliiez dans Google Play › Abonnements.</string>
+    <string name="sub_terms">L’abonnement se renouvelle chaque année jusqu’à ce que vous le résiliiez dans Google Play › Abonnements.</string>
+    <string name="sub_terms_monthly">L’abonnement se renouvelle chaque mois jusqu’à ce que vous le résiliiez dans Google Play › Abonnements.</string>
     <string name="sub_manage">Gérer ou résilier</string>
-    <string name="sub_settings_trial">Essai gratuit jusqu\'au %1$s. Le modifier ou le résilier dans Google Play</string>
+    <string name="sub_settings_trial">Essai gratuit jusqu’au %1$s. Le modifier ou le résilier dans Google Play</string>
     <string name="sub_notif_channel">Abonnement</string>
     <string name="sub_notif_channel_description">Un rappel avant la fin de votre essai gratuit</string>
     <string name="sub_notif_title">Votre essai gratuit se termine le %1$s</string>
     <string name="sub_notif_text">Ensuite, Google Play facture votre abonnement. Touchez pour le gérer ou le résilier.</string>
-    <string name="sub_failed">L\'achat n\'a pas abouti. Réessayez ou vérifiez votre moyen de paiement dans Google Play.</string>
-    <string name="sub_pending">Votre achat attend que Google Play confirme le paiement. Watchlist s\'ouvre dès que c\'est fait.</string>
-    <string name="sub_unavailable">Google Play n\'est pas disponible : l\'abonnement ne peut pas être vérifié. Vérifiez que Google Play est installé et que vous y êtes connecté, puis réessayez.</string>
-    <string name="sub_not_loaded">L\'abonnement n\'a pas pu être chargé depuis Google Play. Vérifiez votre connexion et réessayez.</string>
+    <string name="sub_failed">L’achat n’a pas abouti. Réessayez ou vérifiez votre moyen de paiement dans Google Play.</string>
+    <string name="sub_pending">Votre achat attend que Google Play confirme le paiement. Watchlist s’ouvre dès que c’est fait.</string>
+    <string name="sub_unavailable">Google Play n’est pas disponible : l’abonnement ne peut pas être vérifié. Vérifiez que Google Play est installé et que vous y êtes connecté, puis réessayez.</string>
+    <string name="sub_not_loaded">L’abonnement n’a pas pu être chargé depuis Google Play. Vérifiez votre connexion et réessayez.</string>
     <string name="sub_check_again">Vérifier à nouveau</string>
     <string name="sub_settings_section">Abonnement</string>
     <string name="sub_settings_summary">Le modifier ou le résilier dans Google Play</string>
-    <string name="sub_preview">Aperçu de l\'écran d\'abonnement</string>
-    <string name="sub_preview_summary">Version de test uniquement : affiche l\'écran avec des prix d\'exemple</string>
-    <string name="sub_preview_close">Fermer l\'aperçu</string>
+    <string name="sub_preview">Aperçu de l’écran d’abonnement</string>
+    <string name="sub_preview_summary">Version de test uniquement : affiche l’écran avec des prix d’exemple</string>
+    <string name="sub_preview_close">Fermer l’aperçu</string>
 </resources>

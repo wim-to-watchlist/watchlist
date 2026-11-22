@@ -2,6 +2,10 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: Releases upload to Google Play by themselves
+
+Each release (`patch`, `minor`, `major` or a pushed tag) now uploads the app bundle and its R8 mapping file to Google Play's internal testing track, in one Play edit and released at once, from the same job that built them. Before, the bundle was only stored as an artifact and a Claude session downloaded it and uploaded it through the Play API, which needed a temporary download host in the cloud environment for every build. The upload uses `r0adkll/upload-google-play` (the action the owner approved on 2026-10-14) with the service account key in the `PLAY_SERVICE_ACCOUNT_JSON` secret. It runs before the GitHub Release, so a refused upload leaves no tag and the run can be re-run. It runs in the same job, so the app isn't built twice (fewer Actions minutes). Closed testing and production stay manual in the Play Console. Rejected: a separate job that rebuilds the bundle (twice the minutes), and our own upload script (more code to maintain).
+
 ## 2026-11-22: Free version with Watchlist Plus; the demo is gone
 
 Replaces the two entries below. The owner didn't like the demo and asked for a free app with the

@@ -73,6 +73,7 @@ Signed APKs and app bundles (AAB, for Google Play) are built only by `.github/wo
 | `ANDROID_KEYSTORE_PASSWORD` | secret | Keystore password |
 | `ANDROID_KEY_ALIAS` | secret | Key alias |
 | `ANDROID_KEY_PASSWORD` | secret | Key password |
+| `PLAY_SERVICE_ACCOUNT_JSON` | secret | The whole JSON key of the Google Cloud service account that may release to Play's testing tracks |
 | `SIMKL_CLIENT_ID` | variable | The app's SIMKL client ID (not a secret, per SIMKL's API rules) |
 
 The secret names without `ANDROID_` also work, as earlier releases used them. The workflow decodes the keystore with `scripts/decode_keystore.py`, checks the password, alias and key password before building, runs the tests and lint, and builds with `-PappVersionName`, `-PappVersionCode` and `-PsimklClientId`.
@@ -83,4 +84,4 @@ To publish on Google Play, see [publishing.md](publishing.md).
 
 **Actions › Release › Run workflow** on `main`, choose `patch`, `minor` or `major` (or `none` to only build an APK artifact). Pushing a tag such as `v1.2.3` also releases. The versionCode is `major × 10000 + minor × 100 + patch`.
 
-It refuses to publish when not on `main`, when the tag or release exists, when the version is not higher than the last release, or when nothing changed. Each release has `watchlist-<version>.apk` (to install directly), `watchlist-<version>.aab` (to upload to Google Play; signed with the same key) and `watchlist-<version>-mapping.txt`.
+It refuses to publish when not on `main`, when the tag or release exists, when the version is not higher than the last release, or when nothing changed. A release uploads `watchlist-<version>.aab` and its R8 mapping file to Google Play's **internal testing** track in one Play edit, released at once (status *completed*), before the GitHub Release is made: if Play refuses the upload, no tag is created and the run can simply be re-run. Each GitHub Release then has `watchlist-<version>.apk` (to install directly), `watchlist-<version>.aab` (the same bundle as on Play) and `watchlist-<version>-mapping.txt`. Promoting a build to closed testing or production stays a manual step in the Play Console. A `none` build never uploads to Play.

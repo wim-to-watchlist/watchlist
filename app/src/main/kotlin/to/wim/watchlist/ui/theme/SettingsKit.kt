@@ -8,6 +8,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -43,6 +44,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.painter.Painter
@@ -155,7 +158,11 @@ fun SettingsBlock(
     )
 }
 
-/** A setting with a switch. The whole row is one accessible switch and applies at once. */
+/**
+ * A setting with a switch. The whole row is one accessible switch and applies at once. With
+ * [onLocked] set the setting is locked (Watchlist Plus): title and summary stay readable, the switch
+ * is greyed out behind a lock, and a tap on the row calls [onLocked] instead.
+ */
 @Composable
 fun SwitchSetting(
     title: String,
@@ -166,20 +173,32 @@ fun SwitchSetting(
     icon: Painter? = null,
     warning: String? = null,
     onWarningClick: (() -> Unit)? = null,
+    onLocked: (() -> Unit)? = null,
+    lockedLabel: String? = null,
 ) {
     Column {
         ListItem(
             headlineContent = { Text(title) },
             supportingContent = summary?.let { { Text(it) } },
             leadingContent = icon?.let { { Icon(it, contentDescription = null) } },
-            trailingContent = { Switch(checked = checked, onCheckedChange = null, enabled = enabled) },
+            trailingContent = {
+                if (onLocked != null) {
+                    LockedSwitch(checked, lockedLabel)
+                } else {
+                    Switch(checked = checked, onCheckedChange = null, enabled = enabled)
+                }
+            },
             modifier =
-                Modifier.toggleable(
-                    value = checked,
-                    enabled = enabled,
-                    role = Role.Switch,
-                    onValueChange = onCheckedChange,
-                ),
+                if (onLocked != null) {
+                    Modifier.clickable(role = Role.Button, onClick = onLocked)
+                } else {
+                    Modifier.toggleable(
+                        value = checked,
+                        enabled = enabled,
+                        role = Role.Switch,
+                        onValueChange = onCheckedChange,
+                    )
+                },
         )
         if (warning != null) {
             Text(
@@ -278,6 +297,8 @@ fun AppearanceSettings(
     dynamicColor: Boolean,
     onDynamicColorChange: (Boolean) -> Unit,
     dynamicColorSupported: Boolean,
+    onDynamicColorLocked: (() -> Unit)? = null,
+    lockedLabel: String? = null,
 ) {
     SettingsBlock {
         Text(themeLabel, style = MaterialTheme.typography.bodyLarge)
@@ -297,6 +318,8 @@ fun AppearanceSettings(
             summary = dynamicColorSummary,
             checked = dynamicColor,
             onCheckedChange = onDynamicColorChange,
+            onLocked = onDynamicColorLocked,
+            lockedLabel = lockedLabel,
         )
     }
 }
@@ -330,5 +353,17 @@ fun rememberAppVersion(): String {
         runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }
             .getOrNull()
             .orEmpty()
+    }
+}
+
+/** The control of a locked setting: a lock and the switch greyed out in its current position. */
+@Composable
+fun LockedSwitch(
+    checked: Boolean,
+    lockedLabel: String?,
+) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        Icon(Icons.Rounded.Lock, contentDescription = lockedLabel, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+        Switch(checked = checked, onCheckedChange = null, enabled = false)
     }
 }

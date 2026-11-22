@@ -68,9 +68,7 @@
     <string name="plus_stats_title">Tus estadísticas por tipo están en Plus</string>
     <string name="plus_stats_text">Ve cuánto has visto de series, anime y películas, con Watchlist Plus.</string>
     <string name="plus_locked">Parte de Watchlist Plus</string>
-    <string name="plus_dynamic_color_locked">Los colores de tu fondo de pantalla son parte de Watchlist Plus</string>
     <string name="plus_not_now">Ahora no</string>
-    <string name="plus_notifications_locked">Parte de Watchlist Plus. Toca para ver los planes</string>
     <string name="plus_get">Hazte con Watchlist Plus</string>
     <string name="plus_get_summary">A continuación, el calendario, las notificaciones y más</string>
     <string name="plus_preview_locked">Ver la versión gratuita</string>

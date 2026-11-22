@@ -249,7 +249,7 @@ jobs:
       - name: Check Google Play key
         if: steps.plan.outputs.publish == 'true'
         env:
-          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON || secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON || secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON || secrets.SERVICE_ACCOUNT_JSON }}
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
         run: |
           set -euo pipefail
           if [ -z "$PLAY_SERVICE_ACCOUNT_JSON" ]; then
@@ -264,7 +264,7 @@ jobs:
         if: steps.plan.outputs.publish == 'true'
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON || secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON || secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON || secrets.SERVICE_ACCOUNT_JSON }}
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
           packageName: to.wim.watchlist
           releaseFiles: dist/*.aab
           mappingFile: app/build/outputs/mapping/release/mapping.txt

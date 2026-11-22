@@ -106,6 +106,9 @@ class SubscriptionRepository(
         }
     }
 
+    /** Without asking Google Play: its last answer in this run, else the stored one (the home-screen widget). */
+    suspend fun knownAccess(): Access = SubscriptionRules.access(required, _state.value.status, settings.storedAccess(), System.currentTimeMillis())
+
     /** For the background check: Google Play's answer if it comes quickly, else the stored one. */
     suspend fun currentAccess(): Access {
         if (!required) return Access.Allowed

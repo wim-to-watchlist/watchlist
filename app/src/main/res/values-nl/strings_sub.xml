@@ -75,4 +75,13 @@
     <string name="plus_get_summary">Volgende, de kalender, meldingen en meer</string>
     <string name="plus_preview_locked">Bekijk de gratis versie</string>
     <string name="plus_preview_locked_summary">Alleen testversie: vergrendelt de Plus-functies zoals zonder abonnement</string>
+    <!-- The Up next home-screen widget (Watchlist Plus). -->
+    <string name="widget_description">Je volgende afleveringen op je startscherm</string>
+    <string name="widget_empty">Niets om te kijken op dit moment</string>
+    <string name="widget_locked">De Up next-widget hoort bij Watchlist Plus. Tik om het gratis te proberen.</string>
+    <plurals name="widget_more">
+        <item quantity="one">nog %1$d</item>
+        <item quantity="other">nog %1$d</item>
+    </plurals>
+    <string name="sub_feature_widget">Up next op je startscherm: een widget met je volgende afleveringen</string>
 </resources>

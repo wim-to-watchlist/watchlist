@@ -8,7 +8,7 @@ import to.wim.watchlist.data.NavTab
  * details, search, Discover and the watch totals on the profile. Plus (the subscription or its free
  * trial): Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, the
  * list of rated titles (rating stays free), trailers and similar titles, colours from the wallpaper,
- * a bottom bar of one's own, and
+ * a bottom bar of one's own, the Up next home-screen widget, and
  * everything from TMDB (cast, people, people search). The free version never mentions TMDB.
  * Locked parts stay on screen, blurred, under a card
  * that leads to the subscription screen. Plain Kotlin so it is unit tested.

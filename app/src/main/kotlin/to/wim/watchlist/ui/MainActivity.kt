@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.mutableStateOf
 import to.wim.watchlist.CrashReporter
+import to.wim.watchlist.WatchlistApp
 import to.wim.watchlist.data.model.MediaType
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +18,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) requested.value = detailFrom(intent)
+        if (savedInstanceState == null) {
+            requested.value = detailFrom(intent)
+            openPaywallFrom(intent)
+        }
         if (!CrashReporter.showIfCrashed(this, ::showApp)) showApp()
     }
 
@@ -31,11 +35,24 @@ class MainActivity : ComponentActivity() {
         super.onNewIntent(intent)
         setIntent(intent)
         requested.value = detailFrom(intent)
+        openPaywallFrom(intent)
+    }
+
+    /** The locked Up next widget leads to the subscription screen. */
+    private fun openPaywallFrom(intent: Intent?) {
+        if (intent?.getBooleanExtra(EXTRA_PAYWALL, false) == true) (application as WatchlistApp).showPaywall.value = true
     }
 
     companion object {
         private const val EXTRA_TYPE = "to.wim.watchlist.extra.TYPE"
         private const val EXTRA_ID = "to.wim.watchlist.extra.ID"
+        private const val EXTRA_PAYWALL = "to.wim.watchlist.extra.PAYWALL"
+
+        /** Opens the app on the subscription screen. */
+        fun paywallIntent(context: Context): Intent =
+            Intent(context, MainActivity::class.java)
+                .putExtra(EXTRA_PAYWALL, true)
+                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
         fun detailIntent(
             context: Context,

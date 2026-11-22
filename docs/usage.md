@@ -25,7 +25,7 @@ Watchlist is free to use: sign in, and your lists, marking episodes watched, rat
 - **Surprise me** in Discover.
 - **Trailers and similar titles** ("If you like this") on details pages, shown blurred in the free version.
 - **Your own bottom bar**: reorder and hide tabs in *Settings › Bottom bar*. The free version keeps the default tabs.
-- **All settings** except light or dark mode: which types the app shows, hiding specials, continuing from the latest episode, notifications, the bottom bar and colours. The free version uses the defaults (everything shown, specials hidden, Up next from the latest episode) and shows these settings blurred. Your choices are kept and come back with Plus.
+- **All settings** except light or dark mode: which types the app shows, hiding specials, continuing from the latest episode, notifications, the bottom bar and colours. The free version uses the defaults (everything shown, specials hidden, Up next from the latest episode) and shows these settings with a lock next to their switch: you can read what each one does, and tapping it opens the plans. Your choices are kept and come back with Plus.
 - **Colours from your wallpaper** (Material You). Light and dark mode stay free.
 - **My ratings**, the list of everything you rated, on your profile. Rating a title stays free; the free version shows the list blurred.
 - **Cast and crew** (see below). The free version doesn't show anything about it.

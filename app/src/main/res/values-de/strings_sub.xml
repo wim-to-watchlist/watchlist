@@ -67,9 +67,7 @@
     <string name="plus_stats_title">Deine Statistiken pro Typ gibt es mit Plus</string>
     <string name="plus_stats_text">Sieh, wie viel du von Serien, Anime und Filmen geschaut hast, mit Watchlist Plus.</string>
     <string name="plus_locked">Teil von Watchlist Plus</string>
-    <string name="plus_dynamic_color_locked">Farben aus deinem Hintergrundbild sind Teil von Watchlist Plus</string>
     <string name="plus_not_now">Nicht jetzt</string>
-    <string name="plus_notifications_locked">Teil von Watchlist Plus. Tippe, um die Abos zu sehen</string>
     <string name="plus_get">Watchlist Plus holen</string>
     <string name="plus_get_summary">Als Nächstes, der Kalender, Benachrichtigungen und mehr</string>
     <string name="plus_preview_locked">Kostenlose Version ansehen</string>

@@ -21,9 +21,7 @@ import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 
@@ -52,7 +50,6 @@ import androidx.core.content.ContextCompat
 import to.wim.watchlist.BuildConfig
 import to.wim.watchlist.R
 import to.wim.watchlist.ui.components.LocalPlus
-import to.wim.watchlist.ui.components.LockedRow
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.NavConfig
 import to.wim.watchlist.data.SubscriptionRepository
@@ -67,6 +64,7 @@ import to.wim.watchlist.ui.components.rememberApp
 import to.wim.watchlist.ui.main.icon
 import to.wim.watchlist.ui.theme.AppearanceSettings
 import to.wim.watchlist.ui.theme.DragHandle
+import to.wim.watchlist.ui.theme.LockedSwitch
 import to.wim.watchlist.ui.theme.ReorderableColumn
 import to.wim.watchlist.ui.theme.SettingsBlock
 import to.wim.watchlist.ui.theme.SettingsSection
@@ -106,6 +104,11 @@ fun SettingsScreen(settings: AppSettings) {
             }
         }
 
+    // Every setting but light or dark mode is part of Plus: in the free version each one stays
+    // readable, its switch greyed out behind a lock, and a tap opens the plans.
+    val locked: (() -> Unit)? = if (plus) null else ({ app.showPaywall.value = true })
+    val lockedLabel = stringResource(R.string.plus_locked)
+
     SettingsScaffold(
         title = stringResource(R.string.screens_settings),
         backLabel = stringResource(R.string.screens_back),
@@ -120,32 +123,31 @@ fun SettingsScreen(settings: AppSettings) {
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
-                PlusOnly(plus) {
-                    Column {
-                        MediaType.entries.forEach { type ->
-                            val on = type in settings.types
-                            SwitchSetting(
-                                title = type.label(),
-                                summary = null,
-                                checked = on,
-                                // At least one type stays on.
-                                enabled = !on || settings.types.size > 1,
-                                onCheckedChange = { scope.launch { app.settings.setTypes(settings.types.toggled(type, it)) } },
-                            )
-                        }
-                    }
+                MediaType.entries.forEach { type ->
+                    val on = type in settings.types
+                    SwitchSetting(
+                        title = type.label(),
+                        summary = null,
+                        checked = on,
+                        // At least one type stays on.
+                        enabled = !on || settings.types.size > 1,
+                        onCheckedChange = { scope.launch { app.settings.setTypes(settings.types.toggled(type, it)) } },
+                        onLocked = locked,
+                        lockedLabel = lockedLabel,
+                    )
                 }
             }
         }
 
         item(key = "library") {
             SettingsSection(title = stringResource(R.string.screens_settings_library)) {
-                PlusOnly(plus) { Column {
                 SwitchSetting(
                     title = stringResource(R.string.screens_settings_hide_specials),
                     summary = null,
                     checked = settings.hideSpecials,
                     onCheckedChange = { scope.launch { app.settings.setHideSpecials(it) } },
+                    onLocked = locked,
+                    lockedLabel = lockedLabel,
                 )
                 SwitchSetting(
                     title = stringResource(R.string.screens_settings_continue_latest),
@@ -157,8 +159,9 @@ fun SettingsScreen(settings: AppSettings) {
                             if (on) app.library.refreshLatestNext()
                         }
                     },
+                    onLocked = locked,
+                    lockedLabel = lockedLabel,
                 )
-                } }
             }
         }
 
@@ -166,10 +169,9 @@ fun SettingsScreen(settings: AppSettings) {
             // New-episode notifications are part of Plus: in the free version the switch opens the subscription screen.
             val on = plus && settings.notifications && android.appEnabled
             SettingsSection(title = stringResource(R.string.screens_settings_notifications_section)) {
-                PlusOnly(plus) {
                 SwitchSetting(
                     title = stringResource(R.string.screens_settings_notifications),
-                    summary = stringResource(if (plus) R.string.screens_settings_notifications_sub else R.string.plus_notifications_locked),
+                    summary = stringResource(R.string.screens_settings_notifications_sub),
                     // Off whenever Android blocks the app's notifications, so turning it on asks again.
                     checked = on,
                     onCheckedChange = { turnOn ->
@@ -189,8 +191,9 @@ fun SettingsScreen(settings: AppSettings) {
                             else -> enableNotifications()
                         }
                     },
+                    onLocked = locked,
+                    lockedLabel = lockedLabel,
                 )
-                }
                 if (on) {
                     // One row per type that is on in Content, showing Android's own switch for its channel.
                     NotifyChannel.entries.filter { it.type in settings.types }.forEach { channel ->
@@ -242,17 +245,14 @@ fun SettingsScreen(settings: AppSettings) {
             SettingsSection(title = stringResource(R.string.screens_settings_bottom_bar)) {
                 // Reordering and hiding tabs is part of Plus.
                 if (!plus) {
-                    // A still picture of the default tabs: dragging can't start under the lock.
-                    PlusOnly(plus) {
-                        Column {
-                            shown.forEach { tab ->
-                                ListItem(
-                                    headlineContent = { Text(tab.label()) },
-                                    leadingContent = { Icon(tab.icon(true), null) },
-                                    trailingContent = { Switch(checked = tab in settings.nav.enabled, onCheckedChange = null) },
-                                )
-                            }
-                        }
+                    // The default tabs, readable, each switch locked; they can't be dragged.
+                    shown.forEach { tab ->
+                        ListItem(
+                            headlineContent = { Text(tab.label()) },
+                            leadingContent = { Icon(tab.icon(true), null) },
+                            trailingContent = { LockedSwitch(tab in settings.nav.enabled, lockedLabel) },
+                            modifier = Modifier.clickable(role = Role.Button) { app.showPaywall.value = true },
+                        )
                     }
                     return@SettingsSection
                 }
@@ -293,10 +293,12 @@ fun SettingsScreen(settings: AppSettings) {
                     onThemeSelect = { index -> scope.launch { app.settings.setTheme(ThemeMode.entries[index]) } },
                     dynamicColorTitle = stringResource(R.string.screens_settings_dynamic_color),
                     // Colours from the wallpaper are part of Plus; light and dark stay free.
-                    dynamicColorSummary = stringResource(if (plus) R.string.screens_settings_dynamic_color_sub else R.string.plus_dynamic_color_locked),
+                    dynamicColorSummary = stringResource(R.string.screens_settings_dynamic_color_sub),
                     dynamicColor = plus && settings.dynamicColor,
                     onDynamicColorChange = { on -> if (plus) scope.launch { app.settings.setDynamicColor(on) } else app.showPaywall.value = true },
                     dynamicColorSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S,
+                    onDynamicColorLocked = locked,
+                    lockedLabel = lockedLabel,
                 )
             }
         }
@@ -407,12 +409,3 @@ private fun permissionGranted(context: Context): Boolean =
 @RequiresApi(33)
 private fun permissionAskable(context: Context): Boolean =
     (context as? Activity)?.shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) ?: true
-
-/** A Plus setting: as it is with Plus; in the free version blurred, with a button to the plans on top. */
-@Composable
-private fun PlusOnly(
-    plus: Boolean,
-    content: @Composable () -> Unit,
-) {
-    if (plus) content() else LockedRow(Modifier.fillMaxWidth()) { content() }
-}

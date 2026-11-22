@@ -61,6 +61,7 @@ watchlist/
         │   │   │       ├── TmdbBanner.kt      When the details page offers to add a TMDB token
         │   │   │       ├── Subscription.kt    Whether the subscription is active; which plans to show; trial reminder
         │   │   │       ├── Plus.kt            What the free version locks: Plus on or off, the Up next preview, the TMDB token
+        │   │   │       ├── UpNextWidget.kt    What the Up next home-screen widget shows
         │   │   │       └── NewEpisodes.kt     Which aired episodes a notification announces
         │   │   ├── work/NewEpisodesWorker.kt  Periodic new-episode notifications
         │   │   ├── work/TrialReminderWorker.kt  Notification two days before the free trial ends
@@ -72,6 +73,7 @@ watchlist/
         │   │       ├── person/      A person's page (TMDB): bio, known for, filmography
         │   │       ├── discover/    Trending, airing, premieres, best, "Surprise me"
         │   │       ├── calendar/    Upcoming episodes and releases
+        │   │       ├── widget/      The Up next home-screen widget (RemoteViews; layout/widget_up_next.xml, xml/widget_up_next_info.xml)
         │   │       ├── search/  profile/  settings/  login/
         │   │       ├── components/  Posters, labels, skeletons, shared widgets (PlusLock.kt: blur and Plus card)
         │   │       └── theme/       Material 3 theme, shapes, motion, system bars, settings kit, empty states

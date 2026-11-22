@@ -2,6 +2,10 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: Up next home-screen widget (Plus) with RemoteViews
+
+The widget is built with plain `AppWidgetProvider` and `RemoteViews` (a fixed layout of five rows), not Jetpack Glance, which would be a new library. It draws from the cached library only, so it never calls SIMKL in the background (SIMKL's rule); the app redraws it when the lists, settings or subscription change, and Android asks every hour so the local "aired now" check moves shows into Up next. Unlike the app, the widget counts "still asking Google Play" as locked, so a free user's home screen never shows Up next by mistake; after drawing it asks Google Play and draws again. Colours follow the wallpaper on Android 12+ (the system's own colour resources) and use the app's Material 3 palette below. Rejected: a scrolling list (`RemoteViewsService`), more code for a widget that shows the top few shows; posters, which would need image loading into the widget.
+
 ## 2026-11-22: Releases upload to Google Play by themselves
 
 Each release (`patch`, `minor`, `major` or a pushed tag) now uploads the app bundle and its R8 mapping file to Google Play's internal testing track, in one Play edit and released at once, from the same job that built them. Before, the bundle was only stored as an artifact and a Claude session downloaded it and uploaded it through the Play API, which needed a temporary download host in the cloud environment for every build. The upload uses `r0adkll/upload-google-play` (the action the owner approved on 2026-10-14) with the service account key in the `PLAY_SERVICE_ACCOUNT_JSON` secret. It runs before the GitHub Release, so a refused upload leaves no tag and the run can be re-run. It runs in the same job, so the app isn't built twice (fewer Actions minutes). Closed testing and production stay manual in the Play Console. Rejected: a separate job that rebuilds the bundle (twice the minutes), and our own upload script (more code to maintain).
@@ -13,7 +17,7 @@ crucial features paid. Signing in, the lists, marking watched, ratings, details,
 and the watch totals are free; Watchlist Plus (the same Google Play subscription and trial) adds
 Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, the list of
 rated titles (added the same day at the owner's request; rating stays free), trailers and similar titles, colours from the
-wallpaper, a custom bottom bar, and cast and crew. An Up next home-screen widget is planned for Plus. Locked parts stay on screen, blurred, under a card that opens the plans: people see their
+wallpaper, a custom bottom bar, and cast and crew. An Up next home-screen widget followed in the next build (see above). Locked parts stay on screen, blurred, under a card that opens the plans: people see their
 own data behind the lock, which explains Plus better than a list of features. Up next shows its
 first show unblurred, the owner's pick from three mockups (card only, first row free, banner).
 TMDB is Plus only and the free version doesn't mention it at all (the owner's wish): no token

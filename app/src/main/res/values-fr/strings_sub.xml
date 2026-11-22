@@ -76,4 +76,14 @@
     <string name="plus_get_summary">À suivre, le calendrier, les notifications et plus</string>
     <string name="plus_preview_locked">Aperçu de la version gratuite</string>
     <string name="plus_preview_locked_summary">Version de test uniquement : verrouille les fonctions Plus comme sans abonnement</string>
+    <!-- The Up next home-screen widget (Watchlist Plus). -->
+    <string name="widget_description">Vos prochains épisodes sur l’écran d’accueil</string>
+    <string name="widget_empty">Rien à regarder pour le moment</string>
+    <string name="widget_locked">Le widget Up next fait partie de Watchlist Plus. Touchez pour l’essayer gratuitement.</string>
+    <plurals name="widget_more">
+        <item quantity="one">+%1$d autre</item>
+        <item quantity="many">+%1$d autres</item>
+        <item quantity="other">+%1$d autres</item>
+    </plurals>
+    <string name="sub_feature_widget">Up next sur l’écran d’accueil : un widget avec vos prochains épisodes</string>
 </resources>

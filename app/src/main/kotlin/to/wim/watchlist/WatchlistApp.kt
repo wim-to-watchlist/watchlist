@@ -17,12 +17,16 @@ import to.wim.watchlist.data.SettingsStore
 import to.wim.watchlist.data.SubscriptionRepository
 import to.wim.watchlist.data.api.SimklApi
 import to.wim.watchlist.data.api.TmdbApi
+import to.wim.watchlist.ui.widget.UpNextWidgetProvider
 import to.wim.watchlist.work.NewEpisodesWorker
 import to.wim.watchlist.work.TrialReminderWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -82,6 +86,17 @@ class WatchlistApp :
         runCatching { NewEpisodesWorker.createChannels(this) }
         runCatching { TrialReminderWorker.createChannel(this) }
         scope.launch { runCatching { NewEpisodesWorker.restore(this@WatchlistApp) } }
+        redrawWidgetOnChanges()
+    }
+
+    /** Keeps the Up next widget in step with the lists, the settings and the subscription. */
+    @OptIn(FlowPreview::class)
+    private fun redrawWidgetOnChanges() {
+        scope.launch {
+            combine(library.state, settings.settings, subscription.state, previewLocked) { _, _, _, _ -> }
+                .debounce(1_000)
+                .collect { runCatching { UpNextWidgetProvider.update(this@WatchlistApp, force = false) } }
+        }
     }
 
     override fun newImageLoader(context: PlatformContext): ImageLoader =

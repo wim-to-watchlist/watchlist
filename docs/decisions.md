@@ -2,6 +2,10 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: Every setting but light or dark mode is Plus; every lock shows a preview
+
+At the owner's request every setting is part of Plus except light or dark mode, which stays free for readability. Without Plus the app uses the defaults (`Plus.settings`), so nothing in the free app breaks: all types shown, specials hidden, Up next from the latest episode, the default bottom bar. The stored choices aren't changed, so they come back with Plus. Sign out, the subscription, credits and the version stay reachable. Also at the owner's request, every lock now sits on a blurred preview of the user's own data: the settings, the *My ratings* list (it opens blurred instead of going straight to the plans) and the stats per type, whose card now sits below the blurred cards instead of covering them. Surprise me stays a direct way to the plans: it has no content to preview. Rejected: hiding the locked settings, which would make the free app look broken.
+
 ## 2026-11-22: Up next home-screen widget (Plus) with RemoteViews
 
 The widget is built with plain `AppWidgetProvider` and `RemoteViews` (a fixed layout of five rows), not Jetpack Glance, which would be a new library. It draws from the cached library only, so it never calls SIMKL in the background (SIMKL's rule); the app redraws it when the lists, settings or subscription change, and Android asks every hour so the local "aired now" check moves shows into Up next. Unlike the app, the widget counts "still asking Google Play" as locked, so a free user's home screen never shows Up next by mistake; after drawing it asks Google Play and draws again. Colours follow the wallpaper on Android 12+ (the system's own colour resources) and use the app's Material 3 palette below. Rejected: a scrolling list (`RemoteViewsService`), more code for a widget that shows the top few shows; posters, which would need image loading into the widget.

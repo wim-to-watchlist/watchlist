@@ -1,5 +1,6 @@
 package to.wim.watchlist.data.model
 
+import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.NavConfig
 import to.wim.watchlist.data.NavTab
 
@@ -8,7 +9,8 @@ import to.wim.watchlist.data.NavTab
  * details, search, Discover and the watch totals on the profile. Plus (the subscription or its free
  * trial): Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, the
  * list of rated titles (rating stays free), trailers and similar titles, colours from the wallpaper,
- * a bottom bar of one's own, the Up next home-screen widget, and
+ * a bottom bar of one's own, the Up next home-screen widget, every setting except light or dark mode
+ * (see [settings]), and
  * everything from TMDB (cast, people, people search). The free version never mentions TMDB.
  * Locked parts stay on screen, blurred, under a card
  * that leads to the subscription screen. Plain Kotlin so it is unit tested.
@@ -35,6 +37,29 @@ object Plus {
         plus: Boolean,
         stored: NavConfig,
     ): NavConfig = if (plus) stored else NavConfig(NavTab.defaultOrder, NavTab.defaultEnabled)
+
+    /**
+     * The settings as the app uses them: the user's own with Plus; without it the defaults for
+     * everything but light or dark mode (all types shown, specials hidden, Up next from the latest
+     * episode, the default bottom bar, no wallpaper colours, no notifications, no TMDB token). The
+     * stored choices are kept, so they come back when Plus does.
+     */
+    fun settings(
+        plus: Boolean,
+        stored: AppSettings,
+    ): AppSettings {
+        if (plus) return stored
+        val defaults = AppSettings()
+        return stored.copy(
+            dynamicColor = false,
+            nav = defaults.nav,
+            notifications = false,
+            hideSpecials = defaults.hideSpecials,
+            continueFromLatest = defaults.continueFromLatest,
+            types = defaults.types,
+            tmdbKey = null,
+        )
+    }
 
     /** How many Up next rows stay readable while locked, so the feature shows itself on the user's own shows. */
     const val UP_NEXT_PREVIEW = 1

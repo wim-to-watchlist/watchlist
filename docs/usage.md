@@ -25,8 +25,9 @@ Watchlist is free to use: sign in, and your lists, marking episodes watched, rat
 - **Surprise me** in Discover.
 - **Trailers and similar titles** ("If you like this") on details pages, shown blurred in the free version.
 - **Your own bottom bar**: reorder and hide tabs in *Settings › Bottom bar*. The free version keeps the default tabs.
+- **All settings** except light or dark mode: which types the app shows, hiding specials, continuing from the latest episode, notifications, the bottom bar and colours. The free version uses the defaults (everything shown, specials hidden, Up next from the latest episode) and shows these settings blurred. Your choices are kept and come back with Plus.
 - **Colours from your wallpaper** (Material You). Light and dark mode stay free.
-- **My ratings**, the list of everything you rated, on your profile. Rating a title stays free.
+- **My ratings**, the list of everything you rated, on your profile. Rating a title stays free; the free version shows the list blurred.
 - **Cast and crew** (see below). The free version doesn't show anything about it.
 - **Up next widget** on your home screen: long-press the home screen, choose *Widgets*, find *Watchlist* and drag *Up next* onto it. It lists up to five shows with their next episode, most recently watched first, and says how many more there are. Tap a show to open its details, or the title to open the app. It updates when the app syncs and every hour on its own (newly aired episodes appear without opening the app), from what the app already downloaded. In the free version the widget says it's part of Plus; tapping it opens the plans.
 

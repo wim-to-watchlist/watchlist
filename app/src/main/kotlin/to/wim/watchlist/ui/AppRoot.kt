@@ -45,17 +45,17 @@ fun AppRoot(
     val app = rememberApp()
     val settings by app.settings.settings.collectAsState(initial = null)
     val current = settings ?: return Box(Modifier.fillMaxSize()) // DataStore loads in a few ms.
-    // Colours from the wallpaper are part of Plus.
+    // Every setting but light or dark mode is part of Plus: without it the app uses the defaults.
     val subscription by app.subscription.state.collectAsState()
     val previewLocked by app.previewLocked.collectAsState()
-    val dynamicColor = current.dynamicColor && Plus.unlocked(subscription.access, previewLocked)
+    val shown = Plus.settings(Plus.unlocked(subscription.access, previewLocked), current)
 
-    WatchlistTheme(mode = current.theme, dynamicColor = dynamicColor) {
+    WatchlistTheme(mode = shown.theme, dynamicColor = shown.dynamicColor) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             if (current.accessToken == null) {
                 LoginScreen()
             } else {
-                Subscribed { LoggedIn(current, requested, onRequestHandled) }
+                Subscribed { LoggedIn(shown, requested, onRequestHandled) }
             }
         }
     }

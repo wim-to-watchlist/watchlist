@@ -68,7 +68,6 @@
     <string name="plus_stats_text">Zie hoeveel je keek van series, anime en films, met Watchlist Plus.</string>
     <string name="plus_locked">Deel van Watchlist Plus</string>
     <string name="plus_dynamic_color_locked">Kleuren van je achtergrond zitten in Watchlist Plus</string>
-    <string name="plus_bottom_bar">Tabs herschikken en verbergen</string>
     <string name="plus_not_now">Niet nu</string>
     <string name="plus_notifications_locked">Deel van Watchlist Plus. Tik om de abonnementen te zien</string>
     <string name="plus_get">Neem Watchlist Plus</string>
@@ -84,4 +83,6 @@
         <item quantity="other">nog %1$d</item>
     </plurals>
     <string name="sub_feature_widget">Up next op je startscherm: een widget met je volgende afleveringen</string>
+    <string name="plus_ratings_title">Je beoordelingen zitten in Plus</string>
+    <string name="plus_ratings_text">Zie alles wat je beoordeeld hebt, het beste eerst, met Watchlist Plus.</string>
 </resources>

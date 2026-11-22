@@ -69,7 +69,6 @@
     <string name="plus_stats_text">Vedi quanto hai guardato di serie TV, anime e film, con Watchlist Plus.</string>
     <string name="plus_locked">Fa parte di Watchlist Plus</string>
     <string name="plus_dynamic_color_locked">I colori dal tuo sfondo fanno parte di Watchlist Plus</string>
-    <string name="plus_bottom_bar">Riordina e nascondi le schede</string>
     <string name="plus_not_now">Non ora</string>
     <string name="plus_notifications_locked">Fa parte di Watchlist Plus. Tocca per vedere i piani</string>
     <string name="plus_get">Passa a Watchlist Plus</string>
@@ -86,4 +85,6 @@
         <item quantity="other">+%1$d altri</item>
     </plurals>
     <string name="sub_feature_widget">Up next nella schermata Home: un widget con i tuoi prossimi episodi</string>
+    <string name="plus_ratings_title">Le tue valutazioni sono in Plus</string>
+    <string name="plus_ratings_text">Guarda tutto ciò che hai valutato, il meglio per primo, con Watchlist Plus.</string>
 </resources>

@@ -59,8 +59,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
 import to.wim.watchlist.ui.components.LocalPlus
-import to.wim.watchlist.ui.components.Locked
-import to.wim.watchlist.ui.components.PlusCard
+import to.wim.watchlist.ui.components.LockedPreview
 import to.wim.watchlist.data.model.Images
 import to.wim.watchlist.data.model.TypeStats
 import to.wim.watchlist.data.model.Ratings
@@ -139,13 +138,12 @@ fun ProfileScreen(types: Set<MediaType>) {
                 } else if (shown.isNotEmpty()) {
                     // Free version: the totals stay, the breakdown per type is blurred under a card about Plus.
                     item(key = "plus") {
-                        Box(Modifier.animateItem()) {
-                            Locked { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { shown.forEach { TypeCard(it) } } }
-                            PlusCard(
-                                title = stringResource(R.string.plus_stats_title),
-                                text = stringResource(R.string.plus_stats_text),
-                                modifier = Modifier.align(Alignment.Center).padding(16.dp),
-                            )
+                        LockedPreview(
+                            title = stringResource(R.string.plus_stats_title),
+                            text = stringResource(R.string.plus_stats_text),
+                            modifier = Modifier.animateItem(),
+                        ) {
+                            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { shown.forEach { TypeCard(it) } }
                         }
                     }
                 }
@@ -167,10 +165,10 @@ fun ProfileScreen(types: Set<MediaType>) {
                             )
                         },
                         leadingContent = { Icon(Icons.Rounded.Star, null) },
-                        // The list of rated titles is part of Plus: rating stays free, the overview opens the plans.
+                        // The list of rated titles is part of Plus: rating stays free, the list opens blurred.
                         trailingContent = if (plus) null else ({ Icon(Icons.Rounded.Lock, stringResource(R.string.plus_locked)) }),
                         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-                        modifier = Modifier.clickableRow { if (plus) navigator.push(Route.Ratings) else app.showPaywall.value = true },
+                        modifier = Modifier.clickableRow { navigator.push(Route.Ratings) },
                     )
                 }
             }

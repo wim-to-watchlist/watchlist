@@ -1,5 +1,6 @@
 package to.wim.watchlist.ui.profile
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
@@ -25,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,6 +36,9 @@ import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.data.model.Ratings
 import to.wim.watchlist.ui.LocalNavigator
 import to.wim.watchlist.ui.Route
+import to.wim.watchlist.ui.components.LocalPlus
+import to.wim.watchlist.ui.components.Locked
+import to.wim.watchlist.ui.components.PlusCard
 import to.wim.watchlist.ui.components.PosterTile
 import to.wim.watchlist.ui.components.label
 import to.wim.watchlist.ui.components.rememberApp
@@ -67,27 +72,42 @@ fun RatingsScreen(types: List<MediaType>) {
                 body = stringResource(R.string.screens_ratings_empty_text),
             )
         } else {
-            LazyColumn(
-                contentPadding =
-                    PaddingValues(
-                        top = padding.calculateTopPadding(),
-                        bottom = 16.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
-                    ),
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                rows.forEach { (type, items) ->
-                    item(key = type.name) {
-                        Column {
-                            SectionHeader(type.label(), Modifier.padding(horizontal = 8.dp), items.size) { navigator.push(Route.RatedGrid(type)) }
-                            LazyRow(contentPadding = PaddingValues(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                                items(items, key = { it.key }) { item ->
-                                    RatedTile(item, Modifier.width(120.dp)) {
-                                        navigator.openDetail(item.type, item.ids.simkl, item.title, item.poster)
+            val list: @Composable () -> Unit = {
+                LazyColumn(
+                    contentPadding =
+                        PaddingValues(
+                            top = padding.calculateTopPadding(),
+                            bottom = 16.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                        ),
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    rows.forEach { (type, items) ->
+                        item(key = type.name) {
+                            Column {
+                                SectionHeader(type.label(), Modifier.padding(horizontal = 8.dp), items.size) { navigator.push(Route.RatedGrid(type)) }
+                                LazyRow(contentPadding = PaddingValues(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                    items(items, key = { it.key }) { item ->
+                                        RatedTile(item, Modifier.width(120.dp)) {
+                                            navigator.openDetail(item.type, item.ids.simkl, item.title, item.poster)
+                                        }
                                     }
                                 }
                             }
                         }
                     }
+                }
+            }
+            if (LocalPlus.current) {
+                list()
+            } else {
+                // Free version: the user's own ratings blurred under a card about Plus.
+                Box(Modifier.fillMaxSize()) {
+                    Locked(Modifier.fillMaxSize()) { list() }
+                    PlusCard(
+                        title = stringResource(R.string.plus_ratings_title),
+                        text = stringResource(R.string.plus_ratings_text),
+                        modifier = Modifier.align(Alignment.Center).padding(24.dp),
+                    )
                 }
             }
         }

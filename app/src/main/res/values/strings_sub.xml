@@ -68,7 +68,6 @@
     <string name="plus_stats_text">See how much you watched of TV shows, anime and movies, with Watchlist Plus.</string>
     <string name="plus_locked">Part of Watchlist Plus</string>
     <string name="plus_dynamic_color_locked">Colours from your wallpaper are part of Watchlist Plus</string>
-    <string name="plus_bottom_bar">Reorder and hide tabs</string>
     <string name="plus_not_now">Not now</string>
     <string name="plus_notifications_locked">Part of Watchlist Plus. Tap to see the plans</string>
     <string name="plus_get">Get Watchlist Plus</string>
@@ -84,4 +83,6 @@
         <item quantity="other">+%1$d more</item>
     </plurals>
     <string name="sub_feature_widget">Up next on your home screen: a widget with your next episodes</string>
+    <string name="plus_ratings_title">Your ratings are in Plus</string>
+    <string name="plus_ratings_text">See everything you rated, best first, with Watchlist Plus.</string>
 </resources>

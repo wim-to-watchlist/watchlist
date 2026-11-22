@@ -5,6 +5,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import to.wim.watchlist.data.model.Access
+import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.data.model.Plus
 
 class PlusTest {
@@ -51,5 +52,23 @@ class PlusTest {
     fun `the TMDB token is only used with Plus`() {
         assertEquals("eyJtoken", Plus.tmdbKey(plus = true, stored = "eyJtoken"))
         assertEquals(null, Plus.tmdbKey(plus = false, stored = "eyJtoken"))
+    }
+
+    @Test
+    fun `without Plus every setting but light or dark mode is the default, and the choices are kept`() {
+        val mine =
+            AppSettings(
+                accessToken = "token",
+                theme = ThemeMode.Dark,
+                dynamicColor = true,
+                nav = NavConfig(NavTab.defaultOrder.reversed(), setOf(NavTab.Discover)),
+                notifications = true,
+                hideSpecials = false,
+                continueFromLatest = false,
+                types = setOf(MediaType.Movie),
+                tmdbKey = "eyJtoken",
+            )
+        assertEquals(mine, Plus.settings(plus = true, stored = mine))
+        assertEquals(AppSettings(accessToken = "token", theme = ThemeMode.Dark), Plus.settings(plus = false, stored = mine))
     }
 }

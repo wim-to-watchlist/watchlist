@@ -230,5 +230,9 @@ app apart from their package (and `R` import) lines. Copy a change to the other 
   (hidden when only one is turned on), in the order set in Settings › Bottom bar (drag handles).
 - Ratings, rank and genres on a detail page are rows in the info box, not chips: they can't be
   tapped. Links to other sites are assist chips.
-- The sign-in screen shows the app icon itself (its foreground on a white rounded square, as
-  the launcher shows it), not a generic Material icon.
+- Launcher icon: the gradient TV screen (about 16:10.6, no stand) with a fat checkmark on its
+  right side, in the plate's colour `#EBE7FF`. The background is a soft violet plate
+  (`#F2EFFF` → `#E4DEFF`, `res/drawable/ic_launcher_background.xml`). The themed layer and the
+  notification icon are the screen with the checkmark cut out.
+- The sign-in screen shows the app icon itself (its foreground on the violet plate, as the
+  launcher shows it), not a generic Material icon.

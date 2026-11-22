@@ -2,6 +2,16 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: Launcher icon on a violet plate, with the check on the right
+
+Part of making the owner's app icons one family: one meaningful shape with one gradient on a soft
+plate tinted with the app colour, details solid in the plate's colour instead of white. The TV
+screen is now wider (about 16:10.6, the owner's choice) and carries a fat checkmark on its right
+side, drawn in the plate's colour. The white background became a violet plate (`#7A5CFF` mixed with
+white, 90% to 80%), also behind the icon on the sign-in and Plus screens. The themed layer and
+notification icon follow the new shape. Rejected: a 16:9 screen (too flat), making the TV's
+antennas into the checkmark (read as rabbit ears, not "watched"), and keeping the white background.
+
 ## 2026-11-22: One rule for every lock: blur only what is paid for
 
 The owner asked for consistent locks that show everything that can be shown. Every locked list now

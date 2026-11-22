@@ -52,7 +52,7 @@ copy them into the Play Console as they are.
 other languages (nl-NL, fr-FR, de-DE, es-ES, it-IT):
 
 - App name, short description, full description: from `fastlane/metadata/android/<locale>/`.
-- App icon: 512 × 512 PNG (export the launcher icon on its white background).
+- App icon: 512 × 512 PNG (export the launcher icon on its violet plate).
 - Feature graphic: 1024 × 500 PNG or JPG.
 - Phone screenshots: at least 2 (Up next, a details page, Discover and the calendar work
   well). Take them on your phone with the release build.

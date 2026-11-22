@@ -1,38 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Minimal TV screen with a white checkmark ("watched") and a blue → violet → magenta gradient
-     on the white background. Everything sits inside the 66dp adaptive-icon safe zone (21..87). -->
+<!-- Launcher foreground: a gradient TV screen (about 16:10.6) with a fat checkmark on its right side,
+     drawn in the plate's colour (#EBE7FF, the midpoint of ic_launcher_background). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <group
-        android:pivotX="54"
-        android:pivotY="54"
-        android:scaleX="0.92"
-        android:scaleY="0.92">
-        <!-- Screen -->
-        <path android:pathData="M40,32h28a12,12 0,0 1,12 12v20a12,12 0,0 1,-12 12h-28a12,12 0,0 1,-12 -12v-20a12,12 0,0 1,12 -12z">
-            <aapt:attr name="android:fillColor">
-                <gradient
-                    android:type="linear"
-                    android:startX="28"
-                    android:startY="32"
-                    android:endX="80"
-                    android:endY="76">
-                    <item android:offset="0" android:color="#FF3D7BFF" />
-                    <item android:offset="0.55" android:color="#FF7A5CFF" />
-                    <item android:offset="1" android:color="#FFD15CE6" />
-                </gradient>
-            </aapt:attr>
-        </path>
-        <!-- Checkmark, 6 wide with rounded ends -->
-        <path
-            android:pathData="M42.5,54.5L50.5,62.5L66,47"
-            android:strokeColor="#FFFFFFFF"
-            android:strokeWidth="6"
-            android:strokeLineCap="round"
-            android:strokeLineJoin="round" />
-    </group>
+    <path android:pathData="M38.0,36.77h32a10,10 0,0 1,10,10v14.45a10,10 0,0 1,-10,10h-32a10,10 0,0 1,-10,-10v-14.45a10,10 0,0 1,10,-10z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="28"
+                android:startY="36.77"
+                android:endX="80"
+                android:endY="71.22">
+                <item android:offset="0" android:color="#FF3D7BFF" />
+                <item android:offset="0.55" android:color="#FF7A5CFF" />
+                <item android:offset="1" android:color="#FFD15CE6" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M56.99,54.3L61.64,58.95L71.56,49.03"
+        android:strokeColor="#FFEBE7FF"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
 </vector>

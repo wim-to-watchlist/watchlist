@@ -1,24 +1,31 @@
-Watchlist zet je SIMKL-lijsten op je telefoon en toont wat je nu kunt kijken.
+Watchlist zet je SIMKL-lijsten op je telefoon en toont wat je nu kunt kijken. De app is gratis; Watchlist Plus voegt de volledige Volgende, een kalender, meldingen en meer toe.
 
-Open de app en onder Volgende staat elke serie met een aflevering die je nu kunt kijken. Tik op het vinkje als je die gezien hebt en de volgende aflevering schuift op. Een aflevering overgeslagen? Volgende gaat verder na de laatste die je keek.
+Open de app en Volgende toont de volgende aflevering om te kijken. Tik op het vinkje als je die gezien hebt en de volgende schuift op. Een aflevering overgeslagen? Volgende gaat verder na de laatste die je keek.
 
-WAT JE KRIJGT
+GRATIS
 • Je SIMKL-lijsten als planken voor series, anime en films: Volgende, Wil ik zien, Gezien, Gepauzeerd en Gestopt.
 • Duid afleveringen of hele seizoenen aan als gezien, geef titels een score van 1 tot 10 en check in bij wat je nu kijkt.
+• Ontdekken: Trending op Simkl vandaag, deze week en deze maand, vandaag op tv, nieuwe premières en het beste van het jaar.
+• Detailpagina's met scores van SIMKL, IMDb en anderen, alle afleveringen per seizoen en links naar IMDb, MyAnimeList en meer.
+• Zoeken in de hele SIMKL-catalogus.
+• Je kijktotalen op je profiel.
+• Opent meteen en werkt offline met de kopie van je bibliotheek op je telefoon. Synchroniseert als je de app opent of naar beneden trekt.
+• Material 3-ontwerp met een licht en een donker thema.
+• In het Nederlands, Engels, Frans, Duits, Spaans en Italiaans.
+
+WATCHLIST PLUS
+• Volgende voor elke serie die je kijkt, en een widget op je startscherm met je volgende afleveringen.
 • Een kalender met de komende afleveringen en films uit je lijsten.
 • Een melding als er een nieuwe aflevering is van een serie die je kijkt, of als een film op je lijst Wil ik zien uitkomt. Elk type heeft een eigen kanaal, dus jij kiest wat geluid maakt.
-• Ontdekken: Trending op Simkl vandaag, deze week en deze maand, vandaag op tv, nieuwe premières en het beste van het jaar. Of tik op de dobbelsteen voor een verrassing.
-• Detailpagina's met scores van SIMKL, IMDb en anderen, trailers, alle afleveringen per seizoen en links naar IMDb, TMDB, MyAnimeList en meer.
-• Cast en crew, met pagina's van acteurs en regisseurs, als je je eigen gratis TMDB-token toevoegt (optioneel).
-• Zoeken in de hele SIMKL-catalogus.
-• Opent meteen en werkt offline met de kopie van je bibliotheek op je telefoon. Synchroniseert als je de app opent of naar beneden trekt.
-• Material 3-ontwerp met een donker thema en, vanaf Android 12, de kleuren van je achtergrond.
-• In het Nederlands, Engels, Frans, Duits, Spaans en Italiaans.
+• Trailers en vergelijkbare titels op detailpagina's, en Verras me in Ontdekken.
+• Cast en crew, met pagina's van acteurs en regisseurs, als je je eigen gratis TMDB-token toevoegt.
+• Je statistieken per type en een lijst van alles wat je een score gaf, het beste eerst.
+• Je eigen onderste balk, de kleuren van je achtergrond (vanaf Android 12) en alle instellingen.
 
 PRIVACY
 Geen advertenties, geen analytics, geen tracking. Je logt in op simkl.com, dus de app ziet je wachtwoord nooit. Je lijsten blijven op SIMKL; de app houdt een kopie op je telefoon zodat ze snel opent. Privacybeleid: https://wim-to-watchlist.github.io/privacy/
 
 PRIJS
-Probeer alles 14 dagen gratis. Daarna kost Watchlist € 4,99 per jaar of € 0,99 per maand (Google Play toont de prijs in je eigen munt). De app herinnert je twee dagen voor de proefperiode afloopt, en opzeggen kan altijd via Google Play.
+Watchlist is gratis. Watchlist Plus kost € 4,99 per jaar of € 0,99 per maand (Google Play toont de prijs in je eigen munt). Het jaarabonnement begint met 14 dagen gratis; de app herinnert je twee dagen voor de proefperiode afloopt, en opzeggen kan altijd via Google Play.
 
 Je hebt een gratis SIMKL-account nodig (simkl.com). Watchlist is een onofficiële app en is niet verbonden aan of goedgekeurd door Simkl. Deze applicatie gebruikt TMDB en de TMDB API's, maar is niet onderschreven, gecertificeerd of op een andere manier goedgekeurd door TMDB.

@@ -115,4 +115,5 @@
         <item quantity="one">%1$d aflevering</item>
         <item quantity="other">%1$d afleveringen</item>
     </plurals>
+    <string name="detail_mark_up_to">Tot hier als gezien aanduiden</string>
 </resources>

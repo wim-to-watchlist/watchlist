@@ -71,7 +71,7 @@
     <string name="screens_login_denied">The sign-in was canceled on SIMKL (%1$s).</string>
     <string name="screens_login_redirect_invalid">That sign-in link doesn’t match the one this app started. Tap Sign in with SIMKL again.</string>
     <string name="screens_login_failed">Sign-in failed: %1$s</string>
-    <string name="screens_login_note">You sign in on simkl.com; this app never sees your password. Watchlist is not affiliated with Simkl.</string>
+    <string name="screens_login_note">You sign in on simkl.com; this app never sees your password. Watchlist is not affiliated with SIMKL.</string>
     <string name="screens_settings_tmdb">Cast and crew</string>
     <string name="screens_settings_tmdb_key">TMDB Read Access Token</string>
     <string name="screens_settings_tmdb_key_on">Added. Details pages show cast and crew, and you can look up people.</string>

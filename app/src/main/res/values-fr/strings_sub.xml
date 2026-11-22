@@ -43,7 +43,7 @@
     <string name="sub_notif_title">Votre essai gratuit se termine le %1$s</string>
     <string name="sub_notif_text">Ensuite, Google Play facture votre abonnement. Touchez pour le gérer ou le résilier.</string>
     <string name="sub_failed">L’achat n’a pas abouti. Réessayez ou vérifiez votre moyen de paiement dans Google Play.</string>
-    <string name="sub_pending">Votre achat attend que Google Play confirme le paiement. Plus se débloque dès que c’est fait.</string>
+    <string name="sub_pending">Votre achat attend que Google Play confirme le paiement. Watchlist Plus se débloque dès que c’est fait.</string>
     <string name="sub_unavailable">Google Play n’est pas disponible : l’abonnement ne peut pas être vérifié. Vérifiez que Google Play est installé et que vous y êtes connecté, puis réessayez.</string>
     <string name="sub_not_loaded">L’abonnement n’a pas pu être chargé depuis Google Play. Vérifiez votre connexion et réessayez.</string>
     <string name="sub_check_again">Vérifier à nouveau</string>
@@ -86,4 +86,5 @@
     <string name="sub_feature_widget">Up next sur l’écran d’accueil : un widget avec vos prochains épisodes</string>
     <string name="plus_ratings_title">Vos notes sont dans Plus</string>
     <string name="plus_ratings_text">Retrouvez tout ce que vous avez noté, le meilleur en premier, avec Watchlist Plus.</string>
+    <string name="sub_close">Fermer</string>
 </resources>

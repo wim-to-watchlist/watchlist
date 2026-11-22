@@ -68,6 +68,10 @@
         <item quantity="one">over %d dag</item>
         <item quantity="other">over %d dagen</item>
     </plurals>
+    <plurals name="lib_ago_minutes">
+        <item quantity="one">%d min geleden</item>
+        <item quantity="other">%d min geleden</item>
+    </plurals>
     <plurals name="lib_ago_hours">
         <item quantity="one">%d uur geleden</item>
         <item quantity="other">%d uur geleden</item>

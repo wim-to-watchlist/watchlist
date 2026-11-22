@@ -68,6 +68,10 @@
         <item quantity="one">in %d Tag</item>
         <item quantity="other">in %d Tagen</item>
     </plurals>
+    <plurals name="lib_ago_minutes">
+        <item quantity="one">vor %d Min.</item>
+        <item quantity="other">vor %d Min.</item>
+    </plurals>
     <plurals name="lib_ago_hours">
         <item quantity="one">vor %d Std.</item>
         <item quantity="other">vor %d Std.</item>

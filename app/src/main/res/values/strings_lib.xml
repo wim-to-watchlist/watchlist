@@ -68,6 +68,10 @@
         <item quantity="one">in %d day</item>
         <item quantity="other">in %d days</item>
     </plurals>
+    <plurals name="lib_ago_minutes">
+        <item quantity="one">%d min ago</item>
+        <item quantity="other">%d min ago</item>
+    </plurals>
     <plurals name="lib_ago_hours">
         <item quantity="one">%d h ago</item>
         <item quantity="other">%d h ago</item>

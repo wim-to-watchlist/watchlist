@@ -115,4 +115,5 @@
         <item quantity="one">%1$d Folge</item>
         <item quantity="other">%1$d Folgen</item>
     </plurals>
+    <string name="detail_mark_up_to">Bis hier als gesehen markieren</string>
 </resources>

@@ -1,24 +1,31 @@
-Watchlist lleva tus listas de SIMKL al móvil y te muestra qué ver a continuación.
+Watchlist lleva tus listas de SIMKL al móvil y te muestra qué ver a continuación. La app es gratuita; Watchlist Plus añade «A continuación» completo, un calendario, avisos y más.
 
-Abre la app y en A continuación aparece cada serie con un episodio que puedes ver ahora. Toca la marca cuando lo hayas visto y el siguiente episodio ocupa su lugar. ¿Te saltaste un episodio? A continuación sigue después del último que viste.
+Abre la app y en A continuación aparece el siguiente episodio que puedes ver. Toca la marca cuando lo hayas visto y el siguiente ocupa su lugar. ¿Te saltaste un episodio? A continuación sigue después del último que viste.
 
-QUÉ INCLUYE
+GRATIS
 • Tus listas de SIMKL ordenadas para series, anime y películas: A continuación, Pendiente, Visto, En pausa y Abandonado.
 • Marca episodios o temporadas completas como vistos, puntúa títulos del 1 al 10 y haz check-in de lo que estás viendo ahora.
+• Descubrir: Tendencias en Simkl hoy, esta semana y este mes, en emisión hoy, nuevos estrenos y lo mejor del año.
+• Fichas con valoraciones de SIMKL, IMDb y otros, todos los episodios por temporada y enlaces a IMDb, MyAnimeList y más.
+• Búsqueda en todo el catálogo de SIMKL.
+• Tus totales de visionado en tu perfil.
+• Se abre al instante y funciona sin conexión con la copia de tu biblioteca en el móvil. Se sincroniza al abrir la app o al deslizar hacia abajo.
+• Diseño Material 3 con tema claro y oscuro.
+• En español, inglés, neerlandés, francés, alemán e italiano.
+
+WATCHLIST PLUS
+• A continuación para cada serie que ves, y un widget en la pantalla de inicio con tus próximos episodios.
 • Un calendario con los próximos episodios y estrenos de películas de tus listas.
 • Un aviso cuando sale un episodio nuevo de una serie que sigues, o cuando se estrena una película de tu lista Pendiente. Cada tipo tiene su propio canal, así que tú decides qué suena.
-• Descubrir: Tendencias en Simkl hoy, esta semana y este mes, en emisión hoy, nuevos estrenos y lo mejor del año. O toca el dado para una sorpresa.
-• Fichas con valoraciones de SIMKL, IMDb y otros, tráileres, todos los episodios por temporada y enlaces a IMDb, TMDB, MyAnimeList y más.
-• Reparto y equipo, con páginas de actores y directores, si añades tu propio token gratuito de TMDB (opcional).
-• Búsqueda en todo el catálogo de SIMKL.
-• Se abre al instante y funciona sin conexión con la copia de tu biblioteca en el móvil. Se sincroniza al abrir la app o al deslizar hacia abajo.
-• Diseño Material 3 con tema oscuro y, desde Android 12, los colores de tu fondo de pantalla.
-• En español, inglés, neerlandés, francés, alemán e italiano.
+• Tráileres y títulos similares en las fichas, y «Sorpréndeme» en Descubrir.
+• Reparto y equipo, con páginas de actores y directores, si añades tu propio token gratuito de TMDB.
+• Tus estadísticas por tipo y una lista de todo lo que has valorado, lo mejor primero.
+• Tu propia barra inferior, los colores de tu fondo de pantalla (desde Android 12) y todos los ajustes.
 
 PRIVACIDAD
 Sin anuncios, sin analíticas, sin rastreo. Inicias sesión en simkl.com, así que la app nunca ve tu contraseña. Tus listas siguen en SIMKL; la app guarda una copia en el móvil para abrirse rápido. Política de privacidad: https://wim-to-watchlist.github.io/privacy/
 
 PRECIO
-Prueba todo gratis durante 14 días. Después, Watchlist cuesta 4,99 € al año o 0,99 € al mes (Google Play muestra el precio en tu moneda). La app te avisa dos días antes de que termine la prueba, y puedes cancelar cuando quieras en Google Play.
+Watchlist es gratis. Watchlist Plus cuesta 4,99 € al año o 0,99 € al mes (Google Play muestra el precio en tu moneda). El plan anual empieza con 14 días gratis; la app te avisa dos días antes de que termine la prueba, y puedes cancelar cuando quieras en Google Play.
 
 Necesitas una cuenta gratuita de SIMKL (simkl.com). Watchlist es una app no oficial y no está afiliada a Simkl ni respaldada por Simkl. Esta aplicación usa TMDB y las API de TMDB, pero TMDB no la respalda, certifica ni aprueba de ninguna otra forma.

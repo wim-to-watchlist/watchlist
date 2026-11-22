@@ -130,7 +130,8 @@ object Format {
             n: Long,
         ) = res.getQuantityString(id, n.toInt(), n.toInt())
         return when {
-            d.toMinutes() < 60 -> res.getString(R.string.lib_ago_just_now)
+            d.toMinutes() < 1 -> res.getString(R.string.lib_ago_just_now)
+            d.toMinutes() < 60 -> plural(R.plurals.lib_ago_minutes, d.toMinutes())
             d.toHours() < 24 -> plural(R.plurals.lib_ago_hours, d.toHours())
             d.toDays() < 30 -> plural(R.plurals.lib_ago_days, d.toDays())
             d.toDays() < 365 -> plural(R.plurals.lib_ago_months, d.toDays() / 30)

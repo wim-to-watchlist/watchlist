@@ -5,8 +5,8 @@
     <string name="data_error_not_found">Niet gevonden. Mogelijk is het verwijderd.</string>
     <string name="data_error_busy">Te veel verzoeken op dit moment. Probeer het zo opnieuw.</string>
     <string name="data_error_server">De server reageert niet (HTTP %1$d). Probeer het later opnieuw.</string>
-    <string name="data_error_http">De server gaf een fout (HTTP %1$d).</string>
-    <string name="data_error_unexpected">Er ging iets mis.</string>
+    <string name="data_error_http">De server gaf een fout (HTTP %1$d). Probeer het later opnieuw.</string>
+    <string name="data_error_unexpected">Er ging iets mis. Probeer het zo meteen opnieuw.</string>
     <string name="data_error_unexpected_detail">Er ging iets mis (%1$s).</string>
     <string name="data_notif_new_episode">Nieuwe aflevering beschikbaar</string>
     <string name="data_crash_title">Watchlist is de vorige keer gecrasht</string>

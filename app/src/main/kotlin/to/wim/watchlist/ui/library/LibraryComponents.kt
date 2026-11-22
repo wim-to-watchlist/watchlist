@@ -1,5 +1,8 @@
 package to.wim.watchlist.ui.library
 
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.annotation.StringRes
 import androidx.compose.ui.res.stringResource
 import to.wim.watchlist.R
@@ -423,7 +426,9 @@ fun SectionHeader(
     Row(
         modifier
             .fillMaxWidth()
+            .semantics { heading() }
             .then(if (onOpen != null) Modifier.clip(RoundedCornerShape(12.dp)).clickable(role = Role.Button, onClick = onOpen) else Modifier)
+            .heightIn(min = 48.dp)
             .padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -459,7 +464,7 @@ fun ShowRow(
         modifier = modifier.fillMaxWidth(),
     ) {
         Row(Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
-            Poster(item.poster, item.title, Modifier.width(68.dp), shape = RoundedCornerShape(12.dp))
+            Poster(item.poster, null, Modifier.width(68.dp), shape = RoundedCornerShape(12.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(

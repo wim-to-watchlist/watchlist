@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.Spacer
@@ -114,7 +114,7 @@ fun PlusCard(
             )
             Button(
                 onClick = { app.showPaywall.value = true },
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp).height(48.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp).heightIn(min = 48.dp),
             ) { Text(stringResource(if (trial) R.string.sub_start_trial else R.string.plus_see_plans)) }
         }
     }

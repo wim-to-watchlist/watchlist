@@ -141,7 +141,7 @@ fun PosterTile(
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Box {
-            Poster(poster, title, Modifier.fillMaxWidth())
+            Poster(poster, null, Modifier.fillMaxWidth()) // The title is read from the text below.
             Row(
                 Modifier.align(Alignment.TopStart).padding(6.dp),
                 horizontalArrangement = Arrangement.spacedBy(4.dp),

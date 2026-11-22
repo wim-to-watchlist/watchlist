@@ -43,7 +43,7 @@
     <string name="sub_notif_title">La tua prova gratuita finisce il %1$s</string>
     <string name="sub_notif_text">Dopo, Google Play addebita l’abbonamento. Tocca per gestirlo o disdirlo.</string>
     <string name="sub_failed">L’acquisto non è andato a buon fine. Riprova o controlla il metodo di pagamento in Google Play.</string>
-    <string name="sub_pending">Il tuo acquisto è in attesa della conferma del pagamento da Google Play. Plus si sblocca appena arriva.</string>
+    <string name="sub_pending">Il tuo acquisto è in attesa della conferma del pagamento da Google Play. Watchlist Plus si sblocca appena arriva.</string>
     <string name="sub_unavailable">Google Play non è disponibile, quindi non è possibile verificare l’abbonamento. Controlla che Google Play sia installato e di aver effettuato l’accesso, poi verifica di nuovo.</string>
     <string name="sub_not_loaded">Non è stato possibile caricare l’abbonamento da Google Play. Controlla la connessione e riprova.</string>
     <string name="sub_check_again">Verifica di nuovo</string>
@@ -86,4 +86,5 @@
     <string name="sub_feature_widget">Up next nella schermata Home: un widget con i tuoi prossimi episodi</string>
     <string name="plus_ratings_title">Le tue valutazioni sono in Plus</string>
     <string name="plus_ratings_text">Guarda tutto ciò che hai valutato, il meglio per primo, con Watchlist Plus.</string>
+    <string name="sub_close">Chiudi</string>
 </resources>

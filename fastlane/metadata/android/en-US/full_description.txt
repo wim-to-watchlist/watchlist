@@ -1,24 +1,31 @@
-Watchlist puts your SIMKL lists on your phone and shows what to watch next.
+Watchlist puts your SIMKL lists on your phone and shows what to watch next. The app is free; Watchlist Plus adds the full Up next, a calendar, notifications and more.
 
-Open the app and Up next lists every show with an episode you can watch now. Tap the checkmark when you've seen it and the next episode moves up. Skipped an episode? Up next carries on after the last one you watched.
+Open the app and Up next shows the next episode to watch. Tap the checkmark when you've seen it and the next one moves up. Skipped an episode? Up next carries on after the last one you watched.
 
-WHAT YOU GET
+FREE
 • Your SIMKL lists as shelves for TV shows, anime and movies: Up next, Plan to watch, Watched, On hold and Dropped.
 • Mark episodes or whole seasons watched, rate titles from 1 to 10 and check in to what you're watching right now.
+• Discover: Trending on Simkl today, this week and this month, airing today, new premieres and the best of the year.
+• Detail pages with ratings from SIMKL, IMDb and others, every episode by season and links to IMDb, MyAnimeList and more.
+• Search the whole SIMKL catalogue.
+• Your watch totals on your profile.
+• Opens straight away and works offline from the copy of your library on your phone. It syncs when you open the app or pull down to refresh.
+• Material 3 design with a light and a dark theme.
+• In English, Dutch, French, German, Spanish and Italian.
+
+WATCHLIST PLUS
+• Up next for every show you're watching, and a home-screen widget with your next episodes.
 • A calendar of upcoming episodes and movie releases from your lists.
 • A notification when a new episode of a show you watch is out, or when a movie on your Plan to watch list is released. Each type has its own channel, so you decide what makes a sound.
-• Discover: Trending on Simkl today, this week and this month, airing today, new premieres and the best of the year. Or tap the dice for a surprise.
-• Detail pages with ratings from SIMKL, IMDb and others, trailers, every episode by season and links to IMDb, TMDB, MyAnimeList and more.
-• Cast and crew, with pages for actors and directors, when you add your own free TMDB token (optional).
-• Search the whole SIMKL catalogue.
-• Opens straight away and works offline from the copy of your library on your phone. It syncs when you open the app or pull down to refresh.
-• Material 3 design with a dark theme and, on Android 12 and later, colours from your wallpaper.
-• In English, Dutch, French, German, Spanish and Italian.
+• Trailers and similar titles on detail pages, and Surprise me on Discover.
+• Cast and crew, with pages for actors and directors, when you add your own free TMDB token.
+• Your stats per type and a list of everything you rated, best first.
+• Your own bottom bar, colours from your wallpaper (Android 12 and later) and all settings.
 
 PRIVACY
 No ads, no analytics, no tracking. You sign in on simkl.com, so the app never sees your password. Your lists stay on SIMKL; the app keeps a copy on your phone so it opens fast. Privacy policy: https://wim-to-watchlist.github.io/privacy/
 
 PRICE
-Try everything free for 14 days. After that, Watchlist costs €4.99 a year or €0.99 a month (Google Play shows the price in your currency). The app reminds you two days before the trial ends, and you can cancel any time in Google Play.
+Watchlist is free. Watchlist Plus costs €4.99 a year or €0.99 a month (Google Play shows the price in your currency). The yearly plan starts with 14 days free; the app reminds you two days before the trial ends, and you can cancel any time in Google Play.
 
 You need a free SIMKL account (simkl.com). Watchlist is an unofficial app and is not affiliated with or endorsed by Simkl. This application uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.

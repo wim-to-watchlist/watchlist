@@ -69,6 +69,11 @@
         <item quantity="many">tra %d giorni</item>
         <item quantity="other">tra %d giorni</item>
     </plurals>
+    <plurals name="lib_ago_minutes">
+        <item quantity="one">%d min fa</item>
+        <item quantity="many">%d min fa</item>
+        <item quantity="other">%d min fa</item>
+    </plurals>
     <plurals name="lib_ago_hours">
         <item quantity="one">%d ora fa</item>
         <item quantity="many">%d ore fa</item>

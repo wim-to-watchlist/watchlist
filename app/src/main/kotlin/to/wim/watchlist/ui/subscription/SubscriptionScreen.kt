@@ -1,5 +1,12 @@
 package to.wim.watchlist.ui.subscription
 
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.material3.IconButton
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.Box
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -96,6 +103,11 @@ fun SubscriptionScreen(
     val plan = plans.firstOrNull { it.period == selected } ?: plans.firstOrNull()
     val trialDays = plans.firstNotNullOfOrNull { it.trialDays }
 
+    val close = {
+        if (preview) app.paywallPreview.value = false
+        app.showPaywall.value = false
+    }
+    Box(Modifier.fillMaxSize()) {
     Column(
         Modifier.fillMaxSize().safeDrawingPadding().verticalScroll(rememberScrollState()).padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -142,7 +154,7 @@ fun SubscriptionScreen(
                 Button(
                     onClick = { if (!preview) activity?.let { app.subscription.purchase(it, plan) } },
                     enabled = !state.purchasing,
-                    modifier = Modifier.readableWidth(480.dp).height(56.dp),
+                    modifier = Modifier.readableWidth(480.dp).heightIn(min = 56.dp),
                 ) {
                     if (state.purchasing) {
                         CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp)
@@ -151,7 +163,12 @@ fun SubscriptionScreen(
                     }
                 }
                 if (state.purchaseFailed) {
-                    Text(stringResource(R.string.sub_failed), color = MaterialTheme.colorScheme.error, textAlign = TextAlign.Center)
+                    Text(
+                        stringResource(R.string.sub_failed),
+                        color = MaterialTheme.colorScheme.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
+                    )
                 }
                 Text(
                     stringResource(
@@ -182,6 +199,11 @@ fun SubscriptionScreen(
                 TextButton(onClick = { app.showPaywall.value = false }) { Text(stringResource(R.string.plus_not_now)) }
             }
         }
+    }
+    // Always in reach, so nobody has to scroll past the plans to leave.
+    IconButton(onClick = close, modifier = Modifier.align(Alignment.TopStart).safeDrawingPadding().padding(4.dp)) {
+        Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.sub_close))
+    }
     }
 }
 

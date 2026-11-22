@@ -22,6 +22,7 @@ import androidx.compose.material.icons.automirrored.rounded.Logout
 import androidx.compose.material.icons.automirrored.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.rounded.Sync
 import androidx.compose.material3.AlertDialog
@@ -166,8 +167,10 @@ fun ProfileScreen(types: Set<MediaType>) {
                             )
                         },
                         leadingContent = { Icon(Icons.Rounded.Star, null) },
+                        // The list of rated titles is part of Plus: rating stays free, the overview opens the plans.
+                        trailingContent = if (plus) null else ({ Icon(Icons.Rounded.Lock, stringResource(R.string.plus_locked)) }),
                         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-                        modifier = Modifier.clickableRow { navigator.push(Route.Ratings) },
+                        modifier = Modifier.clickableRow { if (plus) navigator.push(Route.Ratings) else app.showPaywall.value = true },
                     )
                 }
             }

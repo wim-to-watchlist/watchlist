@@ -14,6 +14,10 @@
     <string name="sub_feature_calendar">Un calendrier des épisodes et sorties à venir</string>
     <string name="sub_feature_stats">Statistiques de visionnage pour les séries, les animes et les films</string>
     <string name="sub_feature_surprise">Surprends-moi : laissez Watchlist choisir quoi regarder</string>
+    <string name="sub_feature_ratings">Tous vos titres notés dans une seule liste</string>
+    <string name="sub_feature_colors">Des couleurs assorties à votre fond d’écran</string>
+    <string name="sub_feature_bottom_bar">Votre propre barre du bas : réorganisez et masquez les onglets</string>
+    <string name="sub_feature_trailers">Bandes-annonces et titres similaires sur chaque page de détails</string>
     <string name="sub_plan_yearly">Annuel</string>
     <string name="sub_plan_monthly">Mensuel</string>
     <string name="sub_price_monthly">%1$s par mois</string>
@@ -63,6 +67,9 @@
     <string name="plus_calendar_text">Voyez quand sortent les nouveaux épisodes et films de vos listes, avec Watchlist Plus.</string>
     <string name="plus_stats_title">Vos statistiques par type sont dans Plus</string>
     <string name="plus_stats_text">Voyez combien vous avez regardé de séries, d’animes et de films, avec Watchlist Plus.</string>
+    <string name="plus_locked">Inclus dans Watchlist Plus</string>
+    <string name="plus_dynamic_color_locked">Les couleurs de votre fond d’écran sont incluses dans Watchlist Plus</string>
+    <string name="plus_bottom_bar">Réorganiser et masquer les onglets</string>
     <string name="plus_not_now">Pas maintenant</string>
     <string name="plus_notifications_locked">Inclus dans Watchlist Plus. Touchez pour voir les formules</string>
     <string name="plus_get">Passer à Watchlist Plus</string>

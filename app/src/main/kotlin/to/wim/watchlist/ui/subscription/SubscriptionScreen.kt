@@ -25,6 +25,10 @@ import androidx.compose.material.icons.rounded.CreditCard
 import androidx.compose.material.icons.rounded.LockOpen
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.NotificationsActive
+import androidx.compose.material.icons.rounded.Movie
+import androidx.compose.material.icons.rounded.Palette
+import androidx.compose.material.icons.rounded.SpaceDashboard
+import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.automirrored.rounded.PlaylistPlay
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -110,6 +114,10 @@ fun SubscriptionScreen(
             Feature(Icons.Rounded.CalendarMonth, stringResource(R.string.sub_feature_calendar))
             Feature(Icons.Rounded.BarChart, stringResource(R.string.sub_feature_stats))
             Feature(Icons.Rounded.Casino, stringResource(R.string.sub_feature_surprise))
+            Feature(Icons.Rounded.Star, stringResource(R.string.sub_feature_ratings))
+            Feature(Icons.Rounded.Movie, stringResource(R.string.sub_feature_trailers))
+            Feature(Icons.Rounded.Palette, stringResource(R.string.sub_feature_colors))
+            Feature(Icons.Rounded.SpaceDashboard, stringResource(R.string.sub_feature_bottom_bar))
         }
         val notice =
             when {

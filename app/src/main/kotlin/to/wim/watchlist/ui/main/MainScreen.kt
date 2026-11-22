@@ -35,6 +35,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.NavTab
+import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.ui.calendar.CalendarScreen
 import to.wim.watchlist.ui.discover.DiscoverScreen
@@ -63,7 +65,8 @@ fun NavTab.icon(selected: Boolean): ImageVector =
  */
 @Composable
 fun MainScreen(settings: AppSettings) {
-    val tabs = settings.tabs.ifEmpty { listOf(NavTab.Discover) }
+    // Without Plus the bar keeps its default tabs and order.
+    val tabs = Plus.nav(LocalPlus.current, settings.nav).visible(settings.types).ifEmpty { listOf(NavTab.Discover) }
     var selectedName by rememberSaveable { mutableStateOf(tabs.first().name) }
     val selected = tabs.firstOrNull { it.name == selectedName } ?: tabs.first()
     val showBar = tabs.size > 1

@@ -14,6 +14,10 @@
     <string name="sub_feature_calendar">Ein Kalender mit kommenden Folgen und Starts</string>
     <string name="sub_feature_stats">Statistiken für Serien, Anime und Filme</string>
     <string name="sub_feature_surprise">Überrasch mich: Watchlist wählt etwas zum Schauen aus</string>
+    <string name="sub_feature_ratings">Alle deine bewerteten Titel in einer Liste</string>
+    <string name="sub_feature_colors">Farben passend zu deinem Hintergrundbild</string>
+    <string name="sub_feature_bottom_bar">Deine eigene untere Leiste: Tabs neu anordnen und ausblenden</string>
+    <string name="sub_feature_trailers">Trailer und ähnliche Titel auf jeder Detailseite</string>
     <string name="sub_plan_yearly">Jährlich</string>
     <string name="sub_plan_monthly">Monatlich</string>
     <string name="sub_price_monthly">%1$s pro Monat</string>
@@ -62,6 +66,9 @@
     <string name="plus_calendar_text">Sieh, wann neue Folgen und Filme aus deinen Listen erscheinen, mit Watchlist Plus.</string>
     <string name="plus_stats_title">Deine Statistiken pro Typ gibt es mit Plus</string>
     <string name="plus_stats_text">Sieh, wie viel du von Serien, Anime und Filmen geschaut hast, mit Watchlist Plus.</string>
+    <string name="plus_locked">Teil von Watchlist Plus</string>
+    <string name="plus_dynamic_color_locked">Farben aus deinem Hintergrundbild sind Teil von Watchlist Plus</string>
+    <string name="plus_bottom_bar">Tabs neu anordnen und ausblenden</string>
     <string name="plus_not_now">Nicht jetzt</string>
     <string name="plus_notifications_locked">Teil von Watchlist Plus. Tippe, um die Abos zu sehen</string>
     <string name="plus_get">Watchlist Plus holen</string>

@@ -1,9 +1,14 @@
 package to.wim.watchlist.data.model
 
+import to.wim.watchlist.data.NavConfig
+import to.wim.watchlist.data.NavTab
+
 /**
  * The free version and Watchlist Plus. Free: signing in, the lists, marking watched, ratings,
  * details, search, Discover and the watch totals on the profile. Plus (the subscription or its free
- * trial): Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, and
+ * trial): Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, the
+ * list of rated titles (rating stays free), trailers and similar titles, colours from the wallpaper,
+ * a bottom bar of one's own, and
  * everything from TMDB (cast, people, people search). The free version never mentions TMDB.
  * Locked parts stay on screen, blurred, under a card
  * that leads to the subscription screen. Plain Kotlin so it is unit tested.
@@ -24,6 +29,12 @@ object Plus {
         plus: Boolean,
         stored: String?,
     ): String? = stored.takeIf { plus }
+
+    /** The bottom bar: the user's own order and tabs with Plus, the default ones without. */
+    fun nav(
+        plus: Boolean,
+        stored: NavConfig,
+    ): NavConfig = if (plus) stored else NavConfig(NavTab.defaultOrder, NavTab.defaultEnabled)
 
     /** How many Up next rows stay readable while locked, so the feature shows itself on the user's own shows. */
     const val UP_NEXT_PREVIEW = 1

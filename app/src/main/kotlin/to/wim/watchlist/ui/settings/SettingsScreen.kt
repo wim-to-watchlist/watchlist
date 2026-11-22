@@ -24,6 +24,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -228,6 +229,16 @@ fun SettingsScreen(settings: AppSettings) {
             val shown = settings.nav.available(settings.types)
             val shownOn = shown.count { it in settings.nav.enabled }
             SettingsSection(title = stringResource(R.string.screens_settings_bottom_bar)) {
+                // Reordering and hiding tabs is part of Plus.
+                if (!plus) {
+                    SettingItem(
+                        title = stringResource(R.string.plus_bottom_bar),
+                        summary = stringResource(R.string.plus_locked),
+                        onClick = { app.showPaywall.value = true },
+                        trailing = { Icon(Icons.Rounded.Lock, null) },
+                    )
+                    return@SettingsSection
+                }
                 ReorderableColumn(
                     items = shown,
                     key = { it },
@@ -264,9 +275,10 @@ fun SettingsScreen(settings: AppSettings) {
                     selectedTheme = settings.theme.ordinal,
                     onThemeSelect = { index -> scope.launch { app.settings.setTheme(ThemeMode.entries[index]) } },
                     dynamicColorTitle = stringResource(R.string.screens_settings_dynamic_color),
-                    dynamicColorSummary = stringResource(R.string.screens_settings_dynamic_color_sub),
-                    dynamicColor = settings.dynamicColor,
-                    onDynamicColorChange = { scope.launch { app.settings.setDynamicColor(it) } },
+                    // Colours from the wallpaper are part of Plus; light and dark stay free.
+                    dynamicColorSummary = stringResource(if (plus) R.string.screens_settings_dynamic_color_sub else R.string.plus_dynamic_color_locked),
+                    dynamicColor = plus && settings.dynamicColor,
+                    onDynamicColorChange = { on -> if (plus) scope.launch { app.settings.setDynamicColor(on) } else app.showPaywall.value = true },
                     dynamicColorSupported = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S,
                 )
             }

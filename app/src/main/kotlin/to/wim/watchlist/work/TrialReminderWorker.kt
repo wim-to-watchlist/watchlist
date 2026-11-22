@@ -40,8 +40,10 @@ class TrialReminderWorker(
         val app = applicationContext as WatchlistApp
         val end = app.settings.trialEndsAt() ?: return Result.success()
         if (System.currentTimeMillis() >= end) return Result.success()
-        // Cancelled already, or Google Play can't say: no reminder (better none than a wrong one).
-        if (app.subscription.renewing() != true) return Result.success()
+        // Google Play can't be asked right now: try again later (WorkManager backs off), a few times.
+        val renewing = app.subscription.renewing() ?: return if (runAttemptCount < 5) Result.retry() else Result.success()
+        // Cancelled already: no reminder.
+        if (!renewing) return Result.success()
         notify(applicationContext, end)
         return Result.success()
     }

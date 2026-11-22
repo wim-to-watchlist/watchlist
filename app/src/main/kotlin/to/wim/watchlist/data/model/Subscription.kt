@@ -120,7 +120,14 @@ object SubscriptionRules {
         return when (status) {
             PlayStatus.Active -> Access.Allowed
             PlayStatus.Pending, PlayStatus.Inactive -> Access.Locked
-            PlayStatus.Unknown -> if (recentlyActive) Access.Allowed else Access.Checking
+            // Google Play said no last time: locked straight away, so a free user never sees Plus
+            // (or a TMDB call) for the moment it takes Play to answer at start.
+            PlayStatus.Unknown ->
+                when {
+                    recentlyActive -> Access.Allowed
+                    stored?.active == false -> Access.Locked
+                    else -> Access.Checking
+                }
             PlayStatus.Unavailable -> if (recentlyActive) Access.Allowed else Access.Locked
         }
     }

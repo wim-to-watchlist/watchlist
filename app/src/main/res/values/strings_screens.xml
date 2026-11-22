@@ -104,4 +104,5 @@
     <string name="screens_settings_channel_off">Off in Android’s settings. Tap to turn it on.</string>
     <string name="screens_settings_android_notifications">Android notification settings</string>
     <string name="screens_settings_android_notifications_sub">Every type, with sound, vibration and pop-ups</string>
+    <string name="screens_profile_stats_failed">Couldn’t load your stats. Check your connection and try again.</string>
 </resources>

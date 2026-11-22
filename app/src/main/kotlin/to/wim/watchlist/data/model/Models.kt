@@ -407,13 +407,25 @@ data class UserStats(
 object Images {
     private const val CDN = "https://wsrv.nl/?url=https://simkl.in"
 
-    private fun absolute(path: String): String? =
-        when {
-            path.isBlank() -> null
-            path.startsWith("//") -> "https:$path"
-            path.startsWith("http") -> path
-            else -> null
-        }
+    private const val PROXY = "https://wsrv.nl/?url="
+
+    /**
+     * A full image URL from SIMKL, loaded through wsrv.nl like every other image, so the phone
+     * never contacts another host directly (PRIVACY.md).
+     */
+    internal fun absolute(path: String): String? {
+        val url =
+            when {
+                path.isBlank() -> return null
+                path.startsWith("//") -> "https:$path"
+                path.startsWith("http") -> path
+                else -> return null
+            }
+        return if (url.startsWith(PROXY)) url else PROXY + java.net.URLEncoder.encode(url, "UTF-8")
+    }
+
+    /** A YouTube trailer's thumbnail (320x180), through wsrv.nl too. */
+    fun youtube(id: String): String = "${PROXY}https://img.youtube.com/vi/$id/mqdefault.jpg"
 
     /** `_ca` (190x279) for lists and grids, `_m` (340 wide) for the details header. */
     fun poster(

@@ -70,11 +70,16 @@ fun LoginScreen() {
             val code = uri.getQueryParameter("code")
             val denied = uri.getQueryParameter("error")
             error = null
+            // Only the redirect of this sign-in (its state) may end it, so another app or web page
+            // can't cancel a sign-in in progress or put its own text on this screen.
+            if (pending == null || uri.getQueryParameter("state") != pending.first) {
+                error = resources.getString(R.string.screens_login_redirect_invalid)
+                return@collect
+            }
             when {
                 denied != null ->
                     error = resources.getString(R.string.screens_login_denied, uri.getQueryParameter("error_description") ?: denied)
-                pending == null || code == null || uri.getQueryParameter("state") != pending.first ->
-                    error = resources.getString(R.string.screens_login_redirect_invalid)
+                code == null -> error = resources.getString(R.string.screens_login_redirect_invalid)
                 else -> {
                     busy = true
                     val result =
@@ -87,9 +92,14 @@ fun LoginScreen() {
                         }
                     when (result) {
                         is SignIn.Approved -> {
-                            app.settings.setTokens(result.accessToken, result.refreshToken, result.expiresAt)
-                            // Signing out cancelled the scheduled check; with notifications still on, start it again.
-                            runCatching { NewEpisodesWorker.restore(context) }
+                            app.settings.clearPendingAuth()
+                            // In the app's scope: saving the token swaps this screen for the app.
+                            app.scope.launch {
+                                app.settings.setTokens(result.accessToken, result.refreshToken, result.expiresAt)
+                                // Signing out cancelled the scheduled check; with notifications still on, start it again.
+                                runCatching { NewEpisodesWorker.restore(app) }
+                            }
+                            return@collect
                         }
                         is SignIn.Failed -> error = resources.getString(R.string.screens_login_failed, result.message)
                     }

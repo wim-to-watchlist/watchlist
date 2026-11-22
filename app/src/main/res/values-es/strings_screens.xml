@@ -106,4 +106,5 @@
     <string name="screens_settings_channel_off">Desactivados en los ajustes de Android. Toca para activarlos.</string>
     <string name="screens_settings_android_notifications">Ajustes de avisos de Android</string>
     <string name="screens_settings_android_notifications_sub">Cada tipo, con sonido, vibración y ventanas emergentes</string>
+    <string name="screens_profile_stats_failed">No se pudieron cargar tus estadísticas. Comprueba tu conexión e inténtalo de nuevo.</string>
 </resources>

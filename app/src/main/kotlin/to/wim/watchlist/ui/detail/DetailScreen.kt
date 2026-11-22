@@ -974,7 +974,7 @@ private fun TrailerRow(d: MediaDetails) {
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         AsyncImage(
-                            "https://img.youtube.com/vi/${t.youtubeId}/mqdefault.jpg",
+                            Images.youtube(t.youtubeId),
                             null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f).clip(RoundedCornerShape(16.dp)).background(MaterialTheme.colorScheme.surfaceVariant),

@@ -44,6 +44,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.material3.Button
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -89,8 +92,13 @@ fun ProfileScreen(types: Set<MediaType>) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val library by app.library.state.collectAsState()
-    val profile by produceState<UserProfile?>(null) { value = runCatching { app.account.profile() }.getOrNull() }
-    val stats by produceState<UserStats?>(null) { value = runCatching { app.account.stats() }.getOrNull() }
+    // Loaded again with Retry when SIMKL couldn't be reached.
+    var reload by remember { mutableIntStateOf(0) }
+    val profile by produceState<UserProfile?>(null, reload) { value = runCatching { app.account.profile() }.getOrNull() ?: value }
+    val stats by produceState<Result<UserStats>?>(null, reload) {
+        value = null
+        value = runCatching { checkNotNull(app.account.stats()) }
+    }
     var confirmLogout by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -116,9 +124,22 @@ fun ProfileScreen(types: Set<MediaType>) {
             modifier = Modifier.fillMaxSize().readableWidth(),
         ) {
             item(key = "header") { ProfileHeader(profile) }
-            val s = stats
+            val s = stats?.getOrNull()
             // Keyed items so the stats fade in and the actions card glides down when they load.
-            if (s == null) {
+            if (stats?.isFailure == true) {
+                item(key = "failed") {
+                    Surface(shape = AppShapes.Group, color = MaterialTheme.colorScheme.surfaceContainerLow, modifier = Modifier.animateItem()) {
+                        Column(
+                            Modifier.fillMaxWidth().padding(20.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                        ) {
+                            Text(stringResource(R.string.screens_profile_stats_failed), style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
+                            Button(onClick = { reload++ }) { Text(stringResource(R.string.detail_try_again)) }
+                        }
+                    }
+                }
+            } else if (s == null) {
                 item(key = "loading") {
                     val loading = stringResource(R.string.loading)
                     Column(
@@ -232,7 +253,7 @@ fun ProfileScreen(types: Set<MediaType>) {
             onDismissRequest = { confirmLogout = false },
             title = { Text(stringResource(R.string.screens_profile_log_out_title)) },
             text = { Text(stringResource(R.string.screens_profile_log_out_body)) },
-            confirmButton = { TextButton(onClick = { scope.launch { app.logout() } }) { Text(stringResource(R.string.screens_profile_log_out)) } },
+            confirmButton = { TextButton(onClick = { app.logout() }) { Text(stringResource(R.string.screens_profile_log_out)) } },
             dismissButton = { TextButton(onClick = { confirmLogout = false }) { Text(stringResource(R.string.screens_cancel)) } },
         )
     }

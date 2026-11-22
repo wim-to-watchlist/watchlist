@@ -127,10 +127,12 @@ class SimklApi(
         retried: Boolean = false,
     ): JsonElement {
         val id = clientId()?.takeIf { it.isNotBlank() } ?: throw ApiException(0, "This build has no SIMKL client ID")
-        val bearer = if (auth) accessToken() else null
+        val target = url(path, params)
+        // The token only ever goes to the API itself, never to the public data.simkl.in files.
+        val bearer = if (auth && target.host == BASE.toHttpUrl().host) accessToken() else null
         val request =
             Request.Builder()
-                .url(url(path, params))
+                .url(target)
                 .header("simkl-api-key", id)
                 .header("User-Agent", "$APP_NAME/${BuildConfig.VERSION_NAME}")
                 .header("Accept", "application/json")

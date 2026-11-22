@@ -117,7 +117,7 @@ fun LoginScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(Modifier.height(48.dp))
-        AppIcon(Modifier.size(96.dp))
+        AppIcon(Modifier.size(80.dp))
         Text(stringResource(R.string.app_name), style = MaterialTheme.typography.displaySmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
         Text(
             stringResource(R.string.screens_login_tagline),

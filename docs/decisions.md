@@ -2,6 +2,22 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: Free version with Watchlist Plus; the demo is gone
+
+Replaces the two entries below. The owner didn't like the demo and asked for a free app with the
+crucial features paid. Signing in, the lists, marking watched, ratings, details, search, Discover
+and the watch totals are free; Watchlist Plus (the same Google Play subscription and trial) adds
+Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, and cast and
+crew. Locked parts stay on screen, blurred, under a card that opens the plans: people see their
+own data behind the lock, which explains Plus better than a list of features. Up next shows its
+first show unblurred, the owner's pick from three mockups (card only, first row free, banner).
+TMDB is Plus only and the free version doesn't mention it at all (the owner's wish): no token
+setting, no card, no TMDB link and no TMDB credit, and no TMDB calls, so the free version needs
+no TMDB attribution. Google Play's rules allow this: purchases go through Play Billing, the
+locked parts say clearly that they are in Plus, and the free version works on its own.
+Rejected: locking the core tracking (lists, marking watched, search, details): a tracker that
+can't track makes the free version feel broken.
+
 ## 2026-11-21: Sign in first, subscription after the first sync; the demo stays made up
 
 Reverses the order of the entry below; the owner left the design of the trial and demo to Claude.

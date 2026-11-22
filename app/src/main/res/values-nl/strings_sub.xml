@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- The subscription screen, the Subscription row in Settings and the trial reminder. -->
-    <string name="sub_title">Neem een abonnement om Watchlist te blijven gebruiken</string>
+    <string name="sub_title">Neem Watchlist Plus</string>
     <string name="sub_start_trial">Gratis proefperiode starten</string>
     <string name="sub_subscribe">Abonneren</string>
     <string name="sub_price">%1$s per jaar</string>
     <plurals name="sub_title_trial">
-        <item quantity="one">Probeer Watchlist %1$d dag gratis</item>
-        <item quantity="other">Probeer Watchlist %1$d dagen gratis</item>
-    </plurals>
-    <plurals name="sub_library_ready">
-        <item quantity="one">Je bibliotheek is gesynchroniseerd: %1$d titel staat klaar</item>
-        <item quantity="other">Je bibliotheek is gesynchroniseerd: %1$d titels staan klaar</item>
+        <item quantity="one">Probeer Watchlist Plus %1$d dag gratis</item>
+        <item quantity="other">Probeer Watchlist Plus %1$d dagen gratis</item>
     </plurals>
     <string name="sub_feature_up_next">Volgende: de volgende aflevering van elke serie, gesynchroniseerd met SIMKL</string>
     <string name="sub_feature_notifications">Een melding zodra een nieuwe aflevering of film uit is</string>
     <string name="sub_feature_calendar">Een kalender met komende afleveringen en releases</string>
-    <string name="sub_feature_discover">Ontdek wat populair en nieuw is, of laat Verras me kiezen</string>
-    <string name="sub_feature_details">Je lijsten, beoordelingen en kijkstatistieken</string>
+    <string name="sub_feature_stats">Kijkstatistieken voor series, anime en films</string>
+    <string name="sub_feature_surprise">Verras me: laat Watchlist iets kiezen om te kijken</string>
     <string name="sub_plan_yearly">Jaarlijks</string>
     <string name="sub_plan_monthly">Maandelijks</string>
     <string name="sub_price_monthly">%1$s per maand</string>
@@ -42,7 +38,7 @@
     <string name="sub_notif_title">Je gratis proefperiode loopt af op %1$s</string>
     <string name="sub_notif_text">Daarna rekent Google Play je abonnement aan. Tik om het te beheren of op te zeggen.</string>
     <string name="sub_failed">De aankoop is niet gelukt. Probeer het opnieuw of controleer je betaalmethode in Google Play.</string>
-    <string name="sub_pending">Je aankoop wacht tot Google Play de betaling bevestigt. Watchlist opent zodra dat gebeurd is.</string>
+    <string name="sub_pending">Je aankoop wacht tot Google Play de betaling bevestigt. Plus gaat open zodra dat gebeurt.</string>
     <string name="sub_unavailable">Google Play is niet beschikbaar, dus het abonnement kan niet gecontroleerd worden. Zorg dat Google Play geïnstalleerd is en dat je erin aangemeld bent, en controleer opnieuw.</string>
     <string name="sub_not_loaded">Het abonnement kon niet geladen worden uit Google Play. Controleer je verbinding en probeer het opnieuw.</string>
     <string name="sub_check_again">Opnieuw controleren</string>
@@ -51,4 +47,25 @@
     <string name="sub_preview">Abonnementsscherm bekijken</string>
     <string name="sub_preview_summary">Alleen in de testversie: toont het scherm met voorbeeldprijzen</string>
     <string name="sub_preview_close">Voorbeeld sluiten</string>
+    <!-- Watchlist Plus in the free version: the cards over locked features and their rows in Settings. -->
+    <string name="plus_see_plans">Bekijk de abonnementen</string>
+    <string name="plus_up_next_title">Je volledige Volgende zit in Plus</string>
+    <plurals name="plus_up_next_more">
+        <item quantity="one">Nog %1$d serie in je Volgende</item>
+        <item quantity="other">Nog %1$d series in je Volgende</item>
+    </plurals>
+    <string name="plus_up_next_text">Zie de volgende aflevering van elke serie die je kijkt, met Watchlist Plus.</string>
+    <plurals name="plus_calendar_title">
+        <item quantity="one">%1$d komende aflevering of release</item>
+        <item quantity="other">%1$d komende afleveringen en releases</item>
+    </plurals>
+    <string name="plus_calendar_text">Zie wanneer nieuwe afleveringen en films uit je lijsten uitkomen, met Watchlist Plus.</string>
+    <string name="plus_stats_title">Je statistieken per soort zitten in Plus</string>
+    <string name="plus_stats_text">Zie hoeveel je keek van series, anime en films, met Watchlist Plus.</string>
+    <string name="plus_not_now">Niet nu</string>
+    <string name="plus_notifications_locked">Deel van Watchlist Plus. Tik om de abonnementen te zien</string>
+    <string name="plus_get">Neem Watchlist Plus</string>
+    <string name="plus_get_summary">Volgende, de kalender, meldingen en meer</string>
+    <string name="plus_preview_locked">Bekijk de gratis versie</string>
+    <string name="plus_preview_locked_summary">Alleen testversie: vergrendelt de Plus-functies zoals zonder abonnement</string>
 </resources>

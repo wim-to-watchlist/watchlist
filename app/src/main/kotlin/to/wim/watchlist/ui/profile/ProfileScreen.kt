@@ -57,7 +57,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
-import to.wim.watchlist.ui.demo.LocalDemo
+import to.wim.watchlist.ui.components.LocalPlus
+import to.wim.watchlist.ui.components.Locked
+import to.wim.watchlist.ui.components.PlusCard
 import to.wim.watchlist.data.model.Images
 import to.wim.watchlist.data.model.TypeStats
 import to.wim.watchlist.data.model.Ratings
@@ -80,11 +82,11 @@ import to.wim.watchlist.ui.theme.readableWidth
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(types: Set<MediaType>) {
+    val plus = LocalPlus.current
     val app = rememberApp()
     val navigator = LocalNavigator.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val demo = LocalDemo.current
     val library by app.library.state.collectAsState()
     val profile by produceState<UserProfile?>(null) { value = runCatching { app.account.profile() }.getOrNull() }
     val stats by produceState<UserStats?>(null) { value = runCatching { app.account.stats() }.getOrNull() }
@@ -130,7 +132,22 @@ fun ProfileScreen(types: Set<MediaType>) {
             } else {
                 item(key = "totals") { Box(Modifier.animateItem()) { Totals(s) } }
                 // Only the media types turned on in Settings.
-                s.types.filter { it.type in types }.forEachIndexed { i, t -> item(key = "type-$i") { Box(Modifier.animateItem()) { TypeCard(t) } } }
+                val shown = s.types.filter { it.type in types }
+                if (plus) {
+                    shown.forEachIndexed { i, t -> item(key = "type-$i") { Box(Modifier.animateItem()) { TypeCard(t) } } }
+                } else if (shown.isNotEmpty()) {
+                    // Free version: the totals stay, the breakdown per type is blurred under a card about Plus.
+                    item(key = "plus") {
+                        Box(Modifier.animateItem()) {
+                            Locked { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { shown.forEach { TypeCard(it) } } }
+                            PlusCard(
+                                title = stringResource(R.string.plus_stats_title),
+                                text = stringResource(R.string.plus_stats_text),
+                                modifier = Modifier.align(Alignment.Center).padding(16.dp),
+                            )
+                        }
+                    }
+                }
             }
             // What you watched and what you thought of it belong together: "My ratings" follows the
             // statistics, apart from the account actions below.
@@ -182,7 +199,7 @@ fun ProfileScreen(types: Set<MediaType>) {
                                 }
                             },
                         )
-                        profile?.takeIf { !demo }?.let { p ->
+                        profile?.let { p ->
                             ListItem(
                                 headlineContent = { Text(stringResource(R.string.screens_profile_open_page)) },
                                 leadingContent = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, null) },
@@ -199,13 +216,10 @@ fun ProfileScreen(types: Set<MediaType>) {
             item(key = "logout") {
                 Surface(shape = AppShapes.Group, color = MaterialTheme.colorScheme.surfaceContainerLow, modifier = Modifier.animateItem()) {
                     ListItem(
-                        headlineContent = {
-                            Text(stringResource(if (demo) R.string.demo_exit else R.string.screens_profile_log_out), color = MaterialTheme.colorScheme.error)
-                        },
+                        headlineContent = { Text(stringResource(R.string.screens_profile_log_out), color = MaterialTheme.colorScheme.error) },
                         leadingContent = { Icon(Icons.AutoMirrored.Rounded.Logout, null, tint = MaterialTheme.colorScheme.error) },
                         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
-                        // Nothing to lose in the demo: no confirmation.
-                        modifier = Modifier.clickableRow { if (demo) scope.launch { app.logout() } else confirmLogout = true },
+                        modifier = Modifier.clickableRow { confirmLogout = true },
                     )
                 }
             }

@@ -46,9 +46,6 @@ watchlist/
         │   │   │   ├── SubscriptionRepository.kt   Google Play Billing: purchases, offers, acknowledging
         │   │   │   ├── ErrorMessages.kt       A failed request worded in the user's language (from model/Errors.kt)
         │   │   │   ├── SettingsStore.kt       DataStore: tokens, settings, notified and remembered episodes (two files)
-        │   │   │   ├── demo/
-        │   │   │   │   ├── DemoCatalog.kt     The demo's made-up titles, lists and episodes
-        │   │   │   │   └── DemoSimkl.kt       Pretend SIMKL: answers every request from DemoCatalog, in memory
         │   │   │   ├── api/
         │   │   │   │   ├── SimklApi.kt        HTTP client for api.simkl.com and data.simkl.in
         │   │   │   │   ├── Parsers.kt         JSON → models
@@ -62,8 +59,8 @@ watchlist/
         │   │   │       ├── Shelves.kt         Shelves, episode order, continue-from-latest
         │   │   │       ├── Errors.kt          What went wrong with a request (offline, signed out, busy, …)
         │   │   │       ├── TmdbBanner.kt      When the details page offers to add a TMDB token
-        │   │   │       ├── Onboarding.kt      Which signed-out screen shows (sign in or the demo)
-        │   │   │       ├── Subscription.kt    When the app opens or shows the subscription screen; which plans to show; trial reminder
+        │   │   │       ├── Subscription.kt    Whether the subscription is active; which plans to show; trial reminder
+        │   │   │       ├── Plus.kt            What the free version locks: Plus on or off, the Up next preview, the TMDB token
         │   │   │       └── NewEpisodes.kt     Which aired episodes a notification announces
         │   │   ├── work/NewEpisodesWorker.kt  Periodic new-episode notifications
         │   │   ├── work/TrialReminderWorker.kt  Notification two days before the free trial ends
@@ -75,10 +72,8 @@ watchlist/
         │   │       ├── person/      A person's page (TMDB): bio, known for, filmography
         │   │       ├── discover/    Trending, airing, premieres, best, "Surprise me"
         │   │       ├── calendar/    Upcoming episodes and releases
-        │   │       ├── search/  profile/  settings/  subscription/
-        │   │       ├── login/       Sign-in screen (with Try the demo)
-        │   │       ├── demo/        Demo bar, LocalDemo, drawn demo pictures (Coil fetcher)
-        │   │       ├── components/  Posters, labels, skeletons, shared widgets
+        │   │       ├── search/  profile/  settings/  login/
+        │   │       ├── components/  Posters, labels, skeletons, shared widgets (PlusLock.kt: blur and Plus card)
         │   │       └── theme/       Material 3 theme, shapes, motion, system bars, settings kit, empty states
         │   └── res/
         │       ├── values/          English strings (split by area), colours, themes
@@ -86,7 +81,6 @@ watchlist/
         │       └── xml/                        Backup rules: only the settings file
         └── test/kotlin/to/wim/watchlist/
             ├── data/ParsersTest.kt   Parsers, shelves, continue-from-latest
-            ├── data/DemoTest.kt      The demo's content, pretend SIMKL and onboarding order
             ├── data/ErrorsTest.kt    Failed requests told apart by what the user can do
             └── ui/LaunchTest.kt      Starts MainActivity under Robolectric
 ```

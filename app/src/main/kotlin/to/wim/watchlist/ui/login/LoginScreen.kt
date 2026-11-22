@@ -19,7 +19,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -157,15 +156,7 @@ fun LoginScreen() {
         error?.let {
             Text(it, color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
         }
-        OutlinedButton(onClick = { app.startDemo() }, modifier = Modifier.fillMaxWidth().height(56.dp)) {
-            Text(stringResource(R.string.demo_try))
-        }
-        Text(
-            stringResource(R.string.demo_try_note),
-            style = MaterialTheme.typography.bodySmall,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        Spacer(Modifier.height(8.dp))
         Text(
             stringResource(R.string.screens_login_note),
             style = MaterialTheme.typography.bodySmall,

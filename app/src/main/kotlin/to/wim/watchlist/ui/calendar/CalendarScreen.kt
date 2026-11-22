@@ -46,10 +46,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import to.wim.watchlist.R
+import to.wim.watchlist.ui.components.LocalPlus
+import to.wim.watchlist.ui.components.Locked
+import to.wim.watchlist.ui.components.PlusCard
 import to.wim.watchlist.ui.theme.Motion
 import to.wim.watchlist.data.NavTab
 import to.wim.watchlist.data.model.CalendarEntry
@@ -81,6 +85,7 @@ fun CalendarScreen(types: List<MediaType>) {
     var hidden by rememberSaveable { mutableStateOf(setOf<String>()) }
     var refreshing by remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val plus = LocalPlus.current
 
     LaunchedEffect(Unit) { app.library.refreshCalendar() }
 
@@ -144,7 +149,7 @@ fun CalendarScreen(types: List<MediaType>) {
                         stringResource(R.string.screens_calendar_nothing),
                         body = stringResource(R.string.screens_calendar_mine_hint),
                     )
-                } else {
+                } else if (plus) {
                     LazyColumn(
                         contentPadding = PaddingValues(start = 12.dp, end = 12.dp, bottom = bottomPadding()),
                         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -158,6 +163,32 @@ fun CalendarScreen(types: List<MediaType>) {
                                 }
                             }
                         }
+                    }
+                } else {
+                    // Free version: the calendar blurred under a card about Plus.
+                    val count = shownDays.values.sumOf { it.size }
+                    Box(Modifier.fillMaxSize()) {
+                        Locked(Modifier.fillMaxSize()) {
+                            LazyColumn(
+                                contentPadding = PaddingValues(start = 12.dp, end = 12.dp, bottom = bottomPadding()),
+                                verticalArrangement = Arrangement.spacedBy(8.dp),
+                                modifier = Modifier.fillMaxSize().readableWidth(),
+                            ) {
+                                shownDays.forEach { (day, entries) ->
+                                    item(key = "d-$day") { SectionHeader(Format.day(day), Modifier.animateItem(), entries.size) }
+                                    items(entries, key = { "${it.type}:${it.simklId}:${it.episode?.label}:${it.date}" }) { entry ->
+                                        CalendarRow(entry, Modifier.animateItem()) {
+                                            navigator.openDetail(entry.type, entry.simklId, entry.title, entry.poster)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        PlusCard(
+                            title = pluralStringResource(R.plurals.plus_calendar_title, count, count),
+                            text = stringResource(R.string.plus_calendar_text),
+                            modifier = Modifier.align(Alignment.TopCenter).padding(24.dp),
+                        )
                     }
                 }
             }

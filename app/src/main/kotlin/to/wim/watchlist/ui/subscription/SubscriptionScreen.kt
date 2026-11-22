@@ -18,14 +18,14 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.BarChart
 import androidx.compose.material.icons.rounded.CalendarMonth
+import androidx.compose.material.icons.rounded.Casino
 import androidx.compose.material.icons.rounded.CreditCard
-import androidx.compose.material.icons.rounded.Explore
 import androidx.compose.material.icons.rounded.LockOpen
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.NotificationsActive
 import androidx.compose.material.icons.automirrored.rounded.PlaylistPlay
-import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -71,10 +71,10 @@ import java.time.Instant
 import java.time.temporal.ChronoUnit
 
 /**
- * Shown instead of the app while there is no active subscription: what the app does, the yearly
- * plan (with its free trial when Google Play still offers it) and the monthly one, when the trial
- * reminds and charges, and the terms Google Play requires an app to state (when it charges, that
- * it renews, how to cancel). The library syncs behind it, so it can say the user's lists are ready.
+ * Watchlist Plus, opened from a locked feature: what Plus adds, the yearly plan (with its free trial
+ * when Google Play still offers it) and the monthly one, when the trial reminds and charges, and the
+ * terms Google Play requires an app to state (when it charges, that it renews, how to cancel).
+ * "Not now" goes back to the free version.
  */
 @Composable
 fun SubscriptionScreen(
@@ -86,7 +86,6 @@ fun SubscriptionScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val state by app.subscription.state.collectAsState()
-    val library by app.library.state.collectAsState()
     val plans = if (preview) SubscriptionRules.SAMPLE_PLANS else state.plans
     var selected by rememberSaveable { mutableStateOf(PlanPeriod.Yearly) }
     val plan = plans.firstOrNull { it.period == selected } ?: plans.firstOrNull()
@@ -105,21 +104,12 @@ fun SubscriptionScreen(
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
         )
-        val titles = library.items.size
-        if (titles > 0) {
-            Text(
-                pluralStringResource(R.plurals.sub_library_ready, titles, titles),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center,
-            )
-        }
         Column(Modifier.readableWidth(480.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Feature(Icons.AutoMirrored.Rounded.PlaylistPlay, stringResource(R.string.sub_feature_up_next))
             Feature(Icons.Rounded.Notifications, stringResource(R.string.sub_feature_notifications))
             Feature(Icons.Rounded.CalendarMonth, stringResource(R.string.sub_feature_calendar))
-            Feature(Icons.Rounded.Explore, stringResource(R.string.sub_feature_discover))
-            Feature(Icons.Rounded.Star, stringResource(R.string.sub_feature_details))
+            Feature(Icons.Rounded.BarChart, stringResource(R.string.sub_feature_stats))
+            Feature(Icons.Rounded.Casino, stringResource(R.string.sub_feature_surprise))
         }
         val notice =
             when {
@@ -172,11 +162,14 @@ fun SubscriptionScreen(
             Text(stringResource(R.string.sub_manage))
         }
         if (preview) {
-            OutlinedButton(onClick = { app.paywallPreview.value = false }) { Text(stringResource(R.string.sub_preview_close)) }
+            OutlinedButton(onClick = {
+                app.paywallPreview.value = false
+                app.showPaywall.value = false
+            }) { Text(stringResource(R.string.sub_preview_close)) }
         } else {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 OutlinedButton(onClick = { scope.launch { app.subscription.refresh() } }) { Text(stringResource(R.string.sub_check_again)) }
-                TextButton(onClick = { scope.launch { app.logout() } }) { Text(stringResource(R.string.screens_profile_log_out)) }
+                TextButton(onClick = { app.showPaywall.value = false }) { Text(stringResource(R.string.plus_not_now)) }
             }
         }
     }

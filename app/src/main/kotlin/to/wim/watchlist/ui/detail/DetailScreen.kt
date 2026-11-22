@@ -137,7 +137,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
-import to.wim.watchlist.ui.demo.LocalDemo
+import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.api.TmdbKey
 import androidx.lifecycle.Lifecycle
@@ -192,7 +193,6 @@ fun DetailScreen(
     val resources = LocalResources.current
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
-    val demo = LocalDemo.current
     val library by app.library.state.collectAsState()
     val item = library.item(route.type, route.simklId)
 
@@ -216,7 +216,9 @@ fun DetailScreen(
     // Cast and crew from TMDB, only with the user's own token. A failure leaves them out until the
     // token changes or the app comes back to the foreground, so nothing needs a restart.
     var credits by remember { mutableStateOf<Credits?>(null) }
-    val tmdbKey = TmdbKey.parse(settings.tmdbKey)
+    val plus = LocalPlus.current
+    // Cast and crew are part of Plus: the free version has no token, so it shows none.
+    val tmdbKey = TmdbKey.parse(Plus.tmdbKey(plus, settings.tmdbKey))
     val lifecycle = LocalLifecycleOwner.current.lifecycle
     LaunchedEffect(details, tmdbKey, lifecycle) {
         credits = null
@@ -293,14 +295,11 @@ fun DetailScreen(
                             }
                         },
                     )
-                    // The demo's titles have no page to share.
-                    if (!demo) {
-                        Spacer(Modifier.width(8.dp))
-                        IconButton(
-                            onClick = { context.share(title, webUrl(route.type, route.simklId, ids.slug)) },
-                            colors = IconButtonDefaults.filledTonalIconButtonColors(),
-                        ) { Icon(Icons.Rounded.Share, contentDescription = stringResource(R.string.detail_share)) }
-                    }
+                    Spacer(Modifier.width(8.dp))
+                    IconButton(
+                        onClick = { context.share(title, webUrl(route.type, route.simklId, ids.slug)) },
+                        colors = IconButtonDefaults.filledTonalIconButtonColors(),
+                    ) { Icon(Icons.Rounded.Share, contentDescription = stringResource(R.string.detail_share)) }
                 },
                 colors =
                     TopAppBarDefaults.topAppBarColors(
@@ -395,7 +394,7 @@ fun DetailScreen(
                         if (c.crew.isNotEmpty()) item(key = "crew") { Box(Modifier.animateItem()) { CrewRow(c.crew) } }
                     }
                     // Where cast and crew would be: offers to add a TMDB token.
-                    if (TmdbBanner.show(tmdbKey != null, d, bannerHiddenForNow, settings.tmdbBannerHidden)) {
+                    if (plus && TmdbBanner.show(tmdbKey != null, d, bannerHiddenForNow, settings.tmdbBannerHidden)) {
                         item(key = "tmdb-banner") {
                             TmdbTokenBanner(
                                 onAdd = { addingToken = true },
@@ -450,7 +449,7 @@ fun DetailScreen(
                     }
                 }
                 // TMDB and Trakt file an anime movie under movies; SIMKL files it under anime.
-                if (!demo) item(key = "links") { Links(route.type, ids, movie = details?.let { CreditsSource.of(it)?.movie } ?: (route.type == MediaType.Movie)) }
+                item(key = "links") { Links(route.type, ids, movie = details?.let { CreditsSource.of(it)?.movie } ?: (route.type == MediaType.Movie)) }
             }
         }
     }
@@ -1170,7 +1169,7 @@ private fun Links(
         listOfNotNull(
             "SIMKL" to webUrl(type, ids.simkl, ids.slug),
             ids.imdb?.let { "IMDb" to "https://www.imdb.com/title/$it" },
-            ids.tmdb?.let { "TMDB" to "https://www.themoviedb.org/${if (movie) "movie" else "tv"}/$it" },
+            ids.tmdb?.takeIf { LocalPlus.current }?.let { "TMDB" to "https://www.themoviedb.org/${if (movie) "movie" else "tv"}/$it" },
             ids.mal?.let { "MyAnimeList" to "https://myanimelist.net/anime/$it" },
             ids.anilist?.let { "AniList" to "https://anilist.co/anime/$it" },
             ids.kitsu?.let { "Kitsu" to "https://kitsu.app/anime/$it" },

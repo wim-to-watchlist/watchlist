@@ -31,6 +31,7 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +48,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
 import to.wim.watchlist.BuildConfig
 import to.wim.watchlist.R
-import to.wim.watchlist.ui.demo.LocalDemo
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.NavConfig
 import to.wim.watchlist.data.SubscriptionRepository
@@ -76,7 +77,7 @@ import java.time.Instant
 @Composable
 fun SettingsScreen(settings: AppSettings) {
     val app = rememberApp()
-    val demo = LocalDemo.current
+    val plus = LocalPlus.current
     val navigator = LocalNavigator.current
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -152,15 +153,17 @@ fun SettingsScreen(settings: AppSettings) {
         }
 
         item(key = "notifications") {
-            val on = settings.notifications && android.appEnabled
+            // New-episode notifications are part of Plus: in the free version the switch opens the subscription screen.
+            val on = plus && settings.notifications && android.appEnabled
             SettingsSection(title = stringResource(R.string.screens_settings_notifications_section)) {
                 SwitchSetting(
                     title = stringResource(R.string.screens_settings_notifications),
-                    summary = stringResource(R.string.screens_settings_notifications_sub),
+                    summary = stringResource(if (plus) R.string.screens_settings_notifications_sub else R.string.plus_notifications_locked),
                     // Off whenever Android blocks the app's notifications, so turning it on asks again.
                     checked = on,
                     onCheckedChange = { turnOn ->
                         when {
+                            !plus -> app.showPaywall.value = true
                             !turnOn ->
                                 scope.launch {
                                     app.settings.setNotifications(false)
@@ -199,7 +202,8 @@ fun SettingsScreen(settings: AppSettings) {
             }
         }
 
-        item(key = "tmdb") {
+        // TMDB (cast, people) is part of Plus, so the free version doesn't mention it at all.
+        if (plus) item(key = "tmdb") {
             var editing by rememberSaveable { mutableStateOf(false) }
             SettingsSection(title = stringResource(R.string.screens_settings_tmdb)) {
                 SettingItem(
@@ -269,8 +273,9 @@ fun SettingsScreen(settings: AppSettings) {
         }
 
         item(key = "credits") {
-            // Where the data comes from. TMDB's attribution (its approved logo, unchanged, and its
-            // notice) is required in a credits section, whether or not a token is set.
+            // Where the data comes from. With Plus, TMDB's attribution (its approved logo, unchanged,
+            // and its notice) is in a credits section, whether or not a token is set. The free
+            // version uses no TMDB data, so it doesn't show it.
             SettingsSection(title = stringResource(R.string.screens_settings_credits)) {
                 CreditItem(
                     logo = painterResource(R.drawable.simkl_logo),
@@ -279,7 +284,7 @@ fun SettingsScreen(settings: AppSettings) {
                     text = stringResource(R.string.screens_credit_simkl_text),
                     onClick = { context.openUrl("https://simkl.com/") },
                 )
-                CreditItem(
+                if (plus) CreditItem(
                     logo = painterResource(R.drawable.tmdb_logo_square),
                     logoDescription = stringResource(R.string.screens_tmdb_logo),
                     title = stringResource(R.string.screens_credit_tmdb_title),
@@ -289,10 +294,16 @@ fun SettingsScreen(settings: AppSettings) {
             }
         }
 
-        // The demo has no subscription to manage or preview.
-        if (BuildConfig.REQUIRE_SUBSCRIPTION && !demo) {
+        if (BuildConfig.REQUIRE_SUBSCRIPTION) {
             item(key = "subscription") {
                 SettingsSection(title = stringResource(R.string.sub_settings_section)) {
+                    if (!plus) {
+                        SettingItem(
+                            title = stringResource(R.string.plus_get),
+                            summary = stringResource(R.string.plus_get_summary),
+                            onClick = { app.showPaywall.value = true },
+                        )
+                    }
                     val trialEnd by produceState<Long?>(null) { value = app.settings.trialEndsAt() }
                     SettingItem(
                         title = stringResource(R.string.sub_manage),
@@ -307,13 +318,20 @@ fun SettingsScreen(settings: AppSettings) {
             }
         }
 
-        if (BuildConfig.DEBUG && !demo) {
+        if (BuildConfig.DEBUG) {
             item(key = "subscription_preview") {
                 SettingsSection(title = stringResource(R.string.sub_settings_section)) {
                     SettingItem(
                         title = stringResource(R.string.sub_preview),
                         summary = stringResource(R.string.sub_preview_summary),
                         onClick = { app.paywallPreview.value = true },
+                    )
+                    val previewLocked by app.previewLocked.collectAsState()
+                    SwitchSetting(
+                        title = stringResource(R.string.plus_preview_locked),
+                        summary = stringResource(R.string.plus_preview_locked_summary),
+                        checked = previewLocked,
+                        onCheckedChange = { app.previewLocked.value = it },
                     )
                 }
             }

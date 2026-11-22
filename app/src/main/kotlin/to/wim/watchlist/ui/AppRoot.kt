@@ -4,7 +4,6 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -15,7 +14,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
@@ -23,15 +21,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import to.wim.watchlist.data.AppSettings
-import to.wim.watchlist.data.model.Access
-import to.wim.watchlist.data.model.Onboarding
-import to.wim.watchlist.data.model.Screen
-import to.wim.watchlist.ui.demo.DemoBar
-import to.wim.watchlist.ui.demo.LocalDemo
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.statusBars
+import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.ui.subscription.SubscriptionScreen
 import to.wim.watchlist.ui.components.rememberApp
 import to.wim.watchlist.ui.detail.DetailScreen
@@ -57,37 +48,20 @@ fun AppRoot(
 
     WatchlistTheme(mode = current.theme, dynamicColor = current.dynamicColor) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-            val step by app.signedOutStep.collectAsState()
-            when (Onboarding.screen(signedIn = current.accessToken != null, step)) {
-                Screen.App -> Subscribed { LoggedIn(current, requested, onRequestHandled) }
-                Screen.Demo -> Demo(current)
-                Screen.SignIn -> LoginScreen()
+            if (current.accessToken == null) {
+                LoginScreen()
+            } else {
+                Subscribed { LoggedIn(current, requested, onRequestHandled) }
             }
         }
     }
 }
 
 /**
- * The app filled with made-up titles, under a bar that says so and leads to signing in.
- * Leaving it (the bar, back on the first screen or "Sign out") forgets what was done in it.
- */
-@Composable
-private fun Demo(settings: AppSettings) {
-    val app = rememberApp()
-    Column(Modifier.fillMaxSize()) {
-        DemoBar()
-        Box(Modifier.weight(1f).consumeWindowInsets(WindowInsets.statusBars)) {
-            CompositionLocalProvider(LocalDemo provides true) {
-                LoggedIn(settings, requested = null, onRequestHandled = {}, onLeave = { app.endDemo() })
-            }
-        }
-    }
-}
-
-/**
- * The app itself only with an active subscription (or its free trial); otherwise the subscription
- * screen, with the library syncing behind it. Google Play is asked again each time the app comes to the foreground, so a purchase,
- * renewal or cancellation elsewhere shows without a restart.
+ * The app, free or with Watchlist Plus ([Plus]): [LocalPlus] tells the screens which. The
+ * subscription screen opens on top when a locked feature asks for it. Google Play is asked again
+ * each time the app comes to the foreground, so a purchase, renewal or cancellation elsewhere shows
+ * without a restart.
  */
 @Composable
 private fun Subscribed(content: @Composable () -> Unit) {
@@ -102,15 +76,22 @@ private fun Subscribed(content: @Composable () -> Unit) {
         BackHandler { app.paywallPreview.value = false }
         return SubscriptionScreen(preview = true)
     }
-    when (state.access) {
-        Access.Allowed -> content()
-        Access.Locked -> {
-            // The first sync runs behind the subscription screen, so it can say the lists are ready
-            // and the app opens with them right after subscribing.
-            LaunchedEffect(Unit) { app.library.syncIfStale() }
-            SubscriptionScreen()
+    val previewLocked by app.previewLocked.collectAsState()
+    val plus = Plus.unlocked(state.access, previewLocked)
+    val paywall by app.showPaywall.collectAsState()
+    // Subscribed (or the trial started): the screen that asked for it opens unlocked.
+    LaunchedEffect(plus) { if (plus && !previewLocked) app.showPaywall.value = false }
+    CompositionLocalProvider(LocalPlus provides plus) {
+        Box(Modifier.fillMaxSize()) {
+            content()
+            if (paywall) {
+                BackHandler { app.showPaywall.value = false }
+                Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    // Debug "Preview the free version": sample plans, as Play has none for test builds.
+                    SubscriptionScreen(preview = previewLocked)
+                }
+            }
         }
-        Access.Checking -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { CircularProgressIndicator() }
     }
 }
 
@@ -119,8 +100,6 @@ private fun LoggedIn(
     settings: AppSettings,
     requested: Route.Detail?,
     onRequestHandled: () -> Unit,
-    /** Back on the first screen: the demo ends; otherwise Android handles it (the app closes). */
-    onLeave: (() -> Unit)? = null,
 ) {
     val app = rememberApp()
     val navigator = rememberSaveable(saver = Navigator.Saver) { Navigator() }
@@ -139,7 +118,6 @@ private fun LoggedIn(
         }
     }
     BackHandler(enabled = navigator.stack.size > 1) { navigator.pop() }
-    if (onLeave != null) BackHandler(enabled = navigator.stack.size <= 1, onBack = onLeave)
 
     // Material 3 shared-axis X (see Motion.sharedAxisX).
     val axisOffset = with(LocalDensity.current) { 30.dp.roundToPx() }
@@ -156,7 +134,7 @@ private fun LoggedIn(
                 when (route) {
                     Route.Main -> MainScreen(settings)
                     is Route.Detail -> DetailScreen(route, settings)
-                    Route.Search -> SearchScreen(settings.typeList, settings.tmdbKey)
+                    Route.Search -> SearchScreen(settings.typeList, Plus.tmdbKey(LocalPlus.current, settings.tmdbKey))
                     Route.Profile -> ProfileScreen(settings.types)
                     Route.Settings -> SettingsScreen(settings)
                     Route.Ratings -> RatingsScreen(settings.typeList)

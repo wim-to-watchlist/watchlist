@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="window_background">#FFFDF8FF</color>
-    <color name="ic_launcher_background">#FFFFFFFF</color>
     <!-- Up next widget (Material 3 surface roles; from the wallpaper on Android 12+). -->
     <color name="widget_surface">#FFF3EDF7</color>
     <color name="widget_on_surface">#FF1D1B20</color>

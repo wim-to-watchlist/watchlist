@@ -60,9 +60,10 @@
     </plurals>
     <string name="plus_up_next_text">See the next episode of every show you’re watching, with Watchlist Plus.</string>
     <plurals name="plus_calendar_title">
-        <item quantity="one">%1$d upcoming episode or release</item>
-        <item quantity="other">%1$d upcoming episodes and releases</item>
+        <item quantity="one">%1$d more episode or release coming up</item>
+        <item quantity="other">%1$d more episodes and releases coming up</item>
     </plurals>
+    <string name="plus_calendar_all">Your whole calendar is in Plus</string>
     <string name="plus_calendar_text">See when new episodes and movies from your lists come out, with Watchlist Plus.</string>
     <string name="plus_stats_title">Your stats per type are in Plus</string>
     <string name="plus_stats_text">See how much you watched of TV shows, anime and movies, with Watchlist Plus.</string>

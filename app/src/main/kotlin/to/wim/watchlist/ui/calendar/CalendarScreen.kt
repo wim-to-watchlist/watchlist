@@ -57,6 +57,7 @@ import to.wim.watchlist.ui.components.PlusCard
 import to.wim.watchlist.ui.theme.Motion
 import to.wim.watchlist.data.NavTab
 import to.wim.watchlist.data.model.CalendarEntry
+import to.wim.watchlist.data.model.Plus
 import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.ui.LocalNavigator
 import to.wim.watchlist.ui.theme.EmptyState
@@ -157,7 +158,7 @@ fun CalendarScreen(types: List<MediaType>) {
                     ) {
                         shownDays.forEach { (day, entries) ->
                             item(key = "d-$day") { SectionHeader(Format.day(day), Modifier.animateItem(), entries.size) }
-                            items(entries, key = { "${it.type}:${it.simklId}:${it.episode?.label}:${it.date}" }) { entry ->
+                            items(entries, key = { it.key() }) { entry ->
                                 CalendarRow(entry, Modifier.animateItem()) {
                                     navigator.openDetail(entry.type, entry.simklId, entry.title, entry.poster)
                                 }
@@ -165,36 +166,46 @@ fun CalendarScreen(types: List<MediaType>) {
                         }
                     }
                 } else {
-                    // Free version: the calendar blurred under a card about Plus.
-                    val count = shownDays.values.sumOf { it.size }
-                    Box(Modifier.fillMaxSize()) {
-                        Locked(Modifier.fillMaxSize()) {
-                            LazyColumn(
-                                contentPadding = PaddingValues(start = 12.dp, end = 12.dp, bottom = bottomPadding()),
-                                verticalArrangement = Arrangement.spacedBy(8.dp),
-                                modifier = Modifier.fillMaxSize().readableWidth(),
-                            ) {
-                                shownDays.forEach { (day, entries) ->
-                                    item(key = "d-$day") { SectionHeader(Format.day(day), Modifier.animateItem(), entries.size) }
-                                    items(entries, key = { "${it.type}:${it.simklId}:${it.episode?.label}:${it.date}" }) { entry ->
-                                        CalendarRow(entry, Modifier.animateItem()) {
-                                            navigator.openDetail(entry.type, entry.simklId, entry.title, entry.poster)
-                                        }
-                                    }
+                    // Free version: the first entry as it is, a card about Plus, the other entries
+                    // blurred. The day headers stay readable; only what comes out is part of Plus.
+                    val groups = remember(shownDays) { Plus.previewGroups(shownDays.toList()) }
+                    val more = Plus.lockedCount(groups)
+                    LazyColumn(
+                        contentPadding = PaddingValues(start = 12.dp, end = 12.dp, bottom = bottomPadding()),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxSize().readableWidth(),
+                    ) {
+                        groups.forEachIndexed { i, group ->
+                            item(key = "d-${group.key}") { SectionHeader(Format.day(group.key), Modifier.animateItem(), group.total) }
+                            items(group.shown, key = { it.key() }) { entry ->
+                                CalendarRow(entry, Modifier.animateItem()) {
+                                    navigator.openDetail(entry.type, entry.simklId, entry.title, entry.poster)
                                 }
                             }
+                            if (i == 0) {
+                                item(key = "plus") {
+                                    PlusCard(
+                                        title =
+                                            if (more > 0) {
+                                                pluralStringResource(R.plurals.plus_calendar_title, more, more)
+                                            } else {
+                                                stringResource(R.string.plus_calendar_all)
+                                            },
+                                        text = stringResource(R.string.plus_calendar_text),
+                                        modifier = Modifier.animateItem().padding(vertical = 8.dp),
+                                    )
+                                }
+                            }
+                            items(group.locked, key = { it.key() }) { entry -> Locked { CalendarRow(entry) {} } }
                         }
-                        PlusCard(
-                            title = pluralStringResource(R.plurals.plus_calendar_title, count, count),
-                            text = stringResource(R.string.plus_calendar_text),
-                            modifier = Modifier.align(Alignment.TopCenter).padding(24.dp),
-                        )
                     }
                 }
             }
         }
     }
 }
+
+private fun CalendarEntry.key(): String = "$type:$simklId:${episode?.label}:$date"
 
 /**
  * The type filter of the title bar: a menu of TV shows, anime and movies, each ticked while it is

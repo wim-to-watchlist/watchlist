@@ -1,11 +1,11 @@
 package to.wim.watchlist.ui.profile
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -26,13 +26,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import to.wim.watchlist.R
 import to.wim.watchlist.data.model.LibraryItem
 import to.wim.watchlist.data.model.MediaType
+import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.data.model.PreviewGroup
 import to.wim.watchlist.data.model.Ratings
 import to.wim.watchlist.ui.LocalNavigator
 import to.wim.watchlist.ui.Route
@@ -72,42 +73,44 @@ fun RatingsScreen(types: List<MediaType>) {
                 body = stringResource(R.string.screens_ratings_empty_text),
             )
         } else {
-            val list: @Composable () -> Unit = {
-                LazyColumn(
-                    contentPadding =
-                        PaddingValues(
-                            top = padding.calculateTopPadding(),
-                            bottom = 16.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
-                        ),
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    rows.forEach { (type, items) ->
-                        item(key = type.name) {
-                            Column {
-                                SectionHeader(type.label(), Modifier.padding(horizontal = 8.dp), items.size) { navigator.push(Route.RatedGrid(type)) }
-                                LazyRow(contentPadding = PaddingValues(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                                    items(items, key = { it.key }) { item ->
-                                        RatedTile(item, Modifier.width(120.dp)) {
-                                            navigator.openDetail(item.type, item.ids.simkl, item.title, item.poster)
-                                        }
+            val plus = LocalPlus.current
+            // Free version: the first rated title as it is, a card about Plus, the other titles
+            // blurred. The type headers and their counts stay readable.
+            val groups = remember(rows, plus) { if (plus) null else Plus.previewGroups(rows.toList()) }
+            LazyColumn(
+                contentPadding =
+                    PaddingValues(
+                        top = padding.calculateTopPadding(),
+                        bottom = 16.dp + WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                    ),
+                modifier = Modifier.fillMaxSize(),
+            ) {
+                (groups ?: rows.map { (type, items) -> PreviewGroup(type, items.size, items, emptyList()) }).forEachIndexed { i, group ->
+                    val type = group.key
+                    item(key = type.name) {
+                        Column {
+                            SectionHeader(type.label(), Modifier.padding(horizontal = 8.dp), group.total) {
+                                if (plus) navigator.push(Route.RatedGrid(type)) else app.showPaywall.value = true
+                            }
+                            LazyRow(contentPadding = PaddingValues(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                                items(group.shown, key = { it.key }) { item ->
+                                    RatedTile(item, Modifier.width(120.dp)) {
+                                        navigator.openDetail(item.type, item.ids.simkl, item.title, item.poster)
                                     }
                                 }
+                                items(group.locked, key = { it.key }) { item -> Locked { RatedTile(item, Modifier.width(120.dp)) {} } }
                             }
                         }
                     }
-                }
-            }
-            if (LocalPlus.current) {
-                list()
-            } else {
-                // Free version: the user's own ratings blurred under a card about Plus.
-                Box(Modifier.fillMaxSize()) {
-                    Locked(Modifier.fillMaxSize()) { list() }
-                    PlusCard(
-                        title = stringResource(R.string.plus_ratings_title),
-                        text = stringResource(R.string.plus_ratings_text),
-                        modifier = Modifier.align(Alignment.Center).padding(24.dp),
-                    )
+                    if (groups != null && i == 0) {
+                        item(key = "plus") {
+                            PlusCard(
+                                title = stringResource(R.string.plus_ratings_title),
+                                text = stringResource(R.string.plus_ratings_text),
+                                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp),
+                            )
+                        }
+                    }
                 }
             }
         }

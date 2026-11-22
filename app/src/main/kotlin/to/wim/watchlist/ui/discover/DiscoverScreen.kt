@@ -14,6 +14,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Casino
 import androidx.compose.material.icons.rounded.ErrorOutline
+import androidx.compose.material.icons.rounded.Lock
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -100,7 +107,18 @@ fun DiscoverScreen(types: List<MediaType>) {
                             val id = runCatching { app.catalog.random(type) }.getOrNull()
                             if (id != null) navigator.openDetail(type, id) else snackbar.showSnackbar(resources.getString(R.string.screens_discover_no_suggestion))
                         }
-                    }) { Icon(Icons.Rounded.Casino, contentDescription = stringResource(R.string.screens_discover_surprise)) }
+                    }) {
+                        // A small lock on the dice in the free version, like the locked rows in Settings.
+                        if (plus) {
+                            Icon(Icons.Rounded.Casino, contentDescription = stringResource(R.string.screens_discover_surprise))
+                        } else {
+                            val locked = stringResource(R.string.plus_locked)
+                            BadgedBox(
+                                badge = { Badge(containerColor = MaterialTheme.colorScheme.secondaryContainer) { Icon(Icons.Rounded.Lock, null, Modifier.size(10.dp)) } },
+                                modifier = Modifier.semantics { stateDescription = locked },
+                            ) { Icon(Icons.Rounded.Casino, contentDescription = stringResource(R.string.screens_discover_surprise)) }
+                        }
+                    }
                 }
                 // TV shows, anime and movies are parallel sections of Discover, so they are tabs,
                 // like the shelves of the library tabs. Only the types turned on in Settings; with

@@ -2,6 +2,16 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: One rule for every lock: blur only what is paid for
+
+The owner asked for consistent locks that show everything that can be shown. Every locked list now
+follows Up next: the first item readable, the Plus card after it, the rest blurred (Calendar, *My
+ratings*). Headers, labels and counts are never blurred: the Calendar's days, the types in *My
+ratings* and the labels on the stats per type stay readable, and only their numbers are blurred.
+Settings keep their readable rows with a locked switch, and Surprise me gets the same lock as a badge.
+Trailers and similar titles keep a readable section header over a blurred row. Replaces the
+`LockedPreview` card that was pulled up over fully blurred stats.
+
 ## 2026-11-22: Every setting but light or dark mode is Plus; every lock shows a preview
 
 At the owner's request every setting is part of Plus except light or dark mode, which stays free for readability. Without Plus the app uses the defaults (`Plus.settings`), so nothing in the free app breaks: all types shown, specials hidden, Up next from the latest episode, the default bottom bar. The stored choices aren't changed, so they come back with Plus. Sign out, the subscription, credits and the version stay reachable. Settings are not blurred: after trying it in 1.15.0 the owner found that blurring hid what each setting does, so since 1.16.0 the title and description stay readable and only the switch is locked (greyed out behind a lock; a tap opens the plans). Also at the owner's request, every lock on content sits on a blurred preview of the user's own data: the *My ratings* list (it opens blurred instead of going straight to the plans) and the stats per type, whose card now sits below the blurred cards instead of covering them. Surprise me stays a direct way to the plans: it has no content to preview. Rejected: hiding the locked settings, which would make the free app look broken.

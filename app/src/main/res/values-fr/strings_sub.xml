@@ -61,9 +61,10 @@
     </plurals>
     <string name="plus_up_next_text">Voyez le prochain épisode de chaque série que vous regardez, avec Watchlist Plus.</string>
     <plurals name="plus_calendar_title">
-        <item quantity="one">%1$d épisode ou sortie à venir</item>
-        <item quantity="other">%1$d épisodes et sorties à venir</item>
+        <item quantity="one">%1$d autre épisode ou sortie à venir</item>
+        <item quantity="other">%1$d autres épisodes et sorties à venir</item>
     </plurals>
+    <string name="plus_calendar_all">Votre calendrier complet est dans Plus</string>
     <string name="plus_calendar_text">Voyez quand sortent les nouveaux épisodes et films de vos listes, avec Watchlist Plus.</string>
     <string name="plus_stats_title">Vos statistiques par type sont dans Plus</string>
     <string name="plus_stats_text">Voyez combien vous avez regardé de séries, d’animes et de films, avec Watchlist Plus.</string>

@@ -67,4 +67,29 @@ object Plus {
     /** Up next while locked: the rows shown as they are, and how many more are blurred. */
     fun <T> preview(items: List<T>): Pair<List<T>, Int> =
         items.take(UP_NEXT_PREVIEW) to (items.size - UP_NEXT_PREVIEW).coerceAtLeast(0)
+
+    /**
+     * A grouped list while locked (the Calendar by day, My ratings by type): the first item of
+     * the first group stays readable, every other item is blurred. Group headers and their counts
+     * always stay readable, so only the paywalled content is hidden.
+     */
+    fun <K, T> previewGroups(groups: List<Pair<K, List<T>>>): List<PreviewGroup<K, T>> {
+        var left = UP_NEXT_PREVIEW
+        return groups.map { (key, items) ->
+            val shown = items.take(left)
+            left -= shown.size
+            PreviewGroup(key, items.size, shown, items.drop(shown.size))
+        }
+    }
+
+    /** How many items [previewGroups] blurs in all. */
+    fun <K, T> lockedCount(groups: List<PreviewGroup<K, T>>): Int = groups.sumOf { it.locked.size }
 }
+
+/** One group of a locked list: its header ([key], [total]), the readable items and the blurred ones. */
+data class PreviewGroup<K, T>(
+    val key: K,
+    val total: Int,
+    val shown: List<T>,
+    val locked: List<T>,
+)

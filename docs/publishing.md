@@ -93,11 +93,16 @@ to Play and keep GitHub Releases for testing.
 
 ## 6. Test tracks and first upload
 
-1. Run **Actions › Release** (see [installation.md](installation.md), "Making a release") and
-   download `watchlist-<version>.aab` from the GitHub Release.
-2. **Test and release › Testing › Internal testing › Create new release**, upload the `.aab`,
-   add yourself as a tester and install it from the link. This is the quickest check that the
-   Play build signs in and syncs.
+1. The very first bundle of a new Play app has to be uploaded by hand: run **Actions › Release**
+   (see [installation.md](installation.md), "Making a release"), download
+   `watchlist-<version>.aab` from the GitHub Release and upload it under **Test and release ›
+   Testing › Internal testing › Create new release**. (Done for Watchlist.)
+2. From then on every release uploads itself: the release workflow sends the bundle and its
+   mapping file to the internal testing track with the service account key in the repository
+   secret `PLAY_SERVICE_ACCOUNT_JSON`. The service account needs *Release to testing tracks*
+   for this app under **Users and permissions** in the Play Console. Add yourself as a tester
+   and install from the opt-in link; this is the quickest check that the Play build signs in
+   and syncs.
 3. **Closed testing** (personal accounts): create a track, add at least 12 testers (a Google
    Group or e-mail list), share the opt-in link and keep them opted in for 14 days. Testers have
    to install and open the app.

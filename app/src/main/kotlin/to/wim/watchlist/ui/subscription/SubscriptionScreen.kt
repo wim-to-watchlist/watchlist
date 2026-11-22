@@ -114,7 +114,7 @@ fun SubscriptionScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Spacer(Modifier.height(8.dp))
-        AppIcon(Modifier.size(80.dp))
+        AppIcon(Modifier.size(72.dp))
         Text(
             trialDays?.let { pluralStringResource(R.plurals.sub_title_trial, it, it) } ?: stringResource(R.string.sub_title),
             style = MaterialTheme.typography.headlineSmall,

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- In-app logo: the launcher's TV with the check, cropped to the shape and without the plate
+     (the plate belongs only to the launcher icon). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="52dp"
+    android:height="52dp"
+    android:viewportWidth="52"
+    android:viewportHeight="52">
+    <group
+        android:translateX="-28"
+        android:translateY="-28">
+        <path android:pathData="M38.0,36.77h32a10,10 0,0 1,10,10v14.45a10,10 0,0 1,-10,10h-32a10,10 0,0 1,-10,-10v-14.45a10,10 0,0 1,10,-10z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="28"
+                    android:startY="36.77"
+                    android:endX="80"
+                    android:endY="71.22">
+                    <item android:offset="0" android:color="#FF3D7BFF" />
+                    <item android:offset="0.55" android:color="#FF7A5CFF" />
+                    <item android:offset="1" android:color="#FFD15CE6" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path
+            android:pathData="M56.99,54.3L61.64,58.95L71.56,49.03"
+            android:strokeColor="#FFEBE7FF"
+            android:strokeWidth="8"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round" />
+    </group>
+</vector>

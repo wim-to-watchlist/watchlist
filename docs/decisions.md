@@ -2,6 +2,12 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: The in-app logo has no plate
+
+The owner wants the plate only where the system shows the icon as a tile (the launcher). The
+sign-in and Watchlist Plus screens now show the bare TV with the check (`ic_logo`, the
+launcher foreground cropped to the shape) instead of the launcher icon on its violet plate.
+
 ## 2026-11-22: Launcher icon on a violet plate, with the check on the right
 
 Part of making the owner's app icons one family: one meaningful shape with one gradient on a soft

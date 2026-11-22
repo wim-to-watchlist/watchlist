@@ -7,8 +7,8 @@ import androidx.compose.ui.res.painterResource
 import to.wim.watchlist.R
 
 /**
- * The app's logo inside the app: the gradient TV with the check on its own, without the
- * launcher's plate (the plate belongs only to the launcher icon).
+ * The app's logo inside the app: the gradient TV with the check on its own, with no plate
+ * or box behind it.
  */
 @Composable
 fun AppIcon(modifier: Modifier = Modifier) {

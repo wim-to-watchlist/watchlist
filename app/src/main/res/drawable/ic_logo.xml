@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- In-app logo: the launcher's TV with the check, cropped to the shape and without the plate
-     (the plate belongs only to the launcher icon). -->
+<!-- In-app logo: the launcher's TV with the check, cropped to the shape, with a white check
+     and no plate behind it. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
     android:width="52dp"
@@ -26,7 +26,7 @@
         </path>
         <path
             android:pathData="M56.99,54.3L61.64,58.95L71.56,49.03"
-            android:strokeColor="#FFEBE7FF"
+            android:strokeColor="#FFFFFFFF"
             android:strokeWidth="8"
             android:strokeLineCap="round"
             android:strokeLineJoin="round" />

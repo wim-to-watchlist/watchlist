@@ -2,6 +2,18 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-22: Icons: same padding in every app, white background, white details; colour scheme follows the icon
+
+Part of rolling the owner's approved icon redesign out to all apps. The launcher foreground and
+themed layer are wrapped in a group scaled 0.9560 around the centre, so the shape's furthest point
+is 26.3 units from the middle of the 108 canvas, like in every other app. The launcher background
+is plain white instead of the violet plate, and the check is white instead of the plate's colour
+(the themed layer still cuts it out). The in-app logo (sign-in and Plus screens) was already the
+bare shape without a plate; it now has the white check too. The status bar icon is a bare shape
+and keeps its fit. The colour scheme already followed the icon: the Material seed `#7A5CFF` is the
+gradient's middle stop, so `Theme.kt` is unchanged. The shared `## Icons` section of `DESIGN.md`
+is replaced with the new master text.
+
 ## 2026-11-22: The in-app logo has no plate
 
 The owner wants the plate only where the system shows the icon as a tile (the launcher). The

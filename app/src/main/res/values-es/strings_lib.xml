@@ -69,6 +69,11 @@
         <item quantity="many">en %d días</item>
         <item quantity="other">en %d días</item>
     </plurals>
+    <plurals name="lib_ago_minutes">
+        <item quantity="one">hace %d min</item>
+        <item quantity="many">hace %d min</item>
+        <item quantity="other">hace %d min</item>
+    </plurals>
     <plurals name="lib_ago_hours">
         <item quantity="one">hace %d h</item>
         <item quantity="many">hace %d h</item>

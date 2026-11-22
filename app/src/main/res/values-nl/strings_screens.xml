@@ -104,4 +104,5 @@
     <string name="screens_settings_channel_off">Uit in de Android-instellingen. Tik om aan te zetten.</string>
     <string name="screens_settings_android_notifications">Meldingsinstellingen van Android</string>
     <string name="screens_settings_android_notifications_sub">Alle soorten, met geluid, trillen en pop-ups</string>
+    <string name="screens_profile_stats_failed">Je statistieken konden niet geladen worden. Controleer je verbinding en probeer opnieuw.</string>
 </resources>

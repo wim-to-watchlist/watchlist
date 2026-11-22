@@ -42,7 +42,7 @@
     <string name="sub_notif_title">Je gratis proefperiode loopt af op %1$s</string>
     <string name="sub_notif_text">Daarna rekent Google Play je abonnement aan. Tik om het te beheren of op te zeggen.</string>
     <string name="sub_failed">De aankoop is niet gelukt. Probeer het opnieuw of controleer je betaalmethode in Google Play.</string>
-    <string name="sub_pending">Je aankoop wacht tot Google Play de betaling bevestigt. Plus gaat open zodra dat gebeurt.</string>
+    <string name="sub_pending">Je aankoop wacht tot Google Play de betaling bevestigt. Watchlist Plus gaat open zodra dat gebeurt.</string>
     <string name="sub_unavailable">Google Play is niet beschikbaar, dus het abonnement kan niet gecontroleerd worden. Zorg dat Google Play geïnstalleerd is en dat je erin aangemeld bent, en controleer opnieuw.</string>
     <string name="sub_not_loaded">Het abonnement kon niet geladen worden uit Google Play. Controleer je verbinding en probeer het opnieuw.</string>
     <string name="sub_check_again">Opnieuw controleren</string>
@@ -84,4 +84,5 @@
     <string name="sub_feature_widget">Up next op je startscherm: een widget met je volgende afleveringen</string>
     <string name="plus_ratings_title">Je beoordelingen zitten in Plus</string>
     <string name="plus_ratings_text">Zie alles wat je beoordeeld hebt, het beste eerst, met Watchlist Plus.</string>
+    <string name="sub_close">Sluiten</string>
 </resources>

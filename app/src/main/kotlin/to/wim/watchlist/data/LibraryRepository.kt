@@ -33,6 +33,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withLock
@@ -233,12 +234,16 @@ class LibraryRepository(
             }
         _state.update { it.copy(syncing = false, error = error) }
         if (error == null) {
-            scope.launch {
-                runCatching { refreshCalendar() }
-                // After the calendar, so shows with a newly aired episode are looked up too.
-                runCatching { refreshLatestNext() }
-            }
-            scope.launch { runCatching { refreshCommunityRatings() } }
+            // Kept, so signing out cancels them before they write the old account's data back.
+            followUps =
+                listOf(
+                    scope.launch {
+                        runCatching { refreshCalendar() }
+                        // After the calendar, so shows with a newly aired episode are looked up too.
+                        runCatching { refreshLatestNext() }
+                    },
+                    scope.launch { runCatching { refreshCommunityRatings() } },
+                )
         }
         return error
     }
@@ -591,8 +596,13 @@ class LibraryRepository(
         save(snapshot.copy(playback = snapshot.playback.filterNot { it.id == playback.id }))
     }
 
+    /** The refreshes a sync starts after it (calendar, next episodes, ratings). */
+    @Volatile
+    private var followUps: List<Job> = emptyList()
+
     suspend fun clear() {
         syncJob?.cancel()
+        followUps.forEach { it.cancelAndJoin() }
         synchronized(runningLock) { running?.cancel() }
         mutex.withLock {
             calendarFetchedAt = 0L

@@ -42,7 +42,7 @@
     <string name="sub_notif_title">Dein kostenloser Testzeitraum endet am %1$s</string>
     <string name="sub_notif_text">Danach berechnet Google Play dein Abo. Tippe, um es zu verwalten oder zu kündigen.</string>
     <string name="sub_failed">Der Kauf hat nicht geklappt. Versuche es erneut oder prüfe deine Zahlungsmethode in Google Play.</string>
-    <string name="sub_pending">Dein Kauf wartet darauf, dass Google Play die Zahlung bestätigt. Plus wird freigeschaltet, sobald das passiert.</string>
+    <string name="sub_pending">Dein Kauf wartet darauf, dass Google Play die Zahlung bestätigt. Watchlist Plus wird freigeschaltet, sobald das passiert.</string>
     <string name="sub_unavailable">Google Play ist nicht verfügbar, daher kann das Abo nicht geprüft werden. Stelle sicher, dass Google Play installiert ist und du angemeldet bist, und prüfe erneut.</string>
     <string name="sub_not_loaded">Das Abo konnte nicht aus Google Play geladen werden. Prüfe deine Verbindung und versuche es erneut.</string>
     <string name="sub_check_again">Erneut prüfen</string>
@@ -84,4 +84,5 @@
     <string name="sub_feature_widget">Up next auf dem Startbildschirm: ein Widget mit deinen nächsten Folgen</string>
     <string name="plus_ratings_title">Deine Bewertungen sind in Plus</string>
     <string name="plus_ratings_text">Sieh alles, was du bewertet hast, das Beste zuerst, mit Watchlist Plus.</string>
+    <string name="sub_close">Schließen</string>
 </resources>

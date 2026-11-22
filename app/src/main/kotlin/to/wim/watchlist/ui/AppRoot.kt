@@ -1,6 +1,12 @@
 package to.wim.watchlist.ui
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,9 +18,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -85,6 +94,20 @@ private fun Subscribed(content: @Composable () -> Unit) {
     val paywall by app.showPaywall.collectAsState()
     // Subscribed (or the trial started): the screen that asked for it opens unlocked.
     LaunchedEffect(plus) { if (plus && !previewLocked) app.showPaywall.value = false }
+    // The paywall promises a reminder before the trial ends. On Android 13 and later that needs the
+    // notification permission, so it is asked right after a trial starts in this session.
+    val context = LocalContext.current
+    val askNotifications = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
+    var wasLocked by remember { mutableStateOf(!plus) }
+    LaunchedEffect(plus) {
+        if (plus && wasLocked && Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED &&
+            (app.settings.trialEndsAt() ?: 0L) > System.currentTimeMillis()
+        ) {
+            askNotifications.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+        wasLocked = !plus
+    }
     CompositionLocalProvider(LocalPlus provides plus) {
         Box(Modifier.fillMaxSize()) {
             content()
@@ -122,6 +145,11 @@ private fun LoggedIn(
         }
     }
     BackHandler(enabled = navigator.stack.size > 1) { navigator.pop() }
+    // Plus ended while a Plus-only page (a person, all ratings of a type) was open: leave it.
+    val plus = LocalPlus.current
+    LaunchedEffect(plus, navigator.current) {
+        if (!plus && (navigator.current is Route.Person || navigator.current is Route.RatedGrid)) navigator.pop()
+    }
 
     // Material 3 shared-axis X (see Motion.sharedAxisX).
     val axisOffset = with(LocalDensity.current) { 30.dp.roundToPx() }

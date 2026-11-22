@@ -46,7 +46,8 @@ class SubscriptionTest {
         assertEquals(Access.Allowed, SubscriptionRules.access(true, PlayStatus.Unavailable, recent, now))
         assertEquals(Access.Locked, SubscriptionRules.access(true, PlayStatus.Unavailable, old, now))
         assertEquals(Access.Checking, SubscriptionRules.access(true, PlayStatus.Unknown, null, now))
-        assertEquals(Access.Checking, SubscriptionRules.access(true, PlayStatus.Unknown, StoredAccess(false, now), now))
+        // Google Play said no last time: locked until it answers again, so nothing of Plus flashes open.
+        assertEquals(Access.Locked, SubscriptionRules.access(true, PlayStatus.Unknown, StoredAccess(false, now), now))
         // A clock set back doesn't extend it.
         assertEquals(Access.Locked, SubscriptionRules.access(true, PlayStatus.Unavailable, StoredAccess(true, now + day), now))
     }

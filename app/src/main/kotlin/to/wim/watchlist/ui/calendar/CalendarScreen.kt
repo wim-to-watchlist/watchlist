@@ -249,7 +249,7 @@ private fun CalendarRow(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Poster(entry.poster, entry.title, Modifier.width(48.dp), shape = RoundedCornerShape(8.dp))
+            Poster(entry.poster, null, Modifier.width(48.dp), shape = RoundedCornerShape(8.dp))
             Column(Modifier.weight(1f)) {
                 Text(entry.title, style = MaterialTheme.typography.titleSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(

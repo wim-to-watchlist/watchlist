@@ -5,8 +5,8 @@
     <string name="data_error_not_found">Not found. It may have been removed.</string>
     <string name="data_error_busy">Too many requests right now. Try again in a moment.</string>
     <string name="data_error_server">The server isn’t responding (HTTP %1$d). Try again later.</string>
-    <string name="data_error_http">The server returned an error (HTTP %1$d).</string>
-    <string name="data_error_unexpected">Something went wrong.</string>
+    <string name="data_error_http">The server returned an error (HTTP %1$d). Try again later.</string>
+    <string name="data_error_unexpected">Something went wrong. Try again in a moment.</string>
     <string name="data_error_unexpected_detail">Something went wrong (%1$s).</string>
     <string name="data_notif_new_episode">New episode available</string>
     <string name="data_crash_title">Watchlist crashed last time</string>

@@ -117,4 +117,5 @@
         <item quantity="many">%1$d épisodes</item>
         <item quantity="other">%1$d épisodes</item>
     </plurals>
+    <string name="detail_mark_up_to">Marquer comme vu jusqu’ici</string>
 </resources>

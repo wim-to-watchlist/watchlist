@@ -16,7 +16,8 @@ import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.SearchOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -76,7 +77,7 @@ fun MoviesScreen() {
                     if (spec.hasFilters) FilterButton(options.filter(page), spec) { options.setFilter(page, it) }
                     SortButton(options.sort(page), spec.sorts) { options.setSort(page, it) }
                 }
-                PrimaryTabRow(selectedTabIndex = pagerState.currentPage) {
+                PrimaryScrollableTabRow(selectedTabIndex = pagerState.currentPage, edgePadding = 16.dp) {
                     shelves.forEachIndexed { index, shelf ->
                         Tab(
                             selected = pagerState.currentPage == index,

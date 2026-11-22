@@ -28,7 +28,7 @@
     <string name="detail_watched_episode">Watched %1$s</string>
     <string name="detail_watched_episode_titled">Watched %1$s · %2$s</string>
     <string name="detail_your_note">Your note: %1$s</string>
-    <string name="detail_last_watched">last %1$s</string>
+    <string name="detail_last_watched">last watched %1$s</string>
     <string name="detail_your_rating">Your rating</string>
     <string name="detail_save">Save</string>
     <string name="detail_remove">Remove</string>
@@ -115,4 +115,5 @@
         <item quantity="one">%1$d episode</item>
         <item quantity="other">%1$d episodes</item>
     </plurals>
+    <string name="detail_mark_up_to">Mark watched up to here</string>
 </resources>

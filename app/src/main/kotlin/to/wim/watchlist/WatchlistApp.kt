@@ -27,6 +27,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -105,14 +106,21 @@ class WatchlistApp :
             .crossfade(true)
             .build()
 
-    suspend fun logout() {
-        settings.setToken(null)
-        library.clear()
-        account.clear()
-        episodes.clear()
-        NewEpisodesWorker.cancel(this)
-        // Which episodes were announced belongs to the account that signed out.
-        settings.setNotifiedEpisodes(emptySet())
-        settings.setRememberedEpisodes(emptySet())
-    }
+    /**
+     * Signs out and deletes what belongs to the account. Runs in the app's own scope, so leaving the
+     * profile screen can't stop it halfway; the token goes last, because removing it swaps the app
+     * to the sign-in screen.
+     */
+    fun logout(): Job =
+        scope.launch {
+            NewEpisodesWorker.cancel(this@WatchlistApp)
+            library.clear()
+            account.clear()
+            episodes.clear()
+            // Which episodes were announced belongs to the account that signed out.
+            settings.setNotifiedEpisodes(emptySet())
+            settings.setRememberedEpisodes(emptySet())
+            runCatching { http.cache?.evictAll() }
+            settings.setToken(null)
+        }
 }

@@ -106,4 +106,5 @@
     <string name="screens_settings_channel_off">Disattivate nelle impostazioni Android. Tocca per attivarle.</string>
     <string name="screens_settings_android_notifications">Impostazioni notifiche Android</string>
     <string name="screens_settings_android_notifications_sub">Ogni tipo, con suono, vibrazione e pop-up</string>
+    <string name="screens_profile_stats_failed">Impossibile caricare le tue statistiche. Controlla la connessione e riprova.</string>
 </resources>

@@ -277,7 +277,7 @@ fun ResultRow(
             horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Poster(item.poster, item.title, Modifier.width(56.dp), shape = RoundedCornerShape(10.dp))
+            Poster(item.poster, null, Modifier.width(56.dp), shape = RoundedCornerShape(10.dp))
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(item.title, style = MaterialTheme.typography.titleMedium, maxLines = 2, overflow = TextOverflow.Ellipsis)
                 val meta =

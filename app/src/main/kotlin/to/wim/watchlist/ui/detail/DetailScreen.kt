@@ -17,6 +17,9 @@ import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -974,7 +977,7 @@ private fun TrailerRow(d: MediaDetails) {
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         AsyncImage(
-                            "https://img.youtube.com/vi/${t.youtubeId}/mqdefault.jpg",
+                            Images.youtube(t.youtubeId),
                             null,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f).clip(RoundedCornerShape(16.dp)).background(MaterialTheme.colorScheme.surfaceVariant),
@@ -1096,32 +1099,40 @@ private fun EpisodesBlock(
             }
         }
         Spacer(Modifier.height(8.dp))
+        val upToLabel = stringResource(R.string.detail_mark_up_to)
         list.forEach { e ->
             val watched = e.watched()
             val key = "${e.season}:${e.episode}:${e.special}"
             val open = key in expanded
+            // Long-press: everything up to and including this episode; TalkBack offers it as an action.
+            val markUpTo: (() -> Unit)? =
+                if (e.aired) {
+                    {
+                        val upTo = list.takeWhile { it != e } + e
+                        onToggle(upTo.filter { it.aired && !it.watched() }.map { it.ref() }, true)
+                    }
+                } else {
+                    null
+                }
             Row(
                 Modifier
                     .fillMaxWidth()
                     .combinedClickable(
                         onClick = { expanded = if (open) expanded - key else expanded + key },
-                        onLongClick =
-                            if (e.aired) {
-                                {
-                                    // Long-press: everything up to and including this episode.
-                                    val upTo = list.takeWhile { it != e } + e
-                                    onToggle(upTo.filter { it.aired && !it.watched() }.map { it.ref() }, true)
-                                }
-                            } else {
-                                null
-                            },
-                    ).animateContentSize()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .alpha(if (e.aired) 1f else 0.55f),
+                        onLongClick = markUpTo,
+                    ).semantics {
+                        if (markUpTo != null) customActions = listOf(CustomAccessibilityAction(upToLabel) { markUpTo(); true })
+                    }.animateContentSize()
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = if (open) Alignment.Top else Alignment.CenterVertically,
             ) {
-                Box(Modifier.width(120.dp).aspectRatio(16f / 9f).clip(RoundedCornerShape(12.dp)).background(MaterialTheme.colorScheme.surfaceContainerHighest)) {
+                // Episodes that haven't aired yet: only the picture is dimmed, so the text stays readable.
+                Box(
+                    Modifier.width(120.dp).aspectRatio(16f / 9f).clip(RoundedCornerShape(12.dp))
+                        .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                        .alpha(if (e.aired) 1f else 0.55f),
+                ) {
                     Images.episode(e.image)?.let { AsyncImage(it, null, contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize()) }
                     Surface(
                         Modifier.align(Alignment.BottomStart).padding(4.dp),
@@ -1167,7 +1178,13 @@ private fun EpisodesBlock(
                         )
                     }
                 }
-                Checkbox(checked = watched, onCheckedChange = if (e.aired) ({ toggle(e, it) }) else null, enabled = e.aired)
+                val checkboxLabel = stringResource(R.string.lib_mark_episode_watched, e.ref().label)
+                Checkbox(
+                    checked = watched,
+                    onCheckedChange = if (e.aired) ({ toggle(e, it) }) else null,
+                    enabled = e.aired,
+                    modifier = Modifier.semantics { contentDescription = checkboxLabel },
+                )
             }
         }
     }

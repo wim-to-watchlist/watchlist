@@ -60,9 +60,10 @@
     </plurals>
     <string name="plus_up_next_text">Zie de volgende aflevering van elke serie die je kijkt, met Watchlist Plus.</string>
     <plurals name="plus_calendar_title">
-        <item quantity="one">%1$d komende aflevering of release</item>
-        <item quantity="other">%1$d komende afleveringen en releases</item>
+        <item quantity="one">Nog %1$d komende aflevering of release</item>
+        <item quantity="other">Nog %1$d komende afleveringen en releases</item>
     </plurals>
+    <string name="plus_calendar_all">Je volledige kalender zit in Plus</string>
     <string name="plus_calendar_text">Zie wanneer nieuwe afleveringen en films uit je lijsten uitkomen, met Watchlist Plus.</string>
     <string name="plus_stats_title">Je statistieken per soort zitten in Plus</string>
     <string name="plus_stats_text">Zie hoeveel je keek van series, anime en films, met Watchlist Plus.</string>

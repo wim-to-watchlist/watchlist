@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.style.TextAlign
@@ -51,14 +50,19 @@ fun Locked(
 ) {
     val app = rememberApp()
     Box(modifier) {
-        Box(
-            Modifier
-                .clearAndSetSemantics {}
-                .then(if (Build.VERSION.SDK_INT >= 31) Modifier.blur(10.dp).alpha(0.8f) else Modifier.alpha(0.12f)),
-        ) { content() }
+        Box(Modifier.plusBlur()) { content() }
         Box(Modifier.matchParentSize().clearAndSetSemantics {}.clickable(interactionSource = null, indication = null) { app.showPaywall.value = true })
     }
 }
+
+/**
+ * The blur of every locked part, for a single element such as a number on a card whose labels stay
+ * readable: blurred on Android 12 and later, faded on older versions (they can't blur), and hidden
+ * from TalkBack.
+ */
+fun Modifier.plusBlur(): Modifier =
+    clearAndSetSemantics {}
+        .then(if (Build.VERSION.SDK_INT >= 31) Modifier.blur(10.dp).alpha(0.8f) else Modifier.alpha(0.12f))
 
 /**
  * A locked row of a screen (trailers, similar titles): the row blurred, with a small button on top
@@ -77,34 +81,6 @@ fun LockedRow(
             Spacer(Modifier.width(8.dp))
             Text(stringResource(R.string.plus_locked))
         }
-    }
-}
-
-/**
- * A locked block of a screen (the stats per type): the user's own content blurred in full, with the
- * [PlusCard] below it, pulled up over its lower part so the preview stays in sight above the card
- * however short the content is.
- */
-@Composable
-fun LockedPreview(
-    title: String,
-    text: String,
-    modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
-) {
-    val overlap = 56.dp
-    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Locked { content() }
-        PlusCard(
-            title = title,
-            text = text,
-            modifier =
-                Modifier.padding(horizontal = 16.dp).layout { measurable, constraints ->
-                    val placeable = measurable.measure(constraints)
-                    val up = overlap.roundToPx()
-                    layout(placeable.width, (placeable.height - up).coerceAtLeast(0)) { placeable.place(0, -up) }
-                },
-        )
     }
 }
 

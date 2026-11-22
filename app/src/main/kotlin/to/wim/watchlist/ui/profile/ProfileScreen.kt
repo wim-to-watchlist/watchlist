@@ -59,7 +59,8 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
 import to.wim.watchlist.ui.components.LocalPlus
-import to.wim.watchlist.ui.components.LockedPreview
+import to.wim.watchlist.ui.components.PlusCard
+import to.wim.watchlist.ui.components.plusBlur
 import to.wim.watchlist.data.model.Images
 import to.wim.watchlist.data.model.TypeStats
 import to.wim.watchlist.data.model.Ratings
@@ -136,15 +137,15 @@ fun ProfileScreen(types: Set<MediaType>) {
                 if (plus) {
                     shown.forEachIndexed { i, t -> item(key = "type-$i") { Box(Modifier.animateItem()) { TypeCard(t) } } }
                 } else if (shown.isNotEmpty()) {
-                    // Free version: the totals stay, the breakdown per type is blurred under a card about Plus.
+                    // Free version: the totals stay, and so do the cards per type with their labels;
+                    // only their numbers are blurred, above a card about Plus.
+                    shown.forEachIndexed { i, t -> item(key = "type-$i") { Box(Modifier.animateItem()) { TypeCard(t, locked = true) } } }
                     item(key = "plus") {
-                        LockedPreview(
+                        PlusCard(
                             title = stringResource(R.string.plus_stats_title),
                             text = stringResource(R.string.plus_stats_text),
                             modifier = Modifier.animateItem(),
-                        ) {
-                            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { shown.forEach { TypeCard(it) } }
-                        }
+                        )
                     }
                 }
             }
@@ -292,8 +293,18 @@ private fun Stat(
 }
 
 @Composable
-private fun TypeCard(t: TypeStats) {
-    Surface(shape = AppShapes.Group, color = MaterialTheme.colorScheme.surfaceContainerLow) {
+private fun TypeCard(
+    t: TypeStats,
+    /** The stats per type are part of Plus: the labels stay readable, the numbers are blurred. */
+    locked: Boolean = false,
+) {
+    val app = rememberApp()
+    val numbers = if (locked) Modifier.plusBlur() else Modifier
+    Surface(
+        shape = AppShapes.Group,
+        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        modifier = if (locked) Modifier.clickable(role = Role.Button) { app.showPaywall.value = true } else Modifier,
+    ) {
         Column(Modifier.fillMaxWidth().padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(t.type.label(), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
@@ -305,12 +316,13 @@ private fun TypeCard(t: TypeStats) {
                     ).joinToString(" · "),
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.primary,
+                    modifier = numbers,
                 )
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                 t.counts.forEach { c ->
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(c.count.toString(), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                        Text(c.count.toString(), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, modifier = numbers)
                         Text(c.status.label(t.type), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }

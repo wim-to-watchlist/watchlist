@@ -19,7 +19,7 @@ Nobody needs a SIMKL developer account. If the browser shows the app chooser (wh
 Watchlist is free to use: sign in, and your lists, marking episodes watched, ratings, details, search, Discover and your watch totals all work without paying. **Watchlist Plus**, a subscription sold through Google Play, adds the rest:
 
 - **Up next**: the free version shows the first show; the others are blurred under a card that says how many more there are.
-- **Calendar**: blurred under a card that counts what's coming up.
+- **Calendar**: the free version shows the first entry; the others are blurred under a card that counts them. The day headers stay readable.
 - **New-episode notifications**: the switch in *Settings › Notifications* opens the plans.
 - **Stats per type** on your profile (the totals stay free).
 - **Surprise me** in Discover.
@@ -27,7 +27,7 @@ Watchlist is free to use: sign in, and your lists, marking episodes watched, rat
 - **Your own bottom bar**: reorder and hide tabs in *Settings › Bottom bar*. The free version keeps the default tabs.
 - **All settings** except light or dark mode: which types the app shows, hiding specials, continuing from the latest episode, notifications, the bottom bar and colours. The free version uses the defaults (everything shown, specials hidden, Up next from the latest episode) and shows these settings with a lock next to their switch: you can read what each one does, and tapping it opens the plans. Your choices are kept and come back with Plus.
 - **Colours from your wallpaper** (Material You). Light and dark mode stay free.
-- **My ratings**, the list of everything you rated, on your profile. Rating a title stays free; the free version shows the list blurred.
+- **My ratings**, the list of everything you rated, on your profile. Rating a title stays free; the free version shows the first rated title and blurs the others, with the type headers and their counts readable.
 - **Cast and crew** (see below). The free version doesn't show anything about it.
 - **Up next widget** on your home screen: long-press the home screen, choose *Widgets*, find *Watchlist* and drag *Up next* onto it. It lists up to five shows with their next episode, most recently watched first, and says how many more there are. Tap a show to open its details, or the title to open the app. It updates when the app syncs and every hour on its own (newly aired episodes appear without opening the app), from what the app already downloaded. In the free version the widget says it's part of Plus; tapping it opens the plans.
 

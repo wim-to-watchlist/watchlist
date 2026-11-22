@@ -7,6 +7,7 @@ import org.junit.Test
 import to.wim.watchlist.data.model.Access
 import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.data.model.PreviewGroup
 
 class PlusTest {
     @Test
@@ -70,5 +71,22 @@ class PlusTest {
             )
         assertEquals(mine, Plus.settings(plus = true, stored = mine))
         assertEquals(AppSettings(accessToken = "token", theme = ThemeMode.Dark), Plus.settings(plus = false, stored = mine))
+    }
+
+    @Test
+    fun `a locked grouped list shows only the first item and keeps every header with its count`() {
+        val groups = Plus.previewGroups(listOf("mon" to listOf("a", "b"), "tue" to listOf("c")))
+        assertEquals(
+            listOf(PreviewGroup("mon", 2, listOf("a"), listOf("b")), PreviewGroup("tue", 1, emptyList(), listOf("c"))),
+            groups,
+        )
+        assertEquals(2, Plus.lockedCount(groups))
+    }
+
+    @Test
+    fun `a locked grouped list skips empty groups for its readable item`() {
+        val groups = Plus.previewGroups(listOf("mon" to emptyList(), "tue" to listOf("c", "d")))
+        assertEquals(listOf("c"), groups[1].shown)
+        assertEquals(1, Plus.lockedCount(groups))
     }
 }

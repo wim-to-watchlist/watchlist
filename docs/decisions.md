@@ -11,8 +11,9 @@ Each release (`patch`, `minor`, `major` or a pushed tag) now uploads the app bun
 Replaces the two entries below. The owner didn't like the demo and asked for a free app with the
 crucial features paid. Signing in, the lists, marking watched, ratings, details, search, Discover
 and the watch totals are free; Watchlist Plus (the same Google Play subscription and trial) adds
-Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, and cast and
-crew. Locked parts stay on screen, blurred, under a card that opens the plans: people see their
+Up next, the Calendar, new-episode notifications, the stats per type, Surprise me, the list of
+rated titles (added the same day at the owner's request; rating stays free), trailers and similar titles, colours from the
+wallpaper, a custom bottom bar, and cast and crew. An Up next home-screen widget is planned for Plus. Locked parts stay on screen, blurred, under a card that opens the plans: people see their
 own data behind the lock, which explains Plus better than a list of features. Up next shows its
 first show unblurred, the owner's pick from three mockups (card only, first row free, banner).
 TMDB is Plus only and the free version doesn't mention it at all (the owner's wish): no token

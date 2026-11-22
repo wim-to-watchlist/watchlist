@@ -14,6 +14,10 @@
     <string name="sub_feature_calendar">Een kalender met komende afleveringen en releases</string>
     <string name="sub_feature_stats">Kijkstatistieken voor series, anime en films</string>
     <string name="sub_feature_surprise">Verras me: laat Watchlist iets kiezen om te kijken</string>
+    <string name="sub_feature_ratings">Al je beoordeelde titels in één lijst</string>
+    <string name="sub_feature_colors">Kleuren die bij je achtergrond passen</string>
+    <string name="sub_feature_bottom_bar">Je eigen onderste balk: tabs herschikken en verbergen</string>
+    <string name="sub_feature_trailers">Trailers en vergelijkbare titels op elke detailpagina</string>
     <string name="sub_plan_yearly">Jaarlijks</string>
     <string name="sub_plan_monthly">Maandelijks</string>
     <string name="sub_price_monthly">%1$s per maand</string>
@@ -62,6 +66,9 @@
     <string name="plus_calendar_text">Zie wanneer nieuwe afleveringen en films uit je lijsten uitkomen, met Watchlist Plus.</string>
     <string name="plus_stats_title">Je statistieken per soort zitten in Plus</string>
     <string name="plus_stats_text">Zie hoeveel je keek van series, anime en films, met Watchlist Plus.</string>
+    <string name="plus_locked">Deel van Watchlist Plus</string>
+    <string name="plus_dynamic_color_locked">Kleuren van je achtergrond zitten in Watchlist Plus</string>
+    <string name="plus_bottom_bar">Tabs herschikken en verbergen</string>
     <string name="plus_not_now">Niet nu</string>
     <string name="plus_notifications_locked">Deel van Watchlist Plus. Tik om de abonnementen te zien</string>
     <string name="plus_get">Neem Watchlist Plus</string>

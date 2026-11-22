@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -53,6 +56,26 @@ fun Locked(
                 .then(if (Build.VERSION.SDK_INT >= 31) Modifier.blur(10.dp).alpha(0.8f) else Modifier.alpha(0.12f)),
         ) { content() }
         Box(Modifier.matchParentSize().clearAndSetSemantics {}.clickable(interactionSource = null, indication = null) { app.showPaywall.value = true })
+    }
+}
+
+/**
+ * A locked row of a screen (trailers, similar titles): the row blurred, with a small button on top
+ * that says it is part of Plus and opens the subscription screen.
+ */
+@Composable
+fun LockedRow(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    val app = rememberApp()
+    Box(modifier, contentAlignment = Alignment.Center) {
+        Locked { content() }
+        FilledTonalButton(onClick = { app.showPaywall.value = true }) {
+            Icon(Icons.Rounded.Lock, null, Modifier.size(18.dp))
+            Spacer(Modifier.width(8.dp))
+            Text(stringResource(R.string.plus_locked))
+        }
     }
 }
 

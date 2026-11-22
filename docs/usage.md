@@ -23,6 +23,10 @@ Watchlist is free to use: sign in, and your lists, marking episodes watched, rat
 - **New-episode notifications**: the switch in *Settings › Notifications* opens the plans.
 - **Stats per type** on your profile (the totals stay free).
 - **Surprise me** in Discover.
+- **Trailers and similar titles** ("If you like this") on details pages, shown blurred in the free version.
+- **Your own bottom bar**: reorder and hide tabs in *Settings › Bottom bar*. The free version keeps the default tabs.
+- **Colours from your wallpaper** (Material You). Light and dark mode stay free.
+- **My ratings**, the list of everything you rated, on your profile. Rating a title stays free.
 - **Cast and crew** (see below). The free version doesn't show anything about it.
 
 Tap a locked part, or its card's button, to open the Plus screen. It shows what Plus adds and two plans: **Yearly** (€4.99 a year, with 14 days free) and **Monthly** (€0.99 a month, no trial). Google Play shows the prices in your currency. With the trial, a short timeline shows what happens: full access today, a reminder notification two days before the trial ends, and the first charge on the last day unless you cancel before then. **Start free trial** opens Google Play; someone who already had the trial sees **Subscribe** instead. **Not now** (or back) returns to the free version. Once the purchase goes through, everything unlocks right away. *Settings › Subscription › Get Watchlist Plus* opens the same screen.

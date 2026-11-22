@@ -39,4 +39,17 @@ class PlusTest {
         assertEquals(listOf("a") to 0, Plus.preview(listOf("a")))
         assertEquals(emptyList<String>() to 0, Plus.preview(emptyList<String>()))
     }
+
+    @Test
+    fun `without Plus the bottom bar has its default tabs and order`() {
+        val mine = NavConfig(NavTab.defaultOrder.reversed(), setOf(NavTab.Discover))
+        assertEquals(NavConfig(NavTab.defaultOrder, NavTab.defaultEnabled), Plus.nav(plus = false, stored = mine))
+        assertEquals(mine, Plus.nav(plus = true, stored = mine))
+    }
+
+    @Test
+    fun `the TMDB token is only used with Plus`() {
+        assertEquals("eyJtoken", Plus.tmdbKey(plus = true, stored = "eyJtoken"))
+        assertEquals(null, Plus.tmdbKey(plus = false, stored = "eyJtoken"))
+    }
 }

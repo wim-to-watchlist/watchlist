@@ -139,6 +139,7 @@ import coil3.compose.AsyncImage
 import to.wim.watchlist.R
 import to.wim.watchlist.data.model.Plus
 import to.wim.watchlist.ui.components.LocalPlus
+import to.wim.watchlist.ui.components.LockedRow
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.api.TmdbKey
 import androidx.lifecycle.Lifecycle
@@ -387,7 +388,7 @@ fun DetailScreen(
                         }
                     }
                     if (d.trailers.isNotEmpty()) {
-                        item(key = "trailers") { Box(Modifier.animateItem()) { Trailers(d) } }
+                        item(key = "trailers") { Box(Modifier.animateItem()) { Trailers(d, locked = !plus) } }
                     }
                     credits?.let { c ->
                         if (c.cast.isNotEmpty()) item(key = "cast") { Box(Modifier.animateItem()) { CastRow(c.cast) } }
@@ -440,11 +441,15 @@ fun DetailScreen(
                     item(key = "recs") {
                         Column(Modifier.animateItem()) {
                             SectionHeader(stringResource(R.string.detail_if_you_like), modifier = Modifier.padding(horizontal = 8.dp))
-                            PosterRow(
-                                d.recommendations,
-                                onClick = { navigator.openDetail(it.type, it.simklId, it.title, it.poster) },
-                                inLibrary = { library.item(it.type, it.simklId) != null },
-                            )
+                            // Similar titles are part of Plus.
+                            val row: @Composable () -> Unit = {
+                                PosterRow(
+                                    d.recommendations,
+                                    onClick = { navigator.openDetail(it.type, it.simklId, it.title, it.poster) },
+                                    inLibrary = { library.item(it.type, it.simklId) != null },
+                                )
+                            }
+                            if (plus) row() else LockedRow { row() }
                         }
                     }
                 }
@@ -946,10 +951,21 @@ private fun compact(value: Long): String =
     CompactDecimalFormat.getInstance(Locale.getDefault(), CompactDecimalFormat.CompactStyle.SHORT).format(value)
 
 @Composable
-private fun Trailers(d: MediaDetails) {
-    val context = LocalContext.current
+private fun Trailers(
+    d: MediaDetails,
+    /** Trailers are part of Plus: the free version shows the row blurred. */
+    locked: Boolean,
+) {
     Column {
         SectionHeader(stringResource(R.string.detail_trailers), modifier = Modifier.padding(horizontal = 8.dp))
+        if (locked) LockedRow { TrailerRow(d) } else TrailerRow(d)
+    }
+}
+
+@Composable
+private fun TrailerRow(d: MediaDetails) {
+    val context = LocalContext.current
+    run {
         LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             items(d.trailers) { t ->
                 Column(

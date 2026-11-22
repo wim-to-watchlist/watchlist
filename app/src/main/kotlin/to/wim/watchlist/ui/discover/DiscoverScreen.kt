@@ -42,6 +42,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import to.wim.watchlist.R
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.data.CatalogRepository
 import to.wim.watchlist.data.DiscoverSection
 import to.wim.watchlist.data.NavTab
@@ -80,6 +81,7 @@ fun DiscoverScreen(types: List<MediaType>) {
     val failedRows = remember(type, refresh) { mutableStateMapOf<String, Boolean>() }
     val allFailed = SectionResult.allFailed(failedRows.values, sections.size)
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+    val plus = LocalPlus.current
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -89,6 +91,11 @@ fun DiscoverScreen(types: List<MediaType>) {
             Column {
                 MainTopBar(NavTab.Discover.label(), scrollBehavior) {
                     IconButton(onClick = {
+                        // Surprise me is part of Plus: in the free version it opens the subscription screen.
+                        if (!plus) {
+                            app.showPaywall.value = true
+                            return@IconButton
+                        }
                         scope.launch {
                             val id = runCatching { app.catalog.random(type) }.getOrNull()
                             if (id != null) navigator.openDetail(type, id) else snackbar.showSnackbar(resources.getString(R.string.screens_discover_no_suggestion))

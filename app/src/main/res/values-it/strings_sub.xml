@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- The subscription screen, the Subscription row in Settings and the trial reminder. -->
-    <string name="sub_title">Abbonati per continuare a usare Watchlist</string>
+    <string name="sub_title">Passa a Watchlist Plus</string>
     <string name="sub_start_trial">Inizia la prova gratuita</string>
     <string name="sub_subscribe">Abbonati</string>
     <string name="sub_price">%1$s all’anno</string>
     <plurals name="sub_title_trial">
-        <item quantity="one">Prova Watchlist gratis per %1$d giorno</item>
-        <item quantity="many">Prova Watchlist gratis per %1$d giorni</item>
-        <item quantity="other">Prova Watchlist gratis per %1$d giorni</item>
-    </plurals>
-    <plurals name="sub_library_ready">
-        <item quantity="one">La tua libreria è sincronizzata: %1$d titolo è pronto</item>
-        <item quantity="many">La tua libreria è sincronizzata: %1$d titoli sono pronti</item>
-        <item quantity="other">La tua libreria è sincronizzata: %1$d titoli sono pronti</item>
+        <item quantity="one">Prova Watchlist Plus gratis per %1$d giorno</item>
+        <item quantity="other">Prova Watchlist Plus gratis per %1$d giorni</item>
     </plurals>
     <string name="sub_feature_up_next">Prossimi: il prossimo episodio di ogni serie, sincronizzato con SIMKL</string>
     <string name="sub_feature_notifications">Una notifica appena esce un nuovo episodio o film</string>
     <string name="sub_feature_calendar">Un calendario dei prossimi episodi e uscite</string>
-    <string name="sub_feature_discover">Scopri tendenze e novità, o lascia scegliere a Sorprendimi</string>
-    <string name="sub_feature_details">Le tue liste, valutazioni e statistiche</string>
+    <string name="sub_feature_stats">Statistiche per serie TV, anime e film</string>
+    <string name="sub_feature_surprise">Sorprendimi: lascia che Watchlist scelga cosa guardare</string>
     <string name="sub_plan_yearly">Annuale</string>
     <string name="sub_plan_monthly">Mensile</string>
     <string name="sub_price_monthly">%1$s al mese</string>
@@ -45,7 +39,7 @@
     <string name="sub_notif_title">La tua prova gratuita finisce il %1$s</string>
     <string name="sub_notif_text">Dopo, Google Play addebita l’abbonamento. Tocca per gestirlo o disdirlo.</string>
     <string name="sub_failed">L’acquisto non è andato a buon fine. Riprova o controlla il metodo di pagamento in Google Play.</string>
-    <string name="sub_pending">Il tuo acquisto aspetta che Google Play confermi il pagamento. Watchlist si apre appena succede.</string>
+    <string name="sub_pending">Il tuo acquisto è in attesa della conferma del pagamento da Google Play. Plus si sblocca appena arriva.</string>
     <string name="sub_unavailable">Google Play non è disponibile, quindi non è possibile verificare l’abbonamento. Controlla che Google Play sia installato e di aver effettuato l’accesso, poi verifica di nuovo.</string>
     <string name="sub_not_loaded">Non è stato possibile caricare l’abbonamento da Google Play. Controlla la connessione e riprova.</string>
     <string name="sub_check_again">Verifica di nuovo</string>
@@ -54,4 +48,25 @@
     <string name="sub_preview">Anteprima schermata di abbonamento</string>
     <string name="sub_preview_summary">Solo nella versione di prova: mostra la schermata con prezzi di esempio</string>
     <string name="sub_preview_close">Chiudi anteprima</string>
+    <!-- Watchlist Plus in the free version: the cards over locked features and their rows in Settings. -->
+    <string name="plus_see_plans">Vedi i piani</string>
+    <string name="plus_up_next_title">Il tuo «Prossimi» completo è in Plus</string>
+    <plurals name="plus_up_next_more">
+        <item quantity="one">Ancora %1$d serie nei tuoi «Prossimi»</item>
+        <item quantity="other">Ancora %1$d serie nei tuoi «Prossimi»</item>
+    </plurals>
+    <string name="plus_up_next_text">Vedi il prossimo episodio di ogni serie che stai guardando, con Watchlist Plus.</string>
+    <plurals name="plus_calendar_title">
+        <item quantity="one">%1$d episodio o uscita in arrivo</item>
+        <item quantity="other">%1$d episodi e uscite in arrivo</item>
+    </plurals>
+    <string name="plus_calendar_text">Vedi quando escono i nuovi episodi e film delle tue liste, con Watchlist Plus.</string>
+    <string name="plus_stats_title">Le tue statistiche per tipo sono in Plus</string>
+    <string name="plus_stats_text">Vedi quanto hai guardato di serie TV, anime e film, con Watchlist Plus.</string>
+    <string name="plus_not_now">Non ora</string>
+    <string name="plus_notifications_locked">Fa parte di Watchlist Plus. Tocca per vedere i piani</string>
+    <string name="plus_get">Passa a Watchlist Plus</string>
+    <string name="plus_get_summary">Prossimi, il calendario, le notifiche e altro</string>
+    <string name="plus_preview_locked">Anteprima della versione gratuita</string>
+    <string name="plus_preview_locked_summary">Solo versione di prova: blocca le funzioni Plus come senza abbonamento</string>
 </resources>

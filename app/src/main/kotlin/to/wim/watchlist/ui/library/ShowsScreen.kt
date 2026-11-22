@@ -6,6 +6,10 @@ import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import to.wim.watchlist.R
+import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.ui.components.LocalPlus
+import to.wim.watchlist.ui.components.Locked
+import to.wim.watchlist.ui.components.PlusCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -248,46 +252,68 @@ private fun UpNextList(
         }
     }
 
+    val plus = LocalPlus.current
+    val row: @Composable (LibraryItem, Modifier) -> Unit = { item, modifier ->
+        val playback = state.playbackFor(item.type, item.ids.simkl)?.takeIf { it.episode != null }
+        val next = Shelves.nextEpisode(item, fromLatest, state.latestNext[item.key], state.airedNext(item, fromLatest))
+        val left = item.airedUnwatched
+        ShowRow(
+            item = item,
+            headline =
+                if (playback != null) {
+                    stringResource(R.string.lib_playback_progress, playback.episode!!.label, playback.progress.roundToInt())
+                } else {
+                    next?.let { listOfNotNull(it.ref.label, it.title).joinToString(" · ") } ?: stringResource(R.string.lib_continue_watching)
+                },
+            supporting =
+                listOfNotNull(
+                    playback?.episodeTitle,
+                    if (playback == null && left > 0) pluralStringResource(R.plurals.lib_episodes_left, left, left) else null,
+                    Format.ago(item.lastWatchedAt)?.let { stringResource(R.string.lib_watched_ago, it) },
+                ).joinToString(" · ").ifEmpty { null },
+            airing = Shelves.airingOf(item, state.showInfo[item.key], state.nextAirDate(item)),
+            onClick = { onOpen(item) },
+            modifier = modifier,
+        ) {
+            when {
+                item.key in busy -> CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
+                playback != null ->
+                    FilledTonalIconButton(onClick = { confirm = playback to item }) {
+                        Icon(Icons.Rounded.Check, contentDescription = stringResource(R.string.lib_mark_episode_watched, playback.episode!!.label))
+                    }
+                next != null ->
+                    FilledTonalIconButton(onClick = {
+                        run(item, next.ref.label) { app.library.markEpisodeWatched(item, next.ref) }
+                    }) { Icon(Icons.Rounded.Check, contentDescription = stringResource(R.string.lib_mark_episode_watched, next.ref.label)) }
+            }
+        }
+    }
+
     LazyColumn(
         state = listState,
         contentPadding = PaddingValues(start = 12.dp, end = 12.dp, top = 12.dp, bottom = bottomPadding()),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier.fillMaxSize().readableWidth(),
     ) {
-        items(items, key = { it.key }) { item ->
-            val playback = state.playbackFor(item.type, item.ids.simkl)?.takeIf { it.episode != null }
-            val next = Shelves.nextEpisode(item, fromLatest, state.latestNext[item.key], state.airedNext(item, fromLatest))
-            val left = item.airedUnwatched
-            ShowRow(
-                item = item,
-                headline =
-                    if (playback != null) {
-                        stringResource(R.string.lib_playback_progress, playback.episode!!.label, playback.progress.roundToInt())
-                    } else {
-                        next?.let { listOfNotNull(it.ref.label, it.title).joinToString(" · ") } ?: stringResource(R.string.lib_continue_watching)
-                    },
-                supporting =
-                    listOfNotNull(
-                        playback?.episodeTitle,
-                        if (playback == null && left > 0) pluralStringResource(R.plurals.lib_episodes_left, left, left) else null,
-                        Format.ago(item.lastWatchedAt)?.let { stringResource(R.string.lib_watched_ago, it) },
-                    ).joinToString(" · ").ifEmpty { null },
-                airing = Shelves.airingOf(item, state.showInfo[item.key], state.nextAirDate(item)),
-                onClick = { onOpen(item) },
-                modifier = Modifier.animateItem(),
-            ) {
-                when {
-                    item.key in busy -> CircularProgressIndicator(Modifier.size(24.dp), strokeWidth = 2.dp)
-                    playback != null ->
-                        FilledTonalIconButton(onClick = { confirm = playback to item }) {
-                            Icon(Icons.Rounded.Check, contentDescription = stringResource(R.string.lib_mark_episode_watched, playback.episode!!.label))
-                        }
-                    next != null ->
-                        FilledTonalIconButton(onClick = {
-                            run(item, next.ref.label) { app.library.markEpisodeWatched(item, next.ref) }
-                        }) { Icon(Icons.Rounded.Check, contentDescription = stringResource(R.string.lib_mark_episode_watched, next.ref.label)) }
-                }
+        if (plus) {
+            items(items, key = { it.key }) { item -> row(item, Modifier.animateItem()) }
+        } else {
+            // Free version: the first show as it is, a card about Plus, the rest blurred.
+            val (shown, more) = Plus.preview(items)
+            items(shown, key = { it.key }) { item -> row(item, Modifier.animateItem()) }
+            item(key = "plus") {
+                PlusCard(
+                    title =
+                        if (more > 0) {
+                            pluralStringResource(R.plurals.plus_up_next_more, more, more)
+                        } else {
+                            stringResource(R.string.plus_up_next_title)
+                        },
+                    text = stringResource(R.string.plus_up_next_text),
+                    modifier = Modifier.padding(vertical = 8.dp),
+                )
             }
+            items(items.drop(shown.size), key = { it.key }) { item -> Locked { row(item, Modifier) } }
         }
     }
     confirm?.let { (playback, item) ->

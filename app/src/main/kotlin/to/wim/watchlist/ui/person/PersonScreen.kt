@@ -64,6 +64,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
+import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.api.TmdbApi
 import to.wim.watchlist.data.api.TmdbKey
@@ -102,7 +104,7 @@ fun PersonScreen(
     val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
     val library by app.library.state.collectAsState()
-    val key = TmdbKey.parse(settings.tmdbKey)
+    val key = TmdbKey.parse(Plus.tmdbKey(LocalPlus.current, settings.tmdbKey))
 
     var person by remember { mutableStateOf<Person?>(null) }
     var error by remember { mutableStateOf<String?>(null) }

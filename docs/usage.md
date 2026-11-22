@@ -2,14 +2,6 @@
 
 For people using the app. It assumes the app is installed (see the [README](../README.md#quick-start)).
 
-## Trying the demo
-
-The first screen has **Try the demo** under the sign-in button. It opens the whole app with
-made-up shows, anime and films, so you can look around before you sign in: mark episodes watched,
-rate, move titles between lists, browse Discover and the Calendar. Nothing is sent to SIMKL and
-nothing is kept: a bar at the top says you are in the demo, with **Sign in** and **Exit demo**
-(back also leaves it from the main screen).
-
 ## Signing in
 
 1. Open the app and tap **Sign in with SIMKL**.
@@ -24,11 +16,20 @@ Nobody needs a SIMKL developer account. If the browser shows the app chooser (wh
 
 ## Subscription
 
-After signing in, Watchlist syncs your lists and then needs a subscription, sold through Google Play. If your Google account already has it, for example on a new phone, the app opens right away. The subscription screen shows what the app does, how many of your titles are ready, and two plans: **Yearly** (€4.99 a year, with 14 days free) and **Monthly** (€0.99 a month, no trial). Google Play shows the prices in your currency. With the trial, a short timeline shows what happens: full access today, a reminder notification two days before the trial ends, and the first charge on the last day unless you cancel before then. **Start free trial** opens Google Play; someone who already had the trial sees **Subscribe** instead. Without an active subscription the app only shows this screen.
+Watchlist is free to use: sign in, and your lists, marking episodes watched, ratings, details, search, Discover and your watch totals all work without paying. **Watchlist Plus**, a subscription sold through Google Play, adds the rest:
+
+- **Up next**: the free version shows the first show; the others are blurred under a card that says how many more there are.
+- **Calendar**: blurred under a card that counts what's coming up.
+- **New-episode notifications**: the switch in *Settings › Notifications* opens the plans.
+- **Stats per type** on your profile (the totals stay free).
+- **Surprise me** in Discover.
+- **Cast and crew** (see below). The free version doesn't show anything about it.
+
+Tap a locked part, or its card's button, to open the Plus screen. It shows what Plus adds and two plans: **Yearly** (€4.99 a year, with 14 days free) and **Monthly** (€0.99 a month, no trial). Google Play shows the prices in your currency. With the trial, a short timeline shows what happens: full access today, a reminder notification two days before the trial ends, and the first charge on the last day unless you cancel before then. **Start free trial** opens Google Play; someone who already had the trial sees **Subscribe** instead. **Not now** (or back) returns to the free version. Once the purchase goes through, everything unlocks right away. *Settings › Subscription › Get Watchlist Plus* opens the same screen.
 
 - **Check again**: asks Google Play again, for example after subscribing on another phone with the same Google account.
 - **Manage or cancel** (also in *Settings › Subscription*, which shows the trial's end date while it runs): Google Play's page to change or cancel it.
-- Offline, the app keeps opening for up to 7 days after Google Play last confirmed the subscription.
+- Offline, Plus stays unlocked for up to 7 days after Google Play last confirmed the subscription.
 
 ## Navigation
 
@@ -76,7 +77,7 @@ A title you paused part-way (on another device) shows a **progress banner** with
 
 **Add to list** sits in the title bar, next to Share (list icon; once the title is in a list it shows the list's name) and opens the list statuses. **Your rating** is the tile on the right of the info card's ratings row, as tall as SIMKL's and the other rating tiles; it stays in place while the other ratings scroll, and you tap it to open the 1–10 rating. Below the poster, **Watched** (check mark) marks it watched, and **Check in** (TV icon) tells SIMKL you are watching it right now. Check in asks first and explains itself; SIMKL then marks the title watched when it ends.
 
-**Cast and crew** (optional): add your own free TMDB token in *Settings › Cast and crew* and details pages show a **Cast** row (photo, name and role; for shows, every season) and a **Crew** row (director, writers, book, music, camera) below the trailers. Tap a person to open their page: photo, birthday (and age), birthplace, biography (in English when TMDB has none in your language), **Known for** and the full **Filmography** with their roles and jobs. Titles already in your library have a check mark; tap any title to open its details here (when SIMKL doesn't have it, you can open it on TMDB). The link icon at the top opens the person on TMDB. To get a token: sign in on [themoviedb.org](https://www.themoviedb.org/settings/api), open *Settings › API*, request an API key, and paste the long "API Read Access Token" (it starts with `eyJ`; the shorter "API Key" doesn't work here, and the app says so). The app checks it with TMDB before saving it. The token stays on your phone (it isn't backed up). Cast and crew appear as soon as it is saved, on the next details page you open or when you come back to the app. Titles TMDB doesn't know (many anime) show no cast. Without a token, details pages of titles TMDB knows show a card where the cast would be: tap it (or **Add token**) to enter one, **Not now** hides it until you open the app again, **Don't show again** hides it for good (you can still add a token in Settings).
+**Cast and crew** (Watchlist Plus, optional): add your own free TMDB token in *Settings › Cast and crew* and details pages show a **Cast** row (photo, name and role; for shows, every season) and a **Crew** row (director, writers, book, music, camera) below the trailers. Tap a person to open their page: photo, birthday (and age), birthplace, biography (in English when TMDB has none in your language), **Known for** and the full **Filmography** with their roles and jobs. Titles already in your library have a check mark; tap any title to open its details here (when SIMKL doesn't have it, you can open it on TMDB). The link icon at the top opens the person on TMDB. To get a token: sign in on [themoviedb.org](https://www.themoviedb.org/settings/api), open *Settings › API*, request an API key, and paste the long "API Read Access Token" (it starts with `eyJ`; the shorter "API Key" doesn't work here, and the app says so). The app checks it with TMDB before saving it. The token stays on your phone (it isn't backed up). Cast and crew appear as soon as it is saved, on the next details page you open or when you come back to the app. Titles TMDB doesn't know (many anime) show no cast. Without a token, details pages of titles TMDB knows show a card where the cast would be: tap it (or **Add token**) to enter one, **Not now** hides it until you open the app again, **Don't show again** hides it for good (you can still add a token in Settings).
 
 Links to `simkl.com/tv/…`, `/anime/…` and `/movies/…` from other apps can open straight in these details.
 

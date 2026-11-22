@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- The subscription screen, the Subscription row in Settings and the trial reminder. -->
-    <string name="sub_title">Subscribe to keep using Watchlist</string>
+    <string name="sub_title">Get Watchlist Plus</string>
     <string name="sub_start_trial">Start free trial</string>
     <string name="sub_subscribe">Subscribe</string>
     <string name="sub_price">%1$s per year</string>
     <plurals name="sub_title_trial">
-        <item quantity="one">Try Watchlist free for %1$d day</item>
-        <item quantity="other">Try Watchlist free for %1$d days</item>
-    </plurals>
-    <plurals name="sub_library_ready">
-        <item quantity="one">Your library is synced: %1$d title is ready</item>
-        <item quantity="other">Your library is synced: %1$d titles are ready</item>
+        <item quantity="one">Try Watchlist Plus free for %1$d day</item>
+        <item quantity="other">Try Watchlist Plus free for %1$d days</item>
     </plurals>
     <string name="sub_feature_up_next">Up next: the next episode of every show, synced with SIMKL</string>
     <string name="sub_feature_notifications">A notification when a new episode or movie is out</string>
     <string name="sub_feature_calendar">A calendar of upcoming episodes and releases</string>
-    <string name="sub_feature_discover">Discover what’s trending and new, or let Surprise me pick</string>
-    <string name="sub_feature_details">Your lists, ratings and watch stats</string>
+    <string name="sub_feature_stats">Watch stats for TV shows, anime and movies</string>
+    <string name="sub_feature_surprise">Surprise me: let Watchlist pick something to watch</string>
     <string name="sub_plan_yearly">Yearly</string>
     <string name="sub_plan_monthly">Monthly</string>
     <string name="sub_price_monthly">%1$s per month</string>
@@ -42,7 +38,7 @@
     <string name="sub_notif_title">Your free trial ends on %1$s</string>
     <string name="sub_notif_text">After that, Google Play charges for your subscription. Tap to manage or cancel it.</string>
     <string name="sub_failed">The purchase didn’t go through. Try again, or check your payment method in Google Play.</string>
-    <string name="sub_pending">Your purchase is waiting for Google Play to confirm the payment. Watchlist opens as soon as it does.</string>
+    <string name="sub_pending">Your purchase is waiting for Google Play to confirm the payment. Plus unlocks as soon as it does.</string>
     <string name="sub_unavailable">Google Play isn’t available, so the subscription can’t be checked. Make sure Google Play is installed and you’re signed in to it, then check again.</string>
     <string name="sub_not_loaded">The subscription couldn’t be loaded from Google Play. Check your connection and try again.</string>
     <string name="sub_check_again">Check again</string>
@@ -51,4 +47,25 @@
     <string name="sub_preview">Preview subscription screen</string>
     <string name="sub_preview_summary">Test version only: shows the screen with sample prices</string>
     <string name="sub_preview_close">Close preview</string>
+    <!-- Watchlist Plus in the free version: the cards over locked features and their rows in Settings. -->
+    <string name="plus_see_plans">See plans</string>
+    <string name="plus_up_next_title">Your whole Up next is in Plus</string>
+    <plurals name="plus_up_next_more">
+        <item quantity="one">%1$d more show in your Up next</item>
+        <item quantity="other">%1$d more shows in your Up next</item>
+    </plurals>
+    <string name="plus_up_next_text">See the next episode of every show you’re watching, with Watchlist Plus.</string>
+    <plurals name="plus_calendar_title">
+        <item quantity="one">%1$d upcoming episode or release</item>
+        <item quantity="other">%1$d upcoming episodes and releases</item>
+    </plurals>
+    <string name="plus_calendar_text">See when new episodes and movies from your lists come out, with Watchlist Plus.</string>
+    <string name="plus_stats_title">Your stats per type are in Plus</string>
+    <string name="plus_stats_text">See how much you watched of TV shows, anime and movies, with Watchlist Plus.</string>
+    <string name="plus_not_now">Not now</string>
+    <string name="plus_notifications_locked">Part of Watchlist Plus. Tap to see the plans</string>
+    <string name="plus_get">Get Watchlist Plus</string>
+    <string name="plus_get_summary">Up next, the calendar, notifications and more</string>
+    <string name="plus_preview_locked">Preview the free version</string>
+    <string name="plus_preview_locked_summary">Test version only: locks the Plus features as without a subscription</string>
 </resources>

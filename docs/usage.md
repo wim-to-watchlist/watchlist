@@ -97,7 +97,7 @@ Upcoming episodes and releases of titles in your lists. The **filter** button in
 
 ## Profile
 
-Watch-time statistics per type and status, then **My ratings** (with how many titles you rated), then sync and your SIMKL page, and **Sign out** on its own at the bottom. Settings is the gear at the top.
+Watch-time statistics per type and status (the counts per status in rows of at most three, so long names fit in every language), then **My ratings** (with how many titles you rated), then sync and your SIMKL page, and **Sign out** on its own at the bottom. Settings is the gear at the top.
 
 **My ratings** shows everything you rated, a row per type (TV Shows, Anime, Movies; only the types turned on in *Settings › Content*), highest rating first. Tap a row's header (with the **>**) to see all of that type in a grid.
 

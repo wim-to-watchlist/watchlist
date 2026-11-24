@@ -75,7 +75,8 @@ believe it, or ask Claude to go through the reports and check them.
   a run takes at most 6 at a time and only one run goes at once.
 - Reports and screenshots are not encrypted, because this repository is private: only
   people with access to it can see them. The run refuses to start if the repository is
-  ever made public.
+  public, unless you tick **allow_public** on the Run workflow form: then this run's reports
+  are visible to anyone until the repository is made private.
 
 ## Files
 

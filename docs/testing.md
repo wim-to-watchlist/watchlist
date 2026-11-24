@@ -49,7 +49,7 @@ The debug APK (`watchlist-<version>-debug.apk`) and the test and lint reports ar
 | `data/NewEpisodesTest` | `NewEpisodes`: only aired, unwatched episodes of shows being watched, each announced once; upcoming episodes remembered so a late check still announces them; one notification per show counting its new episodes; at most five shows per check, the rest wait; anime ignores seasons |
 | `ui/LibraryFilterTest` | The library filters (anime type, case-insensitive; my rating; airing / ended; kept when the screen is recreated), the sort orders, what each tab offers (`TabSpec`: no my rating on Up next and Want to watch, no "recently watched" on Want to watch, defaults) and the "My ratings" list (`Ratings`) |
 | `ui/LaunchTest` | Starts `MainActivity` under Robolectric (API 35) signed out (login screen) and with a token (main screen); any exception during start-up or composition fails |
-| `ui/components/LargeTextTest` | Poster tiles keep their width at normal text and grow with large text, up to 1.5 times |
+| `ui/components/LargeTextTest` | Large text: poster tiles grow up to 1.5 times, rating tiles per line, one or two lines on Up next cards, and the shared bottom-bar label size (`fitSize`) |
 
 ## Strategy
 

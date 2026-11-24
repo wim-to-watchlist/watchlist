@@ -459,6 +459,7 @@ fun ShowRow(
     modifier: Modifier = Modifier,
     trailing: @Composable () -> Unit = {},
 ) {
+    val lines = LargeText.cardLines(LocalDensity.current.fontScale)
     Surface(
         onClick = onClick,
         shape = AppShapes.Item,
@@ -472,7 +473,7 @@ fun ShowRow(
                     Text(
                         item.title,
                         style = MaterialTheme.typography.titleMedium,
-                        maxLines = 1,
+                        maxLines = lines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f, fill = false),
                     )
@@ -483,7 +484,7 @@ fun ShowRow(
                         headline,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
-                        maxLines = 1,
+                        maxLines = lines,
                         overflow = TextOverflow.Ellipsis,
                     )
                 }
@@ -492,7 +493,7 @@ fun ShowRow(
                         supporting,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1,
+                        maxLines = lines,
                         overflow = TextOverflow.Ellipsis,
                     )
                 }

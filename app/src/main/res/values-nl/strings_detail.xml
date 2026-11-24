@@ -67,7 +67,10 @@
     <string name="detail_fact_also_known_as">Ook bekend als</string>
     <string name="detail_fact_rank">Rang</string>
     <string name="detail_fact_genres">Genres</string>
-    <string name="detail_votes">%1$s stemmen</string>
+    <plurals name="detail_votes">
+        <item quantity="one">%1$s stem</item>
+        <item quantity="other">%1$s stemmen</item>
+    </plurals>
     <string name="detail_show_more">Toon meer</string>
     <string name="detail_show_less">Toon minder</string>
     <string name="detail_trailers">Trailers</string>

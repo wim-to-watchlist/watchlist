@@ -91,6 +91,9 @@
     <string name="screens_tmdb_api_key">C’est la courte API Key de TMDB. Collez plutôt le long API Read Access Token de la même page.</string>
     <string name="screens_tmdb_not_token">Ce n’est pas un API Read Access Token : c’est le long code qui commence par eyJ.</string>
     <string name="screens_settings_credits">Sources</string>
+    <string name="screens_settings_privacy">Confidentialité</string>
+    <string name="screens_privacy_policy">Politique de confidentialité</string>
+    <string name="screens_privacy_policy_text">Ce que Watchlist enregistre et envoie, et à qui</string>
     <string name="screens_credit_simkl_title">SIMKL</string>
     <string name="screens_credit_simkl_text">Vos listes, notes et historique, ainsi que tous les titres, viennent de SIMKL. Watchlist est une app non officielle, sans lien avec SIMKL.</string>
     <string name="screens_credit_tmdb_title">TMDB</string>

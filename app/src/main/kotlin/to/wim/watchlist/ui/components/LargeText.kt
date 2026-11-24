@@ -22,6 +22,46 @@ object LargeText {
 
     /** The smallest size a label shrinks to before it is cut (scaled by the font setting too). */
     const val MIN_LABEL_SP = 8f
+
+    /**
+     * Lines a card's title or episode line may take: one at normal text size, two once the text
+     * is set larger, so "Grey's An…" can be read in full.
+     */
+    fun cardLines(fontScale: Float): Int = if (fontScale > 1.05f) 2 else 1
+
+    /** The narrowest a rating tile may get at normal text size; it grows with the text. */
+    const val MIN_TILE_WIDTH_DP = 84f
+
+    /**
+     * How many rating tiles share a line [widthDp] wide (8 dp apart) at [fontScale]: as many as
+     * fit at their narrowest, at least one. The rest go to the next line, so no tile is squeezed.
+     */
+    fun tilesPerRow(
+        widthDp: Float,
+        fontScale: Float,
+        gapDp: Float = 8f,
+    ): Int {
+        val tile = MIN_TILE_WIDTH_DP * fontScale.coerceAtLeast(1f)
+        return ((widthDp + gapDp) / (tile + gapDp)).toInt().coerceAtLeast(1)
+    }
+
+    /**
+     * The largest text size from [maxSp] down to [minSp] (in [stepSp] steps) at which [fits] holds,
+     * or [minSp] when none does. The bottom bar uses one size for all its labels, so they stay even.
+     */
+    fun fitSize(
+        maxSp: Float,
+        minSp: Float = MIN_LABEL_SP,
+        stepSp: Float = 0.5f,
+        fits: (Float) -> Boolean,
+    ): Float {
+        var size = maxSp
+        while (size > minSp) {
+            if (fits(size)) return size
+            size -= stepSp
+        }
+        return minSp
+    }
 }
 
 /**

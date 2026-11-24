@@ -543,3 +543,7 @@ The object graph is five lazily created objects in `WatchlistApp`; the navigatio
 ## Robolectric launch test
 
 `LaunchTest` starts `MainActivity` signed out and signed in under Robolectric. Start-up and composition crashes fail CI with their stack trace, without the emulator an instrumented test would need.
+
+## Large text: labels shrink, posters widen (2026-11-24)
+
+The AI testers at 130% and 200% text found cut bottom-bar labels ("Calen"), uneven Discover tabs and poster titles split mid-word. One-line labels in fixed rows (bottom bar, Discover's type tabs) now shrink until they fit (`FitLabel`, Compose's text auto-size), and poster tiles and grid cells grow with the text size up to 1.5 times (`LargeText.posterWidthFactor`). The library's shelf tabs already scroll, so they stay as they are. The ratings row wraps instead of scrolling, so no tile hides behind your rating.

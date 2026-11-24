@@ -1,5 +1,6 @@
 package to.wim.watchlist.ui.components
 
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -57,7 +58,7 @@ fun PosterTileSkeleton(modifier: Modifier = Modifier) {
 @Composable
 fun PosterGridSkeleton(bottomPadding: Dp) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(112.dp),
+        columns = GridCells.Adaptive(112.dp * LargeText.posterWidthFactor(LocalDensity.current.fontScale)),
         contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 8.dp, bottom = bottomPadding),
         userScrollEnabled = false,
         modifier = Modifier.fillMaxSize().loadingSemantics(),

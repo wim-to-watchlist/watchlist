@@ -1,5 +1,6 @@
 package to.wim.watchlist.ui.components
 
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -221,6 +222,7 @@ fun PosterRow(
     itemWidth: Dp = 120.dp,
     inLibrary: (MediaSummary) -> Boolean = { false },
 ) {
+    val width = itemWidth * LargeText.posterWidthFactor(LocalDensity.current.fontScale)
     LazyRow(
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 12.dp),
@@ -234,7 +236,7 @@ fun PosterRow(
                 rating = item.rating,
                 inLibrary = inLibrary(item),
                 onClick = { onClick(item) },
-                modifier = Modifier.width(itemWidth),
+                modifier = Modifier.width(width),
             )
         }
     }

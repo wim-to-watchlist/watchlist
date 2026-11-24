@@ -1,5 +1,7 @@
 package to.wim.watchlist.ui.library
 
+import to.wim.watchlist.ui.components.LargeText
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -386,7 +388,7 @@ fun LibraryGrid(
     showAiring: Boolean,
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(112.dp),
+        columns = GridCells.Adaptive(112.dp * LargeText.posterWidthFactor(LocalDensity.current.fontScale)),
         contentPadding = PaddingValues(start = 8.dp, end = 8.dp, top = 8.dp, bottom = bottomPadding()),
         modifier = Modifier.fillMaxWidth(),
     ) {

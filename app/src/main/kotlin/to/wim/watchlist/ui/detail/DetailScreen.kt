@@ -1,5 +1,7 @@
 package to.wim.watchlist.ui.detail
 
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import android.icu.text.CompactDecimalFormat
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
@@ -20,11 +22,9 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.CustomAccessibilityAction
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -43,7 +43,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -624,18 +623,23 @@ private fun Actions(
         if (type.isEpisodic && next != null && item?.status == ListStatus.Watching) {
             // When the progress banner is on this very episode, its Watched button replaces this one.
             val showWatched = DetailActions.showNextEpisodeWatched(next.ref, playback)
+            // Which episode the buttons act on, as text above them (DESIGN.md, "Material 3"): in
+            // the button, "S01E01 watched" read as if it was already watched and cut the title.
+            Text(
+                next.title?.let { stringResource(R.string.detail_next_episode_titled, next.ref.label, it) }
+                    ?: stringResource(R.string.detail_next_episode, next.ref.label),
+                style = MaterialTheme.typography.titleSmall,
+            )
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
                 if (showWatched) {
+                    val markLabel = stringResource(R.string.lib_mark_episode_watched, next.ref.label)
                     FilledTonalButton(
                         onClick = { onWatchNext(next.ref) },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).semantics { contentDescription = markLabel },
                     ) {
                         Icon(Icons.Rounded.Check, null, Modifier.size(18.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text(
-                            next.title?.let { stringResource(R.string.detail_watched_episode_titled, next.ref.label, it) }
-                                ?: stringResource(R.string.detail_watched_episode, next.ref.label),
-                            maxLines = 1, overflow = TextOverflow.Ellipsis)
+                        Text(stringResource(R.string.detail_mark_watched), maxLines = 1)
                     }
                 }
                 // Alone in the row (the banner has the Watched button) it takes the full width.
@@ -810,6 +814,7 @@ private data class Fact(
  * The information about a title. The ratings stand out as tiles at the top; the facts below them
  * show only the first few until the card is expanded.
  */
+@OptIn(ExperimentalLayoutApi::class) // fillMaxRowHeight: tiles on a line share a height
 @Composable
 private fun InfoCard(
     ratings: List<Rating>,
@@ -826,20 +831,17 @@ private fun InfoCard(
             Modifier.fillMaxWidth().animateContentSize().padding(vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            // The other ratings scroll on the left; your rating is pinned on the right, so it stays in
-            // view however many ratings there are. IntrinsicSize.Min gives every tile the height of
-            // the tallest one (a tile with a vote count has an extra line).
-            Row(
-                Modifier.fillMaxWidth().height(IntrinsicSize.Min).padding(horizontal = 12.dp),
+            // The ratings, then your own: tiles that don't fit go to the next line, so none hides
+            // behind another (a scrolling row cut the second rating off under your rating).
+            // fillMaxRowHeight gives the tiles on a line the height of the tallest one (a tile with
+            // a vote count has an extra line).
+            FlowRow(
+                Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                Row(
-                    Modifier.weight(1f).fillMaxHeight().horizontalScroll(rememberScrollState()),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    ratings.forEach { RatingTile(it, Modifier.fillMaxHeight()) }
-                }
-                YourRatingTile(userRating, Modifier.fillMaxHeight()) { rating = true }
+                ratings.forEach { RatingTile(it, Modifier.fillMaxRowHeight()) }
+                YourRatingTile(userRating, Modifier.fillMaxRowHeight()) { rating = true }
             }
             DetailFacts.visible(facts, expanded).forEach { FactRow(it) }
             if (DetailFacts.canExpand(facts.size)) {

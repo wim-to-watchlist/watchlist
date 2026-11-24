@@ -52,11 +52,25 @@ expected, don't report it.
    A problem inside the app (before Chrome opens, or after SIMKL sends you back) is a
    Watchlist bug.
 
+### Fill the account when it is empty
+The test account may start empty or nearly empty. Right after signing in, look at Up next,
+the TV shows lists and Movies. If they hold fewer than three titles, add some yourself
+before you work on your goal, the way a new user would (Discover or Search, then the list
+button on the details page). Add at most five titles in total:
+- two or three TV shows to Watching, at least one currently airing (Discover's trending
+  lists are a good source), so Up next and the Calendar have something to show;
+- one or two movies to Plan to watch;
+- one anime, if your persona would watch one.
+Mark the first episode of one show as watched so Up next has a next episode. Keep these
+titles at the end of your test (don't undo them): the next testers use them. Report a
+problem you hit while adding them like any other finding.
+
 ### Other testers share the account
 Up to six testers use the same SIMKL test account at the same time. Lists can change
 under you because someone else marked an episode. Only report it as a bug when the app
 contradicts what YOU just did on this phone. Undo what you change when your goal allows
 it (unmark an episode you marked only to test), and never remove more than one item.
+The titles you added to fill an empty account stay.
 
 ### Out of scope
 - Buying Watchlist Plus or the Google Play screens (a test build can't buy).

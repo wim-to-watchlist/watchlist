@@ -26,9 +26,9 @@ All of it is done on github.com, in the repository's **Settings › Secrets and 
 Actions › New repository secret**. Nobody else, Claude included, needs to see these values.
 
 1. **A SIMKL test account.** Make a new, separate SIMKL account (not your own: the testers
-   mark episodes and rate titles in it). Add a few shows (some with unwatched episodes, some
-   airing this week), a few movies and an anime, so the testers have something to work
-   with. Then add two secrets:
+   mark episodes and rate titles in it). It can start empty: a tester that finds fewer than
+   three titles adds a few shows (one airing now), movies and an anime itself, and leaves
+   them for the next run. Then add two secrets:
    - `SIMKL_TEST_EMAIL`: the account's e-mail address
    - `SIMKL_TEST_PASSWORD`: its password
 2. **Claude access**, one of the two:

@@ -1,5 +1,6 @@
 package to.wim.watchlist.ui.main
 
+import to.wim.watchlist.ui.components.FitLabel
 import to.wim.watchlist.ui.components.label
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +23,6 @@ import androidx.compose.material.icons.outlined.Tv
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -101,7 +101,7 @@ fun MainScreen(settings: AppSettings) {
                         selected = isSelected,
                         onClick = { selectedName = tab.name },
                         icon = { Icon(tab.icon(isSelected), contentDescription = null) },
-                        label = { Text(tab.label(), maxLines = 1) },
+                        label = { FitLabel(tab.label()) },
                     )
                 }
             }

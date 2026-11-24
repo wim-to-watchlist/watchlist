@@ -25,8 +25,8 @@
     <string name="detail_in_progress">Bezig · %1$d%%</string>
     <string name="detail_in_progress_episode">Bezig · %1$s · %2$d%%</string>
     <string name="detail_mark_watched">Gezien</string>
-    <string name="detail_watched_episode">%1$s gezien</string>
-    <string name="detail_watched_episode_titled">%1$s gezien · %2$s</string>
+    <string name="detail_next_episode">Volgende aflevering: %1$s</string>
+    <string name="detail_next_episode_titled">Volgende aflevering: %1$s · %2$s</string>
     <string name="detail_your_note">Je notitie: %1$s</string>
     <string name="detail_last_watched">laatst %1$s</string>
     <string name="detail_your_rating">Jouw beoordeling</string>

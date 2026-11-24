@@ -25,8 +25,8 @@
     <string name="detail_in_progress">En cours · %1$d %%</string>
     <string name="detail_in_progress_episode">En cours · %1$s · %2$d %%</string>
     <string name="detail_mark_watched">Vu</string>
-    <string name="detail_watched_episode">%1$s vu</string>
-    <string name="detail_watched_episode_titled">%1$s vu · %2$s</string>
+    <string name="detail_next_episode">Prochain épisode : %1$s</string>
+    <string name="detail_next_episode_titled">Prochain épisode : %1$s · %2$s</string>
     <string name="detail_your_note">Votre mémo : %1$s</string>
     <string name="detail_last_watched">dernier : %1$s</string>
     <string name="detail_your_rating">Votre note</string>

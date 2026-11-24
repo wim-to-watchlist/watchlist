@@ -77,7 +77,7 @@ watchlist/
         │   │       ├── calendar/    Upcoming episodes and releases
         │   │       ├── widget/      The Up next home-screen widget (RemoteViews; layout/widget_up_next.xml, xml/widget_up_next_info.xml)
         │   │       ├── search/  profile/  settings/  login/
-        │   │       ├── components/  Posters, labels, skeletons, shared widgets (PlusLock.kt: blur and Plus card)
+        │   │       ├── components/  Posters, labels, skeletons, shared widgets (PlusLock.kt: blur and Plus card; LargeText.kt: fitting labels and posters at large text sizes)
         │   │       └── theme/       Material 3 theme, shapes, motion, system bars, settings kit, empty states
         │   └── res/
         │       ├── values/          English strings (split by area), colours, themes

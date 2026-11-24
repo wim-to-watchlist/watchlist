@@ -1,5 +1,6 @@
 package to.wim.watchlist.ui.discover
 
+import to.wim.watchlist.ui.components.FitLabel
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -126,7 +127,7 @@ fun DiscoverScreen(types: List<MediaType>) {
                 if (types.size > 1) {
                     PrimaryTabRow(selectedTabIndex = types.indexOf(type)) {
                         types.forEach { t ->
-                            Tab(selected = t == type, onClick = { typeName = t.name }, text = { Text(t.label()) })
+                            Tab(selected = t == type, onClick = { typeName = t.name }, text = { FitLabel(t.label()) })
                         }
                     }
                 }

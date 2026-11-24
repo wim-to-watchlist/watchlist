@@ -4,7 +4,7 @@
 # Run workflow), never on a push, so it spends no minutes unless you run it.
 # Based on github.com/pierridotite/mobile-agent-testers (MIT), Android only. Reports are
 # uploaded unencrypted, which is only acceptable because this repository is private: the
-# plan job stops the run if the repository is public. See agent-testers/README.md.
+# plan job stops the run if the repository is public, unless allow_public is ticked. See agent-testers/README.md.
 name: Agent testers
 
 on:
@@ -25,6 +25,10 @@ on:
       model:
         description: "Model: sonnet, opus or haiku (cheapest)"
         default: sonnet
+      allow_public:
+        description: "Run even though the repository is public: reports, screenshots and the summary are then visible to anyone until it is made private"
+        type: boolean
+        default: false
       record_video:
         description: Record each phone's screen
         type: boolean
@@ -56,12 +60,16 @@ jobs:
       - name: Check setup
         env:
           PRIVATE: ${{ github.event.repository.private }}
+          ALLOW_PUBLIC: ${{ inputs.allow_public }}
           HAS_CLAUDE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' || secrets.ANTHROPIC_API_KEY != '' }}
           HAS_SIMKL: ${{ secrets.SIMKL_TEST_EMAIL != '' && secrets.SIMKL_TEST_PASSWORD != '' }}
           HAS_CLIENT_ID: ${{ vars.SIMKL_CLIENT_ID != '' }}
         run: |
           ok=true
-          [ "$PRIVATE" = true ] || { echo "::error::This repository is public: reports and screenshots would be public. Make it private, or encrypt the results first (see agent-testers/README.md)"; ok=false; }
+          if [ "$PRIVATE" != true ] && [ "$ALLOW_PUBLIC" = true ]; then
+            echo "::warning::The repository is public: this run's reports and screenshots are visible to anyone until it is made private"
+          fi
+          [ "$PRIVATE" = true ] || [ "$ALLOW_PUBLIC" = true ] || { echo "::error::This repository is public: reports and screenshots would be public. Make it private, or encrypt the results first (see agent-testers/README.md)"; ok=false; }
           [ "$HAS_CLAUDE" = true ] || { echo "::error::Add the CLAUDE_CODE_OAUTH_TOKEN (or ANTHROPIC_API_KEY) secret: see agent-testers/README.md"; ok=false; }
           [ "$HAS_SIMKL" = true ] || { echo "::error::Add the SIMKL_TEST_EMAIL and SIMKL_TEST_PASSWORD secrets (a separate test account): see agent-testers/README.md"; ok=false; }
           [ "$HAS_CLIENT_ID" = true ] || { echo "::error::The SIMKL_CLIENT_ID variable is empty: the app could not sign in"; ok=false; }
@@ -206,7 +214,7 @@ jobs:
           mkdir -p merged
           for d in report/results-*/; do n=$(basename "$d"); mkdir -p "merged/$n"; cp -R "$d" "merged/$n/results"; done
           python3 scripts/summarize.py merged > report/SUMMARY.md
-          # The repository is private (checked in plan), so the summary may show on the run page.
+          # The repository is private, or the owner ticked allow_public (checked in plan).
           cat report/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v7
         with:

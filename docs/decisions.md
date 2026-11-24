@@ -17,7 +17,9 @@ uses the debug build and writes a report with screenshots; a last job merges the
   tester after 60 minutes.
 - **Reports are not encrypted**, unlike the template, which encrypts because its logs are public.
   Here only people with access to the repository see them, which lets the summary show on the run
-  page with nothing to install. The workflow refuses to run if the repository is public.
+  page with nothing to install. The workflow refuses to run if the repository is public, unless
+  the owner ticks `allow_public` for that run (added the same day: the repository was still public
+  and the owner judged the reports harmless).
 - **The test account is typed by a script** (`type.py --secret`) from Actions secrets, so the
   agent never sees the e-mail or password.
 - **No change to the app**: no new permission, network destination or dependency. The debug build

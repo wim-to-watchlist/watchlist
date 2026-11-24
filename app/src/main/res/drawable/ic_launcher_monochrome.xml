@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Themed-icon layer: the screen with the checkmark cut out. The second subpath is the outline
-     of the foreground's 8-wide round-capped checkmark stroke. Same padding group as the foreground. -->
+<!-- Themed-icon layer: the screen with the checkmark cut out, and the stand. The second subpath is
+     the outline of the foreground's 8-wide round-capped checkmark stroke, the third the stand.
+     Same padding group as the foreground. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
@@ -9,11 +10,12 @@
     <group
         android:pivotX="54"
         android:pivotY="54"
-        android:scaleX="0.9560"
-        android:scaleY="0.9560">
+        android:scaleX="0.9030"
+        android:scaleY="0.9030"
+        android:translateY="-2.9302">
         <path
             android:fillColor="#FFFFFFFF"
             android:fillType="evenOdd"
-            android:pathData="M38.0,36.77h32a10,10 0,0 1,10,10v14.45a10,10 0,0 1,-10,10h-32a10,10 0,0 1,-10,-10v-14.45a10,10 0,0 1,10,-10z M59.818,51.472L61.64,53.293L68.732,46.202A4,4 0,0 1,74.388,51.858L64.468,61.778A4,4 0,0 1,58.812,61.778L54.162,57.128A4,4 0,0 1,59.818,51.472Z" />
+            android:pathData="M38.0,36.77h32a10,10 0,0 1,10,10v14.45a10,10 0,0 1,-10,10h-32a10,10 0,0 1,-10,-10v-14.45a10,10 0,0 1,10,-10z M59.818,51.472L61.64,53.293L68.732,46.202A4,4 0,0 1,74.388,51.858L64.468,61.778A4,4 0,0 1,58.812,61.778L54.162,57.128A4,4 0,0 1,59.818,51.472Z M45.25,73.22h17.5a2.25,2.25 0,0 1,0,4.5h-17.5a2.25,2.25 0,0 1,0,-4.5z" />
     </group>
 </vector>

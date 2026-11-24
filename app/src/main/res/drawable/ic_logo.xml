@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- In-app logo: the launcher's TV with the check, cropped to the shape, with a white check
+<!-- In-app logo: the launcher's TV with the check and the stand, centred, with a white check
      and no plate behind it. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
@@ -9,8 +9,22 @@
     android:viewportHeight="52">
     <group
         android:translateX="-28"
-        android:translateY="-28">
+        android:translateY="-31.245">
         <path android:pathData="M38.0,36.77h32a10,10 0,0 1,10,10v14.45a10,10 0,0 1,-10,10h-32a10,10 0,0 1,-10,-10v-14.45a10,10 0,0 1,10,-10z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="28"
+                    android:startY="36.77"
+                    android:endX="80"
+                    android:endY="71.22">
+                    <item android:offset="0" android:color="#FF3D7BFF" />
+                    <item android:offset="0.55" android:color="#FF7A5CFF" />
+                    <item android:offset="1" android:color="#FFD15CE6" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path android:pathData="M45.25,73.22h17.5a2.25,2.25 0,0 1,0,4.5h-17.5a2.25,2.25 0,0 1,0,-4.5z">
             <aapt:attr name="android:fillColor">
                 <gradient
                     android:type="linear"

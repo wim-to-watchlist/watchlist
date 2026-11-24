@@ -47,6 +47,9 @@ jobs:
       - name: Test release scripts
         run: python3 -m unittest discover -s scripts/tests -v
 
+      - name: Test AI tester scripts
+        run: python3 -m unittest discover -s agent-testers/tests -v
+
       - name: Unit and launch tests
         run: ./gradlew testDebugUnitTest
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Launcher foreground: a gradient TV screen (about 16:10.6) with a fat checkmark on its right side,
-     drawn in white. Wrapped in a group so the shape's furthest point is 26.3 units from the centre
+     drawn in white, and a short rounded bar under it as the stand. Wrapped in a group that centres
+     screen and stand vertically and scales them so the furthest point is 26.3 units from the centre
      (the same padding in every app). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
@@ -11,9 +12,24 @@
     <group
         android:pivotX="54"
         android:pivotY="54"
-        android:scaleX="0.9560"
-        android:scaleY="0.9560">
+        android:scaleX="0.9030"
+        android:scaleY="0.9030"
+        android:translateY="-2.9302">
         <path android:pathData="M38.0,36.77h32a10,10 0,0 1,10,10v14.45a10,10 0,0 1,-10,10h-32a10,10 0,0 1,-10,-10v-14.45a10,10 0,0 1,10,-10z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="28"
+                    android:startY="36.77"
+                    android:endX="80"
+                    android:endY="71.22">
+                    <item android:offset="0" android:color="#FF3D7BFF" />
+                    <item android:offset="0.55" android:color="#FF7A5CFF" />
+                    <item android:offset="1" android:color="#FFD15CE6" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path android:pathData="M45.25,73.22h17.5a2.25,2.25 0,0 1,0,4.5h-17.5a2.25,2.25 0,0 1,0,-4.5z">
             <aapt:attr name="android:fillColor">
                 <gradient
                     android:type="linear"

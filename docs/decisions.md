@@ -2,6 +2,16 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-24: The launcher icon gets a stand again, as a single line
+
+The owner wanted the screen to read more as a TV. Under it is now a stand that is only a line: a
+short rounded bar in the screen's gradient, close under the screen (22 wide, 4.5 thick, a gap of 2
+on the 108 canvas). Screen and stand are centred together and scaled so the padding rule from
+`DESIGN.md` still holds. The in-app logo, themed layer and notification icon get the same stand.
+The earlier stand (removed 2026-10-14) did not read as a stand next to a play button; this one is
+chosen from mockups at real launcher size. Rejected: a shorter thin line (nearly disappears at
+48 px) and a wide line (reads as an underline).
+
 ## 2026-11-22: Icons: same padding in every app, white background, white details; colour scheme follows the icon
 
 Part of rolling the owner's approved icon redesign out to all apps. The launcher foreground and

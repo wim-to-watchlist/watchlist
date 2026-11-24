@@ -247,10 +247,11 @@ app apart from their package (and `R` import) lines. Copy a change to the other 
   (hidden when only one is turned on), in the order set in Settings › Bottom bar (drag handles).
 - Ratings, rank and genres on a detail page are rows in the info box, not chips: they can't be
   tapped. Links to other sites are assist chips.
-- Launcher icon: the gradient TV screen (about 16:10.6, no stand) with a fat white checkmark on
-  its right side, on a plain white background (`res/drawable/ic_launcher_background.xml`). The
-  foreground and themed layer sit in a group scaled 0.9560 around the centre, so the shape's
-  furthest point is 26.3 units from the middle. The themed layer and notification icon are the
-  screen with the checkmark cut out.
+- Launcher icon: the gradient TV screen (about 16:10.6) with a fat white checkmark on its right
+  side and a stand under it: one short rounded bar (22 wide, 4.5 thick, 2 below the screen, in the
+  same gradient). It sits on a plain white background (`res/drawable/ic_launcher_background.xml`).
+  The foreground and themed layer sit in a group scaled 0.9030 around the centre and moved up 2.93,
+  so screen and stand are centred and the furthest point is 26.3 units from the middle. The themed
+  layer and notification icon are the screen with the checkmark cut out, plus the stand.
 - The sign-in and Watchlist Plus screens show the app's logo, not a generic Material icon: the
   gradient TV with the white check on its own, with no plate or box (`res/drawable/ic_logo.xml`).

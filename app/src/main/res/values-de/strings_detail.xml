@@ -67,7 +67,10 @@
     <string name="detail_fact_also_known_as">Auch bekannt als</string>
     <string name="detail_fact_rank">Platz</string>
     <string name="detail_fact_genres">Genres</string>
-    <string name="detail_votes">%1$s Stimmen</string>
+    <plurals name="detail_votes">
+        <item quantity="one">%1$s Stimme</item>
+        <item quantity="other">%1$s Stimmen</item>
+    </plurals>
     <string name="detail_show_more">Mehr anzeigen</string>
     <string name="detail_show_less">Weniger anzeigen</string>
     <string name="detail_trailers">Trailer</string>

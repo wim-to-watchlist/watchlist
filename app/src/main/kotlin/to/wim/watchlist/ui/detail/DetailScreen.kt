@@ -1,7 +1,11 @@
 package to.wim.watchlist.ui.detail
 
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
+import to.wim.watchlist.ui.components.FitLabel
+import androidx.compose.ui.text.style.TextAlign
+import to.wim.watchlist.ui.components.LargeText
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.IntrinsicSize
 import android.icu.text.CompactDecimalFormat
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
@@ -495,7 +499,7 @@ private fun Header(
                 Poster(poster, title, Modifier.width(120.dp), large = true, shape = RoundedCornerShape(16.dp))
             }
             Column(Modifier.weight(1f).padding(bottom = 4.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text(title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, maxLines = 3, overflow = TextOverflow.Ellipsis)
+                Text(title, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, maxLines = 3 * LargeText.cardLines(LocalDensity.current.fontScale), overflow = TextOverflow.Ellipsis)
                 details?.originalTitle?.let {
                     Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1)
                 }
@@ -591,13 +595,13 @@ private fun Actions(
                     ) {
                         Icon(Icons.Rounded.Check, null, Modifier.size(18.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.detail_mark_as_watched))
+                        FitLabel(stringResource(R.string.detail_mark_as_watched))
                     }
                 }
                 OutlinedButton(onClick = { pendingCheckIn = PendingCheckIn(null) }, modifier = Modifier.weight(1f)) {
                     Icon(Icons.Rounded.LiveTv, null, Modifier.size(18.dp))
                     Spacer(Modifier.width(8.dp))
-                    Text(stringResource(R.string.detail_check_in))
+                    FitLabel(stringResource(R.string.detail_check_in))
                 }
             }
         }
@@ -639,7 +643,7 @@ private fun Actions(
                     ) {
                         Icon(Icons.Rounded.Check, null, Modifier.size(18.dp))
                         Spacer(Modifier.width(8.dp))
-                        Text(stringResource(R.string.detail_mark_watched), maxLines = 1)
+                        FitLabel(stringResource(R.string.detail_mark_watched))
                     }
                 }
                 // Alone in the row (the banner has the Watched button) it takes the full width.
@@ -649,7 +653,7 @@ private fun Actions(
                 ) {
                     Icon(Icons.Rounded.LiveTv, null, Modifier.size(18.dp))
                     Spacer(Modifier.width(8.dp))
-                    Text(stringResource(R.string.detail_check_in), maxLines = 1)
+                    FitLabel(stringResource(R.string.detail_check_in))
                 }
             }
         }
@@ -814,7 +818,6 @@ private data class Fact(
  * The information about a title. The ratings stand out as tiles at the top; the facts below them
  * show only the first few until the card is expanded.
  */
-@OptIn(ExperimentalLayoutApi::class) // fillMaxRowHeight: tiles on a line share a height
 @Composable
 private fun InfoCard(
     ratings: List<Rating>,
@@ -831,17 +834,24 @@ private fun InfoCard(
             Modifier.fillMaxWidth().animateContentSize().padding(vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            // The ratings, then your own: tiles that don't fit go to the next line, so none hides
-            // behind another (a scrolling row cut the second rating off under your rating).
-            // fillMaxRowHeight gives the tiles on a line the height of the tallest one (a tile with
-            // a vote count has an extra line).
-            FlowRow(
-                Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                ratings.forEach { RatingTile(it, Modifier.fillMaxRowHeight()) }
-                YourRatingTile(userRating, Modifier.fillMaxRowHeight()) { rating = true }
+            // The ratings, then your own, in lines of equal tiles: as many per line as fit at
+            // their narrowest (fewer with large text), the rest on the next line, so no tile hides
+            // behind another or gets squeezed. IntrinsicSize.Min gives the tiles on a line the
+            // height of the tallest one (a tile with a vote count has an extra line).
+            BoxWithConstraints(Modifier.fillMaxWidth().padding(horizontal = 12.dp)) {
+                val perRow = LargeText.tilesPerRow(maxWidth.value, LocalDensity.current.fontScale)
+                val tiles: List<@Composable (Modifier) -> Unit> =
+                    ratings.map { r -> @Composable { m: Modifier -> RatingTile(r, m) } } +
+                        listOf(@Composable { m: Modifier -> YourRatingTile(userRating, m) { rating = true } })
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    tiles.chunked(perRow).forEach { line ->
+                        Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            line.forEach { tile -> tile(Modifier.weight(1f).fillMaxHeight()) }
+                            // A short last line keeps the same tile width.
+                            repeat(perRow - line.size) { Spacer(Modifier.weight(1f)) }
+                        }
+                    }
+                }
             }
             DetailFacts.visible(facts, expanded).forEach { FactRow(it) }
             if (DetailFacts.canExpand(facts.size)) {
@@ -901,7 +911,7 @@ private fun YourRatingTile(
                     fontWeight = FontWeight.Bold,
                 )
             }
-            Text(stringResource(R.string.detail_your_rating), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.detail_your_rating), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
         }
     }
 }
@@ -926,10 +936,10 @@ private fun RatingTile(
                 Icon(Icons.Rounded.Star, null, Modifier.size(18.dp))
                 Text(Format.rating(rating.value), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             }
-            Text(rating.source, style = MaterialTheme.typography.labelMedium)
+            Text(rating.source, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center)
             rating.votes?.let {
                 Text(
-                    stringResource(R.string.detail_votes, compact(it.toLong())),
+                    pluralStringResource(R.plurals.detail_votes, it, compact(it.toLong())),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f),
                 )
@@ -973,19 +983,22 @@ private fun TrailerRow(d: MediaDetails) {
     run {
         LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             items(d.trailers) { t ->
+                // The thumbnail is named "Play: <trailer>", so the tile has a name even when the trailer has none.
+                val name = listOfNotNull(stringResource(R.string.detail_play), t.name?.takeIf { it.isNotBlank() }).joinToString(": ")
                 Column(
-                    Modifier.width(220.dp).clip(RoundedCornerShape(16.dp)).clickable(role = Role.Button) { context.openUrl("https://www.youtube.com/watch?v=${t.youtubeId}") },
+                    Modifier.width(220.dp).clip(RoundedCornerShape(16.dp))
+                        .clickable(role = Role.Button) { context.openUrl("https://www.youtube.com/watch?v=${t.youtubeId}") },
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
                     Box(contentAlignment = Alignment.Center) {
                         AsyncImage(
                             Images.youtube(t.youtubeId),
-                            null,
+                            name,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxWidth().aspectRatio(16f / 9f).clip(RoundedCornerShape(16.dp)).background(MaterialTheme.colorScheme.surfaceVariant),
                         )
                         Surface(shape = RoundedCornerShape(50), color = Color.Black.copy(alpha = 0.6f), contentColor = Color.White) {
-                            Icon(Icons.Rounded.PlayArrow, stringResource(R.string.detail_play), Modifier.padding(8.dp))
+                            Icon(Icons.Rounded.PlayArrow, null, Modifier.padding(8.dp))
                         }
                     }
                     // One line even without a name, so the row keeps its height while it scrolls.

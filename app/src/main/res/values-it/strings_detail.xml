@@ -67,7 +67,11 @@
     <string name="detail_fact_also_known_as">Altri titoli</string>
     <string name="detail_fact_rank">Posizione</string>
     <string name="detail_fact_genres">Generi</string>
-    <string name="detail_votes">%1$s voti</string>
+    <plurals name="detail_votes">
+        <item quantity="one">%1$s voto</item>
+        <item quantity="many">%1$s voti</item>
+        <item quantity="other">%1$s voti</item>
+    </plurals>
     <string name="detail_show_more">Mostra altro</string>
     <string name="detail_show_less">Mostra meno</string>
     <string name="detail_trailers">Trailer</string>

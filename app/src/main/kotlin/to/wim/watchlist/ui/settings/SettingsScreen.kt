@@ -1,5 +1,8 @@
 package to.wim.watchlist.ui.settings
 
+import androidx.compose.material.icons.rounded.Policy
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import android.Manifest
 import androidx.annotation.RequiresApi
 import to.wim.watchlist.data.model.NotifyChannel
@@ -262,6 +265,7 @@ fun SettingsScreen(settings: AppSettings) {
                     onMove = { from, to -> scope.launch { app.settings.setNav(settings.nav.moved(shown[from], to, shown)) } },
                 ) { tab ->
                     val enabled = tab in settings.nav.enabled
+                    val tabLabel = tab.label()
                     ListItem(
                         headlineContent = { Text(tab.label()) },
                         leadingContent = { Icon(tab.icon(enabled), null) },
@@ -269,6 +273,8 @@ fun SettingsScreen(settings: AppSettings) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Switch(
                                     checked = enabled,
+                                    // Screen readers say which tab the switch turns on or off.
+                                    modifier = Modifier.semantics { contentDescription = tabLabel },
                                     // At least one destination stays on.
                                     enabled = !enabled || shownOn > 1,
                                     onCheckedChange = { on ->
@@ -321,6 +327,18 @@ fun SettingsScreen(settings: AppSettings) {
                     title = stringResource(R.string.screens_credit_tmdb_title),
                     text = stringResource(R.string.screens_credit_tmdb_text) + "\n" + stringResource(R.string.screens_tmdb_notice),
                     onClick = { context.openUrl("https://www.themoviedb.org/") },
+                )
+            }
+        }
+
+        item(key = "privacy") {
+            // The same policy the Play Store links to, so nobody has to leave the app to find it.
+            SettingsSection(title = stringResource(R.string.screens_settings_privacy)) {
+                ListItem(
+                    headlineContent = { Text(stringResource(R.string.screens_privacy_policy)) },
+                    supportingContent = { Text(stringResource(R.string.screens_privacy_policy_text)) },
+                    leadingContent = { Icon(Icons.Rounded.Policy, null) },
+                    modifier = Modifier.clickable(role = Role.Button) { context.openUrl(PRIVACY_POLICY_URL) },
                 )
             }
         }
@@ -409,3 +427,6 @@ private fun permissionGranted(context: Context): Boolean =
 @RequiresApi(33)
 private fun permissionAskable(context: Context): Boolean =
     (context as? Activity)?.shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) ?: true
+
+/** The public privacy policy (a copy of PRIVACY.md on the project's website). */
+private const val PRIVACY_POLICY_URL = "https://wim-to-watchlist.github.io/privacy/"

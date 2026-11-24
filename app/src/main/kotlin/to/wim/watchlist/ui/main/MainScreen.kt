@@ -1,6 +1,14 @@
 package to.wim.watchlist.ui.main
 
-import to.wim.watchlist.ui.components.FitLabel
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.runtime.remember
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import to.wim.watchlist.ui.components.LargeText
 import to.wim.watchlist.ui.components.label
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -94,16 +102,42 @@ fun MainScreen(settings: AppSettings) {
             }
         }
         if (showBar) {
-            NavigationBar {
-                tabs.forEach { tab ->
-                    val isSelected = tab == selected
-                    NavigationBarItem(
-                        selected = isSelected,
-                        onClick = { selectedName = tab.name },
-                        icon = { Icon(tab.icon(isSelected), contentDescription = null) },
-                        label = { FitLabel(tab.label()) },
-                    )
+            BottomBar(tabs, selected) { selectedName = it.name }
+        }
+    }
+}
+
+/**
+ * The navigation bar. With large text the labels would be cut ("Calen"), so they all shrink to
+ * the one size at which every label fits its item; one size for all keeps the bar even.
+ */
+@Composable
+private fun BottomBar(
+    tabs: List<NavTab>,
+    selected: NavTab,
+    onSelect: (NavTab) -> Unit,
+) {
+    val labels = tabs.map { it.label() }
+    val style = MaterialTheme.typography.labelMedium
+    val measurer = rememberTextMeasurer()
+    BoxWithConstraints(Modifier.fillMaxWidth()) {
+        // Each item's share of the bar, less the room Material keeps around the label.
+        val labelWidth = with(LocalDensity.current) { (maxWidth / tabs.size - 12.dp).toPx() }
+        val size =
+            remember(labels, labelWidth, style) {
+                LargeText.fitSize(style.fontSize.value) { sp ->
+                    labels.all { measurer.measure(it, style.copy(fontSize = sp.sp), maxLines = 1, softWrap = false).size.width <= labelWidth }
                 }
+            }
+        NavigationBar {
+            tabs.forEach { tab ->
+                val isSelected = tab == selected
+                NavigationBarItem(
+                    selected = isSelected,
+                    onClick = { onSelect(tab) },
+                    icon = { Icon(tab.icon(isSelected), contentDescription = null) },
+                    label = { Text(tab.label(), style = style.copy(fontSize = size.sp), maxLines = 1, softWrap = false) },
+                )
             }
         }
     }

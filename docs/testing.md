@@ -6,6 +6,7 @@
 ./gradlew testDebugUnitTest                      # JVM unit tests + Robolectric launch test
 ./gradlew lintDebug                              # Android lint (errors fail the build)
 python3 -m unittest discover -s scripts/tests    # release scripts
+python3 -m unittest discover -s agent-testers/tests  # AI tester scripts
 ```
 
 Everything CI runs, in one go:
@@ -24,6 +25,7 @@ Reports: `app/build/reports/tests/testDebugUnitTest/index.html` and `app/build/r
 | Check | Catches |
 |---|---|
 | Release script tests | Version maths and keystore-secret decoding (`scripts/`) |
+| AI tester script tests | Persona list, job matrix, typing the test account, the summary (`agent-testers/`) |
 | Unit and launch tests | Parsing and shelf logic bugs; crashes while starting the app or composing the first screens |
 | Lint | API misuse, missing translations, accessibility, configuration-unaware resource lookups in Compose |
 | Debug and release builds (with the `SIMKL_CLIENT_ID` variable) | Compile errors, R8 shrinking problems |
@@ -79,3 +81,14 @@ retrace watchlist-<version>-mapping.txt stacktrace.txt
 ```
 
 The in-app crash report (Copy crash report) gives you the stack trace and the version.
+
+## AI testers (by hand, not in CI)
+
+`.github/workflows/agent-testers.yml` builds the debug APK and gives one Android emulator to
+each chosen persona of `agent-testers/personas.json`. A Claude Code agent signs in with a SIMKL
+test account and uses the app like a new user, following `agent-testers/AGENT_BRIEF.md`, then
+writes a report with screenshots. A last job merges the reports into one summary on the run
+page. It finds what nobody wrote a test for: cut text at 200% font, untranslated strings, tablet
+layouts, confusing flows. It is started only by hand (Actions › Agent testers), because it uses
+Actions minutes and Claude usage. Setup, costs and how to read the results:
+`agent-testers/README.md`.

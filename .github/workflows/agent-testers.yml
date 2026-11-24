@@ -1,0 +1,215 @@
+# AI testers: builds the debug APK, then gives one Android emulator to each persona of
+# agent-testers/personas.json, driven by a Claude Code agent that uses the app like a new
+# user and writes a report with screenshots. Started by hand only (Actions › Agent testers ›
+# Run workflow), never on a push, so it spends no minutes unless you run it.
+# Based on github.com/pierridotite/mobile-agent-testers (MIT), Android only. Reports are
+# uploaded unencrypted, which is only acceptable because this repository is private: the
+# plan job stops the run if the repository is public. See agent-testers/README.md.
+name: Agent testers
+
+on:
+  workflow_dispatch:
+    inputs:
+      personas:
+        description: "Personas from agent-testers/personas.json, comma-separated (at most 6), or all"
+        default: "sanne,lukas,camille,grace"
+      ref:
+        description: Branch, tag or commit of the app to test (empty = main)
+        default: ""
+      brief:
+        description: "Instructions for the testers: AGENT_BRIEF.md (find bugs), briefs/improve.md (improvement report)"
+        default: AGENT_BRIEF.md
+      bug_report:
+        description: "Bug to reproduce instead of exploring: an issue (owner/repo#123 or its URL) or the steps as text"
+        default: ""
+      model:
+        description: "Model: sonnet, opus or haiku (cheapest)"
+        default: sonnet
+      record_video:
+        description: Record each phone's screen
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  actions: read
+  issues: read   # bug_report: read the issue to reproduce
+
+# One run at a time: the testers share one SIMKL test account and your Claude usage.
+concurrency:
+  group: agent-testers
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: agent-testers
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      android: ${{ steps.m.outputs.android }}
+    steps:
+      - uses: actions/checkout@v7
+        with: { persist-credentials: false }
+      - name: Check setup
+        env:
+          PRIVATE: ${{ github.event.repository.private }}
+          HAS_CLAUDE: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' || secrets.ANTHROPIC_API_KEY != '' }}
+          HAS_SIMKL: ${{ secrets.SIMKL_TEST_EMAIL != '' && secrets.SIMKL_TEST_PASSWORD != '' }}
+          HAS_CLIENT_ID: ${{ vars.SIMKL_CLIENT_ID != '' }}
+        run: |
+          ok=true
+          [ "$PRIVATE" = true ] || { echo "::error::This repository is public: reports and screenshots would be public. Make it private, or encrypt the results first (see agent-testers/README.md)"; ok=false; }
+          [ "$HAS_CLAUDE" = true ] || { echo "::error::Add the CLAUDE_CODE_OAUTH_TOKEN (or ANTHROPIC_API_KEY) secret: see agent-testers/README.md"; ok=false; }
+          [ "$HAS_SIMKL" = true ] || { echo "::error::Add the SIMKL_TEST_EMAIL and SIMKL_TEST_PASSWORD secrets (a separate test account): see agent-testers/README.md"; ok=false; }
+          [ "$HAS_CLIENT_ID" = true ] || { echo "::error::The SIMKL_CLIENT_ID variable is empty: the app could not sign in"; ok=false; }
+          $ok
+      - id: m
+        env:
+          PERSONAS: ${{ inputs.personas }}
+        run: |
+          PLATFORM=android python3 scripts/matrix.py >> "$GITHUB_OUTPUT"
+          n=$(PLATFORM=android python3 scripts/matrix.py | cut -d= -f2- | python3 -c 'import json,sys; print(len(json.load(sys.stdin)))')
+          [ "$n" -gt 0 ] || { echo "::error::No personas chosen"; exit 1; }
+          [ "$n" -le 6 ] || echo "::warning::$n testers: 6 at a time at most, the others wait. Each one uses your Claude usage and about 15-30 Actions minutes."
+
+  build:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: .
+    steps:
+      - name: Check out the app (full history, needed for git-describe versions)
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.ref }}
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-provider: basic
+      - name: Build the debug APK (Watchlist Dev, Plus unlocked)
+        run: |
+          ./gradlew assembleDebug -PsimklClientId="${{ vars.SIMKL_CLIENT_ID }}"
+          mkdir -p out && cp app/build/outputs/apk/debug/app-debug.apk out/app.apk
+      - uses: actions/upload-artifact@v7
+        with:
+          name: app-under-test
+          path: out/app.apk
+          retention-days: 3
+          if-no-files-found: error
+
+  android:
+    needs: [plan, build]
+    runs-on: ubuntu-latest
+    # An agent normally needs 5 to 15 minutes; the limit stops a stuck one from eating minutes.
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 6   # Claude usage: 20 agents at once can use up a 5-hour window
+      matrix:
+        include: ${{ fromJSON(needs.plan.outputs.android) }}
+    steps:
+      - uses: actions/checkout@v7
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@v7
+        with:
+          name: app-under-test
+          path: agent-testers
+      - run: pip install -q pillow && npm install -g --silent @anthropic-ai/claude-code
+
+      - name: Device profile (fallback to pixel_6)
+        id: profile
+        env: { WANTED: "${{ matrix.profile }}" }
+        run: |
+          if "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" list device -c 2>/dev/null | grep -qx "$WANTED"; then echo "profile=$WANTED" >> "$GITHUB_OUTPUT"
+          else echo "profile=pixel_6" >> "$GITHUB_OUTPUT"; echo "Profile $WANTED missing, pixel_6 used" >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+
+      - name: Bug report to reproduce
+        if: inputs.bug_report != ''
+        env:
+          BUG_REPORT: ${{ inputs.bug_report }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/bug_report.sh
+
+      - name: Emulator + agent
+        uses: reactivecircus/android-emulator-runner@v2
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SIMKL_TEST_EMAIL: ${{ secrets.SIMKL_TEST_EMAIL }}
+          SIMKL_TEST_PASSWORD: ${{ secrets.SIMKL_TEST_PASSWORD }}
+          PERSONA: ${{ matrix.persona }}
+          DEVICE: ${{ matrix.device }}
+          FONT_SCALE: ${{ matrix.font_scale }}
+          THEME: ${{ matrix.theme }}
+          LOCALE: ${{ matrix.locale }}
+          GEO: ${{ matrix.geo }}
+          APP_ID: to.wim.watchlist.debug
+          BRIEF: ${{ inputs.bug_report != '' && inputs.brief == 'AGENT_BRIEF.md' && 'briefs/reproduce.md' || inputs.brief }}
+          MODEL: ${{ inputs.model }}
+          BLOCK_HOSTS: ""
+          RECORD_VIDEO: ${{ inputs.record_video }}
+        with:
+          working-directory: agent-testers
+          api-level: ${{ matrix.api }}
+          target: google_apis
+          arch: x86_64
+          profile: ${{ steps.profile.outputs.profile }}
+          ram-size: 4096M
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          script: bash scripts/android/run_agent.sh
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: results-${{ matrix.persona }}
+          path: agent-testers/results/
+          retention-days: 14
+          if-no-files-found: ignore
+
+  summary:
+    needs: [plan, android]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: results-*
+          path: agent-testers/report
+      - run: npm install -g --silent @anthropic-ai/claude-code
+      - name: Merge the reports into SUMMARY.md (duplicates grouped by Claude)
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          mkdir -p report
+          # summarize.py reads <dir>/<name>/results/<persona>/findings.json
+          mkdir -p merged
+          for d in report/results-*/; do n=$(basename "$d"); mkdir -p "merged/$n"; cp -R "$d" "merged/$n/results"; done
+          python3 scripts/summarize.py merged > report/SUMMARY.md
+          # The repository is private (checked in plan), so the summary may show on the run page.
+          cat report/SUMMARY.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: all-reports
+          path: agent-testers/report/
+          retention-days: 14

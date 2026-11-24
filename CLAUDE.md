@@ -15,6 +15,7 @@ time.
    ```
    CI builds the debug and release APKs on every push, so don't build them here unless a step below asks for it.
    If you touched `scripts/` or the workflows, also run `python3 -m unittest discover -s scripts/tests`.
+   If you touched `agent-testers/`, also run `python3 -m unittest discover -s agent-testers/tests`.
    If you touched `proguard-rules.pro` or WorkManager, also run `./gradlew assembleRelease`.
    Then push and make sure CI on the pull request is green.
 3. **Write the pull request description in plain language** (fill in `.github/pull_request_template.md`):

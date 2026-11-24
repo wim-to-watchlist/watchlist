@@ -2,6 +2,31 @@
 
 Newest first. Add an entry for every notable choice: what was decided, why, and what was rejected.
 
+## 2026-11-24: AI testers on Android emulators, inside this repository, by hand only
+
+The owner wanted exploratory testing on many phones without writing test scripts. The
+`agent-testers/` folder and the `Agent testers` workflow come from
+[mobile-agent-testers](https://github.com/pierridotite/mobile-agent-testers) (MIT): one Android
+emulator per persona, each driven by a Claude Code agent that signs in with a SIMKL test account,
+uses the debug build and writes a report with screenshots; a last job merges the reports.
+
+- **Inside this private repository**, not a separate public one. A public testers repository
+  pulling in this closed-source app would get free runners, but GitHub reserves those for the
+  repository's own project. Here the runs use the free Actions minutes (Linux only, no iOS), so the
+  workflow only starts by hand, runs at most 6 testers at a time and one run at once, and stops a
+  tester after 60 minutes.
+- **Reports are not encrypted**, unlike the template, which encrypts because its logs are public.
+  Here only people with access to the repository see them, which lets the summary show on the run
+  page with nothing to install. The workflow refuses to run if the repository is public.
+- **The test account is typed by a script** (`type.py --secret`) from Actions secrets, so the
+  agent never sees the e-mail or password.
+- **No change to the app**: no new permission, network destination or dependency. The debug build
+  already unlocks Watchlist Plus. Screenshots go to Anthropic's API (the agents), which is test
+  tooling, not something the app sends, so `PRIVACY.md` is unchanged.
+
+Rejected: Maestro or instrumented UI tests (scripts to write and maintain for each flow, and they
+only check what someone thought of); iOS (the app is Android only).
+
 ## 2026-11-24: The launcher icon gets a stand again, as a single line
 
 The owner wanted the screen to read more as a TV. Under it is now a stand that is only a line: a

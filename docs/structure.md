@@ -9,8 +9,10 @@ watchlist/
 │   ├── dependabot.yml                Weekly Gradle and GitHub Actions update PRs
 │   ├── pull_request_template.md      Plain-language PR description + checklist
 │   └── workflows/
+│       ├── agent-testers.yml         By hand: AI testers on Android emulators, one per persona, with a summary
 │       ├── ci.yml                    Script tests, unit + launch tests, lint, builds, R8 keep check, debug APK
 │       └── release.yml               Release rules → verify signing key → build APK → publish GitHub Release
+├── agent-testers/                    AI testers (from mobile-agent-testers, MIT): personas, brief, scripts, tests
 ├── CLAUDE.md                         Rules for Claude Code sessions
 ├── DESIGN.md                         Design language shared with the sibling apps
 ├── LICENSE                           Copyright notice: all rights reserved, no open-source licence

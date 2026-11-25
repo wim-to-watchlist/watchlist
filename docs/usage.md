@@ -18,7 +18,7 @@ Nobody needs a SIMKL developer account. If the browser shows the app chooser (wh
 
 Watchlist is free to use: sign in, and your lists, marking episodes watched, ratings, details, search, Discover and your watch totals all work without paying. **Watchlist Plus**, a subscription sold through Google Play, adds the rest:
 
-- **Up next**: the free version shows the first show with its next episode and the one-tap check; your other shows are listed by name below a card that says how many more there are. Tap one to open it and mark episodes there.
+- **Up next**: the free version shows the first show with its next episode and the one-tap check; the rest are blurred below a card that says how many more there are. Every show you're watching is listed for free in the **Watching** tab; tap one to open it and mark episodes there.
 - **Calendar**: the free version shows the first entry; the others are blurred under a card that counts them. The day headers stay readable.
 - **New-episode notifications**: the switch in *Settings › Notifications* opens the plans.
 - **Stats per type** on your profile (the totals stay free).
@@ -48,7 +48,7 @@ Tap a locked part, or its card's button, to open the Plus screen. It shows what 
 
 ## TV Shows and Anime
 
-Shelves: **Up next** (shows with an aired, unwatched episode; a new episode shows up here as soon as it has aired by SIMKL's calendar), **Watched** (caught up or completed, with the next air date when known), **Plan to watch**, **On hold**, **Dropped**. Every poster shows an *Airing* or *Ended* badge.
+Shelves: **Up next** (shows with an aired, unwatched episode; a new episode shows up here as soon as it has aired by SIMKL's calendar), **Watching** (every show on your SIMKL Watching list, also those in Up next, with your progress and the next air date when known; free in every version), **Watched** (shows you completed), **Plan to watch**, **On hold**, **Dropped**. Every poster shows an *Airing* or *Ended* badge.
 
 - **Mark the next episode watched:** tap ✓ on a show in Up next. A message at the bottom offers **Undo** for about ten seconds. Episodes in progress (paused on another device) show their progress and keep their place in the chosen sort order; marking one watched asks first, because it removes the saved progress.
 - **Sort and filter** with the buttons in the top bar, kept per tab. A dot on the filter button shows a filter is on.
@@ -57,7 +57,7 @@ Shelves: **Up next** (shows with an aired, unwatched episode; a new episode show
   |---|---|---|
   | Up next | Recently watched, Fewest episodes left, Recently added, Title, Release date | Status (airing / ended), Type (Anime) |
   | Want to watch | Recently added, Title, Release date | Status, Type (Anime) |
-  | Watched, On hold, Dropped | Recently watched, Recently added, Title, My rating, Release date | My rating (rated by me / not rated), Status, Type (Anime) |
+  | Watching, Watched, On hold, Dropped | Recently watched, Recently added, Title, My rating, Release date | My rating (rated by me / not rated), Status, Type (Anime) |
 
   There is no "my rating" on Up next and Want to watch: you rate what you have seen. On Movies, Want to watch sorts like the shows' (no filter button); Watched and Dropped have the same sorts as the shows' Watched tab and the my-rating filter.
 - **Continue from the latest episode** (*Settings › Library*, on by default): Up next starts after the most recently watched episode, so skipped earlier episodes or seasons don't keep a show in Up next. SIMKL's API has no "skip", so this is decided in the app.

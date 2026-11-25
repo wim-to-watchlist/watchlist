@@ -6,9 +6,12 @@ import java.time.Instant
 /** The tabs of the TV Shows and Anime screens. */
 enum class Shelf {
     UpNext,
+
+    /** Every show on SIMKL's Watching list, also those in Up next; free in every version. */
+    Watching,
     PlanToWatch,
 
-    /** Caught-up shows (watching, nothing to watch now) and completed ones together. */
+    /** Completed shows. */
     Watched,
     OnHold,
     Dropped,
@@ -198,6 +201,19 @@ object Shelves {
         return item.nextToWatch != null
     }
 
+    /**
+     * The tabs a show appears on: its own shelf, and Watching too for every show on SIMKL's
+     * Watching list, so the whole list can be seen in one place (also in the free version).
+     */
+    fun shelvesOf(
+        item: LibraryItem,
+        now: Instant = Instant.now(),
+        fromLatest: Boolean = false,
+        latest: LatestNext? = null,
+        aired: NextEpisode? = null,
+    ): Set<Shelf> = setOf(shelfOf(item, now, fromLatest, latest, aired)) + if (item.status == ListStatus.Watching) setOf(Shelf.Watching) else emptySet()
+
+    /** The one shelf a show belongs to by its progress: Up next, Watching (caught up), or its list. */
     fun shelfOf(
         item: LibraryItem,
         now: Instant = Instant.now(),
@@ -206,7 +222,7 @@ object Shelves {
         aired: NextEpisode? = null,
     ): Shelf =
         when (item.status) {
-            ListStatus.Watching -> if (hasAvailableEpisode(item, now, fromLatest, latest, aired)) Shelf.UpNext else Shelf.Watched
+            ListStatus.Watching -> if (hasAvailableEpisode(item, now, fromLatest, latest, aired)) Shelf.UpNext else Shelf.Watching
             ListStatus.PlanToWatch -> Shelf.PlanToWatch
             ListStatus.OnHold -> Shelf.OnHold
             ListStatus.Completed -> Shelf.Watched

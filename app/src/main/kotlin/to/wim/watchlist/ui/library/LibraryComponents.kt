@@ -152,7 +152,7 @@ data class TabSpec(
                 Shelf.UpNext ->
                     TabSpec(listOf(SortOrder.Recent, SortOrder.EpisodesLeft, SortOrder.Added, SortOrder.Title, SortOrder.Release), rating = false, airing = true, animeTypes = anime)
                 Shelf.PlanToWatch -> TabSpec(unwatched, rating = false, airing = true, animeTypes = anime)
-                Shelf.Watched, Shelf.OnHold, Shelf.Dropped -> TabSpec(all, rating = true, airing = true, animeTypes = anime)
+                Shelf.Watching, Shelf.Watched, Shelf.OnHold, Shelf.Dropped -> TabSpec(all, rating = true, airing = true, animeTypes = anime)
             }
 
         fun of(shelf: MovieShelf): TabSpec =

@@ -40,13 +40,16 @@
     <string name="lib_anime_type_special">Speciale</string>
     <string name="lib_next_air">Prossimo: %1$s</string>
     <string name="lib_empty_up_next_text">Qui compaiono i nuovi episodi delle serie che stai guardando.</string>
-    <string name="lib_empty_watched_text">Qui compaiono le serie in pari o che hai finito.</string>
+    <string name="lib_empty_watched_text">Qui compaiono le serie che hai finito.</string>
     <string name="lib_empty_plan_text">Aggiungi le serie che vuoi vedere da Scopri o dalla ricerca.</string>
     <string name="lib_empty_other_text">Ancora niente qui.</string>
     <string name="lib_empty_up_next_shows">Nessuna serie tra i prossimi</string>
     <string name="lib_empty_up_next_anime">Nessun anime tra i prossimi</string>
     <string name="lib_empty_watched_shows">Nessuna serie vista</string>
     <string name="lib_empty_watched_anime">Nessun anime visto</string>
+    <string name="lib_empty_watching_text">Qui compaiono le serie che stai guardando.</string>
+    <string name="lib_empty_watching_shows">Nessuna serie in visione</string>
+    <string name="lib_empty_watching_anime">Nessun anime in visione</string>
     <string name="lib_empty_plan_shows">Nessuna serie da vedere</string>
     <string name="lib_empty_plan_anime">Nessun anime da vedere</string>
     <string name="lib_empty_on_hold_shows">Nessuna serie in pausa</string>

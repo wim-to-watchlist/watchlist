@@ -571,3 +571,8 @@ Up next is sorted by the last watched show, so a show jumped to the top the mome
 ## Free users see their whole Up next by name (2026-11-25)
 
 Emma, the free-version tester who finally got past SIMKL's sign-in, added four shows and could see only one: the others were blurred, and no free tab listed them. "Those are my shows." Wim chose to make the names free: after the first show and the Plus card, Up next now lists the other shows by poster and title, without their next episode or the one-tap check; tapping one opens its page, where episodes can be marked as before. Plus still sells seeing and checking off the next episode of every show at a glance, plus the calendar, notifications and stats. Rather than a separate Watching tab, the list stays where the shows already live, so free and Plus users find them in the same place. Rejected for now: freeing the profile's plain counts per list.
+
+## A free Watching tab for shows and anime (2026-11-25)
+
+Replaces the entry above. Wim chose a separate **Watching** tab, right after Up next, that lists every show on SIMKL's Watching list, free in every version. It follows SIMKL's own lists: Watching is SIMKL's watching list and Watched is now only SIMKL's completed list (caught-up shows used to sit there too). Up next is the one tab SIMKL has no list for: the app works it out from the Watching list. A show in Up next is also in Watching (`Shelves.shelvesOf`). Because the names are free there, the free Up next went back to the original style B: the first show, the Plus card, the rest blurred.
+

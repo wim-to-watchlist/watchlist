@@ -116,7 +116,7 @@ fun SubscriptionScreen(
         Spacer(Modifier.height(8.dp))
         AppIcon(Modifier.size(72.dp))
         Text(
-            trialDays?.let { pluralStringResource(R.plurals.sub_title_trial, it, it) } ?: stringResource(R.string.sub_title),
+            plan?.trialDays?.let { pluralStringResource(R.plurals.sub_title_trial, it, it) } ?: stringResource(R.string.sub_title),
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,

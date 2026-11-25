@@ -281,6 +281,8 @@ class ParsersTest {
         assertEquals(4723, tv.watchedEpisodes)
         assertEquals(411040L, tv.leftToWatchMinutes)
         assertEquals(130L, stats.lastWeekMinutes)
+        val noWeek = Parsers.stats(Json.parseToJsonElement("""{"total_mins":60,"watched_last_week":{"total_mins":0}}"""))!!
+        assertEquals(null, noWeek.lastWeekMinutes)
     }
 
     @Test

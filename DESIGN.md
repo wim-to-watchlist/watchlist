@@ -259,5 +259,9 @@ app apart from their package (and `R` import) lines. Copy a change to the other 
   read a bare "Watched" with a tick as a status ("already watched"), not as an action.
 - Library tab rows show every tab at once when they fit at the same width; otherwise they scroll
   and fade out at an edge that has more tabs, so a half-visible tab never looks like a cut word.
+  Scrolling tabs are all as wide as the widest, widened so the last one on screen shows about
+  halfway: a tab that ended right at the edge looked like the end of the list.
+- Paired action buttons (Mark watched, Check in) sit side by side when both labels fit at full
+  size and go under each other otherwise; a label never shrinks below its neighbour's size.
 - Text uses automatic hyphenation (`Hyphens.Auto` in the theme's type styles), so a long word that
   must break (German compounds at large text) breaks at a syllable with a hyphen.

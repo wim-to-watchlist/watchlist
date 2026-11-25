@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.sp
+import kotlin.math.floor
 
 /**
  * Layout rules for large text sizes (Android's font size setting up to 200%), found by the AI
@@ -44,6 +45,44 @@ object LargeText {
         val widest = contentWidthsDp.maxOrNull() ?: return true
         return (widest + TAB_PADDING_DP) * contentWidthsDp.size <= availableDp
     }
+
+    /**
+     * The width for each tab of a scrolling tab row [availableDp] wide (after its start padding),
+     * where the widest tab needs [minTabDp]: the tabs are widened so the last one on screen shows
+     * about halfway, a sign that the row scrolls. A tab ending right at the edge looked like the
+     * end of the list (AI testers, 200% text).
+     */
+    fun peekTabWidth(
+        minTabDp: Float,
+        availableDp: Float,
+    ): Float {
+        if (minTabDp <= 0f || availableDp <= minTabDp) return minTabDp
+        val whole = floor(availableDp / minTabDp)
+        return listOf(whole + 0.5f, whole - 0.5f)
+            .filter { it >= 1.5f }
+            .map { availableDp / it }
+            .firstOrNull { it >= minTabDp } ?: minTabDp
+    }
+
+    /** Room a button adds around its label: 24dp padding on each side, an 18dp icon and an 8dp gap. */
+    const val BUTTON_CHROME_DP = 74f
+
+    /**
+     * Whether buttons with labels [labelWidthsDp] wide fit side by side at equal width in
+     * [availableDp] ([gapDp] apart) without shrinking a label. If not, they go under each other.
+     */
+    fun buttonsFit(
+        labelWidthsDp: List<Float>,
+        availableDp: Float,
+        gapDp: Float = 8f,
+    ): Boolean {
+        if (labelWidthsDp.size <= 1) return true
+        val each = (availableDp - gapDp * (labelWidthsDp.size - 1)) / labelWidthsDp.size
+        return labelWidthsDp.all { it + BUTTON_CHROME_DP <= each }
+    }
+
+    /** Status counts per row on the profile: three, or two once the text is set large. */
+    fun statusesPerRow(fontScale: Float): Int = if (fontScale > 1.3f) 2 else 3
 
     const val MIN_TILE_WIDTH_DP = 84f
 

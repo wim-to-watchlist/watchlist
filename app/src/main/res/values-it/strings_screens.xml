@@ -32,7 +32,6 @@
     <string name="screens_profile_sync_now">Sincronizza ora</string>
     <string name="screens_profile_last_synced">Ultima sincronizzazione: %1$s</string>
     <string name="screens_profile_never_synced">Mai sincronizzato</string>
-    <string name="screens_profile_sync">Sincronizza</string>
     <string name="screens_profile_open_page">Apri la mia pagina SIMKL</string>
     <string name="screens_profile_log_out">Esci</string>
     <string name="screens_profile_log_out_title">Uscire?</string>

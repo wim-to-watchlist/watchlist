@@ -551,3 +551,7 @@ The AI testers at 130% and 200% text found cut bottom-bar labels ("Calen"), unev
 ## Tabs that fit, hyphenation and "Mark watched" (2026-11-25)
 
 The fifth AI test run found three things. First, the library's scrolling shelf tabs looked cut off ("On ho"). Now they show all at once when every tab fits at the same width (`LargeText.tabsFit`). When they don't, the row still scrolls but fades out at an edge with more tabs. Second, words still broke at random letters at large text: German compounds and narrow rating tiles. The theme now turns on automatic hyphenation for every type style, and rating tiles and profile numbers use one shrinking line (`FitLabel`). Third, a bare "Watched" with a tick read as a status, so the button says "Mark watched" (Wim's choice; `DESIGN.md`, "This app").
+
+## Buttons that stack, tabs that peek (2026-11-25)
+
+The sixth AI test run found that shrinking a button label still failed: at large text "Mark watched" became smaller than "Check in", and in German it was cut ("Als gesehen ma"). The details buttons now go under each other at full width when their labels don't fit side by side at full size (`LargeText.buttonsFit`, `ActionButtons`). Testers also still read a scrolling tab row as finished when a tab ended right at the screen edge, so scrolling tabs get equal widths chosen to cut the last visible tab about halfway (`LargeText.peekTabWidth`). The profile's status labels keep their size and may take two lines, two per row with large text, and the sync row is one tap target instead of a row with a separate "Sync" button.

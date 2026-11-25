@@ -1,6 +1,5 @@
 package to.wim.watchlist.ui.discover
 
-import to.wim.watchlist.ui.components.FitLabel
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -11,26 +10,25 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Casino
 import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.foundation.layout.size
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PrimaryTabRow
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -38,6 +36,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
@@ -46,11 +45,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.dp
 import to.wim.watchlist.R
-import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.data.CatalogRepository
 import to.wim.watchlist.data.DiscoverSection
 import to.wim.watchlist.data.NavTab
@@ -58,17 +58,19 @@ import to.wim.watchlist.data.SectionResult
 import to.wim.watchlist.data.model.MediaSummary
 import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.ui.LocalNavigator
+import to.wim.watchlist.ui.components.FitLabel
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.ui.components.PosterRow
+import to.wim.watchlist.ui.components.PosterRowSkeleton
+import to.wim.watchlist.ui.components.label
 import to.wim.watchlist.ui.components.openUrl
 import to.wim.watchlist.ui.components.rememberApp
 import to.wim.watchlist.ui.library.SectionHeader
 import to.wim.watchlist.ui.library.bottomPadding
 import to.wim.watchlist.ui.main.MainTopBar
-import to.wim.watchlist.ui.theme.Motion
 import to.wim.watchlist.ui.theme.EmptyState
-import to.wim.watchlist.ui.components.label
+import to.wim.watchlist.ui.theme.Motion
 import kotlinx.coroutines.launch
-import to.wim.watchlist.ui.components.PosterRowSkeleton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -134,6 +136,8 @@ fun DiscoverScreen(types: List<MediaType>) {
             }
         },
     ) { padding ->
+        // Each tab keeps its own scroll position; a shared one opened the next tab halfway down.
+        val listStates = types.associateWith { t -> key(t) { rememberLazyListState() } }
         PullToRefreshBox(
             isRefreshing = refreshing,
             onRefresh = {
@@ -149,7 +153,7 @@ fun DiscoverScreen(types: List<MediaType>) {
                 }
                 return@PullToRefreshBox
             }
-            LazyColumn(contentPadding = PaddingValues(bottom = bottomPadding()), modifier = Modifier.fillMaxSize()) {
+            LazyColumn(state = listStates.getValue(type), contentPadding = PaddingValues(bottom = bottomPadding()), modifier = Modifier.fillMaxSize()) {
                 sections.forEach { section ->
                     item(key = "${section.id}:$refresh") { SectionRow(section, refresh) { failed -> failedRows[section.id] = failed } }
                 }

@@ -203,7 +203,7 @@ fun ShowsScreen(
                             // One tap marks an episode, so the snackbar offers to take it back.
                             onMarked = { message, undo ->
                                 scope.launch {
-                                    val result = snackbar.showSnackbar(message, actionLabel = resources.getString(R.string.lib_undo), duration = SnackbarDuration.Short)
+                                    val result = snackbar.showSnackbar(message, actionLabel = resources.getString(R.string.lib_undo), duration = SnackbarDuration.Long)
                                     if (result == SnackbarResult.ActionPerformed) undo()
                                 }
                             },

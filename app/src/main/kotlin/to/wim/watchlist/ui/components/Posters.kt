@@ -150,7 +150,8 @@ fun PosterTile(
             ) {
                 AiringBadge(airing)
             }
-            if (rating != null) {
+            // "★ 0.0" on a title nobody rated yet reads as a bad score, so no badge then.
+            if (rating != null && rating > 0) {
                 Surface(
                     Modifier.align(Alignment.TopEnd).padding(6.dp),
                     shape = RoundedCornerShape(8.dp),

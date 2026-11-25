@@ -32,6 +32,7 @@ fun Shelf.label(): String =
     stringResource(
         when (this) {
             Shelf.UpNext -> R.string.shelf_up_next
+            Shelf.Watching -> R.string.status_watching
             Shelf.PlanToWatch -> R.string.status_plan_to_watch
             Shelf.Watched -> R.string.status_watched
             Shelf.OnHold -> R.string.status_on_hold

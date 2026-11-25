@@ -93,9 +93,15 @@ class ParsersTest {
         assertEquals(Shelf.UpNext, Shelves.shelfOf(items.first { it.ids.simkl == 101L }, now))
         // Next episode airs in the future: waiting, and still airing.
         val b = items.first { it.ids.simkl == 102L }
-        assertEquals(Shelf.Watched, Shelves.shelfOf(b, now))
+        assertEquals(Shelf.Watching, Shelves.shelfOf(b, now))
         assertEquals(AiringState.Airing, Shelves.airingOf(b, null, null))
         assertEquals(Shelf.Watched, Shelves.shelfOf(items.first { it.type == MediaType.Anime }, now))
+        // The Watching tab lists every watching show, also those in Up next.
+        assertEquals(setOf(Shelf.UpNext, Shelf.Watching), Shelves.shelvesOf(items.first { it.ids.simkl == 101L }, now))
+        assertEquals(setOf(Shelf.Watching), Shelves.shelvesOf(b, now))
+        items.filter { it.status != ListStatus.Watching }.forEach {
+            assertEquals(setOf(Shelves.shelfOf(it, now)), Shelves.shelvesOf(it, now))
+        }
     }
 
     @Test
@@ -313,9 +319,9 @@ class ParsersTest {
         ) = to.wim.watchlist.data.model.Episode(s, e, null, null, null, null, aired, false)
         val caughtUp = Shelves.latestNextFrom(item, listOf(ep(1, 1), ep(7, 1), ep(7, 2), ep(8, 1, aired = false)))
         assertNull(caughtUp.next)
-        // Off: SIMKL's own next episode keeps it in Up next. On: caught up, so Watched.
+        // Off: SIMKL's own next episode keeps it in Up next. On: caught up, so Watching.
         assertEquals(Shelf.UpNext, Shelves.shelfOf(item, fromLatest = false, latest = caughtUp))
-        assertEquals(Shelf.Watched, Shelves.shelfOf(item, fromLatest = true, latest = caughtUp))
+        assertEquals(Shelf.Watching, Shelves.shelfOf(item, fromLatest = true, latest = caughtUp))
         val newEpisode = Shelves.latestNextFrom(item, listOf(ep(1, 1), ep(7, 2), ep(8, 1)))
         assertEquals(EpisodeRef(8, 1), newEpisode.next?.ref)
         assertEquals(Shelf.UpNext, Shelves.shelfOf(item, fromLatest = true, latest = newEpisode))
@@ -376,7 +382,7 @@ class ParsersTest {
         ) = to.wim.watchlist.data.model.Episode(s, e, null, null, null, null, aired, false)
         val latest = Shelves.latestNextFrom(item, listOf(ep(1, 1), ep(4, 1), ep(4, 2), ep(5, 1), ep(6, 1, aired = false)))
         assertNull(latest.next)
-        assertEquals(Shelf.Watched, Shelves.shelfOf(item, fromLatest = true, latest = latest))
+        assertEquals(Shelf.Watching, Shelves.shelfOf(item, fromLatest = true, latest = latest))
         // Once it has aired it is up next again.
         val aired = Shelves.latestNextFrom(item, listOf(ep(4, 1), ep(4, 2), ep(5, 1), ep(6, 1)))
         assertEquals(Shelf.UpNext, Shelves.shelfOf(item, fromLatest = true, latest = aired))
@@ -446,7 +452,7 @@ class ParsersTest {
         val before = airedAt.minusSeconds(60)
         val after = airedAt.plusSeconds(60)
         assertNull(Shelves.calendarNext(item, calendar, before, fromLatest = true))
-        assertEquals(Shelf.Watched, Shelves.shelfOf(item, after))
+        assertEquals(Shelf.Watching, Shelves.shelfOf(item, after))
         for (fromLatest in listOf(true, false)) {
             val aired = Shelves.calendarNext(item, calendar, after, fromLatest)
             assertEquals(EpisodeRef(13, 4), aired?.ref)

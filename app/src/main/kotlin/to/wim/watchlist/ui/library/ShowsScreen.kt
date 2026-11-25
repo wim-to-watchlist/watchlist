@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import to.wim.watchlist.R
 import to.wim.watchlist.data.model.StableOrder
 import to.wim.watchlist.data.model.Plus
+import to.wim.watchlist.ui.components.Locked
 import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.ui.components.PlusCard
 import androidx.compose.foundation.layout.Arrangement
@@ -27,6 +28,7 @@ import androidx.compose.material.icons.rounded.Block
 import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.CheckCircle
+import androidx.compose.material.icons.rounded.LiveTv
 import androidx.compose.material.icons.rounded.SearchOff
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.PlayCircle
@@ -83,6 +85,7 @@ import to.wim.watchlist.ui.theme.readableWidth
 private fun Shelf.emptyIcon(): ImageVector =
     when (this) {
         Shelf.UpNext -> Icons.Rounded.PlayCircle
+        Shelf.Watching -> Icons.Rounded.LiveTv
         Shelf.Watched -> Icons.Rounded.CheckCircle
         Shelf.PlanToWatch -> Icons.Rounded.Bookmark
         Shelf.OnHold -> Icons.Rounded.Pause
@@ -93,6 +96,7 @@ private fun Shelf.emptyIcon(): ImageVector =
 private fun Shelf.emptyText(): Int =
     when (this) {
         Shelf.UpNext -> R.string.lib_empty_up_next_text
+        Shelf.Watching -> R.string.lib_empty_watching_text
         Shelf.Watched -> R.string.lib_empty_watched_text
         Shelf.PlanToWatch -> R.string.lib_empty_plan_text
         else -> R.string.lib_empty_other_text
@@ -103,6 +107,7 @@ private fun Shelf.emptyTitle(type: MediaType): Int {
     val anime = type == MediaType.Anime
     return when (this) {
         Shelf.UpNext -> if (anime) R.string.lib_empty_up_next_anime else R.string.lib_empty_up_next_shows
+        Shelf.Watching -> if (anime) R.string.lib_empty_watching_anime else R.string.lib_empty_watching_shows
         Shelf.Watched -> if (anime) R.string.lib_empty_watched_anime else R.string.lib_empty_watched_shows
         Shelf.PlanToWatch -> if (anime) R.string.lib_empty_plan_anime else R.string.lib_empty_plan_shows
         Shelf.OnHold -> if (anime) R.string.lib_empty_on_hold_anime else R.string.lib_empty_on_hold_shows
@@ -134,7 +139,8 @@ fun ShowsScreen(
         remember(state, type, fromLatest, options.version) {
             val now = Instant.now()
             state.items.filter { it.type == type }
-                .groupBy { Shelves.shelfOf(it, now, fromLatest, state.latestNext[it.key], state.airedNext(it, fromLatest, now)) }
+                .flatMap { item -> Shelves.shelvesOf(item, now, fromLatest, state.latestNext[item.key], state.airedNext(item, fromLatest, now)).map { it to item } }
+                .groupBy({ it.first }, { it.second })
                 .mapValues { (shelf, v) ->
                     val tab = shelves.indexOf(shelf)
                     val airingOf = { item: LibraryItem -> Shelves.airingOf(item, state.showInfo[item.key], state.nextAirDate(item)) }
@@ -214,7 +220,7 @@ fun ShowsScreen(
                             items = items,
                             state = state,
                             onOpen = ::open,
-                            showProgress = shelf == Shelf.OnHold || shelf == Shelf.Dropped,
+                            showProgress = shelf == Shelf.Watching || shelf == Shelf.OnHold || shelf == Shelf.Dropped,
                             showAiring = true,
                         )
                 }
@@ -323,7 +329,8 @@ private fun UpNextList(
         if (plus) {
             items(items, key = { it.key }) { item -> row(item, Modifier.animateItem()) }
         } else {
-            // Free version: the first show as it is, a card about Plus, the rest by name only.
+            // Free version: the first show as it is, a card about Plus, the rest blurred. The
+            // Watching tab lists every show by name for free.
             val (shown, more) = Plus.preview(items)
             items(shown, key = { it.key }) { item -> row(item, Modifier.animateItem()) }
             item(key = "plus") {
@@ -338,18 +345,7 @@ private fun UpNextList(
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
             }
-            // The other shows by name, so your own list is never hidden; their next episode and the
-            // one-tap check are what Plus adds (Wim, after the free-version testers, 2026-11-25).
-            items(items.drop(shown.size), key = { it.key }) { item ->
-                ShowRow(
-                    item = item,
-                    headline = null,
-                    supporting = null,
-                    airing = Shelves.airingOf(item, state.showInfo[item.key], state.nextAirDate(item)),
-                    onClick = { onOpen(item) },
-                    modifier = Modifier.animateItem(),
-                )
-            }
+            items(items.drop(shown.size), key = { it.key }) { item -> Locked { row(item, Modifier) } }
         }
     }
     confirm?.let { (playback, item) ->

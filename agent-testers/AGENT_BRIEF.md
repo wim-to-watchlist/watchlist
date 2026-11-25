@@ -34,8 +34,25 @@ details pages, ratings and a profile with watch stats. Its texts exist in Englis
 French, German, Spanish and Italian; other phone languages get English.
 
 This is a test build ("Watchlist Dev"): every Watchlist Plus feature is unlocked, so you
-see no paywall. Cast and crew stay empty (they need the user's own TMDB key): that is
-expected, don't report it.
+see no paywall, unless your goal says you test the free version (below). Cast and crew stay
+empty (they need the user's own TMDB key): that is expected, don't report it.
+
+### Free-version testers
+Watchlist is free to use, with a subscription, Watchlist Plus (free trial, then yearly or
+monthly), for Up next, the Calendar, notifications, the stats per type, Surprise me and more.
+Locked parts stay on screen blurred, under a card that leads to the subscription screen.
+If your goal says you use the free version:
+1. After signing in, open Settings (gear on the profile), scroll to the bottom section
+   "Subscription" ("Abonnement" in Dutch) and turn on **Preview the free version**
+   ("Bekijk de gratis versie"). The app now behaves as without a subscription.
+2. The switch resets when the app is closed completely. If Plus features open freely
+   again, turn it back on; don't report that reset.
+3. Tapping a locked part opens the subscription screen. In this test build it shows sample
+   prices and can't buy: judge what it says (features, price, trial, how to cancel), but
+   don't try to complete a purchase and don't report that buying doesn't work.
+   **Preview subscription screen** in the same section opens it directly.
+Report anything unclear, misleading, pushy or broken about the free version and the way
+the app asks you to pay, and whether the free version still feels worth using.
 
 ### Signing in (do this first)
 1. Tap **Sign in with SIMKL**. Chrome opens simkl.com. If Chrome shows its own welcome

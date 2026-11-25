@@ -5,8 +5,17 @@
     "profile": "Nurse, 34, Dutch, follows five or six series at once and forgets where she was in each.",
     "goal": "Sign in, open Up next and mark the next episode of a show as watched, then check that Up next moved on to the episode after it.",
     "locale": "nl-NL",
-    "geo": [52.3676, 4.9041],
-    "device": {"name": "Pixel 7, Android 14", "profile": "pixel_7", "android_api": 34, "font_scale": 1.0, "theme": "light"}
+    "geo": [
+      52.3676,
+      4.9041
+    ],
+    "device": {
+      "name": "Pixel 7, Android 14",
+      "profile": "pixel_7",
+      "android_api": 34,
+      "font_scale": 1.0,
+      "theme": "light"
+    }
   },
   {
     "id": "lukas",
@@ -14,8 +23,17 @@
     "profile": "Engineer, 41, German, careful with his privacy: refuses every permission an app asks for, uses large text and dark mode on an old small phone.",
     "goal": "Sign in, see which episodes air this week in the Calendar, and find out what the app does when he says no to notifications.",
     "locale": "de-DE",
-    "geo": [52.52, 13.405],
-    "device": {"name": "Small phone, Android 11", "profile": "Nexus 5", "android_api": 30, "font_scale": 1.3, "theme": "dark"}
+    "geo": [
+      52.52,
+      13.405
+    ],
+    "device": {
+      "name": "Small phone, Android 11",
+      "profile": "Nexus 5",
+      "android_api": 30,
+      "font_scale": 1.3,
+      "theme": "dark"
+    }
   },
   {
     "id": "camille",
@@ -23,8 +41,17 @@
     "profile": "Film student, 23, French, watches mostly movies, rates everything, taps fast and skips texts.",
     "goal": "Sign in, search for a movie she has not seen, add it to her watchlist, then mark another movie as watched and rate it.",
     "locale": "fr-FR",
-    "geo": [48.8566, 2.3522],
-    "device": {"name": "Pixel 8, Android 15", "profile": "pixel_8", "android_api": 35, "font_scale": 1.0, "theme": "dark"}
+    "geo": [
+      48.8566,
+      2.3522
+    ],
+    "device": {
+      "name": "Pixel 8, Android 15",
+      "profile": "pixel_8",
+      "android_api": 35,
+      "font_scale": 1.0,
+      "theme": "dark"
+    }
   },
   {
     "id": "grace",
@@ -32,8 +59,17 @@
     "profile": "Retired nurse, 74, English, low vision, uses Android's largest font size (200%).",
     "goal": "Sign in, read every screen she opens without zooming, and open the details of a show to see which episode comes next.",
     "locale": "en-US",
-    "geo": [41.8781, -87.6298],
-    "device": {"name": "Pixel 7, Android 14, 200% font", "profile": "pixel_7", "android_api": 34, "font_scale": 2.0, "theme": "light"}
+    "geo": [
+      41.8781,
+      -87.6298
+    ],
+    "device": {
+      "name": "Pixel 7, Android 14, 200% font",
+      "profile": "pixel_7",
+      "android_api": 34,
+      "font_scale": 2.0,
+      "theme": "light"
+    }
   },
   {
     "id": "lucia",
@@ -41,8 +77,17 @@
     "profile": "Teacher, 47, Spanish, uses the family tablet in the evening to pick something to watch.",
     "goal": "Sign in, use Discover and Surprise me to find something new, and judge whether the layout uses the big screen well.",
     "locale": "es-ES",
-    "geo": [40.4168, -3.7038],
-    "device": {"name": "Pixel Tablet, Android 14", "profile": "pixel_tablet", "android_api": 34, "font_scale": 1.0, "theme": "light"}
+    "geo": [
+      40.4168,
+      -3.7038
+    ],
+    "device": {
+      "name": "Pixel Tablet, Android 14",
+      "profile": "pixel_tablet",
+      "android_api": 34,
+      "font_scale": 1.0,
+      "theme": "light"
+    }
   },
   {
     "id": "marco",
@@ -50,8 +95,17 @@
     "profile": "Bartender, 29, Italian, anime fan, likes to customise every app.",
     "goal": "Sign in, look at his watch stats on the profile, then change the bottom bar and the colours in Settings and check the change sticks after leaving and reopening the app.",
     "locale": "it-IT",
-    "geo": [41.9028, 12.4964],
-    "device": {"name": "Pixel 5, Android 12", "profile": "pixel_5", "android_api": 31, "font_scale": 1.15, "theme": "light"}
+    "geo": [
+      41.9028,
+      12.4964
+    ],
+    "device": {
+      "name": "Pixel 5, Android 12",
+      "profile": "pixel_5",
+      "android_api": 31,
+      "font_scale": 1.15,
+      "theme": "light"
+    }
   },
   {
     "id": "tom",
@@ -59,7 +113,52 @@
     "profile": "Retail manager, 52, British, new to SIMKL, wants to know what the app is before trusting it with an account.",
     "goal": "Understand from the first screens what the app does and why it needs a SIMKL account, sign in, and find out how to sign out again.",
     "locale": "en-GB",
-    "geo": [51.5072, -0.1276],
-    "device": {"name": "Small phone, Android 10", "profile": "Nexus 5X", "android_api": 29, "font_scale": 1.15, "theme": "light"}
+    "geo": [
+      51.5072,
+      -0.1276
+    ],
+    "device": {
+      "name": "Small phone, Android 10",
+      "profile": "Nexus 5X",
+      "android_api": 29,
+      "font_scale": 1.15,
+      "theme": "light"
+    }
+  },
+  {
+    "id": "jonas",
+    "platform": "android",
+    "profile": "Bookkeeper, 38, Belgian (Dutch-speaking), careful with money, tried many free tracker apps and only pays when he clearly sees what he gets.",
+    "goal": "Use the free version (see 'Free-version testers' in the brief): find out what is free and what needs Watchlist Plus, open the locked Up next and Calendar, then open the subscription screen and judge whether the price, the free trial and how to cancel are clear before paying.",
+    "locale": "nl-BE",
+    "geo": [
+      51.0543,
+      3.7174
+    ],
+    "device": {
+      "name": "Pixel 6, Android 13",
+      "profile": "pixel_6",
+      "android_api": 33,
+      "font_scale": 1.0,
+      "theme": "light"
+    }
+  },
+  {
+    "id": "emma",
+    "platform": "android",
+    "profile": "Marketing assistant, 27, American, impatient with apps that nag her to pay, closes anything that feels pushy.",
+    "goal": "Use the free version (see 'Free-version testers' in the brief) the way a new user would for a while: add a show, mark an episode, look at the profile. Judge every place the app asks her to pay: is it clear, honest and not pushy, and does the free version still feel useful?",
+    "locale": "en-US",
+    "geo": [
+      30.2672,
+      -97.7431
+    ],
+    "device": {
+      "name": "Pixel 8, Android 15, dark",
+      "profile": "pixel_8",
+      "android_api": 35,
+      "font_scale": 1.0,
+      "theme": "dark"
+    }
   }
 ]

@@ -160,5 +160,77 @@
       "font_scale": 1.0,
       "theme": "dark"
     }
+  },
+  {
+    "id": "hannah",
+    "platform": "android",
+    "profile": "Pharmacist, 36, German, has used SIMKL's own official app for years and knows its screens by heart; skeptical that a third-party app does it better.",
+    "goal": "Sign in and compare with SIMKL's official app: are her Watching, Plan to watch and Completed lists where she expects them, does marking an episode watched work the way SIMKL's app does, and what does this app offer that the official one doesn't?",
+    "locale": "de-DE",
+    "geo": [
+      48.1351,
+      11.582
+    ],
+    "device": {
+      "name": "Pixel 7, Android 14",
+      "profile": "pixel_7",
+      "android_api": 34,
+      "font_scale": 1.0,
+      "theme": "dark"
+    }
+  },
+  {
+    "id": "leo",
+    "platform": "android",
+    "profile": "Barista, 26, American, watches everything through Stremio with SIMKL sync, mostly anime and series; never marks episodes by hand because Stremio does it for him.",
+    "goal": "Sign in and check whether the app shows what Stremio already synced to SIMKL: what he is watching (the Watching tab), what is up next, and his anime. Judge whether the app is worth having next to Stremio when he rarely marks anything himself.",
+    "locale": "en-US",
+    "geo": [
+      30.2672,
+      -97.7431
+    ],
+    "device": {
+      "name": "Pixel 8, Android 15",
+      "profile": "pixel_8",
+      "android_api": 35,
+      "font_scale": 1.0,
+      "theme": "dark"
+    }
+  },
+  {
+    "id": "giulia",
+    "platform": "android",
+    "profile": "Sound engineer, 44, Italian, runs Kodi on a home-theatre PC with the SIMKL scrobbler, often stops a movie halfway and finishes it another evening.",
+    "goal": "Sign in and look for where movies and episodes she paused in Kodi would show up (Movies may have a Continue watching tab only when SIMKL has paused movies; the test account may have none). Judge whether it is clear how paused progress and Kodi's scrobbling fit into the app.",
+    "locale": "it-IT",
+    "geo": [
+      45.4642,
+      9.19
+    ],
+    "device": {
+      "name": "Pixel 5, Android 12",
+      "profile": "pixel_5",
+      "android_api": 31,
+      "font_scale": 1.15,
+      "theme": "light"
+    }
+  },
+  {
+    "id": "mathieu",
+    "platform": "android",
+    "profile": "Developer, 39, French, long-time trakt.tv user who is unhappy with Trakt's recent changes and is considering moving to SIMKL; knows Trakt's Up next, calendar and stats well.",
+    "goal": "Sign in and judge whether this app plus SIMKL could replace Trakt for him: Up next, the Watching list, the Calendar, stats and ratings. Note what he misses from Trakt and whether the app explains anything about moving over.",
+    "locale": "fr-FR",
+    "geo": [
+      45.764,
+      4.8357
+    ],
+    "device": {
+      "name": "Small phone, Android 11",
+      "profile": "Nexus 5",
+      "android_api": 30,
+      "font_scale": 1.3,
+      "theme": "light"
+    }
   }
 ]

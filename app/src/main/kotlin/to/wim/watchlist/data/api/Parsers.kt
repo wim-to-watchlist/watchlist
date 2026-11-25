@@ -393,7 +393,9 @@ object Parsers {
             }
         return UserStats(
             totalMinutes = obj.long("total_mins") ?: types.sumOf { it.minutes },
-            lastWeekMinutes = obj.obj("watched_last_week")?.long("total_mins"),
+            // SIMKL sends 0 for this week even right after episodes were marked (AI testers, round 7),
+            // so 0 hides the tile instead of showing a wrong "0m".
+            lastWeekMinutes = obj.obj("watched_last_week")?.long("total_mins")?.takeIf { it > 0 },
             types = types,
         )
     }

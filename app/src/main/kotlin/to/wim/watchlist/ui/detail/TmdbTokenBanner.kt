@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Groups
-import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -57,7 +57,8 @@ fun TmdbTokenBanner(
             ) {
                 TextButton(onClick = onNever) { Text(stringResource(R.string.detail_tmdb_banner_never)) }
                 TextButton(onClick = onNotNow) { Text(stringResource(R.string.detail_tmdb_banner_not_now)) }
-                FilledTonalButton(onClick = onAdd) { Text(stringResource(R.string.detail_tmdb_banner_add)) }
+                // Filled: a tonal button on this tonal card looked like plain black text.
+                Button(onClick = onAdd) { Text(stringResource(R.string.detail_tmdb_banner_add)) }
             }
         }
     }

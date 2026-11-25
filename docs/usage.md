@@ -18,7 +18,7 @@ Nobody needs a SIMKL developer account. If the browser shows the app chooser (wh
 
 Watchlist is free to use: sign in, and your lists, marking episodes watched, ratings, details, search, Discover and your watch totals all work without paying. **Watchlist Plus**, a subscription sold through Google Play, adds the rest:
 
-- **Up next**: the free version shows the first show; the others are blurred under a card that says how many more there are.
+- **Up next**: the free version shows the first show with its next episode and the one-tap check; your other shows are listed by name below a card that says how many more there are. Tap one to open it and mark episodes there.
 - **Calendar**: the free version shows the first entry; the others are blurred under a card that counts them. The day headers stay readable.
 - **New-episode notifications**: the switch in *Settings › Notifications* opens the plans.
 - **Stats per type** on your profile (the totals stay free).

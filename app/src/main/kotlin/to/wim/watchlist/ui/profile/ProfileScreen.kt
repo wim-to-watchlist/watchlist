@@ -164,14 +164,19 @@ fun ProfileScreen(types: Set<MediaType>) {
                     shown.forEachIndexed { i, t -> item(key = "type-$i") { Box(Modifier.animateItem()) { TypeCard(t) } } }
                 } else if (shown.isNotEmpty()) {
                     // Free version: the totals stay, and so do the cards per type with their labels;
-                    // only their numbers are blurred, above a card about Plus.
-                    shown.forEachIndexed { i, t -> item(key = "type-$i") { Box(Modifier.animateItem()) { TypeCard(t, locked = true) } } }
-                    item(key = "plus") {
-                        PlusCard(
-                            title = stringResource(R.string.plus_stats_title),
-                            text = stringResource(R.string.plus_stats_text),
-                            modifier = Modifier.animateItem(),
-                        )
+                    // only their numbers are blurred. The card about Plus follows the first one, so it is on
+                    // screen next to the blur it explains (AI testers, round 8), as on Up next and the Calendar.
+                    shown.forEachIndexed { i, t ->
+                        item(key = "type-$i") { Box(Modifier.animateItem()) { TypeCard(t, locked = true) } }
+                        if (i == 0) {
+                            item(key = "plus") {
+                                PlusCard(
+                                    title = stringResource(R.string.plus_stats_title),
+                                    text = stringResource(R.string.plus_stats_text),
+                                    modifier = Modifier.animateItem(),
+                                )
+                            }
+                        }
                     }
                 }
             }

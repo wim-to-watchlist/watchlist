@@ -379,6 +379,14 @@ fun SettingsScreen(settings: AppSettings) {
         if (BuildConfig.DEBUG) {
             item(key = "subscription_preview") {
                 SettingsSection(title = stringResource(R.string.sub_settings_section)) {
+                    // As in release builds, so the free-version preview shows where to get Plus.
+                    if (!plus) {
+                        SettingItem(
+                            title = stringResource(R.string.plus_get),
+                            summary = stringResource(R.string.plus_get_summary),
+                            onClick = { app.showPaywall.value = true },
+                        )
+                    }
                     SettingItem(
                         title = stringResource(R.string.sub_preview),
                         summary = stringResource(R.string.sub_preview_summary),

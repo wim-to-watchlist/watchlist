@@ -157,6 +157,8 @@ data class TabSpec(
 
         fun of(shelf: MovieShelf): TabSpec =
             when (shelf) {
+                // Most recently paused first, nothing to sort or filter by.
+                MovieShelf.ContinueWatching -> TabSpec(listOf(SortOrder.Recent), rating = false, airing = false, animeTypes = false)
                 MovieShelf.PlanToWatch -> TabSpec(unwatched, rating = false, airing = false, animeTypes = false)
                 MovieShelf.Completed, MovieShelf.Dropped -> TabSpec(all, rating = true, airing = false, animeTypes = false)
             }

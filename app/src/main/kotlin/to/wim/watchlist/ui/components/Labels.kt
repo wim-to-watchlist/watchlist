@@ -44,6 +44,7 @@ fun Shelf.label(): String =
 fun MovieShelf.label(): String =
     stringResource(
         when (this) {
+            MovieShelf.ContinueWatching -> R.string.lib_continue_watching
             MovieShelf.PlanToWatch -> R.string.status_plan_to_watch
             MovieShelf.Completed -> R.string.status_watched
             MovieShelf.Dropped -> R.string.status_dropped

@@ -32,14 +32,34 @@ data class LatestNext(
 
 /** The tabs of the Movies screen. */
 enum class MovieShelf(
-    val status: ListStatus,
+    /** The SIMKL list it shows; null for [ContinueWatching], which isn't a list. */
+    val status: ListStatus?,
 ) {
+    /** Movies paused part-way (SIMKL's playback progress); only shown when there are any. */
+    ContinueWatching(null),
     PlanToWatch(ListStatus.PlanToWatch),
     Completed(ListStatus.Completed),
     Dropped(ListStatus.Dropped),
 }
 
 object Shelves {
+    /**
+     * Movies paused part-way, most recently paused first. SIMKL has no list for them: a movie stopped
+     * halfway only exists as playback progress. A movie that isn't on any of the user's lists gets a
+     * plain item from the playback (no poster).
+     */
+    fun pausedMovies(
+        items: List<LibraryItem>,
+        playback: List<Playback>,
+    ): List<LibraryItem> {
+        val byId = items.filter { it.type == MediaType.Movie }.associateBy { it.ids.simkl }
+        return playback
+            .filter { it.type == MediaType.Movie && it.episode == null }
+            .sortedByDescending { it.pausedAt.orEmpty() }
+            .distinctBy { it.simklId }
+            .map { pb -> byId[pb.simklId] ?: LibraryItem(MediaType.Movie, MediaIds(pb.simklId), pb.title, status = ListStatus.PlanToWatch) }
+    }
+
     /** Position of an episode in watching order (specials, season 0, sort first and are ignored). */
     fun order(ref: EpisodeRef): Long = (ref.season ?: 1).toLong() * 100_000 + ref.episode
 

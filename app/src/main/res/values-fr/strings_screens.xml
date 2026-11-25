@@ -36,7 +36,7 @@
     <string name="screens_profile_open_page">Ouvrir ma page SIMKL</string>
     <string name="screens_profile_log_out">Se déconnecter</string>
     <string name="screens_profile_log_out_title">Se déconnecter ?</string>
-    <string name="screens_profile_log_out_body">Vos listes restent sur SIMKL. Elles sont seulement retirées de cet appareil.</string>
+    <string name="screens_profile_log_out_body">Vos listes restent sur SIMKL. Elles sont seulement retirées de cet appareil. Pour retirer aussi l’accès de l’appli à votre compte, supprimez-la des applis connectées dans vos paramètres sur simkl.com.</string>
     <string name="screens_profile_joined">Membre depuis le %1$s</string>
     <string name="screens_profile_time_watched">Temps de visionnage</string>
     <string name="screens_profile_last_7_days">7 derniers jours</string>
@@ -73,7 +73,7 @@
     <string name="screens_login_denied">La connexion a été annulée sur SIMKL (%1$s).</string>
     <string name="screens_login_redirect_invalid">Ce lien de connexion ne correspond pas à celui lancé par l’app. Appuyez à nouveau sur Se connecter avec SIMKL.</string>
     <string name="screens_login_failed">Échec de la connexion : %1$s</string>
-    <string name="screens_login_note">Vous vous connectez sur simkl.com ; cette app ne voit jamais votre mot de passe. Watchlist n’est pas affilié à Simkl.</string>
+    <string name="screens_login_note">Vous vous connectez sur simkl.com ; cette app ne voit jamais votre mot de passe. Watchlist n’est pas affilié à SIMKL.</string>
     <string name="screens_settings_tmdb">Distribution et équipe</string>
     <string name="screens_settings_tmdb_key">Read Access Token TMDB</string>
     <string name="screens_settings_tmdb_key_on">Ajouté. Les fiches affichent la distribution et l’équipe, et vous pouvez rechercher des personnes.</string>
@@ -108,6 +108,7 @@
     <string name="screens_settings_channel_on">Activées · son et plus dans les paramètres Android</string>
     <string name="screens_settings_channel_off">Désactivées dans les paramètres Android. Touchez pour les activer.</string>
     <string name="screens_settings_android_notifications">Paramètres de notification Android</string>
-    <string name="screens_settings_android_notifications_sub">Chaque type, avec son, vibration et pop-ups</string>
+    <string name="screens_settings_android_notifications_sub">Ouvre les paramètres Android de l’appli : son, vibration et pop-ups pour chaque type</string>
     <string name="screens_profile_stats_failed">Impossible de charger vos statistiques. Vérifiez votre connexion et réessayez.</string>
+    <string name="screens_login_about">SIMKL est un site gratuit qui garde vos listes et ce que vous avez vu. Pas encore de compte ? Vous pouvez en créer un en vous connectant.</string>
 </resources>

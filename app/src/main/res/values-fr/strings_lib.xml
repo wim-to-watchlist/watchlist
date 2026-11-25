@@ -99,4 +99,6 @@
         <item quantity="many">%d épisodes restants</item>
         <item quantity="other">%d épisodes restants</item>
     </plurals>
+    <string name="lib_undo">Annuler</string>
+    <string name="lib_marked_watched">%1$s de %2$s marqué comme vu</string>
 </resources>

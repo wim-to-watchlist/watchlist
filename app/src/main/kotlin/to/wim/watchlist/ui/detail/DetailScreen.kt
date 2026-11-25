@@ -92,6 +92,9 @@ import androidx.compose.material3.LinearProgressIndicator
 import to.wim.watchlist.data.model.DetailActions
 import to.wim.watchlist.data.model.NextEpisode
 import to.wim.watchlist.data.model.DetailFacts
+import to.wim.watchlist.data.model.Genre
+import to.wim.watchlist.data.model.countryName
+import to.wim.watchlist.data.model.showsAirTime
 import to.wim.watchlist.data.model.Rating
 import to.wim.watchlist.data.model.Playback
 import to.wim.watchlist.data.model.Shelves
@@ -777,16 +780,21 @@ private fun About(
         }
         // Ratings, rank and genres are information, not controls, so they sit in the info card.
         // Only the ratings and the first few facts show until the card is expanded.
+        val res = LocalResources.current
         val facts: List<Fact> =
             listOfNotNull(
                 d.rank?.let { Fact(Icons.Rounded.EmojiEvents, stringResource(R.string.detail_fact_rank), "#$it") },
                 d.genres.takeIf { it.isNotEmpty() }?.let { genres ->
-                    Fact(Icons.Rounded.Category, stringResource(R.string.detail_fact_genres), genres.joinToString(", ") { it.replaceFirstChar { c -> c.uppercase() } })
+                    Fact(
+                        Icons.Rounded.Category,
+                        stringResource(R.string.detail_fact_genres),
+                        genres.joinToString(", ") { g -> Genre.fromApi(g)?.let { res.getString(it.label) } ?: g.replaceFirstChar { c -> c.uppercase() } },
+                    )
                 },
                 d.status?.let {
                     Fact(Icons.Rounded.Info, stringResource(R.string.detail_fact_status), ShowStatus.fromApi(it)?.let { s -> stringResource(s.label) } ?: it.replaceFirstChar { c -> c.uppercase() })
                 },
-                d.airs?.let { Format.airs(it) }?.let { Fact(Icons.Rounded.Schedule, stringResource(R.string.detail_fact_airs), it) },
+                d.airs?.takeIf { showsAirTime(d.status) }?.let { Format.airs(it) }?.let { Fact(Icons.Rounded.Schedule, stringResource(R.string.detail_fact_airs), it) },
                 d.firstAired?.let { date ->
                     Fact(
                         Icons.Rounded.CalendarMonth,
@@ -796,7 +804,7 @@ private fun About(
                 },
                 d.totalEpisodes?.takeIf { it > 0 }?.let { Fact(Icons.Rounded.VideoLibrary, stringResource(R.string.detail_fact_episodes), it.toString()) },
                 d.network?.let { Fact(Icons.Rounded.Tv, stringResource(R.string.detail_fact_network), it) },
-                d.country?.let { Fact(Icons.Rounded.Public, stringResource(R.string.detail_fact_country), it) },
+                d.country?.let { Fact(Icons.Rounded.Public, stringResource(R.string.detail_fact_country), countryName(it, res.configuration.locales[0])) },
                 d.director?.let { Fact(Icons.Rounded.Movie, stringResource(R.string.detail_fact_director), it) },
                 d.budget?.let { Fact(Icons.Rounded.AttachMoney, stringResource(R.string.detail_fact_budget), money(it)) },
                 d.revenue?.let { Fact(Icons.Rounded.AttachMoney, stringResource(R.string.detail_fact_box_office), money(it)) },
@@ -1193,7 +1201,8 @@ private fun EpisodesBlock(
                         )
                     }
                 }
-                val checkboxLabel = stringResource(R.string.lib_mark_episode_watched, e.ref().label)
+                // Read with the checkbox state: "S01E02 watched, checked", not "Mark S01E02 watched, checked".
+                val checkboxLabel = stringResource(R.string.detail_episode_watched_box, e.ref().label)
                 Checkbox(
                     checked = watched,
                     onCheckedChange = if (e.aired) ({ toggle(e, it) }) else null,

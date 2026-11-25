@@ -296,9 +296,10 @@ private fun ProfileHeader(profile: UserProfile?) {
 @Composable
 private fun Totals(stats: UserStats) {
     Surface(shape = AppShapes.Group, color = MaterialTheme.colorScheme.primaryContainer) {
-        Row(Modifier.fillMaxWidth().padding(20.dp), horizontalArrangement = Arrangement.SpaceAround) {
-            Stat(stringResource(R.string.screens_profile_time_watched), Format.duration(stats.totalMinutes))
-            stats.lastWeekMinutes?.let { Stat(stringResource(R.string.screens_profile_last_7_days), Format.duration(it)) }
+        // Each stat gets half the width, so a long value wraps within its own half.
+        Row(Modifier.fillMaxWidth().padding(20.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Stat(stringResource(R.string.screens_profile_time_watched), Format.duration(stats.totalMinutes), Modifier.weight(1f))
+            stats.lastWeekMinutes?.let { Stat(stringResource(R.string.screens_profile_last_7_days), Format.duration(it), Modifier.weight(1f)) }
         }
     }
 }
@@ -307,10 +308,11 @@ private fun Totals(stats: UserStats) {
 private fun Stat(
     label: String,
     value: String,
+    modifier: Modifier = Modifier,
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Text(label, style = MaterialTheme.typography.labelMedium)
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(value, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+        Text(label, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center)
     }
 }
 

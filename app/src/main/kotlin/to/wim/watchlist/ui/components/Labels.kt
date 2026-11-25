@@ -6,6 +6,7 @@ import androidx.compose.ui.res.stringResource
 import to.wim.watchlist.R
 import to.wim.watchlist.data.NavTab
 import to.wim.watchlist.data.ThemeMode
+import to.wim.watchlist.data.model.Genre
 import to.wim.watchlist.data.model.ListStatus
 import to.wim.watchlist.data.model.MediaType
 import to.wim.watchlist.data.model.MovieShelf
@@ -92,4 +93,39 @@ val ShowStatus.label: Int
             ShowStatus.InProduction -> R.string.detail_status_in_production
             ShowStatus.Planned -> R.string.detail_status_planned
             ShowStatus.Released -> R.string.detail_status_released
+        }
+
+val Genre.label: Int
+    @StringRes get() =
+        when (this) {
+            Genre.Action -> R.string.genre_action
+            Genre.Adventure -> R.string.genre_adventure
+            Genre.Animation -> R.string.genre_animation
+            Genre.Anime -> R.string.genre_anime
+            Genre.Biography -> R.string.genre_biography
+            Genre.Children -> R.string.genre_children
+            Genre.Comedy -> R.string.genre_comedy
+            Genre.Crime -> R.string.genre_crime
+            Genre.Documentary -> R.string.genre_documentary
+            Genre.Drama -> R.string.genre_drama
+            Genre.Family -> R.string.genre_family
+            Genre.Fantasy -> R.string.genre_fantasy
+            Genre.GameShow -> R.string.genre_game_show
+            Genre.History -> R.string.genre_history
+            Genre.Horror -> R.string.genre_horror
+            Genre.MiniSeries -> R.string.genre_mini_series
+            Genre.Music -> R.string.genre_music
+            Genre.Musical -> R.string.genre_musical
+            Genre.Mystery -> R.string.genre_mystery
+            Genre.News -> R.string.genre_news
+            Genre.Reality -> R.string.genre_reality
+            Genre.Romance -> R.string.genre_romance
+            Genre.ScienceFiction -> R.string.genre_science_fiction
+            Genre.Soap -> R.string.genre_soap
+            Genre.Sport -> R.string.genre_sport
+            Genre.Suspense -> R.string.genre_suspense
+            Genre.TalkShow -> R.string.genre_talk_show
+            Genre.Thriller -> R.string.genre_thriller
+            Genre.War -> R.string.genre_war
+            Genre.Western -> R.string.genre_western
         }

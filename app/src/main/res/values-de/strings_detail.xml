@@ -119,4 +119,5 @@
         <item quantity="other">%1$d Folgen</item>
     </plurals>
     <string name="detail_mark_up_to">Bis hier als gesehen markieren</string>
+    <string name="detail_episode_watched_box">%1$s gesehen</string>
 </resources>

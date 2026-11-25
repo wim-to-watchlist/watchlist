@@ -142,11 +142,14 @@ object Format {
     fun duration(minutes: Long): String {
         val days = minutes / (60 * 24)
         val hours = (minutes / 60) % 24
-        return when {
-            days > 0 -> res.getString(R.string.lib_duration_days_hours, days, hours)
-            hours > 0 -> res.getString(R.string.lib_duration_hours_minutes, hours, minutes % 60)
-            else -> res.getString(R.string.lib_duration_minutes, minutes)
-        }
+        val text =
+            when {
+                days > 0 -> res.getString(R.string.lib_duration_days_hours, days, hours)
+                hours > 0 -> res.getString(R.string.lib_duration_hours_minutes, hours, minutes % 60)
+                else -> res.getString(R.string.lib_duration_minutes, minutes)
+            }
+        // One value: a line may break before or after "12d 4h", never inside it.
+        return text.replace(' ', '\u00A0')
     }
 
     /** A broadcast in the phone's time zone: "Tuesday 21:30", or just the time without a day. */

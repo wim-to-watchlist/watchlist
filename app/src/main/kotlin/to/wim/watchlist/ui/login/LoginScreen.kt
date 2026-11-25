@@ -125,6 +125,13 @@ fun LoginScreen() {
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
+        // New users may not know SIMKL: say what it is and that an account is free.
+        Text(
+            stringResource(R.string.screens_login_about),
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
         Spacer(Modifier.height(16.dp))
         Button(
             onClick = {

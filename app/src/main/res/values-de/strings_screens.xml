@@ -36,7 +36,7 @@
     <string name="screens_profile_open_page">Meine SIMKL-Seite öffnen</string>
     <string name="screens_profile_log_out">Abmelden</string>
     <string name="screens_profile_log_out_title">Abmelden?</string>
-    <string name="screens_profile_log_out_body">Deine Listen bleiben auf SIMKL. Sie werden nur von diesem Gerät entfernt.</string>
+    <string name="screens_profile_log_out_body">Deine Listen bleiben auf SIMKL. Sie werden nur von diesem Gerät entfernt. Um der App auch den Zugriff auf dein Konto zu entziehen, entferne sie in deinen Einstellungen auf simkl.com bei den verbundenen Apps.</string>
     <string name="screens_profile_joined">Mitglied seit %1$s</string>
     <string name="screens_profile_time_watched">Sehzeit</string>
     <string name="screens_profile_last_7_days">Letzte 7 Tage</string>
@@ -71,7 +71,7 @@
     <string name="screens_login_denied">Die Anmeldung wurde auf SIMKL abgebrochen (%1$s).</string>
     <string name="screens_login_redirect_invalid">Dieser Anmeldelink gehört nicht zur Anmeldung dieser App. Tippe erneut auf Mit SIMKL anmelden.</string>
     <string name="screens_login_failed">Anmeldung fehlgeschlagen: %1$s</string>
-    <string name="screens_login_note">Du meldest dich auf simkl.com an; diese App sieht dein Passwort nie. Watchlist ist nicht mit Simkl verbunden.</string>
+    <string name="screens_login_note">Du meldest dich auf simkl.com an; diese App sieht dein Passwort nie. Watchlist ist nicht mit SIMKL verbunden.</string>
     <string name="screens_settings_tmdb">Besetzung und Team</string>
     <string name="screens_settings_tmdb_key">TMDB Read Access Token</string>
     <string name="screens_settings_tmdb_key_on">Hinzugefügt. Detailseiten zeigen Besetzung und Team, und du kannst Personen suchen.</string>
@@ -106,6 +106,7 @@
     <string name="screens_settings_channel_on">An · Ton und mehr in den Android-Einstellungen</string>
     <string name="screens_settings_channel_off">In den Android-Einstellungen aus. Tippen zum Einschalten.</string>
     <string name="screens_settings_android_notifications">Android-Benachrichtigungseinstellungen</string>
-    <string name="screens_settings_android_notifications_sub">Jede Art, mit Ton, Vibration und Pop-ups</string>
+    <string name="screens_settings_android_notifications_sub">Öffnet die Android-Einstellungen dieser App: Ton, Vibration und Pop-ups für jede Art</string>
     <string name="screens_profile_stats_failed">Deine Statistik konnte nicht geladen werden. Prüfe deine Verbindung und versuche es noch einmal.</string>
+    <string name="screens_login_about">SIMKL ist eine kostenlose Website, die deine Listen und alles Gesehene speichert. Noch kein Konto? Du kannst beim Anmelden eins anlegen.</string>
 </resources>

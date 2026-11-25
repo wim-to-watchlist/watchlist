@@ -92,4 +92,6 @@
         <item quantity="one">nog %d aflevering</item>
         <item quantity="other">nog %d afleveringen</item>
     </plurals>
+    <string name="lib_undo">Ongedaan maken</string>
+    <string name="lib_marked_watched">%1$s van %2$s gemarkeerd als gezien</string>
 </resources>

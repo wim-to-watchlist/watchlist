@@ -19,7 +19,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.CheckCircle
+import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -163,8 +164,10 @@ fun PosterTile(
                 }
             }
             if (inLibrary) {
+                // A bookmark, not a check: a check reads as "watched", and a title can be in a list
+                // without being watched (Plan to watch).
                 Icon(
-                    Icons.Rounded.CheckCircle,
+                    Icons.Rounded.Bookmark,
                     contentDescription = stringResource(R.string.lib_in_your_lists),
                     tint = MaterialTheme.colorScheme.primary,
                     modifier =
@@ -186,7 +189,8 @@ fun PosterTile(
         // and structure"). The caption follows the title directly; a one-line title leaves the
         // spare line at the bottom instead of between title and caption.
         Box {
-            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            // Only takes up the space; screen readers skip it.
+            Column(Modifier.clearAndSetSemantics {}, verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text("", style = MaterialTheme.typography.labelLarge, minLines = 2)
                 Text("", style = MaterialTheme.typography.labelSmall, minLines = 1)
             }

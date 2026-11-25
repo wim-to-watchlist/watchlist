@@ -9,7 +9,6 @@ import to.wim.watchlist.R
 import to.wim.watchlist.data.model.StableOrder
 import to.wim.watchlist.data.model.Plus
 import to.wim.watchlist.ui.components.LocalPlus
-import to.wim.watchlist.ui.components.Locked
 import to.wim.watchlist.ui.components.PlusCard
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -324,7 +323,7 @@ private fun UpNextList(
         if (plus) {
             items(items, key = { it.key }) { item -> row(item, Modifier.animateItem()) }
         } else {
-            // Free version: the first show as it is, a card about Plus, the rest blurred.
+            // Free version: the first show as it is, a card about Plus, the rest by name only.
             val (shown, more) = Plus.preview(items)
             items(shown, key = { it.key }) { item -> row(item, Modifier.animateItem()) }
             item(key = "plus") {
@@ -339,7 +338,18 @@ private fun UpNextList(
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
             }
-            items(items.drop(shown.size), key = { it.key }) { item -> Locked { row(item, Modifier) } }
+            // The other shows by name, so your own list is never hidden; their next episode and the
+            // one-tap check are what Plus adds (Wim, after the free-version testers, 2026-11-25).
+            items(items.drop(shown.size), key = { it.key }) { item ->
+                ShowRow(
+                    item = item,
+                    headline = null,
+                    supporting = null,
+                    airing = Shelves.airingOf(item, state.showInfo[item.key], state.nextAirDate(item)),
+                    onClick = { onOpen(item) },
+                    modifier = Modifier.animateItem(),
+                )
+            }
         }
     }
     confirm?.let { (playback, item) ->

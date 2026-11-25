@@ -6,6 +6,7 @@ import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import to.wim.watchlist.R
+import to.wim.watchlist.data.model.StableOrder
 import to.wim.watchlist.data.model.Plus
 import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.ui.components.Locked
@@ -43,6 +44,7 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -225,7 +227,7 @@ fun ShowsScreen(
 
 @Composable
 private fun UpNextList(
-    items: List<LibraryItem>,
+    sortedItems: List<LibraryItem>,
     state: LibraryState,
     fromLatest: Boolean,
     onOpen: (LibraryItem) -> Unit,
@@ -239,6 +241,11 @@ private fun UpNextList(
     var busy by remember { mutableStateOf(setOf<String>()) }
     var confirm by remember { mutableStateOf<Pair<Playback, LibraryItem>?>(null) }
     val listState = rememberLazyListState()
+    // Shows keep their place while the screen is open, so repeated taps hit the same show.
+    var shownKeys by remember { mutableStateOf(emptyList<String>()) }
+    val ordered = remember(sortedItems) { StableOrder.apply(shownKeys, sortedItems) { it.key } }
+    SideEffect { shownKeys = ordered.second }
+    val items = ordered.first
 
     // A list keeps its first visible item in view when items move. When the top show is watched
     // elsewhere and reorders after a sync, that would scroll it under the top bar; stay at the top.

@@ -89,7 +89,9 @@ object Format {
 
     // Created per call so they follow the current locale.
     private val dateFormat get() = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).withLocale(Locale.getDefault())
-    private val dayFormat get() = DateTimeFormatter.ofPattern("EEE d MMM", Locale.getDefault())
+    // The locale's own order and punctuation: "Sun, Nov 29" in the US, "zo 29 nov." in Dutch (AI testers, round 9).
+    private val dayFormat get() =
+        Locale.getDefault().let { DateTimeFormatter.ofPattern(android.text.format.DateFormat.getBestDateTimePattern(it, "EEEdMMM"), it) }
     private val timeFormat get() = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.getDefault())
 
     fun date(value: String?): String? = Dates.parse(value)?.let { date(it) }
@@ -98,7 +100,7 @@ object Format {
 
     fun time(instant: Instant): String = timeFormat.format(instant.atZone(zone))
 
-    /** "Today", "Tomorrow", "Yesterday" or "Fri 14 Mar". */
+    /** "Today", "Tomorrow", "Yesterday" or the short date, such as "Fri, Mar 14" in the US. */
     fun day(date: LocalDate): String {
         val today = LocalDate.now(zone)
         return when (date) {

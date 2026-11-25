@@ -255,3 +255,9 @@ app apart from their package (and `R` import) lines. Copy a change to the other 
   layer and notification icon are the screen with the checkmark cut out, plus the stand.
 - The sign-in and Watchlist Plus screens show the app's logo, not a generic Material icon: the
   gradient TV with the white check on its own, with no plate or box (`res/drawable/ic_logo.xml`).
+- The button that marks a title or episode watched says **Mark watched**, not "Watched": testers
+  read a bare "Watched" with a tick as a status ("already watched"), not as an action.
+- Library tab rows show every tab at once when they fit at the same width; otherwise they scroll
+  and fade out at an edge that has more tabs, so a half-visible tab never looks like a cut word.
+- Text uses automatic hyphenation (`Hyphens.Auto` in the theme's type styles), so a long word that
+  must break (German compounds at large text) breaks at a syllable with a hyphen.

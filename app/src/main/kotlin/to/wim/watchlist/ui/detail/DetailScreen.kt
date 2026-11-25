@@ -907,19 +907,19 @@ private fun YourRatingTile(
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
     ) {
         Column(
-            Modifier.fillMaxHeight().padding(horizontal = 14.dp, vertical = 8.dp),
+            Modifier.fillMaxHeight().padding(horizontal = 8.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 Icon(if (userRating != null) Icons.Rounded.Star else Icons.Rounded.StarOutline, null, Modifier.size(18.dp))
-                Text(
+                // One line each, shrunk to fit: a narrow tile never breaks a word ("Valo/rar").
+                FitLabel(
                     userRating?.toString() ?: stringResource(R.string.detail_rate),
-                    style = if (userRating != null) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
+                    style = (if (userRating != null) MaterialTheme.typography.titleLarge else MaterialTheme.typography.titleMedium).copy(fontWeight = FontWeight.Bold),
                 )
             }
-            Text(stringResource(R.string.detail_your_rating), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
+            FitLabel(stringResource(R.string.detail_your_rating), style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant))
         }
     }
 }
@@ -936,7 +936,7 @@ private fun RatingTile(
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     ) {
         Column(
-            Modifier.fillMaxHeight().padding(horizontal = 14.dp, vertical = 8.dp),
+            Modifier.fillMaxHeight().padding(horizontal = 8.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -944,12 +944,11 @@ private fun RatingTile(
                 Icon(Icons.Rounded.Star, null, Modifier.size(18.dp))
                 Text(Format.rating(rating.value), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
             }
-            Text(rating.source, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center)
+            FitLabel(rating.source, style = MaterialTheme.typography.labelMedium)
             rating.votes?.let {
-                Text(
+                FitLabel(
                     pluralStringResource(R.plurals.detail_votes, it, compact(it.toLong())),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f),
+                    style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.75f)),
                 )
             }
         }

@@ -1,5 +1,8 @@
 package to.wim.watchlist.ui.theme
 
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.Hyphens
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -93,5 +96,32 @@ fun WatchlistTheme(
             else -> LightColors
         }
     SystemBarsFollowTheme(dark)
-    MaterialTheme(colorScheme = colors, content = content)
+    MaterialTheme(colorScheme = colors, typography = HyphenatedTypography, content = content)
 }
+
+/**
+ * Material's type scale with automatic hyphenation: a word too long for its line (German compounds
+ * at large text) breaks at a syllable with a hyphen, not at a random letter.
+ */
+private val HyphenatedTypography: Typography =
+    with(Typography()) {
+        copy(
+            displayLarge = displayLarge.hyphenated(),
+            displayMedium = displayMedium.hyphenated(),
+            displaySmall = displaySmall.hyphenated(),
+            headlineLarge = headlineLarge.hyphenated(),
+            headlineMedium = headlineMedium.hyphenated(),
+            headlineSmall = headlineSmall.hyphenated(),
+            titleLarge = titleLarge.hyphenated(),
+            titleMedium = titleMedium.hyphenated(),
+            titleSmall = titleSmall.hyphenated(),
+            bodyLarge = bodyLarge.hyphenated(),
+            bodyMedium = bodyMedium.hyphenated(),
+            bodySmall = bodySmall.hyphenated(),
+            labelLarge = labelLarge.hyphenated(),
+            labelMedium = labelMedium.hyphenated(),
+            labelSmall = labelSmall.hyphenated(),
+        )
+    }
+
+private fun TextStyle.hyphenated(): TextStyle = copy(hyphens = Hyphens.Auto)

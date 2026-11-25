@@ -16,12 +16,10 @@ import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.SearchOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -77,15 +75,11 @@ fun MoviesScreen() {
                     if (spec.hasFilters) FilterButton(options.filter(page), spec) { options.setFilter(page, it) }
                     SortButton(options.sort(page), spec.sorts) { options.setSort(page, it) }
                 }
-                PrimaryScrollableTabRow(selectedTabIndex = pagerState.currentPage, edgePadding = 16.dp) {
-                    shelves.forEachIndexed { index, shelf ->
-                        Tab(
-                            selected = pagerState.currentPage == index,
-                            onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
-                            text = { TabLabel(shelf.label(), byStatus[shelf.status]?.size ?: 0) },
-                        )
-                    }
-                }
+                ShelfTabRow(
+                    selected = pagerState.currentPage,
+                    tabs = shelves.map { shelf -> shelf.label() to (byStatus[shelf.status]?.size ?: 0) },
+                    onSelect = { index -> scope.launch { pagerState.animateScrollToPage(index) } },
+                )
             }
         },
     ) { padding ->

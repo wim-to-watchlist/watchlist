@@ -1,5 +1,6 @@
 package to.wim.watchlist.ui.profile
 
+import to.wim.watchlist.ui.components.FitLabel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -311,7 +312,8 @@ private fun Stat(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(value, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
+        // The value is one unit ("6 Std. 58 Min."): kept on one line and shrunk when it doesn't fit.
+        FitLabel(value, style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold))
         Text(label, style = MaterialTheme.typography.labelMedium, textAlign = TextAlign.Center)
     }
 }
@@ -355,7 +357,8 @@ private fun TypeCard(
                 t.counts.forEach { c ->
                     Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(c.count.toString(), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, modifier = numbers)
-                        Text(c.status.label(t.type), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center)
+                        // One line, shrunk when needed: "Abgebrochen" never breaks mid-word.
+                        FitLabel(c.status.label(t.type), style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant))
                     }
                 }
             }

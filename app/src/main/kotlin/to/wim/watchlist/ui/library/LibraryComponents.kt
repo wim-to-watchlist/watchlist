@@ -1,5 +1,19 @@
 package to.wim.watchlist.ui.library
 
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material3.PrimaryScrollableTabRow
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Tab
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.text.rememberTextMeasurer
 import to.wim.watchlist.ui.components.LargeText
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.foundation.layout.heightIn
@@ -372,6 +386,74 @@ fun TabLabel(
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
                 contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
             ) { Text(count.toString()) }
+        }
+    }
+}
+
+/**
+ * The tab row of a library type. When every tab fits at the same width, all of them show at once
+ * (fixed tabs). When they don't, the row scrolls and fades out at an edge that has more tabs, so a
+ * half-visible tab reads as "more this way" rather than as a word cut off.
+ */
+@Composable
+fun ShelfTabRow(
+    selected: Int,
+    /** Each tab's label and count (0 for no badge). */
+    tabs: List<Pair<String, Int>>,
+    onSelect: (Int) -> Unit,
+) {
+    val measurer = rememberTextMeasurer()
+    val labelStyle = MaterialTheme.typography.titleSmall
+    val badgeStyle = MaterialTheme.typography.labelSmall
+    val density = LocalDensity.current
+    BoxWithConstraints(Modifier.fillMaxWidth()) {
+        val widths =
+            remember(tabs, labelStyle, badgeStyle, density) {
+                tabs.map { (label, count) ->
+                    with(density) {
+                        val text = measurer.measure(label, labelStyle, maxLines = 1).size.width.toDp().value
+                        val badge = if (count > 0) 6f + maxOf(16f, measurer.measure(count.toString(), badgeStyle).size.width.toDp().value + 8f) else 0f
+                        text + badge
+                    }
+                }
+            }
+        val content: @Composable () -> Unit = {
+            tabs.forEachIndexed { index, (label, count) ->
+                Tab(selected = selected == index, onClick = { onSelect(index) }, text = { TabLabel(label, count) })
+            }
+        }
+        if (LargeText.tabsFit(widths, maxWidth.value)) {
+            PrimaryTabRow(selectedTabIndex = selected, tabs = content)
+        } else {
+            val scroll = rememberScrollState()
+            val fade = with(density) { 32.dp.toPx() }
+            PrimaryScrollableTabRow(
+                selectedTabIndex = selected,
+                scrollState = scroll,
+                edgePadding = 16.dp,
+                modifier =
+                    Modifier
+                        .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
+                        .drawWithContent {
+                            drawContent()
+                            if (scroll.value > 0) {
+                                drawRect(
+                                    Brush.horizontalGradient(listOf(Color.Transparent, Color.Black), startX = 0f, endX = fade),
+                                    size = Size(fade, size.height),
+                                    blendMode = BlendMode.DstIn,
+                                )
+                            }
+                            if (scroll.value < scroll.maxValue) {
+                                drawRect(
+                                    Brush.horizontalGradient(listOf(Color.Black, Color.Transparent), startX = size.width - fade, endX = size.width),
+                                    topLeft = Offset(size.width - fade, 0f),
+                                    size = Size(fade, size.height),
+                                    blendMode = BlendMode.DstIn,
+                                )
+                            }
+                        },
+                tabs = content,
+            )
         }
     }
 }

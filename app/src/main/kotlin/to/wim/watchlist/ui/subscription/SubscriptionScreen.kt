@@ -3,7 +3,7 @@ package to.wim.watchlist.ui.subscription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.LiveRegionMode
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.Box
@@ -200,8 +200,9 @@ fun SubscriptionScreen(
             }
         }
     }
-    // Always in reach, so nobody has to scroll past the plans to leave.
-    IconButton(onClick = close, modifier = Modifier.align(Alignment.TopStart).safeDrawingPadding().padding(4.dp)) {
+    // Always in reach, so nobody has to scroll past the plans to leave. Filled, so it stays readable over
+    // the feature list scrolling under it (AI testers, round 8).
+    FilledTonalIconButton(onClick = close, modifier = Modifier.align(Alignment.TopStart).safeDrawingPadding().padding(4.dp)) {
         Icon(Icons.Rounded.Close, contentDescription = stringResource(R.string.sub_close))
     }
     }

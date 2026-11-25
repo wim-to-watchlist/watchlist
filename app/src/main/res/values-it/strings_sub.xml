@@ -77,13 +77,13 @@
     <!-- The Up next home-screen widget (Watchlist Plus). -->
     <string name="widget_description">I tuoi prossimi episodi nella schermata Home</string>
     <string name="widget_empty">Niente da guardare al momento</string>
-    <string name="widget_locked">Il widget Up next fa parte di Watchlist Plus. Tocca per provarlo gratis.</string>
+    <string name="widget_locked">Il widget Prossimi fa parte di Watchlist Plus. Tocca per provarlo gratis.</string>
     <plurals name="widget_more">
         <item quantity="one">+%1$d altro</item>
         <item quantity="many">+%1$d altri</item>
         <item quantity="other">+%1$d altri</item>
     </plurals>
-    <string name="sub_feature_widget">Up next nella schermata Home: un widget con i tuoi prossimi episodi</string>
+    <string name="sub_feature_widget">Prossimi nella schermata Home: un widget con i tuoi prossimi episodi</string>
     <string name="plus_ratings_title">Le tue valutazioni sono in Plus</string>
     <string name="plus_ratings_text">Guarda tutto ciò che hai valutato, il meglio per primo, con Watchlist Plus.</string>
     <string name="sub_close">Chiudi</string>

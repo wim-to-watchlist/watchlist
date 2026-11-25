@@ -76,12 +76,12 @@
     <!-- The Up next home-screen widget (Watchlist Plus). -->
     <string name="widget_description">Je volgende afleveringen op je startscherm</string>
     <string name="widget_empty">Niets om te kijken op dit moment</string>
-    <string name="widget_locked">De Up next-widget hoort bij Watchlist Plus. Tik om het gratis te proberen.</string>
+    <string name="widget_locked">De Volgende-widget hoort bij Watchlist Plus. Tik om het gratis te proberen.</string>
     <plurals name="widget_more">
         <item quantity="one">nog %1$d</item>
         <item quantity="other">nog %1$d</item>
     </plurals>
-    <string name="sub_feature_widget">Up next op je startscherm: een widget met je volgende afleveringen</string>
+    <string name="sub_feature_widget">Volgende op je startscherm: een widget met je volgende afleveringen</string>
     <string name="plus_ratings_title">Je beoordelingen zitten in Plus</string>
     <string name="plus_ratings_text">Zie alles wat je beoordeeld hebt, het beste eerst, met Watchlist Plus.</string>
     <string name="sub_close">Sluiten</string>

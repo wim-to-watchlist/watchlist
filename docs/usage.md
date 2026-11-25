@@ -65,7 +65,7 @@ Shelves: **Up next** (shows with an aired, unwatched episode; a new episode show
 
 ## Movies
 
-Shelves: **Plan to watch**, **Watched**, **Dropped**, with the same sort button.
+Shelves: **Continue watching** (movies you paused part-way, most recently paused first; only there when you have any), **Plan to watch**, **Watched**, **Dropped**, with the same sort button. A movie only counts as paused when an app that reports playback to SIMKL (Plex, Kodi, Jellyfin and the like) saved its progress.
 
 ## Details
 

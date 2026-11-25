@@ -576,3 +576,7 @@ Emma, the free-version tester who finally got past SIMKL's sign-in, added four s
 
 Replaces the entry above. Wim chose a separate **Watching** tab, right after Up next, that lists every show on SIMKL's Watching list, free in every version. It follows SIMKL's own lists: Watching is SIMKL's watching list and Watched is now only SIMKL's completed list (caught-up shows used to sit there too). Up next is the one tab SIMKL has no list for: the app works it out from the Watching list. A show in Up next is also in Watching (`Shelves.shelvesOf`). Because the names are free there, the free Up next went back to the original style B: the first show, the Plus card, the rest blurred.
 
+## Continue watching for paused movies (2026-11-25)
+
+SIMKL has only three lists for movies (plan to watch, completed, dropped), so a movie stopped halfway is on none of them: it only exists as playback progress (`/sync/playback`, which the app already downloads after `/sync/activities`). Wim chose a **Continue watching** tab on Movies that appears only when there are paused movies (`Shelves.pausedMovies`), most recently paused first. A paused movie that isn't on any list gets a plain tile without a poster. Rejected: an always-visible tab, which would be empty for anyone whose player doesn't report progress to SIMKL, and no tab at all. Sort and filter choices are now kept per shelf rather than per tab position, so they stay put when the tab comes and goes.
+

@@ -36,7 +36,7 @@
     <string name="screens_profile_open_page">Apri la mia pagina SIMKL</string>
     <string name="screens_profile_log_out">Esci</string>
     <string name="screens_profile_log_out_title">Uscire?</string>
-    <string name="screens_profile_log_out_body">Le tue liste restano su SIMKL. Vengono rimosse solo da questo dispositivo.</string>
+    <string name="screens_profile_log_out_body">Le tue liste restano su SIMKL. Vengono rimosse solo da questo dispositivo. Per togliere anche l’accesso dell’app al tuo account, rimuovila dalle app collegate nelle tue impostazioni su simkl.com.</string>
     <string name="screens_profile_joined">Iscritto dal %1$s</string>
     <string name="screens_profile_time_watched">Tempo di visione</string>
     <string name="screens_profile_last_7_days">Ultimi 7 giorni</string>
@@ -73,7 +73,7 @@
     <string name="screens_login_denied">L’accesso è stato annullato su SIMKL (%1$s).</string>
     <string name="screens_login_redirect_invalid">Questo link di accesso non corrisponde a quello avviato dall’app. Tocca di nuovo Accedi con SIMKL.</string>
     <string name="screens_login_failed">Accesso non riuscito: %1$s</string>
-    <string name="screens_login_note">Accedi su simkl.com; questa app non vede mai la tua password. Watchlist non è affiliato a Simkl.</string>
+    <string name="screens_login_note">Accedi su simkl.com; questa app non vede mai la tua password. Watchlist non è affiliato a SIMKL.</string>
     <string name="screens_settings_tmdb">Cast e troupe</string>
     <string name="screens_settings_tmdb_key">Read Access Token di TMDB</string>
     <string name="screens_settings_tmdb_key_on">Aggiunto. Le schede mostrano cast e troupe, e puoi cercare persone.</string>
@@ -108,6 +108,7 @@
     <string name="screens_settings_channel_on">Attive · suono e altro nelle impostazioni Android</string>
     <string name="screens_settings_channel_off">Disattivate nelle impostazioni Android. Tocca per attivarle.</string>
     <string name="screens_settings_android_notifications">Impostazioni notifiche Android</string>
-    <string name="screens_settings_android_notifications_sub">Ogni tipo, con suono, vibrazione e pop-up</string>
+    <string name="screens_settings_android_notifications_sub">Apre le impostazioni Android dell’app: suono, vibrazione e pop-up per ogni tipo</string>
     <string name="screens_profile_stats_failed">Impossibile caricare le tue statistiche. Controlla la connessione e riprova.</string>
+    <string name="screens_login_about">SIMKL è un sito gratuito che conserva le tue liste e ciò che hai visto. Non hai ancora un account? Puoi crearne uno quando accedi.</string>
 </resources>

@@ -92,4 +92,6 @@
         <item quantity="one">noch %d Folge</item>
         <item quantity="other">noch %d Folgen</item>
     </plurals>
+    <string name="lib_undo">Rückgängig</string>
+    <string name="lib_marked_watched">%1$s von %2$s als gesehen markiert</string>
 </resources>

@@ -16,6 +16,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.saveable.rememberSaveable
 import to.wim.watchlist.ui.components.Format
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -423,6 +424,8 @@ fun SectionHeader(
     modifier: Modifier = Modifier,
     count: Int? = null,
     /** Opens the full list; the header then ends in a ">" and the whole row is tappable. */
+    /** Marks the header, as the calendar does for today: the title sits in a filled pill. */
+    highlight: Boolean = false,
     onOpen: (() -> Unit)? = null,
 ) {
     Row(
@@ -435,7 +438,16 @@ fun SectionHeader(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text(title, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+        if (highlight) {
+            Text(
+                title,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.clip(RoundedCornerShape(50)).background(MaterialTheme.colorScheme.primary).padding(horizontal = 10.dp, vertical = 2.dp),
+            )
+        } else {
+            Text(title, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+        }
         if (count != null) Text(count.toString(), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         if (onOpen != null) {
             Box(Modifier.weight(1f))

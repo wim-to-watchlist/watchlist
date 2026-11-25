@@ -119,4 +119,5 @@
         <item quantity="other">%1$d afleveringen</item>
     </plurals>
     <string name="detail_mark_up_to">Tot hier als gezien aanduiden</string>
+    <string name="detail_episode_watched_box">%1$s gezien</string>
 </resources>

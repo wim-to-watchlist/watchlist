@@ -91,6 +91,7 @@ fun CalendarScreen(types: List<MediaType>) {
     LaunchedEffect(Unit) { app.library.refreshCalendar() }
 
     val zone = ZoneId.systemDefault()
+    val today = LocalDate.now(zone)
     val days =
         remember(state.calendar, state.items, hidden, types) {
             // Start of yesterday in the user's time zone (not UTC), so day groups below are never partial.
@@ -157,7 +158,7 @@ fun CalendarScreen(types: List<MediaType>) {
                         modifier = Modifier.fillMaxSize().readableWidth(),
                     ) {
                         shownDays.forEach { (day, entries) ->
-                            item(key = "d-$day") { SectionHeader(Format.day(day), Modifier.animateItem(), entries.size) }
+                            item(key = "d-$day") { SectionHeader(Format.day(day), Modifier.animateItem(), entries.size, highlight = day == today) }
                             items(entries, key = { it.key() }) { entry ->
                                 CalendarRow(entry, Modifier.animateItem()) {
                                     navigator.openDetail(entry.type, entry.simklId, entry.title, entry.poster)
@@ -176,7 +177,7 @@ fun CalendarScreen(types: List<MediaType>) {
                         modifier = Modifier.fillMaxSize().readableWidth(),
                     ) {
                         groups.forEachIndexed { i, group ->
-                            item(key = "d-${group.key}") { SectionHeader(Format.day(group.key), Modifier.animateItem(), group.total) }
+                            item(key = "d-${group.key}") { SectionHeader(Format.day(group.key), Modifier.animateItem(), group.total, highlight = group.key == today) }
                             items(group.shown, key = { it.key() }) { entry ->
                                 CalendarRow(entry, Modifier.animateItem()) {
                                     navigator.openDetail(entry.type, entry.simklId, entry.title, entry.poster)

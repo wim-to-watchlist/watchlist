@@ -99,4 +99,6 @@
         <item quantity="many">quedan %d episodios</item>
         <item quantity="other">quedan %d episodios</item>
     </plurals>
+    <string name="lib_undo">Deshacer</string>
+    <string name="lib_marked_watched">%1$s de %2$s marcado como visto</string>
 </resources>

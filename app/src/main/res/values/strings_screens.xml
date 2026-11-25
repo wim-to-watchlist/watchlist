@@ -36,7 +36,7 @@
     <string name="screens_profile_open_page">Open my SIMKL page</string>
     <string name="screens_profile_log_out">Sign out</string>
     <string name="screens_profile_log_out_title">Sign out?</string>
-    <string name="screens_profile_log_out_body">Your lists stay on SIMKL. This only removes them from this device.</string>
+    <string name="screens_profile_log_out_body">Your lists stay on SIMKL. This only removes them from this device. To also take away this app’s access to your account, remove it from the connected apps in your settings on simkl.com.</string>
     <string name="screens_profile_joined">Joined %1$s</string>
     <string name="screens_profile_time_watched">Time watched</string>
     <string name="screens_profile_last_7_days">Last 7 days</string>
@@ -106,6 +106,7 @@
     <string name="screens_settings_channel_on">On · sound and more in Android’s settings</string>
     <string name="screens_settings_channel_off">Off in Android’s settings. Tap to turn it on.</string>
     <string name="screens_settings_android_notifications">Android notification settings</string>
-    <string name="screens_settings_android_notifications_sub">Every type, with sound, vibration and pop-ups</string>
+    <string name="screens_settings_android_notifications_sub">Opens Android’s settings for this app: sound, vibration and pop-ups for every type</string>
     <string name="screens_profile_stats_failed">Couldn’t load your stats. Check your connection and try again.</string>
+    <string name="screens_login_about">SIMKL is a free website that keeps your lists and what you’ve watched. No account yet? You can make one when you sign in.</string>
 </resources>

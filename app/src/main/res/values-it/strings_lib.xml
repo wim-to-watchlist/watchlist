@@ -99,4 +99,6 @@
         <item quantity="many">mancano %d episodi</item>
         <item quantity="other">mancano %d episodi</item>
     </plurals>
+    <string name="lib_undo">Annulla</string>
+    <string name="lib_marked_watched">%1$s di %2$s segnato come visto</string>
 </resources>

@@ -37,8 +37,10 @@ import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -121,6 +123,7 @@ fun ShowsScreen(
     val scope = rememberCoroutineScope()
     val state by app.library.state.collectAsState()
     val snackbar = remember { SnackbarHostState() }
+    val resources = LocalResources.current
     val shelves = Shelf.entries
     val options = rememberTabOptions(shelves.map { TabSpec.of(it, anime = type == MediaType.Anime) })
     val pagerState = rememberPagerState { shelves.size }
@@ -197,7 +200,20 @@ fun ShowsScreen(
                     items.isEmpty() && state.loaded && !state.syncing ->
                         EmptyState(shelf.emptyIcon(), stringResource(shelf.emptyTitle(type)), body = stringResource(shelf.emptyText()))
                     shelf == Shelf.UpNext ->
-                        UpNextList(items, state, fromLatest, ::open) { message -> scope.launch { snackbar.showSnackbar(message) } }
+                        UpNextList(
+                            items,
+                            state,
+                            fromLatest,
+                            ::open,
+                            onError = { message -> scope.launch { snackbar.showSnackbar(message) } },
+                            // One tap marks an episode, so the snackbar offers to take it back.
+                            onMarked = { message, undo ->
+                                scope.launch {
+                                    val result = snackbar.showSnackbar(message, actionLabel = resources.getString(R.string.lib_undo), duration = SnackbarDuration.Short)
+                                    if (result == SnackbarResult.ActionPerformed) undo()
+                                }
+                            },
+                        )
                     else ->
                         LibraryGrid(
                             items = items,
@@ -220,6 +236,8 @@ private fun UpNextList(
     fromLatest: Boolean,
     onOpen: (LibraryItem) -> Unit,
     onError: (String) -> Unit,
+    /** After a one-tap Watched: the message and how to take it back. */
+    onMarked: (String, () -> Unit) -> Unit,
 ) {
     val app = rememberApp()
     val resources = LocalResources.current
@@ -283,7 +301,14 @@ private fun UpNextList(
                     }
                 next != null ->
                     FilledTonalIconButton(onClick = {
-                        run(item, next.ref.label) { app.library.markEpisodeWatched(item, next.ref) }
+                        run(item, next.ref.label) {
+                            app.library.markEpisodeWatched(item, next.ref)
+                            onMarked(resources.getString(R.string.lib_marked_watched, next.ref.label, item.title)) {
+                                run(item, next.ref.label) {
+                                    app.library.setEpisodesWatched(item.type, item.ids, item.title, item.poster, listOf(next.ref), false)
+                                }
+                            }
+                        }
                     }) { Icon(Icons.Rounded.Check, contentDescription = stringResource(R.string.lib_mark_episode_watched, next.ref.label)) }
             }
         }

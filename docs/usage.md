@@ -10,7 +10,7 @@ For people using the app. It assumes the app is installed (see the [README](../R
 
 Nobody needs a SIMKL developer account. If the browser shows the app chooser (when a test build is also installed), pick the app you started the sign-in from.
 
-**Sign out:** Profile (top bar) › **Sign out**. This deletes the token and the cached library from the phone.
+**Sign out:** Profile (top bar) › **Sign out**. This deletes the token and the cached library from the phone. The app keeps its access on SIMKL until you remove it from the connected apps in your settings on simkl.com; the dialog says so.
 
 **Coming from version 1.8.0 or older (the app's previous name):** Watchlist is a separate app for Android, so the old one doesn't update to it. Install Watchlist, sign in (your lists are on SIMKL, so everything comes back), set your settings again, then uninstall the old app. The old app can no longer sign in to SIMKL.
 
@@ -50,7 +50,7 @@ Tap a locked part, or its card's button, to open the Plus screen. It shows what 
 
 Shelves: **Up next** (shows with an aired, unwatched episode; a new episode shows up here as soon as it has aired by SIMKL's calendar), **Watched** (caught up or completed, with the next air date when known), **Plan to watch**, **On hold**, **Dropped**. Every poster shows an *Airing* or *Ended* badge.
 
-- **Mark the next episode watched:** tap ✓ on a show in Up next. Episodes in progress (paused on another device) show their progress and keep their place in the chosen sort order; marking one watched asks first, because it removes the saved progress.
+- **Mark the next episode watched:** tap ✓ on a show in Up next. A message at the bottom offers **Undo** for a few seconds. Episodes in progress (paused on another device) show their progress and keep their place in the chosen sort order; marking one watched asks first, because it removes the saved progress.
 - **Sort and filter** with the buttons in the top bar, kept per tab. A dot on the filter button shows a filter is on.
 
   | Tab | Sort (default first) | Filter |
@@ -69,7 +69,7 @@ Shelves: **Plan to watch**, **Watched**, **Dropped**, with the same sort button.
 
 ## Details
 
-Tap any poster. You get fanart, your list status, your 1–10 rating, **Watched** / **Check in**, the overview, an info card (ratings from SIMKL, IMDb, MAL… as tiles with their vote counts, then rank, genres and status; **Show more** adds airing info, release date, episodes, network, country, director, budget and more, each with an icon), trailers, recommendations, links (SIMKL, IMDb, TMDB, MAL, AniList…), and the full episode list per season.
+Tap any poster. You get fanart, your list status, your 1–10 rating, **Watched** / **Check in**, the overview, an info card (ratings from SIMKL, IMDb, MAL… as tiles with their vote counts, then rank, genres (in the phone's language) and status; **Show more** adds airing info (the weekly air time only while a show still airs), release date, episodes, network, country (its name in the phone's language), director, budget and more, each with an icon), trailers, recommendations, links (SIMKL, IMDb, TMDB, MAL, AniList…), and the full episode list per season.
 
 The show's status is shown in the app's language, and the weekly broadcast day and time are converted from the broadcaster's time zone to your phone's time zone. The episode list opens on the season you are watching: the season of a paused episode, else the season of your latest watched episode (not season 1 when you skipped earlier seasons).
 
@@ -94,7 +94,7 @@ TV Shows / Anime / Movies tabs with trending today, this week and this month, ai
 
 ## Calendar
 
-Upcoming episodes and releases of titles in your lists. The **filter** button in the top bar shows or hides TV shows, anime and movies (ticked = shown; a dot on it means something is hidden).
+Upcoming episodes and releases of titles in your lists. Today's header is a filled pill, so you see at a glance where today starts. The **filter** button in the top bar shows or hides TV shows, anime and movies (ticked = shown; a dot on it means something is hidden).
 
 ## Profile
 

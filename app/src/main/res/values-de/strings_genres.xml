@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Genre names; SIMKL sends them in English. -->
+<resources>
+    <string name="genre_action">Action</string>
+    <string name="genre_adventure">Abenteuer</string>
+    <string name="genre_animation">Animation</string>
+    <string name="genre_anime">Anime</string>
+    <string name="genre_biography">Biografie</string>
+    <string name="genre_children">Kinder</string>
+    <string name="genre_comedy">Komödie</string>
+    <string name="genre_crime">Krimi</string>
+    <string name="genre_documentary">Dokumentation</string>
+    <string name="genre_drama">Drama</string>
+    <string name="genre_family">Familie</string>
+    <string name="genre_fantasy">Fantasy</string>
+    <string name="genre_game_show">Spielshow</string>
+    <string name="genre_history">Geschichte</string>
+    <string name="genre_horror">Horror</string>
+    <string name="genre_mini_series">Miniserie</string>
+    <string name="genre_music">Musik</string>
+    <string name="genre_musical">Musical</string>
+    <string name="genre_mystery">Mystery</string>
+    <string name="genre_news">Nachrichten</string>
+    <string name="genre_reality">Reality</string>
+    <string name="genre_romance">Liebesfilm</string>
+    <string name="genre_science_fiction">Science-Fiction</string>
+    <string name="genre_soap">Seifenoper</string>
+    <string name="genre_sport">Sport</string>
+    <string name="genre_suspense">Spannung</string>
+    <string name="genre_talk_show">Talkshow</string>
+    <string name="genre_thriller">Thriller</string>
+    <string name="genre_war">Krieg</string>
+    <string name="genre_western">Western</string>
+</resources>

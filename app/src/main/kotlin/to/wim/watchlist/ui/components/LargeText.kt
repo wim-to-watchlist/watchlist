@@ -30,6 +30,21 @@ object LargeText {
     fun cardLines(fontScale: Float): Int = if (fontScale > 1.05f) 2 else 1
 
     /** The narrowest a rating tile may get at normal text size; it grows with the text. */
+    /** Room a tab adds around its label: 16dp on each side. */
+    const val TAB_PADDING_DP = 32f
+
+    /**
+     * Whether tabs whose content is [contentWidthsDp] wide all fit side by side in [availableDp] at
+     * the same width (the widest decides), so the row can show every tab at once.
+     */
+    fun tabsFit(
+        contentWidthsDp: List<Float>,
+        availableDp: Float,
+    ): Boolean {
+        val widest = contentWidthsDp.maxOrNull() ?: return true
+        return (widest + TAB_PADDING_DP) * contentWidthsDp.size <= availableDp
+    }
+
     const val MIN_TILE_WIDTH_DP = 84f
 
     /**

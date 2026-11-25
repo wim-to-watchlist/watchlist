@@ -1,6 +1,8 @@
 package to.wim.watchlist.ui.components
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class LargeTextTest {
@@ -51,5 +53,18 @@ class LargeTextTest {
         assertEquals(1, LargeText.cardLines(1f))
         assertEquals(2, LargeText.cardLines(1.15f))
         assertEquals(2, LargeText.cardLines(2f))
+    }
+
+    @Test
+    fun `tabs fit when the widest one times the count fits`() {
+        // Widest 60 + 32 padding = 92 per tab, 3 tabs = 276.
+        assertTrue(LargeText.tabsFit(listOf(40f, 60f, 50f), 276f))
+        assertFalse(LargeText.tabsFit(listOf(40f, 60f, 50f), 275f))
+    }
+
+    @Test
+    fun `five long shelf tabs on a small phone scroll`() {
+        assertFalse(LargeText.tabsFit(listOf(60f, 58f, 90f, 55f, 62f), 360f))
+        assertTrue(LargeText.tabsFit(emptyList(), 100f))
     }
 }

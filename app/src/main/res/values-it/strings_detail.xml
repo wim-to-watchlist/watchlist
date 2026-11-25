@@ -18,13 +18,13 @@
     <string name="detail_add_to_list">Aggiungi a lista</string>
     <string name="detail_remove_from_lists">Rimuovi dalle mie liste</string>
     <string name="detail_rate">Vota</string>
-    <string name="detail_mark_as_watched">Visto</string>
+    <string name="detail_mark_as_watched">Segna come visto</string>
     <string name="detail_check_in">Check-in</string>
     <string name="detail_check_in_title">Fare il check-in?</string>
     <string name="detail_check_in_text">SIMKL saprà che stai guardando %1$s in questo momento. Lo segnerà come visto alla fine.</string>
     <string name="detail_in_progress">In corso · %1$d%%</string>
     <string name="detail_in_progress_episode">In corso · %1$s · %2$d%%</string>
-    <string name="detail_mark_watched">Visto</string>
+    <string name="detail_mark_watched">Segna come visto</string>
     <string name="detail_next_episode">Prossimo episodio: %1$s</string>
     <string name="detail_next_episode_titled">Prossimo episodio: %1$s · %2$s</string>
     <string name="detail_your_note">La tua nota: %1$s</string>

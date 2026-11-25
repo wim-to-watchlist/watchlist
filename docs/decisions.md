@@ -555,3 +555,7 @@ The fifth AI test run found three things. First, the library's scrolling shelf t
 ## Buttons that stack, tabs that peek (2026-11-25)
 
 The sixth AI test run found that shrinking a button label still failed: at large text "Mark watched" became smaller than "Check in", and in German it was cut ("Als gesehen ma"). The details buttons now go under each other at full width when their labels don't fit side by side at full size (`LargeText.buttonsFit`, `ActionButtons`). Testers also still read a scrolling tab row as finished when a tab ended right at the screen edge, so scrolling tabs get equal widths chosen to cut the last visible tab about halfway (`LargeText.peekTabWidth`). The profile's status labels keep their size and may take two lines, two per row with large text, and the sync row is one tap target instead of a row with a separate "Sync" button.
+
+## SIMKL's plan named as such, Undo on details (2026-11-25)
+
+The seventh AI test run showed the round-six fixes worked (no more complaints about the details buttons or the tab rows). It found that the profile's bare "Free", SIMKL's account type, read as Watchlist's own plan and stayed English in every language: it now says "Free SIMKL account" (translated) or "SIMKL PRO"/"SIMKL VIP" (`SimklPlan`). Marking the next episode watched on a details page now offers the same Undo as Up next. The last switch that is on (types, bottom bar) says why it can't be turned off, and the TMDB card's Add token button is filled, because a tonal button on the tonal card looked like plain text.

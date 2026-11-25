@@ -132,7 +132,8 @@ fun SettingsScreen(settings: AppSettings) {
                     val on = type in settings.types
                     SwitchSetting(
                         title = type.label(),
-                        summary = null,
+                        // Says why the last switch that is on can't be turned off.
+                        summary = if (on && settings.types.size == 1) stringResource(R.string.screens_settings_last_one_on) else null,
                         checked = on,
                         // At least one type stays on.
                         enabled = !on || settings.types.size > 1,
@@ -270,6 +271,12 @@ fun SettingsScreen(settings: AppSettings) {
                     val tabLabel = tab.label()
                     ListItem(
                         headlineContent = { Text(tab.label()) },
+                        supportingContent =
+                            if (enabled && shownOn == 1) {
+                                { Text(stringResource(R.string.screens_settings_last_one_on)) }
+                            } else {
+                                null
+                            },
                         leadingContent = { Icon(tab.icon(enabled), null) },
                         trailingContent = {
                             Row(verticalAlignment = Alignment.CenterVertically) {

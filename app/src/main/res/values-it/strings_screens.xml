@@ -110,4 +110,6 @@
     <string name="screens_settings_android_notifications_sub">Apre le impostazioni Android dell’app: suono, vibrazione e pop-up per ogni tipo</string>
     <string name="screens_profile_stats_failed">Impossibile caricare le tue statistiche. Controlla la connessione e riprova.</string>
     <string name="screens_login_about">SIMKL è un sito gratuito che conserva le tue liste e ciò che hai visto. Non hai ancora un account? Puoi crearne uno quando accedi.</string>
+    <string name="screens_profile_simkl_free">Account SIMKL gratuito</string>
+    <string name="screens_settings_last_one_on">Almeno uno resta attivo</string>
 </resources>

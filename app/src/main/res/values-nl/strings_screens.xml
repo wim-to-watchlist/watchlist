@@ -108,4 +108,6 @@
     <string name="screens_settings_android_notifications_sub">Opent de Android-instellingen van deze app: geluid, trillen en pop-ups per soort</string>
     <string name="screens_profile_stats_failed">Je statistieken konden niet geladen worden. Controleer je verbinding en probeer opnieuw.</string>
     <string name="screens_login_about">SIMKL is een gratis website die je lijsten bijhoudt en wat je gezien hebt. Nog geen account? Dat maak je aan bij het inloggen.</string>
+    <string name="screens_profile_simkl_free">Gratis SIMKL-account</string>
+    <string name="screens_settings_last_one_on">Er blijft er minstens één aan</string>
 </resources>

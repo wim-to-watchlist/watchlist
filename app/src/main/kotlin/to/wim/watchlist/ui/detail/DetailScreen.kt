@@ -114,6 +114,8 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -357,6 +359,16 @@ fun DetailScreen(
                         onWatchNext = { next ->
                             run(resources.getString(R.string.detail_error_mark_episode_watched, next.label)) {
                                 app.library.setEpisodesWatched(route.type, ids, title, poster, listOf(next), true, episodes)
+                                // The same Undo as on Up next: one tap marks an episode, so it can be taken back.
+                                val result =
+                                    snackbar.showSnackbar(
+                                        resources.getString(R.string.lib_marked_watched, next.label, title),
+                                        actionLabel = resources.getString(R.string.lib_undo),
+                                        duration = SnackbarDuration.Long,
+                                    )
+                                if (result == SnackbarResult.ActionPerformed) {
+                                    app.library.setEpisodesWatched(route.type, ids, title, poster, listOf(next), false, episodes)
+                                }
                             }
                         },
                         onCheckIn = { episode ->

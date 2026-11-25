@@ -1,5 +1,6 @@
 package to.wim.watchlist.ui.profile
 
+import to.wim.watchlist.data.model.SimklPlan
 import to.wim.watchlist.ui.components.FitLabel
 import to.wim.watchlist.ui.components.LargeText
 import androidx.compose.foundation.background
@@ -290,7 +291,12 @@ private fun ProfileHeader(profile: UserProfile?) {
             Text(name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
             val meta =
                 listOfNotNull(
-                    profile?.accountType?.replaceFirstChar { it.uppercase() },
+                    // SIMKL's own plan, named as such: a bare "Free" read as Watchlist's plan.
+                    when (val plan = SimklPlan.of(profile?.accountType)) {
+                        SimklPlan.Free -> stringResource(R.string.screens_profile_simkl_free)
+                        is SimklPlan.Paid -> stringResource(R.string.screens_profile_simkl_plan, plan.name)
+                        null -> null
+                    },
                     profile?.joinedAt?.let { Format.date(it) }?.let { stringResource(R.string.screens_profile_joined, it) },
                     profile?.location,
                 ).joinToString(" · ")

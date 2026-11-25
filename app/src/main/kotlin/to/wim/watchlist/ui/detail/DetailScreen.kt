@@ -1,5 +1,7 @@
 package to.wim.watchlist.ui.detail
 
+import to.wim.watchlist.ui.components.ActionButton
+import to.wim.watchlist.ui.components.ActionButtons
 import to.wim.watchlist.ui.components.FitLabel
 import androidx.compose.ui.text.style.TextAlign
 import to.wim.watchlist.ui.components.LargeText
@@ -589,24 +591,14 @@ private fun Actions(
     var pendingCheckIn by remember { mutableStateOf<PendingCheckIn?>(null) }
     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         if (type == MediaType.Movie) {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                // While the progress banner below is showing, its own Watched button does the same, so only one is shown.
-                if (DetailActions.showMovieWatched(item?.status, playback)) {
-                    FilledTonalButton(
-                        onClick = onMovieWatched,
-                        modifier = Modifier.weight(1f),
-                    ) {
-                        Icon(Icons.Rounded.Check, null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
-                        FitLabel(stringResource(R.string.detail_mark_as_watched))
-                    }
-                }
-                OutlinedButton(onClick = { pendingCheckIn = PendingCheckIn(null) }, modifier = Modifier.weight(1f)) {
-                    Icon(Icons.Rounded.LiveTv, null, Modifier.size(18.dp))
-                    Spacer(Modifier.width(8.dp))
-                    FitLabel(stringResource(R.string.detail_check_in))
-                }
-            }
+            ActionButtons(
+                listOfNotNull(
+                    // While the progress banner below is showing, its own Watched button does the same, so only one is shown.
+                    ActionButton(stringResource(R.string.detail_mark_as_watched), Icons.Rounded.Check, onMovieWatched, filled = true)
+                        .takeIf { DetailActions.showMovieWatched(item?.status, playback) },
+                    ActionButton(stringResource(R.string.detail_check_in), Icons.Rounded.LiveTv, { pendingCheckIn = PendingCheckIn(null) }),
+                ),
+            )
         }
         if (playback != null) {
             Surface(shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.secondaryContainer) {
@@ -637,28 +629,19 @@ private fun Actions(
                     ?: stringResource(R.string.detail_next_episode, next.ref.label),
                 style = MaterialTheme.typography.titleSmall,
             )
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
-                if (showWatched) {
-                    val markLabel = stringResource(R.string.lib_mark_episode_watched, next.ref.label)
-                    FilledTonalButton(
-                        onClick = { onWatchNext(next.ref) },
-                        modifier = Modifier.weight(1f).semantics { contentDescription = markLabel },
-                    ) {
-                        Icon(Icons.Rounded.Check, null, Modifier.size(18.dp))
-                        Spacer(Modifier.width(8.dp))
-                        FitLabel(stringResource(R.string.detail_mark_watched))
-                    }
-                }
-                // Alone in the row (the banner has the Watched button) it takes the full width.
-                OutlinedButton(
-                    onClick = { pendingCheckIn = PendingCheckIn(next.ref) },
-                    modifier = if (showWatched) Modifier else Modifier.fillMaxWidth(),
-                ) {
-                    Icon(Icons.Rounded.LiveTv, null, Modifier.size(18.dp))
-                    Spacer(Modifier.width(8.dp))
-                    FitLabel(stringResource(R.string.detail_check_in))
-                }
-            }
+            // Alone (the banner has the Watched button) Check in takes the full width.
+            ActionButtons(
+                listOfNotNull(
+                    ActionButton(
+                        stringResource(R.string.detail_mark_watched),
+                        Icons.Rounded.Check,
+                        { onWatchNext(next.ref) },
+                        description = stringResource(R.string.lib_mark_episode_watched, next.ref.label),
+                        filled = true,
+                    ).takeIf { showWatched },
+                    ActionButton(stringResource(R.string.detail_check_in), Icons.Rounded.LiveTv, { pendingCheckIn = PendingCheckIn(next.ref) }),
+                ),
+            )
         }
         item?.memo?.let { memo ->
             Surface(shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.tertiaryContainer) {

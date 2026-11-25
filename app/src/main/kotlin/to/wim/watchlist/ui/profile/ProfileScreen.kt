@@ -1,6 +1,7 @@
 package to.wim.watchlist.ui.profile
 
 import to.wim.watchlist.ui.components.FitLabel
+import to.wim.watchlist.ui.components.LargeText
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -53,6 +54,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -216,13 +218,14 @@ fun ProfileScreen(types: Set<MediaType>) {
                             },
                             leadingContent = { Icon(Icons.Rounded.Sync, null) },
                             colors = colors,
-                            trailingContent = {
-                                if (library.syncing) {
-                                    CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp)
-                                } else {
-                                    TextButton(onClick = { scope.launch { app.library.sync() } }) { Text(stringResource(R.string.screens_profile_sync)) }
-                                }
+                            // The whole row syncs: a separate button beside it squeezed "Last synced"
+                            // into several lines (AI testers, Italian and German).
+                            trailingContent = if (library.syncing) {
+                                { CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp) }
+                            } else {
+                                null
                             },
+                            modifier = Modifier.clickableRow(enabled = !library.syncing) { scope.launch { app.library.sync() } },
                         )
                         profile?.let { p ->
                             ListItem(
@@ -261,7 +264,10 @@ fun ProfileScreen(types: Set<MediaType>) {
     }
 }
 
-private fun Modifier.clickableRow(onClick: () -> Unit) = clickable(role = Role.Button, onClick = onClick)
+private fun Modifier.clickableRow(
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+) = clickable(enabled = enabled, role = Role.Button, onClick = onClick)
 
 @Composable
 private fun ProfileHeader(profile: UserProfile?) {
@@ -347,18 +353,25 @@ private fun TypeCard(
                     modifier = Modifier.weight(1f).then(numbers),
                 )
             }
-            // At most three per row, so long status names (German, Dutch) have room and never run together.
+            // At most three per row (two with large text), so long status names have room and never run together.
             FlowRow(
                 Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
-                maxItemsInEachRow = 3,
+                maxItemsInEachRow = LargeText.statusesPerRow(LocalDensity.current.fontScale),
             ) {
                 t.counts.forEach { c ->
                     Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(c.count.toString(), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, modifier = numbers)
-                        // One line, shrunk when needed: "Abgebrochen" never breaks mid-word.
-                        FitLabel(c.status.label(t.type), style = MaterialTheme.typography.labelSmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant))
+                        // Full size, up to two lines ("Plan to / watch"); with large text two per row,
+                        // so a long one-word status ("Abgebrochen") keeps its line.
+                        Text(
+                            c.status.label(t.type),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center,
+                            maxLines = 2,
+                        )
                     }
                 }
             }

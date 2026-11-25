@@ -1,33 +1,23 @@
 package to.wim.watchlist.ui.settings
 
-import androidx.compose.material.icons.rounded.Policy
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import android.Manifest
-import androidx.annotation.RequiresApi
-import to.wim.watchlist.data.model.NotifyChannel
-import androidx.lifecycle.compose.LifecycleEventEffect
-import androidx.lifecycle.Lifecycle
-import android.content.Context
 import android.app.Activity
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import to.wim.watchlist.data.api.TmdbKey
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.draw.clip
-import androidx.compose.material.icons.automirrored.rounded.OpenInNew
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-
+import androidx.compose.material.icons.automirrored.rounded.OpenInNew
+import androidx.compose.material.icons.rounded.Policy
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -37,30 +27,41 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import to.wim.watchlist.BuildConfig
 import to.wim.watchlist.R
-import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.data.AppSettings
 import to.wim.watchlist.data.NavConfig
 import to.wim.watchlist.data.SubscriptionRepository
 import to.wim.watchlist.data.ThemeMode
+import to.wim.watchlist.data.api.TmdbKey
 import to.wim.watchlist.data.model.MediaType
+import to.wim.watchlist.data.model.NotifyChannel
 import to.wim.watchlist.data.toggled
 import to.wim.watchlist.ui.LocalNavigator
 import to.wim.watchlist.ui.components.Format
+import to.wim.watchlist.ui.components.LocalPlus
 import to.wim.watchlist.ui.components.label
 import to.wim.watchlist.ui.components.openUrl
 import to.wim.watchlist.ui.components.rememberApp
@@ -69,15 +70,16 @@ import to.wim.watchlist.ui.theme.AppearanceSettings
 import to.wim.watchlist.ui.theme.DragHandle
 import to.wim.watchlist.ui.theme.LockedSwitch
 import to.wim.watchlist.ui.theme.ReorderableColumn
-import to.wim.watchlist.ui.theme.SettingsBlock
-import to.wim.watchlist.ui.theme.SettingsSection
-import to.wim.watchlist.ui.theme.SettingsFooter
 import to.wim.watchlist.ui.theme.SettingItem
+import to.wim.watchlist.ui.theme.SettingsBlock
+import to.wim.watchlist.ui.theme.SettingsFooter
 import to.wim.watchlist.ui.theme.SettingsScaffold
+import to.wim.watchlist.ui.theme.SettingsSection
 import to.wim.watchlist.ui.theme.SwitchSetting
 import to.wim.watchlist.work.NewEpisodesWorker
-import kotlinx.coroutines.launch
 import java.time.Instant
+import kotlinx.coroutines.launch
+
 
 @Composable
 fun SettingsScreen(settings: AppSettings) {
@@ -405,7 +407,13 @@ private fun CreditItem(
         headlineContent = { Text(title) },
         supportingContent = { Text(text) },
         leadingContent = {
-            Image(logo, logoDescription, contentScale = ContentScale.Fit, modifier = Modifier.size(40.dp).clip(RoundedCornerShape(8.dp)))
+            // On a white tile, so the black SIMKL logo stays visible in the dark theme.
+            Image(
+                logo,
+                logoDescription,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier.size(40.dp).clip(RoundedCornerShape(8.dp)).background(Color.White),
+            )
         },
         trailingContent = { Icon(Icons.AutoMirrored.Rounded.OpenInNew, null) },
         modifier = Modifier.clickable(role = Role.Button, onClick = onClick),

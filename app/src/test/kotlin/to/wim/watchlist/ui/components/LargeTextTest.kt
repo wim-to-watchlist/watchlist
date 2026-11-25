@@ -67,4 +67,35 @@ class LargeTextTest {
         assertFalse(LargeText.tabsFit(listOf(60f, 58f, 90f, 55f, 62f), 360f))
         assertTrue(LargeText.tabsFit(emptyList(), 100f))
     }
+
+    @Test
+    fun `scrolling tabs widen so the last one on screen is cut about halfway`() {
+        // 360 wide: three 100dp tabs end at 300, so tabs grow to show 3.5 of them.
+        assertEquals(360f / 3.5f, LargeText.peekTabWidth(100f, 360f), 0.01f)
+        // 344 wide: 3.5 tabs would be narrower than 100, so 2.5 are shown instead.
+        assertEquals(344f / 2.5f, LargeText.peekTabWidth(100f, 344f), 0.01f)
+    }
+
+    @Test
+    fun `a tab wider than two thirds of the row keeps its own width`() {
+        assertEquals(344f / 1.5f, LargeText.peekTabWidth(200f, 344f), 0.01f)
+        assertEquals(300f, LargeText.peekTabWidth(300f, 344f), 0.01f)
+        assertEquals(400f, LargeText.peekTabWidth(400f, 344f), 0.01f)
+    }
+
+    @Test
+    fun `buttons sit side by side only when every label fits at full size`() {
+        // 344 wide, 8 apart: 168 each; a label gets 168 - 74 = 94.
+        assertTrue(LargeText.buttonsFit(listOf(80f, 60f), 344f))
+        assertTrue(LargeText.buttonsFit(listOf(94f, 60f), 344f))
+        assertFalse(LargeText.buttonsFit(listOf(95f, 60f), 344f))
+        assertTrue(LargeText.buttonsFit(listOf(500f), 344f))
+    }
+
+    @Test
+    fun `profile statuses go two per row with large text`() {
+        assertEquals(3, LargeText.statusesPerRow(1f))
+        assertEquals(3, LargeText.statusesPerRow(1.3f))
+        assertEquals(2, LargeText.statusesPerRow(2f))
+    }
 }

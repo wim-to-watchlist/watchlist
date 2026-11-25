@@ -417,14 +417,16 @@ fun ShelfTabRow(
                     }
                 }
             }
-        val content: @Composable () -> Unit = {
+        val content: @Composable (Modifier) -> Unit = { tabModifier ->
             tabs.forEachIndexed { index, (label, count) ->
-                Tab(selected = selected == index, onClick = { onSelect(index) }, text = { TabLabel(label, count) })
+                Tab(selected = selected == index, onClick = { onSelect(index) }, modifier = tabModifier, text = { TabLabel(label, count) })
             }
         }
         if (LargeText.tabsFit(widths, maxWidth.value)) {
-            PrimaryTabRow(selectedTabIndex = selected, tabs = content)
+            PrimaryTabRow(selectedTabIndex = selected, tabs = { content(Modifier) })
         } else {
+            // Equal tabs, sized so the last one on screen is cut about halfway: the row clearly goes on.
+            val tabWidth = LargeText.peekTabWidth((widths.maxOrNull() ?: 0f) + LargeText.TAB_PADDING_DP, maxWidth.value - 16f).dp
             val scroll = rememberScrollState()
             val fade = with(density) { 32.dp.toPx() }
             PrimaryScrollableTabRow(
@@ -452,7 +454,7 @@ fun ShelfTabRow(
                                 )
                             }
                         },
-                tabs = content,
+                tabs = { content(Modifier.width(tabWidth)) },
             )
         }
     }

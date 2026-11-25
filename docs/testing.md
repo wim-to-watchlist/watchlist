@@ -91,6 +91,7 @@ each chosen persona of `agent-testers/personas.json`. A Claude Code agent signs 
 test account and uses the app like a new user, following `agent-testers/AGENT_BRIEF.md`, then
 writes a report with screenshots. A last job merges the reports into one summary on the run
 page. It finds what nobody wrote a test for: cut text at 200% font, untranslated strings, tablet
-layouts, confusing flows. It is started only by hand (Actions › Agent testers), because it uses
+layouts, confusing flows. Two personas (jonas, emma) turn on the debug build's "Preview the free
+version" switch to judge the free version and the way the app asks people to subscribe. It is started only by hand (Actions › Agent testers), because it uses
 Actions minutes and Claude usage. Setup, costs and how to read the results:
 `agent-testers/README.md`.

@@ -17,7 +17,7 @@
     <string name="status_plan_to_watch">Wil ik zien</string>
     <string name="status_watched">Gezien</string>
     <string name="status_completed">Voltooid</string>
-    <string name="status_on_hold">On hold</string>
+    <string name="status_on_hold">In de wacht</string>
     <string name="status_dropped">Gestopt</string>
     <string name="theme_system">Systeem</string>
     <string name="theme_light">Licht</string>

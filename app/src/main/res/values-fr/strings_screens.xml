@@ -39,7 +39,7 @@
     <string name="screens_profile_joined">Membre depuis le %1$s</string>
     <string name="screens_profile_time_watched">Temps de visionnage</string>
     <string name="screens_profile_last_7_days">7 derniers jours</string>
-    <string name="screens_profile_time_left">reste %1$s</string>
+    <string name="screens_profile_time_left">reste %1$s</string>
     <string name="screens_settings_appearance">Apparence</string>
     <string name="screens_settings_theme">Thème</string>
     <string name="screens_settings_dynamic_color">Couleurs dynamiques</string>
@@ -74,7 +74,7 @@
     <string name="screens_login_failed">Échec de la connexion : %1$s</string>
     <string name="screens_login_note">Vous vous connectez sur simkl.com ; cette app ne voit jamais votre mot de passe. Watchlist n’est pas affilié à SIMKL.</string>
     <string name="screens_settings_tmdb">Distribution et équipe</string>
-    <string name="screens_settings_tmdb_key">Read Access Token TMDB</string>
+    <string name="screens_settings_tmdb_key">Jeton d’accès TMDB</string>
     <string name="screens_settings_tmdb_key_on">Ajouté. Les fiches affichent la distribution et l’équipe, et vous pouvez rechercher des personnes.</string>
     <string name="screens_settings_tmdb_key_off">Ajoutez votre propre jeton TMDB gratuit pour voir la distribution, l’équipe et les personnes.</string>
     <string name="screens_tmdb_dialog_text">TMDB fournit des jetons gratuits pour un usage personnel. Connectez-vous sur themoviedb.org, ouvrez Paramètres › API, demandez une clé API, puis copiez ici le long « API Read Access Token » (il commence par eyJ). Il reste sur ce téléphone et n’est envoyé qu’à TMDB.</string>

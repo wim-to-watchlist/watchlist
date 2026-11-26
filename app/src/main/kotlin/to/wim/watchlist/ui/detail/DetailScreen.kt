@@ -42,6 +42,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -287,7 +288,8 @@ fun DetailScreen(
 
     Scaffold(
         contentWindowInsets = WindowInsets(0),
-        snackbarHost = { SnackbarHost(snackbar) },
+        // Edge to edge with no content insets: keep the snackbar above the navigation bar.
+        snackbarHost = { SnackbarHost(snackbar, Modifier.navigationBarsPadding()) },
         topBar = {
             TopAppBar(
                 // One line: no hyphen before the ellipsis ("Trac…-").

@@ -76,7 +76,7 @@ The show's status is shown in the app's language, and the weekly broadcast day a
 In the episode list:
 
 - tap an episode to read its description;
-- tick its checkbox to mark it watched;
+- tick its checkbox to mark it watched; if earlier aired episodes aren't watched yet, the app asks whether to mark those too (*Mark all*) or *Only this one*;
 - long-press an episode to mark everything up to it;
 - mark a whole season at once.
 

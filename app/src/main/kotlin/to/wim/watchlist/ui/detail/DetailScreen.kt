@@ -1062,11 +1062,42 @@ private fun EpisodesBlock(
     fun Episode.watched() = item?.isWatched(this.season, this.episode) == true
 
     /** Marking the paused episode watched asks first, because it removes the saved progress. */
-    fun toggle(
+    fun toggleOnly(
         e: Episode,
         watched: Boolean,
     ) {
         if (watched && playback != null && playback.episode == e.ref()) onPlaybackWatched(playback) else onToggle(listOf(e.ref()), watched)
+    }
+
+    // Ticking a later episode while earlier ones are still open asks whether to mark those too.
+    var askEarlier by remember { mutableStateOf<Pair<Episode, List<EpisodeRef>>?>(null) }
+
+    fun toggle(
+        e: Episode,
+        watched: Boolean,
+    ) {
+        val earlier = if (watched) DetailActions.earlierUnwatched(seasons.values.flatten(), item, e.ref()) else emptyList()
+        if (earlier.isEmpty()) toggleOnly(e, watched) else askEarlier = e to earlier
+    }
+    askEarlier?.let { (e, earlier) ->
+        AlertDialog(
+            onDismissRequest = { askEarlier = null },
+            icon = { Icon(Icons.Rounded.DoneAll, null) },
+            title = { Text(stringResource(R.string.detail_earlier_title)) },
+            text = { Text(pluralStringResource(R.plurals.detail_earlier_text, earlier.size, earlier.size)) },
+            confirmButton = {
+                TextButton(onClick = {
+                    askEarlier = null
+                    onToggle(earlier + e.ref(), true)
+                }) { Text(stringResource(R.string.detail_earlier_mark_all)) }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    askEarlier = null
+                    toggleOnly(e, true)
+                }) { Text(stringResource(R.string.detail_earlier_only_this)) }
+            },
+        )
     }
     var menu by remember { mutableStateOf(false) }
     // Episodes whose full description is shown; tapping a row expands it, the checkbox marks it.

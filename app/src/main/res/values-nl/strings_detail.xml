@@ -121,4 +121,11 @@
     </plurals>
     <string name="detail_mark_up_to">Tot hier als gezien aanduiden</string>
     <string name="detail_episode_watched_box">%1$s gezien</string>
+    <string name="detail_earlier_title">Eerdere afleveringen ook aanduiden?</string>
+    <plurals name="detail_earlier_text">
+        <item quantity="one">%1$d eerdere aflevering is nog niet als gezien aangeduid.</item>
+        <item quantity="other">%1$d eerdere afleveringen zijn nog niet als gezien aangeduid.</item>
+    </plurals>
+    <string name="detail_earlier_mark_all">Alles aanduiden</string>
+    <string name="detail_earlier_only_this">Alleen deze</string>
 </resources>

@@ -25,4 +25,24 @@ object DetailActions {
         title: String,
         episode: EpisodeRef?,
     ): String = if (episode == null) title else "$title ${episode.label}"
+
+    /**
+     * Aired episodes before [ref] that aren't watched yet, in order, so ticking a later episode can
+     * offer to mark them too. Specials are left out: they sit outside the story order.
+     */
+    fun earlierUnwatched(
+        episodes: List<Episode>,
+        item: LibraryItem?,
+        ref: EpisodeRef,
+    ): List<EpisodeRef> {
+        fun order(season: Int?, episode: Int) = (season ?: 1).toLong() * 100_000 + episode
+        val target = order(ref.season, ref.episode)
+        return episodes
+            .filter { it.aired && !it.special && (it.season ?: 1) > 0 }
+            .filter { order(it.season, it.episode) < target }
+            .filter { item?.isWatched(it.season, it.episode) != true }
+            .sortedBy { order(it.season, it.episode) }
+            .map { EpisodeRef(it.season, it.episode) }
+            .distinct()
+    }
 }

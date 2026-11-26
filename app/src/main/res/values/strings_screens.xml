@@ -39,7 +39,7 @@
     <string name="screens_profile_joined">Joined %1$s</string>
     <string name="screens_profile_time_watched">Time watched</string>
     <string name="screens_profile_last_7_days">Last 7 days</string>
-    <string name="screens_profile_time_left">%1$s left</string>
+    <string name="screens_profile_time_left">%1$s left</string>
     <string name="screens_settings_appearance">Appearance</string>
     <string name="screens_settings_theme">Theme</string>
     <string name="screens_settings_dynamic_color">Dynamic color</string>
@@ -72,7 +72,7 @@
     <string name="screens_login_failed">Sign-in failed: %1$s</string>
     <string name="screens_login_note">You sign in on simkl.com; this app never sees your password. Watchlist is not affiliated with SIMKL.</string>
     <string name="screens_settings_tmdb">Cast and crew</string>
-    <string name="screens_settings_tmdb_key">TMDB Read Access Token</string>
+    <string name="screens_settings_tmdb_key">TMDB access token</string>
     <string name="screens_settings_tmdb_key_on">Added. Details pages show cast and crew, and you can look up people.</string>
     <string name="screens_settings_tmdb_key_off">Add your own free TMDB token to see cast, crew and people.</string>
     <string name="screens_tmdb_dialog_text">TMDB gives free tokens for personal use. Sign in on themoviedb.org, open Settings › API, request an API key, then copy the long “API Read Access Token” (it starts with eyJ) and paste it here. It stays on this phone and is only sent to TMDB.</string>

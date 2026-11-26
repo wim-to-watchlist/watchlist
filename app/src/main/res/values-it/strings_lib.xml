@@ -104,4 +104,5 @@
     </plurals>
     <string name="lib_undo">Annulla</string>
     <string name="lib_marked_watched">%1$s di %2$s segnato come visto</string>
+    <string name="lib_grid_progress">%1$d/%2$d visti</string>
 </resources>

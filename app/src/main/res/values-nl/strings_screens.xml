@@ -39,7 +39,7 @@
     <string name="screens_profile_joined">Lid sinds %1$s</string>
     <string name="screens_profile_time_watched">Kijktijd</string>
     <string name="screens_profile_last_7_days">Laatste 7 dagen</string>
-    <string name="screens_profile_time_left">nog %1$s</string>
+    <string name="screens_profile_time_left">nog %1$s</string>
     <string name="screens_settings_appearance">Weergave</string>
     <string name="screens_settings_theme">Thema</string>
     <string name="screens_settings_dynamic_color">Dynamische kleuren</string>
@@ -72,7 +72,7 @@
     <string name="screens_login_failed">Inloggen mislukt: %1$s</string>
     <string name="screens_login_note">Je logt in op simkl.com; deze app ziet je wachtwoord nooit. Watchlist is geen officiële app van SIMKL.</string>
     <string name="screens_settings_tmdb">Cast en crew</string>
-    <string name="screens_settings_tmdb_key">TMDB Read Access Token</string>
+    <string name="screens_settings_tmdb_key">TMDB-toegangstoken</string>
     <string name="screens_settings_tmdb_key_on">Toegevoegd. Detailpagina’s tonen cast en crew, en je kunt personen opzoeken.</string>
     <string name="screens_settings_tmdb_key_off">Voeg je eigen gratis TMDB-token toe om cast, crew en personen te zien.</string>
     <string name="screens_tmdb_dialog_text">TMDB geeft gratis tokens voor persoonlijk gebruik. Log in op themoviedb.org, open Instellingen › API, vraag een API-sleutel aan en kopieer het lange „API Read Access Token” (het begint met eyJ) en plak het hier. Het blijft op deze telefoon en gaat alleen naar TMDB.</string>

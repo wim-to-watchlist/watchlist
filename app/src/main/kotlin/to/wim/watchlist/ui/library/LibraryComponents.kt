@@ -71,6 +71,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.Hyphens
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -490,7 +491,7 @@ fun LibraryGrid(
                         ?: listOfNotNull(
                             item.year?.toString(),
                             item.userRating?.let { "★ $it" },
-                            if (item.type.isEpisodic && item.totalEpisodes > 0) "${item.watchedEpisodes}/${item.totalEpisodes}" else null,
+                            if (item.type.isEpisodic && item.totalEpisodes > 0) stringResource(R.string.lib_grid_progress, item.watchedEpisodes, item.totalEpisodes) else null,
                         ).joinToString(" · ").ifEmpty { null },
                 // A title being watched shows how far the movie or episode got.
                 progress = playback?.let { (it.progress / 100).toFloat() } ?: if (showProgress) progressOf(item) else null,
@@ -570,7 +571,8 @@ fun ShowRow(
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     Text(
                         item.title,
-                        style = MaterialTheme.typography.titleMedium,
+                        // A name such as "Severance" is not split as "Seve-rance".
+                        style = MaterialTheme.typography.titleMedium.copy(hyphens = Hyphens.None),
                         maxLines = lines,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f, fill = false),
@@ -591,7 +593,8 @@ fun ShowRow(
                         supporting,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = lines,
+                        // One line more than the title, so the episodes left and when it was watched fit.
+                        maxLines = lines + 1,
                         overflow = TextOverflow.Ellipsis,
                     )
                 }

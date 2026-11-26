@@ -588,3 +588,7 @@ Round 10 tested with people who come from other apps: SIMKL's official app, Stre
 
 Of the three ideas left from round 10, Wim chose only this one. Ticking an episode's checkbox while earlier aired episodes are still unwatched asks "Mark earlier episodes too?" with *Mark all* and *Only this one* (`DetailActions.earlierUnwatched`); specials and episodes that haven't aired don't count. Unticking, long-press "up to here" and the season menu don't ask, because they already say what they mark. Not done: the Trakt importer hint and the note about Kodi's paused movies.
 
+
+## Small fixes from the eleventh AI test run (2026-11-26)
+
+Round 11 ran the same six testers as round 10 (average 6.8; emma was stopped by SIMKL's Cloudflare check). Fixed: the snackbar on a details or person page now sits above the navigation bar (its last word was hidden under it), the Dutch "On hold" is now "In de wacht", the TMDB setting is called "TMDB access token" in each language (the dialog still names TMDB's own "API Read Access Token"), the poster grid says "1/20 watched" instead of a bare "1/20", the Up next line with episodes left and when it was watched may take a second line, show names in lists are no longer hyphenated, and "reste", "noch", … stay on the same line as the time. Left alone: tabs cut at the screen edge (that is how the row shows it scrolls), the debug build's price formats, the Trakt and Kodi hints (Wim chose not to), and the wish for richer stats and calendar views.

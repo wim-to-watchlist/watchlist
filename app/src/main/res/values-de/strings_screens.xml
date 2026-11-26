@@ -39,7 +39,7 @@
     <string name="screens_profile_joined">Mitglied seit %1$s</string>
     <string name="screens_profile_time_watched">Sehzeit</string>
     <string name="screens_profile_last_7_days">Letzte 7 Tage</string>
-    <string name="screens_profile_time_left">noch %1$s</string>
+    <string name="screens_profile_time_left">noch %1$s</string>
     <string name="screens_settings_appearance">Darstellung</string>
     <string name="screens_settings_theme">Design</string>
     <string name="screens_settings_dynamic_color">Dynamische Farben</string>
@@ -72,7 +72,7 @@
     <string name="screens_login_failed">Anmeldung fehlgeschlagen: %1$s</string>
     <string name="screens_login_note">Du meldest dich auf simkl.com an; diese App sieht dein Passwort nie. Watchlist ist keine offizielle App von SIMKL.</string>
     <string name="screens_settings_tmdb">Besetzung und Team</string>
-    <string name="screens_settings_tmdb_key">TMDB Read Access Token</string>
+    <string name="screens_settings_tmdb_key">TMDB-Zugriffstoken</string>
     <string name="screens_settings_tmdb_key_on">Hinzugefügt. Detailseiten zeigen Besetzung und Team, und du kannst Personen suchen.</string>
     <string name="screens_settings_tmdb_key_off">Füge dein eigenes kostenloses TMDB-Token hinzu, um Besetzung, Team und Personen zu sehen.</string>
     <string name="screens_tmdb_dialog_text">TMDB vergibt kostenlose Tokens für die private Nutzung. Melde dich auf themoviedb.org an, öffne Einstellungen › API, beantrage einen API-Schlüssel und kopiere dann das lange „API Read Access Token“ (es beginnt mit eyJ) hierher. Es bleibt auf diesem Telefon und wird nur an TMDB gesendet.</string>

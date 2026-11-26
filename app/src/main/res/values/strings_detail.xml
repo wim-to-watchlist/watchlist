@@ -121,4 +121,11 @@
     </plurals>
     <string name="detail_mark_up_to">Mark watched up to here</string>
     <string name="detail_episode_watched_box">%1$s watched</string>
+    <string name="detail_earlier_title">Mark earlier episodes too?</string>
+    <plurals name="detail_earlier_text">
+        <item quantity="one">%1$d earlier episode isn\'t marked as watched yet.</item>
+        <item quantity="other">%1$d earlier episodes aren\'t marked as watched yet.</item>
+    </plurals>
+    <string name="detail_earlier_mark_all">Mark all</string>
+    <string name="detail_earlier_only_this">Only this one</string>
 </resources>

@@ -124,4 +124,12 @@
     </plurals>
     <string name="detail_mark_up_to">Segna come visto fino a qui</string>
     <string name="detail_episode_watched_box">%1$s visto</string>
+    <string name="detail_earlier_title">Segnare anche gli episodi precedenti?</string>
+    <plurals name="detail_earlier_text">
+        <item quantity="one">%1$d episodio precedente non è ancora segnato come visto.</item>
+        <item quantity="many">%1$d episodi precedenti non sono ancora segnati come visti.</item>
+        <item quantity="other">%1$d episodi precedenti non sono ancora segnati come visti.</item>
+    </plurals>
+    <string name="detail_earlier_mark_all">Segna tutti</string>
+    <string name="detail_earlier_only_this">Solo questo</string>
 </resources>

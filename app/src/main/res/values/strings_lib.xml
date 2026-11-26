@@ -45,8 +45,8 @@
     <string name="lib_empty_other_text">Nothing here yet.</string>
     <string name="lib_empty_up_next_shows">No shows up next</string>
     <string name="lib_empty_up_next_anime">No anime up next</string>
-    <string name="lib_empty_watched_shows">No watched shows</string>
-    <string name="lib_empty_watched_anime">No watched anime</string>
+    <string name="lib_empty_watched_shows">No completed shows</string>
+    <string name="lib_empty_watched_anime">No completed anime</string>
     <string name="lib_empty_watching_text">Shows you’re watching show up here.</string>
     <string name="lib_empty_watching_shows">No shows you’re watching</string>
     <string name="lib_empty_watching_anime">No anime you’re watching</string>

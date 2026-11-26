@@ -48,7 +48,7 @@ Tap a locked part, or its card's button, to open the Plus screen. It shows what 
 
 ## TV Shows and Anime
 
-Shelves: **Up next** (shows with an aired, unwatched episode; a new episode shows up here as soon as it has aired by SIMKL's calendar), **Watching** (every show on your SIMKL Watching list, also those in Up next, with your progress and the next air date when known; free in every version), **Watched** (shows you completed), **Plan to watch**, **On hold**, **Dropped**. Every poster shows an *Airing* or *Ended* badge.
+Shelves: **Up next** (shows with an aired, unwatched episode; a new episode shows up here as soon as it has aired by SIMKL's calendar), **Watching** (every show on your SIMKL Watching list, also those in Up next, with your progress and the next air date when known; free in every version), **Completed** (shows you finished; SIMKL's name for the list), **Plan to watch**, **On hold**, **Dropped**. Every poster shows an *Airing* or *Ended* badge.
 
 - **Mark the next episode watched:** tap ✓ on a show in Up next. A message at the bottom offers **Undo** for about ten seconds. Episodes in progress (paused on another device) show their progress and keep their place in the chosen sort order; marking one watched asks first, because it removes the saved progress.
 - **Sort and filter** with the buttons in the top bar, kept per tab. A dot on the filter button shows a filter is on.
@@ -57,7 +57,7 @@ Shelves: **Up next** (shows with an aired, unwatched episode; a new episode show
   |---|---|---|
   | Up next | Recently watched, Fewest episodes left, Recently added, Title, Release date | Status (airing / ended), Type (Anime) |
   | Want to watch | Recently added, Title, Release date | Status, Type (Anime) |
-  | Watching, Watched, On hold, Dropped | Recently watched, Recently added, Title, My rating, Release date | My rating (rated by me / not rated), Status, Type (Anime) |
+  | Watching, Completed, On hold, Dropped | Recently watched, Recently added, Title, My rating, Release date | My rating (rated by me / not rated), Status, Type (Anime) |
 
   There is no "my rating" on Up next and Want to watch: you rate what you have seen. On Movies, Want to watch sorts like the shows' (no filter button); Watched and Dropped have the same sorts as the shows' Watched tab and the my-rating filter.
 - **Continue from the latest episode** (*Settings › Library*, on by default): Up next starts after the most recently watched episode, so skipped earlier episodes or seasons don't keep a show in Up next. SIMKL's API has no "skip", so this is decided in the app.

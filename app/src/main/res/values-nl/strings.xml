@@ -7,6 +7,9 @@
     <string name="tab_tv">Series</string>
     <string name="tab_anime">Anime</string>
     <string name="tab_movies">Films</string>
+    <!-- Badge on one title (singular). -->
+    <string name="type_one_tv">Serie</string>
+    <string name="type_one_movie">Film</string>
     <string name="tab_discover">Ontdekken</string>
     <string name="tab_calendar">Kalender</string>
     <string name="shelf_up_next">Volgende</string>
@@ -14,7 +17,7 @@
     <string name="status_plan_to_watch">Wil ik zien</string>
     <string name="status_watched">Gezien</string>
     <string name="status_completed">Voltooid</string>
-    <string name="status_on_hold">Gepauzeerd</string>
+    <string name="status_on_hold">On hold</string>
     <string name="status_dropped">Gestopt</string>
     <string name="theme_system">Systeem</string>
     <string name="theme_light">Licht</string>

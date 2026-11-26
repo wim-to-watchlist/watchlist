@@ -76,6 +76,7 @@
     <string name="detail_show_less">Mostrar menos</string>
     <string name="detail_trailers">Tráileres</string>
     <string name="detail_play">Reproducir</string>
+    <string name="detail_play_named">%1$s: %2$s</string>
     <string name="detail_episodes">Episodios</string>
     <string name="detail_season_options">Opciones de temporada</string>
     <string name="detail_mark_season_watched">Marcar temporada como vista</string>

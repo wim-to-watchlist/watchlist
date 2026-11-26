@@ -70,7 +70,7 @@
     <string name="screens_login_denied">Die Anmeldung wurde auf SIMKL abgebrochen (%1$s).</string>
     <string name="screens_login_redirect_invalid">Dieser Anmeldelink gehört nicht zur Anmeldung dieser App. Tippe erneut auf Mit SIMKL anmelden.</string>
     <string name="screens_login_failed">Anmeldung fehlgeschlagen: %1$s</string>
-    <string name="screens_login_note">Du meldest dich auf simkl.com an; diese App sieht dein Passwort nie. Watchlist ist nicht mit SIMKL verbunden.</string>
+    <string name="screens_login_note">Du meldest dich auf simkl.com an; diese App sieht dein Passwort nie. Watchlist ist keine offizielle App von SIMKL.</string>
     <string name="screens_settings_tmdb">Besetzung und Team</string>
     <string name="screens_settings_tmdb_key">TMDB Read Access Token</string>
     <string name="screens_settings_tmdb_key_on">Hinzugefügt. Detailseiten zeigen Besetzung und Team, und du kannst Personen suchen.</string>

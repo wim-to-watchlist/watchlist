@@ -30,7 +30,7 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.material.icons.rounded.LiveTv
 import androidx.compose.material.icons.rounded.SearchOff
-import androidx.compose.material.icons.rounded.Pause
+import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.material.icons.rounded.PlayCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -88,7 +88,8 @@ private fun Shelf.emptyIcon(): ImageVector =
         Shelf.Watching -> Icons.Rounded.LiveTv
         Shelf.Watched -> Icons.Rounded.CheckCircle
         Shelf.PlanToWatch -> Icons.Rounded.Bookmark
-        Shelf.OnHold -> Icons.Rounded.Pause
+        // Not a playback icon: On hold is a list, not a paused video.
+        Shelf.OnHold -> Icons.Rounded.Schedule
         Shelf.Dropped -> Icons.Rounded.Block
     }
 

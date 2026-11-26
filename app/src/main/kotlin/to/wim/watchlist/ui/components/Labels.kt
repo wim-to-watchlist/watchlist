@@ -34,7 +34,8 @@ fun Shelf.label(): String =
             Shelf.UpNext -> R.string.shelf_up_next
             Shelf.Watching -> R.string.status_watching
             Shelf.PlanToWatch -> R.string.status_plan_to_watch
-            Shelf.Watched -> R.string.status_watched
+            // Completed shows: SIMKL's own name for the list ("Watched" is used for episodes).
+            Shelf.Watched -> R.string.status_completed
             Shelf.OnHold -> R.string.status_on_hold
             Shelf.Dropped -> R.string.status_dropped
         },
@@ -58,6 +59,17 @@ fun MediaType.label(): String =
             MediaType.Tv -> R.string.tab_tv
             MediaType.Anime -> R.string.tab_anime
             MediaType.Movie -> R.string.tab_movies
+        },
+    )
+
+/** The type of one title, for a badge on it (singular, unlike the tab names). */
+@Composable
+fun MediaType.oneLabel(): String =
+    stringResource(
+        when (this) {
+            MediaType.Tv -> R.string.type_one_tv
+            MediaType.Anime -> R.string.tab_anime
+            MediaType.Movie -> R.string.type_one_movie
         },
     )
 

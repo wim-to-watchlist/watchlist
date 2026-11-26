@@ -9,6 +9,9 @@
     <string name="tab_tv">TV shows</string>
     <string name="tab_anime">Anime</string>
     <string name="tab_movies">Movies</string>
+    <!-- Badge on one title (singular). -->
+    <string name="type_one_tv">Show</string>
+    <string name="type_one_movie">Movie</string>
     <string name="tab_discover">Discover</string>
     <string name="tab_calendar">Calendar</string>
     <string name="shelf_up_next">Up next</string>

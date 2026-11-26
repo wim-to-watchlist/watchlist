@@ -69,6 +69,7 @@ import to.wim.watchlist.ui.library.SectionHeader
 import to.wim.watchlist.ui.library.bottomPadding
 import to.wim.watchlist.ui.main.MainTopBar
 import to.wim.watchlist.ui.components.label
+import to.wim.watchlist.ui.components.oneLabel
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.ZoneId
@@ -259,7 +260,7 @@ private fun CalendarRow(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
-            PosterBadge(entry.type.label())
+            PosterBadge(entry.type.oneLabel())
         }
     }
 }

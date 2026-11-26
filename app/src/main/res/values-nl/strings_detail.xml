@@ -75,6 +75,7 @@
     <string name="detail_show_less">Toon minder</string>
     <string name="detail_trailers">Trailers</string>
     <string name="detail_play">Afspelen</string>
+    <string name="detail_play_named">%1$s: %2$s</string>
     <string name="detail_episodes">Afleveringen</string>
     <string name="detail_season_options">Seizoensopties</string>
     <string name="detail_mark_season_watched">Seizoen als gezien markeren</string>

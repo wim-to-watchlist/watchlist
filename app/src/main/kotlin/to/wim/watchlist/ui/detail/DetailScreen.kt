@@ -147,6 +147,8 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.Hyphens
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import to.wim.watchlist.R
@@ -288,7 +290,8 @@ fun DetailScreen(
         snackbarHost = { SnackbarHost(snackbar) },
         topBar = {
             TopAppBar(
-                title = { if (scrolled) Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                // One line: no hyphen before the ellipsis ("Trac…-").
+                title = { if (scrolled) Text(title, maxLines = 1, overflow = TextOverflow.Ellipsis, style = LocalTextStyle.current.copy(hyphens = Hyphens.None)) },
                 navigationIcon = {
                     IconButton(onClick = { navigator.pop() }, colors = IconButtonDefaults.filledTonalIconButtonColors()) {
                         Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = stringResource(R.string.detail_back))
@@ -986,7 +989,8 @@ private fun TrailerRow(d: MediaDetails) {
         LazyRow(contentPadding = PaddingValues(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             items(d.trailers) { t ->
                 // The thumbnail is named "Play: <trailer>", so the tile has a name even when the trailer has none.
-                val name = listOfNotNull(stringResource(R.string.detail_play), t.name?.takeIf { it.isNotBlank() }).joinToString(": ")
+                val play = stringResource(R.string.detail_play)
+                val name = t.name?.takeIf { it.isNotBlank() }?.let { stringResource(R.string.detail_play_named, play, it) } ?: play
                 Column(
                     Modifier.width(220.dp).clip(RoundedCornerShape(16.dp))
                         .clickable(role = Role.Button) { context.openUrl("https://www.youtube.com/watch?v=${t.youtubeId}") },
